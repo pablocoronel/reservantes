@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="row">
+
+    @if (Session["usuarioTipo"].ToString() != String.Empty)
+    {
+       
+            <p>tipo de usuario: </p>
+            @Session["usuarioTipo"].ToString();
+        <br>
+        <p>ID de usuario: </p>
+            @Session["usuarioId"].ToString();
+        <br>
+        <p>nombre de usuario: </p>
+            @Session["usuarioNombre"].ToString();
+
+    }
+</div>

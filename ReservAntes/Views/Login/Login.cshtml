@@ -1,0 +1,35 @@
+﻿@model ReservAntes.Usuario
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+}
+
+<div class="jumbotron">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-6">
+
+            @using (Html.BeginForm("Login", "Login"))
+            {
+                <div class="form-group">
+                    @Html.LabelFor(Model => Model.Username)
+
+                    @Html.TextBoxFor(Model => Model.Username, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(Model => Model.Username, "", new { @class = "text-danger" })
+                </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(Model => Model.Password)
+
+                        @Html.PasswordFor(Model => Model.Password, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(Model => Model.Password, "", new { @class = "text-danger" })
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Ingresar</button>
+                    <button onclick="location.href='@Url.Action("Inicio", "Home")';return false;" class="btn btn-danger">Cancelar</button>
+            }
+        </div>
+    </div>
+</div>
