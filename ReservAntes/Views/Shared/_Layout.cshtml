@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
+    <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -20,14 +20,7 @@
                @Html.ActionLink("ReservAntes", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
-                </ul>
-                <div class="col-md-6"></div>
-
-                @if (Session["usuarioId"].ToString() == String.Empty)
+                @if (Session["usuarioTipo"].ToString() == String.Empty)
                 {
                  <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Login", "Login", "Login") </li>
@@ -37,6 +30,21 @@
                 else
                 {
                     <ul class="nav navbar-nav">
+                        @switch (Session["usuarioTipo"])
+                        {
+                            case 1:
+                                <li>@Html.ActionLink("Administrar app", "Index", "Administrador") </li>
+                                break;
+
+                            case 2:
+                                <li>@Html.ActionLink("Administrar cliente", "Index", "Cliente") </li>
+                                break;
+
+                            case 3:
+                                <li>@Html.ActionLink("Administrar restaurante", "Index", "Restaurante") </li>
+                                break;
+                        }
+                            
                         <li>@Html.ActionLink("Cerrar sesión", "Logout", "Login") </li>
                     </ul>
                 }
