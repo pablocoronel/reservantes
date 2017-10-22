@@ -294,10 +294,12 @@
     <Content Include="Views\Cliente\DetalleCliente.cshtml" />
     <Content Include="Views\Cliente\EditCliente.cshtml" />
     <Content Include="Views\Cliente\ReservCliente.cshtml" />
+    <Content Include="Views\Shared\_LayoutRestaurante.cshtml" />
+    <Content Include="Views\Shared\_PartialViewRestaurante.cshtml" />
+    <Content Include="Views\Restaurante\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Restaurante\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
