@@ -13,10 +13,10 @@ namespace ReservAntes
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class dbReservantesEntities : DbContext
+    public partial class dbReservAntesEntities : DbContext
     {
-        public dbReservantesEntities()
-            : base("name=dbReservantesEntities")
+        public dbReservAntesEntities()
+            : base("name=dbReservAntesEntities")
         {
         }
     
@@ -38,8 +38,8 @@ namespace ReservAntes
         public DbSet<Provincia> Provincia { get; set; }
         public DbSet<Reserva> Reserva { get; set; }
         public DbSet<Restaurante> Restaurante { get; set; }
-        public DbSet<sysdiagrams> sysdiagrams { get; set; }
         public DbSet<TipoUsuario> TipoUsuario { get; set; }
         public DbSet<Usuario> Usuario { get; set; }
+        public DbSet<sysdiagrams> sysdiagrams { get; set; }
     }
 }

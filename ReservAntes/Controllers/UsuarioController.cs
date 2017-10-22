@@ -8,7 +8,7 @@ namespace ReservAntes.Controllers
 {
     public class UsuarioController : Controller
     {
-        dbReservantesEntities ctx = new dbReservantesEntities();
+        dbReservAntesEntities ctx = new dbReservAntesEntities();
 
         Models.LogicaUsuario LogUs = new Models.LogicaUsuario();
 
@@ -58,8 +58,8 @@ namespace ReservAntes.Controllers
                 return View("../Home/Index");
             }
 
-                return View("../Home/Index");
-            }
+            return View("../Home/Index");
+        }
          
         
 

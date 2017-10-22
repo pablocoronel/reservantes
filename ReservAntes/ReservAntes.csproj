@@ -202,6 +202,7 @@
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\LogicaCliente.cs" />
+    <Compile Include="Models\LogicaRestaurante.cs" />
     <Compile Include="Models\LogicaUsuario.cs" />
     <Compile Include="Partido.cs">
       <DependentUpon>Model.tt</DependentUpon>
@@ -297,6 +298,7 @@
     <Content Include="Views\Shared\_LayoutRestaurante.cshtml" />
     <Content Include="Views\Shared\_PartialViewRestaurante.cshtml" />
     <Content Include="Views\Restaurante\Index.cshtml" />
+    <Content Include="Views\Restaurante\CreatePlato.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="dbReservantesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="dbReservantesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Cliente">
           <Key>
             <PropertyRef Name="Id" />
@@ -67,6 +67,7 @@
           <Property Name="RestauranteId" Type="int" />
           <Property Name="Descripcion" Type="varchar" MaxLength="50" />
           <Property Name="EstiloMenuId" Type="int" />
+          <Property Name="PlatoId" Type="int" />
         </EntityType>
         <EntityType Name="Partido">
           <Key>
@@ -81,10 +82,11 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MenuId" Type="int" />
-          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="NombrePlato" Type="varchar" MaxLength="50" />
           <Property Name="Precio" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
           <Property Name="Foto" Type="image" />
+          <Property Name="MenuId" Type="int" />
         </EntityType>
         <EntityType Name="PlatosElegidos">
           <Key>
@@ -121,6 +123,7 @@
           <Property Name="DatosBancariosId" Type="int" />
           <Property Name="CUIT" Type="int" />
           <Property Name="Foto" Type="image" />
+          <Property Name="CantClientes" Type="int" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -424,8 +427,7 @@
             <End Role="Usuario1" EntitySet="Usuario" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="dbReservantesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -501,9 +503,11 @@
           <Property Name="RestauranteId" Type="Int32" />
           <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="EstiloMenuId" Type="Int32" />
+          <Property Name="PlatoId" Type="Int32" />
           <NavigationProperty Name="EstiloMenu" Relationship="Self.FK_Menu_EstiloMenu" FromRole="Menu" ToRole="EstiloMenu" />
+          <NavigationProperty Name="Plato" Relationship="Self.FK_Menu_Plato" FromRole="Menu" ToRole="Plato" />
           <NavigationProperty Name="Restaurante" Relationship="Self.FK_Menu_Restaurante" FromRole="Menu" ToRole="Restaurante" />
-          <NavigationProperty Name="Plato" Relationship="Self.FK_Plato_Menu" FromRole="Menu" ToRole="Plato" />
+          <NavigationProperty Name="Plato1" Relationship="dbReservantesModel.FK_Plato_Menu" FromRole="Menu" ToRole="Plato" />
         </EntityType>
         <EntityType Name="Partido">
           <Key>
@@ -520,12 +524,14 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MenuId" Type="Int32" />
-          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NombrePlato" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Precio" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Foto" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="Menu" Relationship="Self.FK_Plato_Menu" FromRole="Plato" ToRole="Menu" />
+          <NavigationProperty Name="Menu" Relationship="Self.FK_Menu_Plato" FromRole="Plato" ToRole="Menu" />
           <NavigationProperty Name="PlatosElegidos" Relationship="Self.FK_PlatosElegidos_Plato" FromRole="Plato" ToRole="PlatosElegidos" />
+          <Property Name="MenuId" Type="Int32" />
+          <NavigationProperty Name="Menu1" Relationship="dbReservantesModel.FK_Plato_Menu" FromRole="Plato" ToRole="Menu" />
         </EntityType>
         <EntityType Name="PlatosElegidos">
           <Key>
@@ -569,19 +575,10 @@
           <Property Name="DatosBancariosId" Type="Int32" />
           <Property Name="CUIT" Type="Int32" />
           <Property Name="Foto" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="CantClientes" Type="Int32" />
           <NavigationProperty Name="DatosBancarios" Relationship="Self.FK_DatosBancarios_Restaurante" FromRole="Restaurante" ToRole="DatosBancarios" />
           <NavigationProperty Name="Menu" Relationship="Self.FK_Menu_Restaurante" FromRole="Restaurante" ToRole="Menu" />
           <NavigationProperty Name="Reserva" Relationship="Self.FK_Reserva_Restaurante" FromRole="Restaurante" ToRole="Reserva" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="TipoUsuario">
           <Key>
@@ -702,6 +699,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Menu_Plato">
+          <End Role="Plato" Type="Self.Plato" Multiplicity="0..1" />
+          <End Role="Menu" Type="Self.Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plato">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Menu">
+              <PropertyRef Name="PlatoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Menu_Restaurante">
           <End Role="Restaurante" Type="Self.Restaurante" Multiplicity="1" />
           <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
@@ -711,18 +720,6 @@
             </Principal>
             <Dependent Role="Menu">
               <PropertyRef Name="Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Plato_Menu">
-          <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
-          <End Role="Plato" Type="Self.Plato" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Menu">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Plato">
-              <PropertyRef Name="MenuId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -798,7 +795,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="dbReservantesEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="dbReservAntesEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Cliente" EntityType="Self.Cliente" />
           <EntitySet Name="DatosBancarios" EntityType="Self.DatosBancarios" />
           <EntitySet Name="Domicilio" EntityType="Self.Domicilio" />
@@ -812,7 +809,6 @@
           <EntitySet Name="Provincia" EntityType="Self.Provincia" />
           <EntitySet Name="Reserva" EntityType="Self.Reserva" />
           <EntitySet Name="Restaurante" EntityType="Self.Restaurante" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="TipoUsuario" EntityType="Self.TipoUsuario" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" />
           <AssociationSet Name="FK_Cliente_Domicilio" Association="Self.FK_Cliente_Domicilio">
@@ -847,13 +843,13 @@
             <End Role="Partido" EntitySet="Partido" />
             <End Role="Localidad" EntitySet="Localidad" />
           </AssociationSet>
+          <AssociationSet Name="FK_Menu_Plato" Association="Self.FK_Menu_Plato">
+            <End Role="Plato" EntitySet="Plato" />
+            <End Role="Menu" EntitySet="Menu" />
+          </AssociationSet>
           <AssociationSet Name="FK_Menu_Restaurante" Association="Self.FK_Menu_Restaurante">
             <End Role="Restaurante" EntitySet="Restaurante" />
             <End Role="Menu" EntitySet="Menu" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Plato_Menu" Association="Self.FK_Plato_Menu">
-            <End Role="Menu" EntitySet="Menu" />
-            <End Role="Plato" EntitySet="Plato" />
           </AssociationSet>
           <AssociationSet Name="FK_Partido_Provincia" Association="Self.FK_Partido_Provincia">
             <End Role="Provincia" EntitySet="Provincia" />
@@ -879,13 +875,40 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Usuario1" EntitySet="Usuario" />
           </AssociationSet>
+          <EntitySet Name="sysdiagrams" EntityType="dbReservantesModel.sysdiagrams" />
+          <AssociationSet Name="FK_Plato_Menu" Association="dbReservantesModel.FK_Plato_Menu">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="Plato" EntitySet="Plato" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Plato_Menu">
+          <End Type="dbReservantesModel.Menu" Role="Menu" Multiplicity="0..1" />
+          <End Type="dbReservantesModel.Plato" Role="Plato" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Plato">
+              <PropertyRef Name="MenuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="dbReservantesModelStoreContainer" CdmEntityContainer="dbReservantesEntities">
+        <EntityContainerMapping StorageEntityContainer="dbReservantesModelStoreContainer" CdmEntityContainer="dbReservAntesEntities">
           <EntitySetMapping Name="Cliente">
             <EntityTypeMapping TypeName="dbReservantesModel.Cliente">
               <MappingFragment StoreEntitySet="Cliente">
@@ -953,6 +976,7 @@
                 <ScalarProperty Name="RestauranteId" ColumnName="RestauranteId" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="EstiloMenuId" ColumnName="EstiloMenuId" />
+                <ScalarProperty Name="PlatoId" ColumnName="PlatoId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -968,10 +992,11 @@
           <EntitySetMapping Name="Plato">
             <EntityTypeMapping TypeName="dbReservantesModel.Plato">
               <MappingFragment StoreEntitySet="Plato">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="MenuId" ColumnName="MenuId" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="NombrePlato" ColumnName="NombrePlato" />
                 <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Foto" ColumnName="Foto" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1013,17 +1038,7 @@
                 <ScalarProperty Name="DatosBancariosId" ColumnName="DatosBancariosId" />
                 <ScalarProperty Name="CUIT" ColumnName="CUIT" />
                 <ScalarProperty Name="Foto" ColumnName="Foto" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="dbReservantesModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="CantClientes" ColumnName="CantClientes" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1044,6 +1059,17 @@
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="TipoUsuarioId" ColumnName="TipoUsuarioId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="dbReservantesModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

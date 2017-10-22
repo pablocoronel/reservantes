@@ -8,6 +8,12 @@ namespace ReservAntes.Controllers
 {
     public class RestauranteController : Controller
     {
+
+        dbReservAntesEntities ctx = new dbReservAntesEntities();
+
+        Models.LogicaRestaurante LogRes = new Models.LogicaRestaurante();
+
+
         // GET: Restaurante
         public ActionResult Index()
         {
@@ -84,6 +90,28 @@ namespace ReservAntes.Controllers
             {
                 return View();
             }
+        }
+
+
+
+        public ActionResult CreatePlato()
+        {
+          return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreatePlato(Plato id)
+        {
+            {
+                if (ModelState.IsValid)
+
+                    this.LogRes.CrearPlato(id);
+
+
+                return View("Restaurante/Index");
+            }
+
+            return View("../Shared/Error");
         }
     }
 }

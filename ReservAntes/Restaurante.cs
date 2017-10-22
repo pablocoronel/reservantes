@@ -25,6 +25,7 @@ namespace ReservAntes
         public Nullable<int> DatosBancariosId { get; set; }
         public Nullable<int> CUIT { get; set; }
         public byte[] Foto { get; set; }
+        public Nullable<int> CantClientes { get; set; }
     
         public virtual ICollection<DatosBancarios> DatosBancarios { get; set; }
         public virtual Menu Menu { get; set; }
