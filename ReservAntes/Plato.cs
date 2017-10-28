@@ -14,20 +14,14 @@ namespace ReservAntes
     
     public partial class Plato
     {
-        public Plato()
-        {
-            this.Menu = new HashSet<Menu>();
-        }
-    
         public int Id { get; set; }
         public string NombrePlato { get; set; }
         public Nullable<decimal> Precio { get; set; }
         public string Descripcion { get; set; }
-        public byte[] Foto { get; set; }
+        public string Foto { get; set; }
         public Nullable<int> MenuId { get; set; }
     
-        public virtual ICollection<Menu> Menu { get; set; }
+        public virtual Menu Menu { get; set; }
         public virtual PlatosElegidos PlatosElegidos { get; set; }
-        public virtual Menu Menu1 { get; set; }
     }
 }

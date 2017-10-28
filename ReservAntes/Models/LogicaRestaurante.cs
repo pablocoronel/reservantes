@@ -7,45 +7,71 @@ using System.IO;
 using System.Data;
 
 
+
 namespace ReservAntes.Models
 {
     public class LogicaRestaurante
     {
-        dbReservAntesEntities ctx = new dbReservAntesEntities();
+        dbReservantesEntities ctx = new dbReservantesEntities();
 
         public void CrearPlato(Plato plate)
         {
-            Plato NewPlato = new Plato();
-            NewPlato.NombrePlato = plate.NombrePlato;
-            NewPlato.NombrePlato = plate.Descripcion;
-            NewPlato.Precio = plate.Precio;
+
+            //Plato NewPlato = new Plato();
+            //NewPlato.NombrePlato = plate.NombrePlato;
+            //NewPlato.NombrePlato = plate.Descripcion;
+            //NewPlato.Precio = plate.Precio;
 
 
-            // IMAGEN
+            //// IMAGEN
 
-            if (plate.Foto != null)
-            {
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    plate.Foto.InputStream.CopyTo(ms);
-                    byte[] array = ms.GetBuffer();
+            //if (plate.Foto.ContentLength > 0)
+            //{
+            //    HttpPostedFileBase file = plate.Foto;
+            //    string nombrePelicula = plate.NombrePlato;
+            //    string nombreImagen = string.Concat(nombrePelicula, Path.GetExtension(file.FileName));
 
-                    var context = new Models.db();
-                    ctx.activofijoes.Add(new Models.activofijo()
-                    {
-                        FotoAF = array,
-                    });
-                    context.SaveChanges();
-                }
+            //    string carpetaImagenes = System.Configuration.ConfigurationManager.AppSettings["CarpetaImagenes"];
+            //    string pathDestino = System.Web.Hosting.HostingEnvironment.MapPath("~") + carpetaImagenes;
+
+            //    //si no exise la carpeta, la creamos
+            //    if (!System.IO.Directory.Exists(pathDestino))
+            //    {
+            //        System.IO.Directory.CreateDirectory(pathDestino);
+            //    }
+
+            //    // guardar
+            //    file.SaveAs(string.Concat(pathDestino, nombreImagen));
+
+            //    //ruta de la imagen
+            //    string rutaImagen = string.Concat(carpetaImagenes, nombreImagen);
+
+            //    NewPlato.Foto = rutaImagen;
 
 
-                // -------------------------------------------
+            //    // -------------------------------------------
 
 
-                ctx.Plato.Add(NewPlato);
-            ctx.SaveChanges();
+            //    ctx.Plato.Add(NewPlato);
+            //    ctx.SaveChanges();
+            //}
+
         }
 
+        // ----------------- MENU ---------------------
+
+
+        public List<Plato> GetPlato(int idMenu)
+        {
+            List<Plato> ListPlato = (from m in ctx.Plato
+                                   where m.MenuId == idMenu
+                                     select m).ToList();
+
+            return ListPlato;
         }
+
+        // -------------------------------------
+
+
     }
 }

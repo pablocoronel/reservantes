@@ -1,0 +1,50 @@
+﻿@model List<Plato>
+@{
+    ViewBag.Title = "MiMenu";
+    Layout = "~/Views/Shared/_LayoutRestaurante.cshtml";
+}
+
+@Html.Partial("_PartialViewRestaurante")  
+
+<h2>Mi Menu</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <h2 class="col-md-4"><u>Peliculas</u></h2>
+        <button class="col-md-2 btn btn-primary" onclick="location.href='@Url.Action("CreatePlato")'; return false;">Crear Nuevo Plato</button>
+    </div>
+
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <table class="table table-bordered">
+                <thead>
+                    <tr class="info">
+                        <th>Imagen</th>
+                        <th>Nombre</th>
+                        <th>Descripcion</th>
+                        <th>Precio</th>
+                        <th>Editar</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody class="table table-hover">
+                    @foreach (Plato plat in Model)
+                    {
+                        <tr>
+                            <th><img src="@plat.Foto" width="70" /></th>
+                            <th>@plat.NombrePlato</th>
+                            <th>@plat.Descripcion</th>
+                            <th>@plat.Precio</th>
+                            <th><a href="" class="btn btn-primary">Editar</a></th>
+                            <th><a href="" class="btn btn-primary">Eliminar</a></th>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

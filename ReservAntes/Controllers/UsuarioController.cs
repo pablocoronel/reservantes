@@ -8,7 +8,7 @@ namespace ReservAntes.Controllers
 {
     public class UsuarioController : Controller
     {
-        dbReservAntesEntities ctx = new dbReservAntesEntities();
+        dbReservantesEntities ctx = new dbReservantesEntities();
 
         Models.LogicaUsuario LogUs = new Models.LogicaUsuario();
 

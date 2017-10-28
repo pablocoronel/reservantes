@@ -19,7 +19,7 @@ namespace ReservAntes.Models
         }
 
 
-        dbReservAntesEntities ctx = new dbReservAntesEntities();
+        dbReservantesEntities ctx = new dbReservantesEntities();
 
         public void CrearUsuario (Usuario us)
         {

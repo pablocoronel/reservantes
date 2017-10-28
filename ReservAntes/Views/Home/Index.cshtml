@@ -1,20 +1,24 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<h2>Index</h2>
 
 <div class="row">
 
     @if (Session["usuarioTipo"].ToString() != String.Empty)
     {
-       
-            <p>tipo de usuario: </p>
+
+        <p>tipo de usuario: </p>
             @Session["usuarioTipo"].ToString();
         <br>
         <p>ID de usuario: </p>
-            @Session["usuarioId"].ToString();
+        @Session["usuarioId"].ToString();
         <br>
         <p>nombre de usuario: </p>
-            @Session["usuarioNombre"].ToString();
+        @Session["usuarioNombre"].ToString();
 
     }
 </div>

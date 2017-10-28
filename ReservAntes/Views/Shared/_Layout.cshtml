@@ -13,55 +13,23 @@
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+                    <span class="icon-bar">Nosotros</span>
+                    <span class="icon-bar">Contacto</span>
+                    <span class="icon-bar">Mapa</span>
                 </button>
-               @Html.ActionLink("ReservAntes", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                @if (Session["usuarioTipo"].ToString() == String.Empty)
-                {
-                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Login", "Login", "Login") </li>
-                    <li>@Html.ActionLink("Registrarse", "CreateUser", "Usuario")</li>
-                </ul>
-                }
-                else
-                {
-                    <ul class="nav navbar-nav">
-                        @switch (Session["usuarioTipo"])
-                        {
-                            case 1:
-                                <li>@Html.ActionLink("Administrar app", "Index", "Administrador") </li>
-                                break;
-
-                            case 2:
-                                <li>@Html.ActionLink("Administrar cliente", "Index", "Cliente") </li>
-                                break;
-
-                            case 3:
-                                <li>@Html.ActionLink("Administrar restaurante", "Index", "Restaurante") </li>
-                                break;
-                        }
-                            
-                        <li>@Html.ActionLink("Cerrar sesión", "Logout", "Login") </li>
-                    </ul>
-                }
-            
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - ReservAntes - Trabajo Practico Integrador 2017 2C</p>
-        </footer>
-    </div>
+                <div class="container body-content">
+                    @RenderBody()
+                    <hr />
+                    <footer>
+                        <p>&copy; @DateTime.Now.Year - ReservAntes - Trabajo Practico Integrador 2017 2C</p>
+                    </footer>
+                </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+                @Scripts.Render("~/bundles/jquery")
+                @Scripts.Render("~/bundles/bootstrap")
+                @RenderSection("scripts", required: false)
 </body>
 </html>

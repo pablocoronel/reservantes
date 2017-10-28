@@ -16,7 +16,7 @@ namespace ReservAntes
     {
         public Menu()
         {
-            this.Plato1 = new HashSet<Plato>();
+            this.Plato = new HashSet<Plato>();
         }
     
         public int Id { get; set; }
@@ -26,8 +26,7 @@ namespace ReservAntes
         public Nullable<int> PlatoId { get; set; }
     
         public virtual EstiloMenu EstiloMenu { get; set; }
-        public virtual Plato Plato { get; set; }
         public virtual Restaurante Restaurante { get; set; }
-        public virtual ICollection<Plato> Plato1 { get; set; }
+        public virtual ICollection<Plato> Plato { get; set; }
     }
 }

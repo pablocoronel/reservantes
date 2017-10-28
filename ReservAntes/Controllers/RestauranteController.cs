@@ -9,7 +9,7 @@ namespace ReservAntes.Controllers
     public class RestauranteController : Controller
     {
 
-        dbReservAntesEntities ctx = new dbReservAntesEntities();
+        dbReservantesEntities ctx = new dbReservantesEntities();
 
         Models.LogicaRestaurante LogRes = new Models.LogicaRestaurante();
 
@@ -93,6 +93,7 @@ namespace ReservAntes.Controllers
         }
 
 
+        // --------------------- CREAR PLATO -----------------------------
 
         public ActionResult CreatePlato()
         {
@@ -100,7 +101,7 @@ namespace ReservAntes.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreatePlato(Plato id)
+        public ActionResult CreatePlato(Plato id, HttpPostedFile imagen)
         {
             {
                 if (ModelState.IsValid)
@@ -113,5 +114,9 @@ namespace ReservAntes.Controllers
 
             return View("../Shared/Error");
         }
+
+
+        
+
     }
 }

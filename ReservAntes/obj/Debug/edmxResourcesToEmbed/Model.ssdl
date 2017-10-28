@@ -62,6 +62,7 @@
     <Property Name="RestauranteId" Type="int" />
     <Property Name="Descripcion" Type="varchar" MaxLength="50" />
     <Property Name="EstiloMenuId" Type="int" />
+    <Property Name="PlatoId" Type="int" />
   </EntityType>
   <EntityType Name="Partido">
     <Key>
@@ -76,10 +77,11 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="MenuId" Type="int" />
-    <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+    <Property Name="NombrePlato" Type="varchar" MaxLength="50" />
     <Property Name="Precio" Type="decimal" Precision="18" Scale="0" />
-    <Property Name="Foto" Type="image" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+    <Property Name="Foto" Type="varchar" MaxLength="50" />
+    <Property Name="MenuId" Type="int" />
   </EntityType>
   <EntityType Name="PlatosElegidos">
     <Key>
@@ -116,6 +118,7 @@
     <Property Name="DatosBancariosId" Type="int" />
     <Property Name="CUIT" Type="int" />
     <Property Name="Foto" Type="image" />
+    <Property Name="CantClientes" Type="int" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
