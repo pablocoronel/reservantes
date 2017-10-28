@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<nav class="navbar navbar">
+<nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="">ReservAntes</a>
@@ -15,8 +15,8 @@
             <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li><span class="glyphicon glyphicon-user">@Html.ActionLink("Registrarse", "CreateUser", "Usuario")</span></li>
-            <li><span class="glyphicon glyphicon - log -in">@Html.ActionLink("Login", "Login", "Login")</span> </li>
+            <li>@*<span class="glyphicon glyphicon-user"></span>*@@Html.ActionLink("Registrarse", "CreateUser", "Usuario")</i>
+            <li>@*<span class="glyphicon glyphicon-log-in"></span>*@@Html.ActionLink("Login", "Login", "Login")</li>
         </ul>
     </div>
 </nav>

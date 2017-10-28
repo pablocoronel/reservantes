@@ -36,6 +36,8 @@ namespace ReservAntes.Controllers
             return View("../Home/Index");
         }
 
+    
+
         //Cerrar sesion
         [HttpGet]
         public void Logout()
