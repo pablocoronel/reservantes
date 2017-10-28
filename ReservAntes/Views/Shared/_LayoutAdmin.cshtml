@@ -4,6 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<!-- menu principal -->
 <div class="navbar navbar navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -39,12 +40,12 @@
                             <li>@Html.ActionLink("Administrar restaurante", "Index", "Restaurante") </li>
                             break;
                     }
-
                     <li>@Html.ActionLink("Cerrar sesión", "Logout", "Login") </li>
                 </ul>
-                
+            }
 
+            </div>
         </div>
     </div>
-</div>
 
+@RenderBody()

@@ -35,7 +35,7 @@ namespace ReservAntes.Controllers
                 switch (Session["usuarioTipo"])
                 {
                     case 1:
-                        Response.Redirect("../Home/Index");
+                        Response.Redirect("../Admin/Index");
                         break;
                     case 2:
                         Response.Redirect("../Cliente/Index");

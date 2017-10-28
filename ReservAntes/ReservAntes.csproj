@@ -160,6 +160,7 @@
     <Compile Include="Cliente.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -287,13 +288,11 @@
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Usuario\CreateUser.cshtml" />
     <Content Include="Views\Shared\_LayoutCliente.cshtml" />
-    <Content Include="Views\Shared\_PartialViewCliente.cshtml" />
     <Content Include="Views\Cliente\Index.cshtml" />
     <Content Include="Views\Cliente\DetalleCliente.cshtml" />
     <Content Include="Views\Cliente\EditCliente.cshtml" />
     <Content Include="Views\Cliente\ReservCliente.cshtml" />
     <Content Include="Views\Shared\_LayoutRestaurante.cshtml" />
-    <Content Include="Views\Shared\_PartialViewRestaurante.cshtml" />
     <Content Include="Views\Restaurante\Index.cshtml" />
     <Content Include="Views\Restaurante\CreatePlato.cshtml" />
     <Content Include="Views\Restaurante\MiMenu.cshtml" />
@@ -302,6 +301,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
