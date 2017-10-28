@@ -16,9 +16,9 @@ namespace ReservAntes.Controllers
         {
             if (Session["usuarioId"].ToString() != String.Empty)
             {
-                Response.Redirect("../home/Index");
+                Response.Redirect("../Home/Index");
             }
-            return View();
+            return View(    );
         }
 
         [HttpPost]
@@ -33,7 +33,7 @@ namespace ReservAntes.Controllers
                 Session["usuarioNombre"] = existeUsuario.Username;
                 Response.Redirect("../Home/Index");
             }
-            return View();
+            return View("../Home/Index");
         }
 
         //Cerrar sesion
@@ -42,7 +42,7 @@ namespace ReservAntes.Controllers
         {
             Session.Abandon();
             Response.Cookies.Add(new HttpCookie("ASP.NET_SessionId", ""));
-            Response.Redirect("/Home/Index");
+            Response.Redirect("../Home/Index");
         }
 
     }
