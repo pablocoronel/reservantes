@@ -31,8 +31,28 @@ namespace ReservAntes.Controllers
                 Session["usuarioId"] = existeUsuario.Id;
                 Session["usuarioTipo"] = existeUsuario.TipoUsuarioId;
                 Session["usuarioNombre"] = existeUsuario.Username;
-                Response.Redirect("../Home/Index");
+
+                switch (Session["usuarioTipo"])
+                {
+                    case 1:
+                        Response.Redirect("../Home/Index");
+                        break;
+                    case 2:
+                        Response.Redirect("../Cliente/Index");
+                        break;
+                    case 3:
+                        Response.Redirect("../Restaurante/Index");
+                        break;
+
+                    default:
+                        Response.Redirect("../Home/Index");
+                        break;
+                }
+
+                
             }
+
+            //si no hay session
             return View("../Home/Index");
         }
 
