@@ -115,8 +115,14 @@ namespace ReservAntes.Controllers
             return View("../Shared/Error");
         }
 
+        // --------------------------------------------------
 
-        
+        // --------------------- MENU -----------------------------
+
+        public ActionResult MiMenu()
+        {
+            return View();
+        }
 
     }
 }

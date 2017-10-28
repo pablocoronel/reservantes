@@ -1,4 +1,5 @@
-﻿@model List<Plato>
+﻿@using ReservAntes;
+@model List<Plato>
 @{
     ViewBag.Title = "MiMenu";
     Layout = "~/Views/Shared/_LayoutRestaurante.cshtml";
@@ -11,7 +12,6 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3"></div>
-        <h2 class="col-md-4"><u>Peliculas</u></h2>
         <button class="col-md-2 btn btn-primary" onclick="location.href='@Url.Action("CreatePlato")'; return false;">Crear Nuevo Plato</button>
     </div>
 
