@@ -11,8 +11,11 @@ using System.Data;
 namespace ReservAntes.Models
 {
     public class LogicaRestaurante
+
     {
+
         dbReservantesEntities ctx = new dbReservantesEntities();
+
 
 
        public List<EstiloMenu> GetEstilosMenus()
@@ -102,7 +105,7 @@ namespace ReservAntes.Models
         {
             Menu newMenu = new Menu();
 
-            
+            var usuarioID = 
 
             newMenu.Descripcion = menu.Descripcion;
             newMenu.EstiloMenu = menu.EstiloMenu;
