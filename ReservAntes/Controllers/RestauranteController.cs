@@ -138,6 +138,8 @@ namespace ReservAntes.Controllers
             ViewBag.ListTiposMenus = LogRes.GetEstilosMenus();
 
             var IdUsuario = this.Session["usuarioId"];
+            var nomUsuario = this.Session["usuarioNombre"];
+
 
             if (ModelState.IsValid)
             {
@@ -146,7 +148,7 @@ namespace ReservAntes.Controllers
 
             newMenu.RestauranteId = Convert.ToInt32(IdUsuario);
             newMenu.Descripcion = menu.Descripcion;
-            newMenu.EstiloMenuId = menu.EstiloMenuId;   
+            newMenu.EstiloMenuId = menu.EstiloMenuId;
 
             ctx.Menu.Add(newMenu);
             ctx.SaveChanges();
