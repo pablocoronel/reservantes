@@ -15,7 +15,7 @@ namespace ReservAntes.Models
         dbReservantesEntities ctx = new dbReservantesEntities();
 
 
-        public List<EstiloMenu> GetEstilosMenus()
+       public List<EstiloMenu> GetEstilosMenus()
         {
             List<EstiloMenu> ListTiposMenus = new List<EstiloMenu>();
             ListTiposMenus = ctx.EstiloMenu.ToList();
@@ -96,11 +96,13 @@ namespace ReservAntes.Models
             return ListMenu;
         }
 
-
+       
 
         public void crearMenu(Menu menu)
         {
             Menu newMenu = new Menu();
+
+            
 
             newMenu.Descripcion = menu.Descripcion;
             newMenu.EstiloMenu = menu.EstiloMenu;

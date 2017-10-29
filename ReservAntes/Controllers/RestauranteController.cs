@@ -13,6 +13,7 @@ namespace ReservAntes.Controllers
 
         Models.LogicaRestaurante LogRes = new Models.LogicaRestaurante();
 
+      
 
         // GET: Restaurante
         public ActionResult Index()
@@ -109,10 +110,9 @@ namespace ReservAntes.Controllers
                     this.LogRes.CrearPlato(id);
 
 
-                return View("Restaurante/Index");
+                return View("Index");
             }
 
-            return View("../Shared/Error");
         }
 
         // --------------------------------------------------
@@ -133,7 +133,9 @@ namespace ReservAntes.Controllers
         [HttpPost]
         public ActionResult CreateMenu(Menu id)
         {
+            
             ViewBag.ListTiposMenus = LogRes.GetEstilosMenus();
+            @Session["usuarioTipo"].ToString();
 
             {
                 if (ModelState.IsValid)
@@ -141,7 +143,7 @@ namespace ReservAntes.Controllers
                     this.LogRes.crearMenu(id);
 
 
-                return View("Restaurante/Index");
+                return View("Index");
             }
 
             return View("../Shared/Error");

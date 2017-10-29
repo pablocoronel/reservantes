@@ -58,7 +58,6 @@ namespace ReservAntes.Controllers
                 return View("../Home/Index");
             }
 
-            return View("../Home/Index");
         }
          
         
