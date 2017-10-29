@@ -10,6 +10,28 @@ namespace ReservAntes.Controllers
     {
         public ActionResult Index()
         {
+            if(Session["usuarioTipo"] != null)
+{
+                switch (Session["usuarioTipo"])
+                {
+                    case 1:
+                        Response.Redirect("/Admin/Index/");
+                        break;
+
+                    case 2:
+                        Response.Redirect("/Cliente/Index/");
+                        break;
+
+                    case 3:
+                        Response.Redirect("/Restaurante/Index/");
+                        break;
+
+                    default:
+                        Response.Redirect("/Home/Index/");
+                        break;
+                }
+
+            }
             return View();
         }
 
