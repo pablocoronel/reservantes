@@ -132,7 +132,7 @@ namespace ReservAntes.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateMenu(Menu menu)
+        public ActionResult CreateMenu(Menu us)
         {
 
             ViewBag.ListTiposMenus = LogRes.GetEstilosMenus();
@@ -147,8 +147,8 @@ namespace ReservAntes.Controllers
             Menu newMenu = new Menu();
 
             newMenu.RestauranteId = Convert.ToInt32(IdUsuario);
-            newMenu.Descripcion = menu.Descripcion;
-            newMenu.EstiloMenuId = menu.EstiloMenuId;
+            newMenu.Descripcion = us.Descripcion;
+            newMenu.EstiloMenuId = us.EstiloMenuId;
 
             ctx.Menu.Add(newMenu);
             ctx.SaveChanges();
