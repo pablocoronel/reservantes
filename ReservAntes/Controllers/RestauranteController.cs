@@ -124,5 +124,28 @@ namespace ReservAntes.Controllers
             return View();
         }
 
+        public ActionResult CreateMenu()
+        {
+            ViewBag.ListTiposMenus = LogRes.GetEstilosMenus();
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateMenu(Menu id)
+        {
+            ViewBag.ListTiposMenus = LogRes.GetEstilosMenus();
+
+            {
+                if (ModelState.IsValid)
+
+                    this.LogRes.crearMenu(id);
+
+
+                return View("Restaurante/Index");
+            }
+
+            return View("../Shared/Error");
+        }
+
     }
 }

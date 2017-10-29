@@ -14,6 +14,16 @@ namespace ReservAntes.Models
     {
         dbReservantesEntities ctx = new dbReservantesEntities();
 
+
+        public List<EstiloMenu> GetEstilosMenus()
+        {
+            List<EstiloMenu> ListTiposMenus = new List<EstiloMenu>();
+            ListTiposMenus = ctx.EstiloMenu.ToList();
+
+            return ListTiposMenus;
+        }
+
+
         public void CrearPlato(Plato plate)
         {
 
@@ -58,7 +68,7 @@ namespace ReservAntes.Models
 
         }
 
-        // ----------------- MENU ---------------------
+        // ----------------- Platos ---------------------
 
 
         public List<Plato> GetPlato(int idMenu)
@@ -73,5 +83,34 @@ namespace ReservAntes.Models
         // -------------------------------------
 
 
+        // ----------------- Menu ---------------------
+
+       
+
+        public List<Menu> GetMenu(int idMenu)
+        {
+            List<Menu> ListMenu = (from m in ctx.Menu
+                                     where m.Id == idMenu
+                                   select m).ToList();
+
+            return ListMenu;
+        }
+
+
+
+        public void crearMenu(Menu menu)
+        {
+            Menu newMenu = new Menu();
+
+            newMenu.Descripcion = menu.Descripcion;
+            newMenu.EstiloMenu = menu.EstiloMenu;
+
+            ctx.Menu.Add(newMenu);
+            ctx.SaveChanges();
+ 
+        }
+
+
+        // -------------------------------------
     }
 }

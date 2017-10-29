@@ -1,5 +1,4 @@
-﻿@using ReservAntes;
-@model List<Plato>
+﻿@model List<Plato>
 @{
     ViewBag.Title = "MiMenu";
     Layout = "~/Views/Shared/_LayoutRestaurante.cshtml";
@@ -10,9 +9,9 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-3"></div>
+        <div class="col-md-9"></div>
         <button class="col-md-2 btn btn-primary" onclick="location.href='@Url.Action("CreatePlato")'; return false;">Crear Nuevo Plato</button>
-    </div>
+    </div><br />
 
     <div class="row">
         <div class="col-md-1"></div>
@@ -29,7 +28,7 @@
                     </tr>
                 </thead>
                 <tbody class="table table-hover">
-                    @foreach (Plato plat in Model)
+                    @*@foreach (Plato plat in Model)
                     {
                         <tr>
                             <th><img src="@plat.Foto" width="70" /></th>
@@ -40,7 +39,7 @@
                             <th><a href="" class="btn btn-primary">Eliminar</a></th>
 
                         </tr>
-                    }
+                    }*@
                 </tbody>
             </table>
         </div>
