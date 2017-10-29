@@ -72,7 +72,6 @@
     <Property Name="RestauranteId" Type="Int32" />
     <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="EstiloMenuId" Type="Int32" />
-    <Property Name="PlatoId" Type="Int32" />
     <NavigationProperty Name="EstiloMenu" Relationship="Self.FK_Menu_EstiloMenu" FromRole="Menu" ToRole="EstiloMenu" />
     <NavigationProperty Name="Restaurante" Relationship="Self.FK_Menu_Restaurante" FromRole="Menu" ToRole="Restaurante" />
     <NavigationProperty Name="Plato" Relationship="Self.FK_Plato_Menu" FromRole="Menu" ToRole="Plato" />

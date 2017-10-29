@@ -29,7 +29,7 @@ namespace ReservAntes.Controllers
         // GET: Usuario/Create
         public ActionResult CreateUser()
         {
-            if (Session["usuarioTipo"].ToString() != String.Empty)
+            if (Session["usuarioTipo"] != null)
             {
                 if (Session["usuarioTipo"].ToString() != "1")
                 {

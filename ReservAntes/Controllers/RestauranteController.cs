@@ -146,7 +146,7 @@ namespace ReservAntes.Controllers
 
             newMenu.RestauranteId = Convert.ToInt32(IdUsuario);
             newMenu.Descripcion = menu.Descripcion;
-            newMenu.EstiloMenuId = menu.EstiloMenuId;
+            newMenu.EstiloMenuId = menu.EstiloMenuId;   
 
             ctx.Menu.Add(newMenu);
             ctx.SaveChanges();

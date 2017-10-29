@@ -68,7 +68,6 @@
           <ScalarProperty Name="RestauranteId" ColumnName="RestauranteId" />
           <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
           <ScalarProperty Name="EstiloMenuId" ColumnName="EstiloMenuId" />
-          <ScalarProperty Name="PlatoId" ColumnName="PlatoId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
