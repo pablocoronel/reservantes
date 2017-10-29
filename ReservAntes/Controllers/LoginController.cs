@@ -14,11 +14,11 @@ namespace ReservAntes.Controllers
         [HttpGet]
         public ActionResult Login()
         {
-            if (Session["usuarioId"].ToString() != String.Empty)
+            if (Session["usuarioId"] != null)
             {
                 Response.Redirect("../Home/Index");
             }
-            return View(    );
+            return View();
         }
 
         [HttpPost]

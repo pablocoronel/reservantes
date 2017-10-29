@@ -4,6 +4,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@if (Session["usuarioId"] == null)
+{
+    Response.Redirect("../Home/Index/");
+}
+
 <!-- menu principal -->
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
@@ -11,9 +16,9 @@
             <a class="navbar-brand" href="">ReservAntes</a>
         </div>
         <ul class="nav navbar-nav">
-            <li>@Html.ActionLink("Home", "Index", "Home")</li>
-            <li>@Html.ActionLink("About", "About", "Home")</li>
-            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+            <li>@Html.ActionLink("Home", "Index", "Cliente")</li>
+            <li>@Html.ActionLink("About", "About", "Cliente")</li>
+            <li>@Html.ActionLink("Contact", "Contact", "Cliente")</li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li>@Html.ActionLink("Salir", "Logout", "Login")</li>
