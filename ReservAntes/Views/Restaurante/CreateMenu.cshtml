@@ -21,7 +21,8 @@
 
                 <div class="form-group">
                     <label>Tipo de Menu:</label>
-                        @Html.DropDownList("EstiloMenu", new SelectList(ViewBag.ListTiposMenus, "Id", "Descripcion"), new { @class = "form-control" })
+                        @Html.DropDownList("EstiloMenuId", new SelectList(ViewBag.ListTiposMenus, "Id", "Descripcion"), new { @class = "form-control" })
+
                 </div>
                <p></p>
                 <div><input type="submit" value="Crear" class="btn btn-info" /></div>

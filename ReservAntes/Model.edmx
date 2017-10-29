@@ -67,7 +67,6 @@
           <Property Name="RestauranteId" Type="int" />
           <Property Name="Descripcion" Type="varchar" MaxLength="50" />
           <Property Name="EstiloMenuId" Type="int" />
-          <Property Name="PlatoId" Type="int" />
         </EntityType>
         <EntityType Name="Partido">
           <Key>
@@ -503,7 +502,6 @@
           <Property Name="RestauranteId" Type="Int32" />
           <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="EstiloMenuId" Type="Int32" />
-          <Property Name="PlatoId" Type="Int32" />
           <NavigationProperty Name="EstiloMenu" Relationship="Self.FK_Menu_EstiloMenu" FromRole="Menu" ToRole="EstiloMenu" />
           <NavigationProperty Name="Restaurante" Relationship="Self.FK_Menu_Restaurante" FromRole="Menu" ToRole="Restaurante" />
           <NavigationProperty Name="Plato" Relationship="Self.FK_Plato_Menu" FromRole="Menu" ToRole="Plato" />
@@ -958,7 +956,6 @@
                 <ScalarProperty Name="RestauranteId" ColumnName="RestauranteId" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="EstiloMenuId" ColumnName="EstiloMenuId" />
-                <ScalarProperty Name="PlatoId" ColumnName="PlatoId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

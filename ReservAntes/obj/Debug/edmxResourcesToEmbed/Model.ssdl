@@ -62,7 +62,6 @@
     <Property Name="RestauranteId" Type="int" />
     <Property Name="Descripcion" Type="varchar" MaxLength="50" />
     <Property Name="EstiloMenuId" Type="int" />
-    <Property Name="PlatoId" Type="int" />
   </EntityType>
   <EntityType Name="Partido">
     <Key>
