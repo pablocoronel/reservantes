@@ -13,7 +13,7 @@ namespace ReservAntes.Controllers
 
         Models.LogicaRestaurante LogRes = new Models.LogicaRestaurante();
 
-      
+
 
         // GET: Restaurante
         public ActionResult Index()
@@ -98,7 +98,7 @@ namespace ReservAntes.Controllers
 
         public ActionResult CreatePlato()
         {
-          return View();
+            return View();
         }
 
         [HttpPost]
@@ -117,7 +117,7 @@ namespace ReservAntes.Controllers
 
         // --------------------------------------------------
 
-        // --------------------- MENU -----------------------------
+        // --------------------- MENU -------------------------------------------------------------------------------
 
         public ActionResult MiMenu()
         {
@@ -126,28 +126,40 @@ namespace ReservAntes.Controllers
 
         public ActionResult CreateMenu()
         {
+
             ViewBag.ListTiposMenus = LogRes.GetEstilosMenus();
             return View();
         }
 
         [HttpPost]
-        public ActionResult CreateMenu(Menu id)
+        public ActionResult CreateMenu(Menu menu)
         {
-            
+
             ViewBag.ListTiposMenus = LogRes.GetEstilosMenus();
-            @Session["usuarioTipo"].ToString();
 
+            var IdUsuario = this.Session["usuarioId"];
+
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
 
-                    this.LogRes.crearMenu(id);
+            Menu newMenu = new Menu();
 
+            newMenu.RestauranteId = Convert.ToInt32(IdUsuario);
+            newMenu.Descripcion = menu.Descripcion;
+            newMenu.EstiloMenuId = menu.EstiloMenuId;
+
+            ctx.Menu.Add(newMenu);
+            ctx.SaveChanges();
 
                 return View("Index");
             }
 
+            //this.LogRes.crearMenu(id);
+            
             return View("../Shared/Error");
         }
+
+        // ----------------------------------------------------------------------------------------------------
 
     }
 }
