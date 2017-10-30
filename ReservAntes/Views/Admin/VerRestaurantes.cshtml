@@ -1,0 +1,34 @@
+﻿@model List<Restaurante>
+@{
+    ViewBag.Title = "Ver restaurantes";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Restaurante</th>
+                <th>Estado</th>
+                <th>Habilitar</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var resto in Model)
+            {
+                String estado = "";
+                if (resto.Estado == 1) {
+                    estado = "Habilitado";
+                } else {
+                    estado = "NO habilitado";
+                }
+
+                <tr>
+                    <td>@resto.ClienteId</td>
+                    <td>@estado</td>
+                    <td><a href="@Url.Action("HabilitarRestaurante","Admin", new { idResto = resto.Id })" class="btn btn-success">Habilitar</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

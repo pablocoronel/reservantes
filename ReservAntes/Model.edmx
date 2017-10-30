@@ -123,6 +123,7 @@
           <Property Name="CUIT" Type="int" />
           <Property Name="Foto" Type="image" />
           <Property Name="CantClientes" Type="int" />
+          <Property Name="Estado" Type="int" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -575,6 +576,7 @@
           <NavigationProperty Name="DatosBancarios" Relationship="Self.FK_DatosBancarios_Restaurante" FromRole="Restaurante" ToRole="DatosBancarios" />
           <NavigationProperty Name="Menu" Relationship="Self.FK_Menu_Restaurante" FromRole="Restaurante" ToRole="Menu" />
           <NavigationProperty Name="Reserva" Relationship="Self.FK_Reserva_Restaurante" FromRole="Restaurante" ToRole="Reserva" />
+          <Property Name="Estado" Type="Int32" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -1011,6 +1013,7 @@
           <EntitySetMapping Name="Restaurante">
             <EntityTypeMapping TypeName="dbReservantesModel.Restaurante">
               <MappingFragment StoreEntitySet="Restaurante">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
                 <ScalarProperty Name="RazonSocial" ColumnName="RazonSocial" />

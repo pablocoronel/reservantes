@@ -16,9 +16,27 @@ namespace ReservAntes.Models
 
         dbReservantesEntities ctx = new dbReservantesEntities();
 
+        //Listado de restaurantes
+        public List<Restaurante> GetRestaurantes()
+        {
+            List<Restaurante> todosLosRestaurantes = new List<Restaurante>(); 
+            todosLosRestaurantes = ctx.Restaurante.ToList();
+
+            return todosLosRestaurantes;
+        }
+
+        //Habilitar el restaurante
+        public void HabilitarRestaurante(int idresto)
+        {
+            Restaurante restaurante = ctx.Restaurante.FirstOrDefault(x => x.Id == idresto);
+            // 0 => NO habilitado | 1 => Habilitado
+            restaurante.Estado = 1;
+
+            ctx.SaveChanges();
+        }
 
 
-       public List<EstiloMenu> GetEstilosMenus()
+        public List<EstiloMenu> GetEstilosMenus()
         {
             List<EstiloMenu> ListTiposMenus = new List<EstiloMenu>();
             ListTiposMenus = ctx.EstiloMenu.ToList();
