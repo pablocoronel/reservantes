@@ -225,9 +225,6 @@
     <Compile Include="Restaurante.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="sysdiagrams.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="TipoUsuario.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

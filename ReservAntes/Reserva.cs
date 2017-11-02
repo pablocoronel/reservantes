@@ -22,7 +22,6 @@ namespace ReservAntes
     
         public virtual Cliente Cliente { get; set; }
         public virtual EstadoReserva EstadoReserva { get; set; }
-        public virtual PlatosElegidos PlatosElegidos { get; set; }
         public virtual Restaurante Restaurante { get; set; }
     }
 }

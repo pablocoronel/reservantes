@@ -17,8 +17,5 @@ namespace ReservAntes
         public int ReservaId { get; set; }
         public int PlatoId { get; set; }
         public Nullable<int> Cantidad { get; set; }
-    
-        public virtual Plato Plato { get; set; }
-        public virtual Reserva Reserva { get; set; }
     }
 }

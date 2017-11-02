@@ -99,21 +99,7 @@ namespace ReservAntes.Models
             return ListMenu;
         }
 
-       
-
-        public void crearMenu(Menu menu)
-        {
-            Menu newMenu = new Menu();
-
-            var usuarioID = 
-
-            newMenu.Descripcion = menu.Descripcion;
-            newMenu.EstiloMenu = menu.EstiloMenu;
-
-            ctx.Menu.Add(newMenu);
-            ctx.SaveChanges();
- 
-        }
+      
 
 
         // -------------------------------------

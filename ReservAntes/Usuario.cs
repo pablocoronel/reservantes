@@ -21,8 +21,7 @@ namespace ReservAntes
         public int TipoUsuarioId { get; set; }
     
         public virtual Cliente Cliente { get; set; }
+        public virtual Restaurante Restaurante { get; set; }
         public virtual TipoUsuario TipoUsuario { get; set; }
-        public virtual Usuario Usuario1 { get; set; }
-        public virtual Usuario Usuario2 { get; set; }
     }
 }

@@ -19,9 +19,8 @@ namespace ReservAntes
         public Nullable<decimal> Precio { get; set; }
         public string Descripcion { get; set; }
         public string Foto { get; set; }
-        public Nullable<int> MenuId { get; set; }
+        public int MenuId { get; set; }
     
         public virtual Menu Menu { get; set; }
-        public virtual PlatosElegidos PlatosElegidos { get; set; }
     }
 }
