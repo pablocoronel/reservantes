@@ -14,6 +14,7 @@ namespace ReservAntes
     
     public partial class Cliente
     {
+        public int IdCliente { get; set; }
         public int IdUsuario { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
@@ -21,6 +22,5 @@ namespace ReservAntes
     
         public virtual Domicilio Domicilio { get; set; }
         public virtual Usuario Usuario { get; set; }
-        public virtual Reserva Reserva { get; set; }
     }
 }

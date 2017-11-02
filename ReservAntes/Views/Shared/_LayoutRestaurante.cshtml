@@ -2,9 +2,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@if (Session["usuarioId"] == null)
+@if (Session["usuarioTipo"] == null || Session["usuarioTipo"].ToString() != "3")
 {
-    Response.Redirect("../Home/Index/");
+    Response.Redirect("/Home/Index/");
 }
 
 <!-- menu principal -->
@@ -19,6 +19,7 @@
             <li>@Html.ActionLink("Contact", "Contact", "Restaurante")</li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
+            <li><a>@Session["usuarioNombre"]</a></li>
             <li>@Html.ActionLink("Salir", "Logout", "Login")</li>
         </ul>
     </div>

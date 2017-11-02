@@ -20,15 +20,18 @@ namespace ReservAntes
             this.Menu = new HashSet<Menu>();
         }
     
-        public int IdUsuario { get; set; }
+        public int IdRestaurante { get; set; }
+        public Nullable<int> IdUsuario { get; set; }
         public string RazonSocial { get; set; }
         public Nullable<int> DatosBancariosId { get; set; }
         public Nullable<int> CUIT { get; set; }
         public byte[] Foto { get; set; }
         public Nullable<int> CantClientes { get; set; }
         public int Estado { get; set; }
+        public Nullable<int> DomicilioID { get; set; }
     
         public virtual ICollection<DatosBancarios> DatosBancarios { get; set; }
+        public virtual Domicilio Domicilio { get; set; }
         public virtual ICollection<Menu> Menu { get; set; }
         public virtual Reserva Reserva { get; set; }
         public virtual Usuario Usuario { get; set; }

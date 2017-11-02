@@ -12,12 +12,12 @@ namespace ReservAntes
     using System;
     using System.Collections.Generic;
     
-    public partial class PlatosElegidos
+    public partial class sysdiagrams
     {
-        public int ReservaId { get; set; }
-        public int PlatoId { get; set; }
-        public Nullable<int> Cantidad { get; set; }
-    
-        public virtual Plato Plato { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

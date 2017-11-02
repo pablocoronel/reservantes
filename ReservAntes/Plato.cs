@@ -22,5 +22,6 @@ namespace ReservAntes
         public int MenuId { get; set; }
     
         public virtual Menu Menu { get; set; }
+        public virtual PlatosElegidos PlatosElegidos { get; set; }
     }
 }

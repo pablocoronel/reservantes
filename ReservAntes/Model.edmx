@@ -7,9 +7,10 @@
       <Schema Namespace="dbReservantesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Cliente">
           <Key>
-            <PropertyRef Name="IdUsuario" />
+            <PropertyRef Name="IdCliente" />
           </Key>
-          <Property Name="IdUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdUsuario" Type="int" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="50" />
           <Property Name="Apellido" Type="varchar" MaxLength="50" />
           <Property Name="DomicilioId" Type="int" />
@@ -113,15 +114,17 @@
         </EntityType>
         <EntityType Name="Restaurante">
           <Key>
-            <PropertyRef Name="IdUsuario" />
+            <PropertyRef Name="IdRestaurante" />
           </Key>
-          <Property Name="IdUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdRestaurante" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdUsuario" Type="int" />
           <Property Name="RazonSocial" Type="varchar" MaxLength="50" />
           <Property Name="DatosBancariosId" Type="int" />
           <Property Name="CUIT" Type="int" />
           <Property Name="Foto" Type="image" />
           <Property Name="CantClientes" Type="int" />
           <Property Name="Estado" Type="int" Nullable="false" />
+          <Property Name="DomicilioID" Type="int" />
         </EntityType>
         <EntityType Name="TipoUsuario">
           <Key>
@@ -143,7 +146,7 @@
         </EntityType>
         <Association Name="FK_Cliente_Domicilio">
           <End Role="Domicilio" Type="Self.Domicilio" Multiplicity="1" />
-          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Domicilio">
               <PropertyRef Name="Id" />
@@ -155,7 +158,7 @@
         </Association>
         <Association Name="FK_Cliente_Usuario">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
-          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuario">
               <PropertyRef Name="Id" />
@@ -170,7 +173,7 @@
           <End Role="DatosBancarios" Type="Self.DatosBancarios" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Restaurante">
-              <PropertyRef Name="IdUsuario" />
+              <PropertyRef Name="IdRestaurante" />
             </Principal>
             <Dependent Role="DatosBancarios">
               <PropertyRef Name="RestauranteId" />
@@ -218,7 +221,7 @@
           <End Role="Menu" Type="Self.Menu" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Restaurante">
-              <PropertyRef Name="IdUsuario" />
+              <PropertyRef Name="IdRestaurante" />
             </Principal>
             <Dependent Role="Menu">
               <PropertyRef Name="RestauranteId" />
@@ -249,15 +252,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Reserva_Cliente">
-          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
-          <End Role="Reserva" Type="Self.Reserva" Multiplicity="0..1" />
+        <Association Name="FK_PlatosElegidos_Plato">
+          <End Role="Plato" Type="Self.Plato" Multiplicity="1" />
+          <End Role="PlatosElegidos" Type="Self.PlatosElegidos" Multiplicity="0..1" />
           <ReferentialConstraint>
-            <Principal Role="Cliente">
-              <PropertyRef Name="IdUsuario" />
-            </Principal>
-            <Dependent Role="Reserva">
+            <Principal Role="Plato">
               <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PlatosElegidos">
+              <PropertyRef Name="ReservaId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -278,16 +281,28 @@
           <End Role="Reserva" Type="Self.Reserva" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Restaurante">
-              <PropertyRef Name="IdUsuario" />
+              <PropertyRef Name="IdRestaurante" />
             </Principal>
             <Dependent Role="Reserva">
               <PropertyRef Name="Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Restaurante_Domicilio">
+          <End Role="Domicilio" Type="Self.Domicilio" Multiplicity="0..1" />
+          <End Role="Restaurante" Type="Self.Restaurante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Domicilio">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Restaurante">
+              <PropertyRef Name="DomicilioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Restaurante_Usuario">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
-          <End Role="Restaurante" Type="Self.Restaurante" Multiplicity="0..1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Restaurante" Type="Self.Restaurante" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuario">
               <PropertyRef Name="Id" />
@@ -361,9 +376,9 @@
             <End Role="Menu" EntitySet="Menu" />
             <End Role="Plato" EntitySet="Plato" />
           </AssociationSet>
-          <AssociationSet Name="FK_Reserva_Cliente" Association="Self.FK_Reserva_Cliente">
-            <End Role="Cliente" EntitySet="Cliente" />
-            <End Role="Reserva" EntitySet="Reserva" />
+          <AssociationSet Name="FK_PlatosElegidos_Plato" Association="Self.FK_PlatosElegidos_Plato">
+            <End Role="Plato" EntitySet="Plato" />
+            <End Role="PlatosElegidos" EntitySet="PlatosElegidos" />
           </AssociationSet>
           <AssociationSet Name="FK_Reserva_EstadoReserva" Association="Self.FK_Reserva_EstadoReserva">
             <End Role="EstadoReserva" EntitySet="EstadoReserva" />
@@ -372,6 +387,10 @@
           <AssociationSet Name="FK_Reserva_Restaurante" Association="Self.FK_Reserva_Restaurante">
             <End Role="Restaurante" EntitySet="Restaurante" />
             <End Role="Reserva" EntitySet="Reserva" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Restaurante_Domicilio" Association="Self.FK_Restaurante_Domicilio">
+            <End Role="Domicilio" EntitySet="Domicilio" />
+            <End Role="Restaurante" EntitySet="Restaurante" />
           </AssociationSet>
           <AssociationSet Name="FK_Restaurante_Usuario" Association="Self.FK_Restaurante_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
@@ -389,15 +408,15 @@
       <Schema Namespace="dbReservantesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Cliente">
           <Key>
-            <PropertyRef Name="IdUsuario" />
+            <PropertyRef Name="IdCliente" />
           </Key>
-          <Property Name="IdUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdUsuario" Type="Int32" Nullable="false" />
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DomicilioId" Type="Int32" />
           <NavigationProperty Name="Domicilio" Relationship="Self.FK_Cliente_Domicilio" FromRole="Cliente" ToRole="Domicilio" />
           <NavigationProperty Name="Usuario" Relationship="Self.FK_Cliente_Usuario" FromRole="Cliente" ToRole="Usuario" />
-          <NavigationProperty Name="Reserva" Relationship="Self.FK_Reserva_Cliente" FromRole="Cliente" ToRole="Reserva" />
         </EntityType>
         <EntityType Name="DatosBancarios">
           <Key>
@@ -422,6 +441,7 @@
           <Property Name="Ubicacion" Type="Geography" Nullable="false" />
           <NavigationProperty Name="Cliente" Relationship="Self.FK_Cliente_Domicilio" FromRole="Domicilio" ToRole="Cliente" />
           <NavigationProperty Name="Localidad" Relationship="Self.FK_Domicilio_Domicilio" FromRole="Domicilio" ToRole="Localidad" />
+          <NavigationProperty Name="Restaurante" Relationship="Self.FK_Restaurante_Domicilio" FromRole="Domicilio" ToRole="Restaurante" />
         </EntityType>
         <EntityType Name="EstadoReserva">
           <Key>
@@ -483,6 +503,7 @@
           <Property Name="Foto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="MenuId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Menu" Relationship="Self.FK_Plato_Plato" FromRole="Plato" ToRole="Menu" />
+          <NavigationProperty Name="PlatosElegidos" Relationship="Self.FK_PlatosElegidos_Plato" FromRole="Plato" ToRole="PlatosElegidos" />
         </EntityType>
         <EntityType Name="PlatosElegidos">
           <Key>
@@ -491,6 +512,7 @@
           <Property Name="ReservaId" Type="Int32" Nullable="false" />
           <Property Name="PlatoId" Type="Int32" Nullable="false" />
           <Property Name="Cantidad" Type="Int32" />
+          <NavigationProperty Name="Plato" Relationship="Self.FK_PlatosElegidos_Plato" FromRole="PlatosElegidos" ToRole="Plato" />
         </EntityType>
         <EntityType Name="Provincia">
           <Key>
@@ -509,22 +531,24 @@
           <Property Name="RestaurenteId" Type="Int32" />
           <Property Name="Observaciones" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="EstadoReservaId" Type="Int32" />
-          <NavigationProperty Name="Cliente" Relationship="Self.FK_Reserva_Cliente" FromRole="Reserva" ToRole="Cliente" />
           <NavigationProperty Name="EstadoReserva" Relationship="Self.FK_Reserva_EstadoReserva" FromRole="Reserva" ToRole="EstadoReserva" />
           <NavigationProperty Name="Restaurante" Relationship="Self.FK_Reserva_Restaurante" FromRole="Reserva" ToRole="Restaurante" />
         </EntityType>
         <EntityType Name="Restaurante">
           <Key>
-            <PropertyRef Name="IdUsuario" />
+            <PropertyRef Name="IdRestaurante" />
           </Key>
-          <Property Name="IdUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdRestaurante" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdUsuario" Type="Int32" />
           <Property Name="RazonSocial" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DatosBancariosId" Type="Int32" />
           <Property Name="CUIT" Type="Int32" />
           <Property Name="Foto" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="CantClientes" Type="Int32" />
           <Property Name="Estado" Type="Int32" Nullable="false" />
+          <Property Name="DomicilioID" Type="Int32" />
           <NavigationProperty Name="DatosBancarios" Relationship="Self.FK_DatosBancarios_Restaurante" FromRole="Restaurante" ToRole="DatosBancarios" />
+          <NavigationProperty Name="Domicilio" Relationship="Self.FK_Restaurante_Domicilio" FromRole="Restaurante" ToRole="Domicilio" />
           <NavigationProperty Name="Menu" Relationship="Self.FK_Menu_Restaurante" FromRole="Restaurante" ToRole="Menu" />
           <NavigationProperty Name="Reserva" Relationship="Self.FK_Reserva_Restaurante" FromRole="Restaurante" ToRole="Reserva" />
           <NavigationProperty Name="Usuario" Relationship="Self.FK_Restaurante_Usuario" FromRole="Restaurante" ToRole="Usuario" />
@@ -553,7 +577,7 @@
         </EntityType>
         <Association Name="FK_Cliente_Domicilio">
           <End Role="Domicilio" Type="Self.Domicilio" Multiplicity="1" />
-          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Domicilio">
               <PropertyRef Name="Id" />
@@ -565,7 +589,7 @@
         </Association>
         <Association Name="FK_Cliente_Usuario">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
-          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuario">
               <PropertyRef Name="Id" />
@@ -575,24 +599,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Reserva_Cliente">
-          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
-          <End Role="Reserva" Type="Self.Reserva" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Cliente">
-              <PropertyRef Name="IdUsuario" />
-            </Principal>
-            <Dependent Role="Reserva">
-              <PropertyRef Name="Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_DatosBancarios_Restaurante">
           <End Role="Restaurante" Type="Self.Restaurante" Multiplicity="0..1" />
           <End Role="DatosBancarios" Type="Self.DatosBancarios" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Restaurante">
-              <PropertyRef Name="IdUsuario" />
+              <PropertyRef Name="IdRestaurante" />
             </Principal>
             <Dependent Role="DatosBancarios">
               <PropertyRef Name="RestauranteId" />
@@ -608,6 +620,18 @@
             </Principal>
             <Dependent Role="Domicilio">
               <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Restaurante_Domicilio">
+          <End Role="Domicilio" Type="Self.Domicilio" Multiplicity="0..1" />
+          <End Role="Restaurante" Type="Self.Restaurante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Domicilio">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Restaurante">
+              <PropertyRef Name="DomicilioID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -652,7 +676,7 @@
           <End Role="Menu" Type="Self.Menu" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Restaurante">
-              <PropertyRef Name="IdUsuario" />
+              <PropertyRef Name="IdRestaurante" />
             </Principal>
             <Dependent Role="Menu">
               <PropertyRef Name="RestauranteId" />
@@ -683,12 +707,24 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PlatosElegidos_Plato">
+          <End Role="Plato" Type="Self.Plato" Multiplicity="1" />
+          <End Role="PlatosElegidos" Type="Self.PlatosElegidos" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Plato">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PlatosElegidos">
+              <PropertyRef Name="ReservaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Reserva_Restaurante">
           <End Role="Restaurante" Type="Self.Restaurante" Multiplicity="1" />
           <End Role="Reserva" Type="Self.Reserva" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Restaurante">
-              <PropertyRef Name="IdUsuario" />
+              <PropertyRef Name="IdRestaurante" />
             </Principal>
             <Dependent Role="Reserva">
               <PropertyRef Name="Id" />
@@ -696,8 +732,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Restaurante_Usuario">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
-          <End Role="Restaurante" Type="Self.Restaurante" Multiplicity="0..1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Restaurante" Type="Self.Restaurante" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuario">
               <PropertyRef Name="Id" />
@@ -743,10 +779,6 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Cliente" EntitySet="Cliente" />
           </AssociationSet>
-          <AssociationSet Name="FK_Reserva_Cliente" Association="Self.FK_Reserva_Cliente">
-            <End Role="Cliente" EntitySet="Cliente" />
-            <End Role="Reserva" EntitySet="Reserva" />
-          </AssociationSet>
           <AssociationSet Name="FK_DatosBancarios_Restaurante" Association="Self.FK_DatosBancarios_Restaurante">
             <End Role="Restaurante" EntitySet="Restaurante" />
             <End Role="DatosBancarios" EntitySet="DatosBancarios" />
@@ -754,6 +786,10 @@
           <AssociationSet Name="FK_Domicilio_Domicilio" Association="Self.FK_Domicilio_Domicilio">
             <End Role="Localidad" EntitySet="Localidad" />
             <End Role="Domicilio" EntitySet="Domicilio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Restaurante_Domicilio" Association="Self.FK_Restaurante_Domicilio">
+            <End Role="Domicilio" EntitySet="Domicilio" />
+            <End Role="Restaurante" EntitySet="Restaurante" />
           </AssociationSet>
           <AssociationSet Name="FK_Reserva_EstadoReserva" Association="Self.FK_Reserva_EstadoReserva">
             <End Role="EstadoReserva" EntitySet="EstadoReserva" />
@@ -779,6 +815,10 @@
             <End Role="Provincia" EntitySet="Provincia" />
             <End Role="Partido" EntitySet="Partido" />
           </AssociationSet>
+          <AssociationSet Name="FK_PlatosElegidos_Plato" Association="Self.FK_PlatosElegidos_Plato">
+            <End Role="Plato" EntitySet="Plato" />
+            <End Role="PlatosElegidos" EntitySet="PlatosElegidos" />
+          </AssociationSet>
           <AssociationSet Name="FK_Reserva_Restaurante" Association="Self.FK_Reserva_Restaurante">
             <End Role="Restaurante" EntitySet="Restaurante" />
             <End Role="Reserva" EntitySet="Reserva" />
@@ -801,6 +841,7 @@
           <EntitySetMapping Name="Cliente">
             <EntityTypeMapping TypeName="dbReservantesModel.Cliente">
               <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
                 <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Apellido" ColumnName="Apellido" />
@@ -919,6 +960,7 @@
           <EntitySetMapping Name="Restaurante">
             <EntityTypeMapping TypeName="dbReservantesModel.Restaurante">
               <MappingFragment StoreEntitySet="Restaurante">
+                <ScalarProperty Name="IdRestaurante" ColumnName="IdRestaurante" />
                 <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
                 <ScalarProperty Name="RazonSocial" ColumnName="RazonSocial" />
                 <ScalarProperty Name="DatosBancariosId" ColumnName="DatosBancariosId" />
@@ -926,6 +968,7 @@
                 <ScalarProperty Name="Foto" ColumnName="Foto" />
                 <ScalarProperty Name="CantClientes" ColumnName="CantClientes" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="DomicilioID" ColumnName="DomicilioID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -14,14 +14,20 @@ namespace ReservAntes
     
     public partial class Usuario
     {
+        public Usuario()
+        {
+            this.Cliente = new HashSet<Cliente>();
+            this.Restaurante = new HashSet<Restaurante>();
+        }
+    
         public int Id { get; set; }
         public string Username { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
         public int TipoUsuarioId { get; set; }
     
-        public virtual Cliente Cliente { get; set; }
-        public virtual Restaurante Restaurante { get; set; }
+        public virtual ICollection<Cliente> Cliente { get; set; }
+        public virtual ICollection<Restaurante> Restaurante { get; set; }
         public virtual TipoUsuario TipoUsuario { get; set; }
     }
 }
