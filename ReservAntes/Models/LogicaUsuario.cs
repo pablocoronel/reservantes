@@ -39,7 +39,7 @@ namespace ReservAntes.Models
             {
                 var usuarioRecienCreado = ctx.Usuario.OrderByDescending(x => x.Id).FirstOrDefault();
 
-                nuevoRestaurante.ClienteId = usuarioRecienCreado.Id +1;
+                nuevoRestaurante.IdUsuario = usuarioRecienCreado.Id +1;
                 nuevoRestaurante.RazonSocial = null;
                 nuevoRestaurante.DatosBancariosId = null;
                 nuevoRestaurante.CUIT = null;

@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="662c3be628a54af1b0c5f417558f7df2" Name="Diagram1">
+      <Diagram DiagramId="44d7c437437a45308cdada6b6646dc79" Name="Diagram1">
         <EntityTypeShape EntityType="dbReservantesModel.Cliente" Width="1.5" PointX="9.75" PointY="6" IsExpanded="true" />
         <EntityTypeShape EntityType="dbReservantesModel.DatosBancarios" Width="1.5" PointX="15" PointY="6.125" IsExpanded="true" />
         <EntityTypeShape EntityType="dbReservantesModel.Domicilio" Width="1.5" PointX="7.5" PointY="5.75" IsExpanded="true" />
@@ -18,6 +18,7 @@
         <EntityTypeShape EntityType="dbReservantesModel.Provincia" Width="1.5" PointX="0.75" PointY="6.375" IsExpanded="true" />
         <EntityTypeShape EntityType="dbReservantesModel.Reserva" Width="1.5" PointX="15" PointY="9" IsExpanded="true" />
         <EntityTypeShape EntityType="dbReservantesModel.Restaurante" Width="1.5" PointX="12.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbReservantesModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="dbReservantesModel.TipoUsuario" Width="1.5" PointX="5.25" PointY="2.25" IsExpanded="true" />
         <EntityTypeShape EntityType="dbReservantesModel.Usuario" Width="1.5" PointX="7.5" PointY="1.875" IsExpanded="true" />
         <AssociationConnector Association="dbReservantesModel.FK_Cliente_Domicilio" ManuallyRouted="false" />

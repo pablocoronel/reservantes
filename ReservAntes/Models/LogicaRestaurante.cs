@@ -28,7 +28,7 @@ namespace ReservAntes.Models
         //Habilitar el restaurante
         public void HabilitarRestaurante(int idresto)
         {
-            Restaurante restaurante = ctx.Restaurante.FirstOrDefault(x => x.Id == idresto);
+            Restaurante restaurante = ctx.Restaurante.FirstOrDefault(x => x.IdUsuario == idresto);
             // 0 => NO habilitado | 1 => Habilitado
             restaurante.Estado = 1;
 
