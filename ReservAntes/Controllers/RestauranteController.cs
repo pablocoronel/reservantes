@@ -163,5 +163,45 @@ namespace ReservAntes.Controllers
 
         // ----------------------------------------------------------------------------------------------------
 
+
+
+        // --------------------- Perfil Restoran -------------------------------------------------------------------------------
+
+
+        public ActionResult RestoPerfil()
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult RestoPerfil(Restaurante id)
+        {
+
+            return View();
+        }
+
+
+        // ----------------------------------------------------------------------------------------------------
+
+
+        // --------------------- Perfil Restoran -------------------------------------------------------------------------------
+
+
+        public ActionResult DatosBancarios()
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult DatosBancarios(Restaurante id)
+        {
+
+            return View();
+        }
+
+
+        // ----------------------------------------------------------------------------------------------------
     }
 }

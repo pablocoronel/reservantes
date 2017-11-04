@@ -309,6 +309,8 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Restaurante\CreateMenu.cshtml" />
     <Content Include="Views\Admin\VerRestaurantes.cshtml" />
+    <Content Include="Views\Restaurante\RestoPerfil.cshtml" />
+    <Content Include="Views\Restaurante\DatosBancarios.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

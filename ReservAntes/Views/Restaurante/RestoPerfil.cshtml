@@ -1,0 +1,38 @@
+﻿@model ReservAntes.Restaurante
+@{
+    ViewBag.Title = "RestoPerfil";
+    Layout = "~/Views/Shared/_LayoutRestaurante.cshtml";
+}
+
+<h2>Perfil del Restaurante</h2>
+<div class="jumbotron">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-6">
+
+            @using (Html.BeginForm("RestoPerfil", "Restaurante"))
+            {
+                <div class="form-group">
+                   <label>Razon Social:</label>
+                    @Html.TextBoxFor(Model => Model.RazonSocial, new { @class = "form-control" })  
+                </div>
+                <div class="form-group">
+                    <label>CUIT:</label>
+                    @Html.TextBoxFor(Model => Model.CUIT, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    <label>Domicilio:</label>
+                    @Html.TextBoxFor(Model => Model.Domicilio, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    <label>Cantidad maxima de clientes:</label>
+                    @Html.TextBoxFor(Model => Model.CantClientes, new { @class = "form-control" })
+                </div>
+
+
+                    <button type="submit" class="btn btn-primary">Ingresar</button>
+                    <button onclick="location.href='@Url.Action("Index", "Restaurante")';return false;" class="btn btn-danger">Cancelar</button>
+            }
+        </div>
+    </div>
+</div>
