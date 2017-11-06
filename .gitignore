@@ -1,0 +1,4 @@
+#ignorar carpeta .vs
+.vs/
+obj/
+bin/

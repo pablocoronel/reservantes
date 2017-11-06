@@ -20,9 +20,9 @@ namespace ReservAntes
         }
     
         public int Id { get; set; }
-        public Nullable<int> RestauranteId { get; set; }
         public string Descripcion { get; set; }
         public Nullable<int> EstiloMenuId { get; set; }
+        public int RestauranteId { get; set; }
     
         public virtual EstiloMenu EstiloMenu { get; set; }
         public virtual Restaurante Restaurante { get; set; }

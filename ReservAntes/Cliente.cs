@@ -14,14 +14,13 @@ namespace ReservAntes
     
     public partial class Cliente
     {
-        public int Id { get; set; }
+        public int IdCliente { get; set; }
+        public int IdUsuario { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public Nullable<int> DomicilioId { get; set; }
-        public Nullable<int> UsuarioId { get; set; }
     
         public virtual Domicilio Domicilio { get; set; }
         public virtual Usuario Usuario { get; set; }
-        public virtual Reserva Reserva { get; set; }
     }
 }

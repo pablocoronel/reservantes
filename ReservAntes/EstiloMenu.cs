@@ -14,9 +14,14 @@ namespace ReservAntes
     
     public partial class EstiloMenu
     {
+        public EstiloMenu()
+        {
+            this.Menu = new HashSet<Menu>();
+        }
+    
         public int Id { get; set; }
         public string Descripcion { get; set; }
     
-        public virtual Menu Menu { get; set; }
+        public virtual ICollection<Menu> Menu { get; set; }
     }
 }

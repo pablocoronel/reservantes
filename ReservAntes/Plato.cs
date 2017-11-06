@@ -15,10 +15,11 @@ namespace ReservAntes
     public partial class Plato
     {
         public int Id { get; set; }
-        public Nullable<int> MenuId { get; set; }
-        public string Descripcion { get; set; }
+        public string NombrePlato { get; set; }
         public Nullable<decimal> Precio { get; set; }
-        public byte[] Foto { get; set; }
+        public string Descripcion { get; set; }
+        public string Foto { get; set; }
+        public int MenuId { get; set; }
     
         public virtual Menu Menu { get; set; }
         public virtual PlatosElegidos PlatosElegidos { get; set; }

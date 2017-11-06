@@ -20,9 +20,7 @@ namespace ReservAntes
         public string Observaciones { get; set; }
         public Nullable<int> EstadoReservaId { get; set; }
     
-        public virtual Cliente Cliente { get; set; }
         public virtual EstadoReserva EstadoReserva { get; set; }
-        public virtual PlatosElegidos PlatosElegidos { get; set; }
         public virtual Restaurante Restaurante { get; set; }
     }
 }

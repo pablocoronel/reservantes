@@ -1,0 +1,45 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Session["usuarioTipo"] == null || Session["usuarioTipo"].ToString() != "3")
+{
+    Response.Redirect("/Home/Index/");
+}
+
+<!-- menu principal -->
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="">ReservAntes</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li>@Html.ActionLink("Home", "Index", "Restaurante")</li>
+            <li>@Html.ActionLink("About", "About", "Restaurante")</li>
+            <li>@Html.ActionLink("Contact", "Contact", "Restaurante")</li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a>@Session["usuarioNombre"]</a></li>
+            <li>@Html.ActionLink("Salir", "Logout", "Login")</li>
+        </ul>
+    </div>
+</nav>
+
+<!-- menu de cliente -->
+<div class="navbar navbar-default navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <div class="navbar-brand">
+                <span class="glyphicon glyphicon-th"></span>
+                <button onclick="location.href='@Url.Action("Index","Restaurante")'; return false;" class="btn btn-default">Inicio</button>
+                <button onclick="location.href='@Url.Action("DetalleRestaurante","Restaurante")'; return false;" class="btn btn-default">Mi Restoran</button>
+                <button onclick="location.href='@Url.Action("Reservas","Restaurante")'; return false;" class="btn btn-default">Reservas</button>
+                <button onclick="location.href='@Url.Action("Reporte","Restaurante")'; return false;" class="btn btn-default">Reporte</button>
+                <button onclick="location.href='@Url.Action("CreateMenu","Restaurante")'; return false;" class="btn btn-default">Crear Nuevo Menu</button>
+                <button onclick="location.href='@Url.Action("MiMenu","Restaurante")'; return false;" class="btn btn-default">Ver mi Menu</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@RenderBody()

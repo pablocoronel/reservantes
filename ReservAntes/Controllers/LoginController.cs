@@ -14,9 +14,9 @@ namespace ReservAntes.Controllers
         [HttpGet]
         public ActionResult Login()
         {
-            if (Session["usuarioId"].ToString() != String.Empty)
+            if (Session["usuarioId"] != null)
             {
-                Response.Redirect("../home/Index");
+                Response.Redirect("../Home/Index");
             }
             return View();
         }
@@ -31,10 +31,32 @@ namespace ReservAntes.Controllers
                 Session["usuarioId"] = existeUsuario.Id;
                 Session["usuarioTipo"] = existeUsuario.TipoUsuarioId;
                 Session["usuarioNombre"] = existeUsuario.Username;
-                Response.Redirect("../Home/Index");
+
+                switch (Session["usuarioTipo"])
+                {
+                    case 1:
+                        Response.Redirect("../Admin/Index");
+                        break;
+                    case 2:
+                        Response.Redirect("../Cliente/Index");
+                        break;
+                    case 3:
+                        Response.Redirect("../Restaurante/Index");
+                        break;
+
+                    default:
+                        Response.Redirect("../Home/Index");
+                        break;
+                }
+
+                
             }
-            return View();
+
+            //si no hay session
+            return View("../Home/Index");
         }
+
+    
 
         //Cerrar sesion
         [HttpGet]
@@ -42,7 +64,7 @@ namespace ReservAntes.Controllers
         {
             Session.Abandon();
             Response.Cookies.Add(new HttpCookie("ASP.NET_SessionId", ""));
-            Response.Redirect("/Home/Index");
+            Response.Redirect("../Home/Index");
         }
 
     }

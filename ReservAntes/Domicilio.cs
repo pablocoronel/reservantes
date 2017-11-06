@@ -14,6 +14,12 @@ namespace ReservAntes
     
     public partial class Domicilio
     {
+        public Domicilio()
+        {
+            this.Cliente = new HashSet<Cliente>();
+            this.Restaurante = new HashSet<Restaurante>();
+        }
+    
         public int Id { get; set; }
         public string NombreCalle { get; set; }
         public int NumeroCalle { get; set; }
@@ -22,7 +28,8 @@ namespace ReservAntes
         public int LocalidadId { get; set; }
         public System.Data.Spatial.DbGeography Ubicacion { get; set; }
     
-        public virtual Cliente Cliente { get; set; }
+        public virtual ICollection<Cliente> Cliente { get; set; }
         public virtual Localidad Localidad { get; set; }
+        public virtual ICollection<Restaurante> Restaurante { get; set; }
     }
 }

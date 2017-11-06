@@ -24,6 +24,7 @@ namespace ReservAntes.Models
         public void CrearUsuario (Usuario us)
         {
             Usuario NewUsuario = new Usuario();
+            Restaurante nuevoRestaurante = new Restaurante();
 
             NewUsuario.Username = us.Username;
             NewUsuario.Password = us.Password;
@@ -32,6 +33,23 @@ namespace ReservAntes.Models
 
 
             ctx.Usuario.Add(NewUsuario);
+
+            //Crear el restaurante si eligio tipo de usuario restaurante
+            if (us.TipoUsuarioId == 3)
+            {
+                var usuarioRecienCreado = ctx.Usuario.OrderByDescending(x => x.Id).FirstOrDefault();
+
+                nuevoRestaurante.IdUsuario = usuarioRecienCreado.Id +1;
+                nuevoRestaurante.RazonSocial = null;
+                nuevoRestaurante.DatosBancariosId = null;
+                nuevoRestaurante.CUIT = null;
+                nuevoRestaurante.Foto = null;
+                nuevoRestaurante.CantClientes = null;
+                nuevoRestaurante.Estado = 0;
+
+                ctx.Restaurante.Add(nuevoRestaurante);
+            }
+
             ctx.SaveChanges();
 
         }

@@ -20,9 +20,9 @@ namespace ReservAntes
 
         protected void Session_Start(Object sender, EventArgs e)
         {
-            Session["usuarioId"] = String.Empty;
-            Session["usuarioNombre"] = String.Empty;
-            Session["usuarioTipo"] = String.Empty;
+            Session["usuarioId"] = null;
+            Session["usuarioNombre"] = null;
+            Session["usuarioTipo"] = null;
         }
 
     }
