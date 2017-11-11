@@ -1,8 +1,29 @@
-﻿
+﻿@model List<Cliente>
 @{
     ViewBag.Title = "VerClientes";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>VerClientes</h2>
+<h2>Listado Total de Clientes</h2>
 
+<div class="jumbotron">
+    <table>
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>Nombre</td>
+                <td>Apellido</td>
+            </tr>
+        </thead>
+        @foreach (Cliente item in Model)
+        {
+            <tr>
+                <td>@item.IdUsuario</td>
+            <td>@item.Nombre</td>
+            <td>@item.Apellido</td>
+        </tr>
+        }
+        <tbody></tbody>
+
+    </table>
+</div>

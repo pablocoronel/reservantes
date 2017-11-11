@@ -1,0 +1,33 @@
+﻿@model List<Usuario>
+@{
+    ViewBag.Title = "VerUsuarios";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Listado Total de Usuarios</h2>
+
+<div class="jumbotron">
+    <table class="table-bordered">
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>Email</td>
+                <td>Usuario</td>
+                <td>Contraseña</td>
+                <td>Eliminar</td>
+            </tr>
+        </thead>
+        @foreach (Usuario item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Email</td>
+                <td>@item.Username</td>
+                <td>@item.Password</td>
+                <td>Eliminar</td>
+            </tr>
+        }
+        <tbody></tbody>
+
+    </table>
+</div>

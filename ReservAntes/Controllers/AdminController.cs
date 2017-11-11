@@ -11,6 +11,8 @@ namespace ReservAntes.Controllers
         dbReservantesEntities ctx = new dbReservantesEntities();
         Models.LogicaRestaurante LogResto = new Models.LogicaRestaurante();
         Models.LogicaCliente LogCliente = new Models.LogicaCliente();
+        Models.LogicaUsuario LogUsuario = new Models.LogicaUsuario();
+
 
 
 
@@ -20,10 +22,27 @@ namespace ReservAntes.Controllers
             return View();
         }
 
+        // Listado Restaurantes
         public ActionResult VerRestaurantes()
         {
             List<Restaurante> restaurantes = LogResto.GetRestaurantes();
             return View(model: restaurantes);
+        }
+
+        // Listado Clientes
+
+        public ActionResult VerClientes()
+        {
+            List<Cliente> clientes = LogCliente.GetCliente();
+            return View(model: clientes);
+        }
+
+        // Listado Usuarios
+
+        public ActionResult VerUsuarios()
+        {
+            List<Usuario> usuarios = LogUsuario.GetUsuario();
+            return View(model: usuarios);
         }
 
         [HttpGet]
@@ -34,11 +53,7 @@ namespace ReservAntes.Controllers
             return RedirectToAction(actionName: "VerRestaurantes");
         }
 
-        public ActionResult VerClientes()
-        {
-            List<Cliente> clientes = LogCliente.GetCliente();
-            return View(model: clientes);
-        }
+       
 
 
     }

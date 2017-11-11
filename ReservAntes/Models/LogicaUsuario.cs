@@ -18,6 +18,15 @@ namespace ReservAntes.Models
             return ListUsuario;
         }
 
+        // Listado Usuarios
+
+        public List<Usuario> GetUsuario()
+        {
+            List<Usuario> todosLosUsuarios = new List<Usuario>();
+            todosLosUsuarios = ctx.Usuario.ToList();
+
+            return todosLosUsuarios;
+        }
 
         dbReservantesEntities ctx = new dbReservantesEntities();
 
