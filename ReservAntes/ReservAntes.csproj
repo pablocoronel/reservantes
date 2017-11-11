@@ -312,6 +312,7 @@
     <Content Include="Views\Restaurante\DatosBancarios.cshtml" />
     <Content Include="Views\Cliente\EditCliente.cshtml" />
     <Content Include="Views\Restaurante\EditRestoran.cshtml" />
+    <Content Include="Views\Admin\VerClientes.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

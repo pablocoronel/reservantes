@@ -10,6 +10,8 @@ namespace ReservAntes.Controllers
     {
         dbReservantesEntities ctx = new dbReservantesEntities();
         Models.LogicaRestaurante LogResto = new Models.LogicaRestaurante();
+        Models.LogicaCliente LogCliente = new Models.LogicaCliente();
+
 
 
         // GET: Admin
@@ -31,5 +33,13 @@ namespace ReservAntes.Controllers
 
             return RedirectToAction(actionName: "VerRestaurantes");
         }
+
+        public ActionResult VerClientes()
+        {
+            List<Cliente> clientes = LogCliente.GetCliente();
+            return View(model: clientes);
+        }
+
+
     }
 }

@@ -11,6 +11,7 @@ namespace ReservAntes.Controllers
 
         dbReservantesEntities ctx = new dbReservantesEntities();
 
+        Models.LogicaCliente LogCliente = new Models.LogicaCliente();
             
         // GET: Cliente
         public ActionResult Index()
@@ -37,13 +38,15 @@ namespace ReservAntes.Controllers
                 if (ModelState.IsValid)
                 {
 
+                
                     Cliente EditCliente = new Cliente();
 
                     EditCliente.IdUsuario = Convert.ToInt32(IdUsuario);
                     EditCliente.Nombre = editCl.Nombre;
                     EditCliente.Apellido = editCl.Apellido;
+                    EditCliente.Domicilio = null;
 
-                    ctx.Cliente.Add(EditCliente);
+                     ctx.Cliente.Add(EditCliente);
                     ctx.SaveChanges();
 
                     return View("Index");
@@ -92,6 +95,13 @@ namespace ReservAntes.Controllers
             return View();
         }
 
+        
+        public ActionResult DetalleCliente()
+        {
+            return View();
+        }
+
+        [HttpPost]
         public ActionResult DetalleCliente(Cliente cl)
         {
             var IdUsuario = this.Session["usuarioId"];
@@ -106,6 +116,8 @@ namespace ReservAntes.Controllers
                 newCliente.IdUsuario = Convert.ToInt32(IdUsuario);
                 newCliente.Nombre = cl.Nombre;
                 newCliente.Apellido = cl.Apellido;
+                newCliente.Domicilio = null;
+      
 
                 ctx.Cliente.Add(newCliente);
                 ctx.SaveChanges();
