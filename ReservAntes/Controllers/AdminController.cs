@@ -34,7 +34,7 @@ namespace ReservAntes.Controllers
         public ActionResult VerClientes()
         {
             List<Cliente> clientes = LogCliente.GetCliente();
-            return View(model: clientes);
+            return View(clientes);
         }
 
 
