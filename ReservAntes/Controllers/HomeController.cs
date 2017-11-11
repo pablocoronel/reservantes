@@ -19,11 +19,11 @@ namespace ReservAntes.Controllers
                         break;
 
                     case 2:
-                        Response.Redirect("/Cliente/Index/");
+                        Response.Redirect("/Cliente/EditCliente/");
                         break;
 
                     case 3:
-                        Response.Redirect("/Restaurante/Index/");
+                        Response.Redirect("/Restaurante/DetalleCliente/");
                         break;
 
                     default:

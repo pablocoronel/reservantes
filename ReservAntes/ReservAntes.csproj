@@ -295,7 +295,6 @@
     <Content Include="Views\Shared\_LayoutCliente.cshtml" />
     <Content Include="Views\Cliente\Index.cshtml" />
     <Content Include="Views\Cliente\DetalleCliente.cshtml" />
-    <Content Include="Views\Cliente\EditCliente.cshtml" />
     <Content Include="Views\Cliente\ReservCliente.cshtml" />
     <Content Include="Views\Shared\_LayoutRestaurante.cshtml" />
     <Content Include="Views\Restaurante\Index.cshtml" />
@@ -311,6 +310,7 @@
     <Content Include="Views\Admin\VerRestaurantes.cshtml" />
     <Content Include="Views\Restaurante\RestoPerfil.cshtml" />
     <Content Include="Views\Restaurante\DatosBancarios.cshtml" />
+    <Content Include="Views\Cliente\EditCliente.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
