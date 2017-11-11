@@ -28,6 +28,16 @@ namespace ReservAntes.Models
             return todosLosUsuarios;
         }
 
+        // Eliminar Usuarios
+
+        public void EliminarUs(int id)
+        {
+            var DeleteUsuario = (from Usuario in ctx.Usuario where Usuario.Id == id select Usuario).FirstOrDefault();
+            ctx.Usuario.Remove(DeleteUsuario);
+            ctx.SaveChanges();
+        }
+
+
         dbReservantesEntities ctx = new dbReservantesEntities();
 
         public void CrearUsuario (Usuario us)

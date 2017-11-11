@@ -87,7 +87,9 @@ namespace ReservAntes.Controllers
         // GET: Usuario/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            this.LogUs.EliminarUs(id);
+
+            return RedirectToAction("../Admin/VerUsuarios");
         }
 
         // POST: Usuario/Delete/5

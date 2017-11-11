@@ -37,6 +37,7 @@ namespace ReservAntes.Controllers
             return View(model: clientes);
         }
 
+
         // Listado Usuarios
 
         public ActionResult VerUsuarios()
@@ -44,6 +45,7 @@ namespace ReservAntes.Controllers
             List<Usuario> usuarios = LogUsuario.GetUsuario();
             return View(model: usuarios);
         }
+      
 
         [HttpGet]
         public ActionResult HabilitarRestaurante(int idResto)
