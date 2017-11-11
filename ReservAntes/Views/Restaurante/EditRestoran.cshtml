@@ -1,10 +1,10 @@
 ﻿@model ReservAntes.Restaurante
 @{
-    ViewBag.Title = "RestoPerfil";
+    ViewBag.Title = "EditRestoran";
     Layout = "~/Views/Shared/_LayoutRestaurante.cshtml";
 }
 
-<h4> Para poder completar el registro debe llenar los siguientes campos:</h4>
+<h2>EditRestoran</h2>
 
 <h2>Perfil del Restaurante</h2>
 <div class="jumbotron">
@@ -15,8 +15,8 @@
             @using (Html.BeginForm("RestoPerfil", "Restaurante"))
             {
                 <div class="form-group">
-                   <label>Razon Social:</label>
-                    @Html.TextBoxFor(Model => Model.RazonSocial, new { @class = "form-control" })  
+                    <label>Razon Social:</label>
+                    @Html.TextBoxFor(Model => Model.RazonSocial, new { @class = "form-control" })
                 </div>
                 <div class="form-group">
                     <label>CUIT:</label>
@@ -32,7 +32,7 @@
                 </div>
 
 
-                    <button type="submit" class="btn btn-primary">Ingresar</button>
+                <button type="submit" class="btn btn-primary">Ingresar</button>
                     <button onclick="location.href='@Url.Action("Index", "Restaurante")';return false;" class="btn btn-danger">Cancelar</button>
             }
         </div>
