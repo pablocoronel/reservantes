@@ -401,3 +401,4 @@ C:\ReservAntes\ReservAntes\bin\System.Web.Http.WebHost.xml
 C:\ReservAntes\ReservAntes\bin\es\System.Net.Http.Formatting.resources.dll
 C:\ReservAntes\ReservAntes\bin\es\System.Web.Http.resources.dll
 C:\ReservAntes\ReservAntes\bin\es\System.Web.Http.WebHost.resources.dll
+C:\ReservAntes\ReservAntes\obj\Debug\ReservAntes.csprojResolveAssemblyReference.cache

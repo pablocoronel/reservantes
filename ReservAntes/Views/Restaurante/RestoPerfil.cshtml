@@ -22,16 +22,39 @@
                     <label>CUIT:</label>
                     @Html.TextBoxFor(Model => Model.CUIT, new { @class = "form-control" })
                 </div>
-                <div class="form-group">
-                    <label>Domicilio:</label>
-                    @Html.TextBoxFor(Model => Model.Domicilio, new { @class = "form-control" })
-                </div>
+
                 <div class="form-group">
                     <label>Cantidad maxima de clientes:</label>
                     @Html.TextBoxFor(Model => Model.CantClientes, new { @class = "form-control" })
                 </div>
 
+                /*Domicilio*/
+                <div >
+                    <h3>Ingrese datos de domicilio</h3>
+                    <div class="form-group">
+                        <label>Calle:</label>
+                        @Html.TextBoxFor(Model => Model.Domicilio.NombreCalle, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label>Número:</label>
+                        @Html.TextBoxFor(Model => Model.Domicilio.NombreCalle, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label>Piso:</label>
+                        @Html.TextBoxFor(Model => Model.Domicilio.NombreCalle, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label>Departamento:</label>
+                        @Html.TextBoxFor(Model => Model.Domicilio.NombreCalle, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <!--Peliculas-->
+                        @Html.LabelFor(u => u.Domicilio.Localidad.Partido.Provincia.Id, "Provincias", new { @class = "col-lg-2 control-label" })
+                        @Html.DropDownListFor(u => u.IdPelicula, new SelectList(Model.Provincias, "IdPelicula", "Nombre"), "Seleccione", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(u => u.IdPelicula)
 
+                    </div>
+                </div>
                     <button type="submit" class="btn btn-primary">Ingresar</button>
                     <button onclick="location.href='@Url.Action("Index", "Restaurante")';return false;" class="btn btn-danger">Cancelar</button>
             }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ReservAntes.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -175,8 +176,9 @@ namespace ReservAntes.Controllers
         }
 
         [HttpPost]
-        public ActionResult RestoPerfil(Restaurante id)
+        public ActionResult RestoPerfil(RestauranteViewModel restaurante)
         {
+
 
             return View();
         }

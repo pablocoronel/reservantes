@@ -180,6 +180,18 @@
     <Compile Include="EstiloMenu.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Extensions\ClienteExtension.cs" />
+    <Compile Include="Extensions\DatosBancariosExtension.cs" />
+    <Compile Include="Extensions\DomicilioExtension.cs" />
+    <Compile Include="Extensions\Enums\EstadoReservaEnum.cs" />
+    <Compile Include="Extensions\Enums\TipoUsuarioEnum.cs" />
+    <Compile Include="Extensions\EstadoReservaExtension.cs" />
+    <Compile Include="Extensions\MenuExtension.cs" />
+    <Compile Include="Extensions\PlatoExtension.cs" />
+    <Compile Include="Extensions\ReservaExtension.cs" />
+    <Compile Include="Extensions\RestauranteExtension.cs" />
+    <Compile Include="Extensions\TipoUsuarioExtension.cs" />
+    <Compile Include="Extensions\UsuarioExtension.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -204,10 +216,19 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\LogicaDomicilio.cs" />
+    <Compile Include="ViewModels\DatosBancariosViewModel.cs" />
+    <Compile Include="ViewModels\DomicilioViewModel.cs" />
+    <Compile Include="ViewModels\Extensions\TipoUsuarioViewModelExtension.cs" />
     <Compile Include="Models\LogicaCliente.cs" />
     <Compile Include="Models\LogicaReserva.cs" />
     <Compile Include="Models\LogicaRestaurante.cs" />
     <Compile Include="Models\LogicaUsuario.cs" />
+    <Compile Include="ViewModels\MenuViewModel.cs" />
+    <Compile Include="ViewModels\PlatoViewModel.cs" />
+    <Compile Include="ViewModels\ReservaViewModel.cs" />
+    <Compile Include="ViewModels\RestauranteViewModel.cs" />
+    <Compile Include="ViewModels\TipoUsuarioViewModel.cs" />
     <Compile Include="Partido.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -236,6 +257,7 @@
     <Compile Include="Usuario.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\UsuarioViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\dbReservantes.mdf" />
@@ -319,9 +341,7 @@
     <Content Include="Views\Admin\VerClientes.cshtml" />
     <Content Include="Views\Admin\VerUsuarios.cshtml" />
   </ItemGroup>
-
   <ItemGroup>
-    <Folder Include="Extensions\" />
     <Folder Include="Views\Reserva\" />
   </ItemGroup>
   <ItemGroup>

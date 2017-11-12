@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.IO;
 using System.Data;
+using ReservAntes.Extensions.Enums;
 
 namespace ReservAntes.Models
 {
@@ -13,7 +14,8 @@ namespace ReservAntes.Models
         public List<TipoUsuario> GetTiposDeUs()
         {
             List<TipoUsuario> ListUsuario = new List<TipoUsuario>();
-            ListUsuario = ctx.TipoUsuario.ToList();
+            int tipoUsuarioAdmin = (int)TipoUsuarioEnum.Administrador;
+            ListUsuario = ctx.TipoUsuario.Where(x =>x.TipoUsuarioEnum != tipoUsuarioAdmin).ToList();
 
             return ListUsuario;
         }
@@ -44,32 +46,32 @@ namespace ReservAntes.Models
         {
             Usuario NewUsuario = new Usuario();
             Restaurante nuevoRestaurante = new Restaurante();
-
-            NewUsuario.Username = us.Username;
-            NewUsuario.Password = us.Password;
-            NewUsuario.Email = us.Email;
-            NewUsuario.TipoUsuarioId = us.TipoUsuarioId;
-
-
+            NewUsuario = us;
+            //NewUsuario.Username = us.Username;
+            //NewUsuario.Password = us.Password;
+            //NewUsuario.Email = us.Email;
+            //NewUsuario.TipoUsuarioId = us.TipoUsuarioId;
             ctx.Usuario.Add(NewUsuario);
-
-            //Crear el restaurante si eligio tipo de usuario restaurante
-            if (us.TipoUsuarioId == 3)
-            {
-                var usuarioRecienCreado = ctx.Usuario.OrderByDescending(x => x.Id).FirstOrDefault();
-
-                nuevoRestaurante.IdUsuario = usuarioRecienCreado.Id +1;
-                nuevoRestaurante.RazonSocial = null;
-                nuevoRestaurante.DatosBancariosId = null;
-                nuevoRestaurante.CUIT = null;
-                nuevoRestaurante.Foto = null;
-                nuevoRestaurante.CantClientes = null;
-                nuevoRestaurante.Estado = 0;
-
-                ctx.Restaurante.Add(nuevoRestaurante);
-            }
-
             ctx.SaveChanges();
+            //int tipoUsuarioResto = (int)TipoUsuarioEnum.Restaurante;
+
+            ////Crear el restaurante si eligio tipo de usuario restaurante
+            //if (us.TipoUsuarioId == ctx.TipoUsuario.Where(x=>x.TipoUsuarioEnum==tipoUsuarioResto).FirstOrDefault().Id)
+            //{
+            //    var usuarioRecienCreado = ctx.Usuario.OrderByDescending(x => x.Id).FirstOrDefault();
+
+            //    nuevoRestaurante.IdUsuario = NewUsuario.Id;
+            //    nuevoRestaurante.RazonSocial = null;
+            //    nuevoRestaurante.DatosBancariosId = null;
+            //    nuevoRestaurante.CUIT = null;
+            //    nuevoRestaurante.Foto = null;
+            //    nuevoRestaurante.CantClientes = null;
+            //    nuevoRestaurante.Estado = 0;
+
+            //    ctx.Restaurante.Add(nuevoRestaurante);
+            //}
+
+            //ctx.SaveChanges();
 
         }
 
