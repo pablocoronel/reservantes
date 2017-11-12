@@ -24,7 +24,14 @@ namespace ReservAntes.Models
 
         //----------------------------------------------------------------------------------
 
+        //Listado de restaurantes
+        public List<Restaurante> GetRestaurantes()
+        {
+            List<Restaurante> todosLosRestaurantes = new List<Restaurante>();
+            todosLosRestaurantes = ctx.Restaurante.ToList();
 
+            return todosLosRestaurantes;
+        }
 
 
     }

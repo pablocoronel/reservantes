@@ -16,7 +16,9 @@ namespace ReservAntes.Controllers
         // GET: Cliente
         public ActionResult Index()
         {
-            return View();
+            List<Restaurante> listaDeResto = LogCliente.GetRestaurantes();
+
+            return View(model: listaDeResto);
         }
 
 
