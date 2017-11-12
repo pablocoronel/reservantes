@@ -11,17 +11,11 @@ namespace ReservAntes.Controllers
 
         dbReservantesEntities ctx = new dbReservantesEntities();
 
+        Models.LogicaCliente LogCliente = new Models.LogicaCliente();
             
         // GET: Cliente
         public ActionResult Index()
         {
-            return View();
-        }
-
-        // GET: Cliente/Details/5
-        public ActionResult DetalleCliente(int id)
-        {
-
             return View();
         }
 
@@ -34,18 +28,35 @@ namespace ReservAntes.Controllers
 
         // POST: Cliente/Edit/5
         [HttpPost]
-        public ActionResult EditCliente(int id, FormCollection collection)
+        public ActionResult EditCliente(int id, Cliente editCl)
         {
-            try
-            {
-                // TODO: Add update logic here
+            
+                var IdUsuario = this.Session["usuarioId"];
+                var nomUsuario = this.Session["usuarioNombre"];
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+
+                if (ModelState.IsValid)
+                {
+
+                
+                    Cliente EditCliente = new Cliente();
+
+                    EditCliente.IdUsuario = Convert.ToInt32(IdUsuario);
+                    EditCliente.Nombre = editCl.Nombre;
+                    EditCliente.Apellido = editCl.Apellido;
+                    EditCliente.Domicilio = null;
+
+                     ctx.Cliente.Add(EditCliente);
+                    ctx.SaveChanges();
+
+                    return View("Index");
+                }
+
+                //this.LogRes.crearMenu(id);
+
+                return View("../Shared/Error");
+            
+           
         }
 
         // GET: Cliente/Delete/5
@@ -76,5 +87,49 @@ namespace ReservAntes.Controllers
         {
             return View();
         }
+
+
+        public ActionResult CompletarCliente()
+        {
+
+            return View();
+        }
+
+        
+        public ActionResult DetalleCliente()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult DetalleCliente(Cliente cl)
+        {
+            var IdUsuario = this.Session["usuarioId"];
+            var nomUsuario = this.Session["usuarioNombre"];
+
+
+            if (ModelState.IsValid)
+            {
+
+                Cliente newCliente = new Cliente();
+
+                newCliente.IdUsuario = Convert.ToInt32(IdUsuario);
+                newCliente.Nombre = cl.Nombre;
+                newCliente.Apellido = cl.Apellido;
+                newCliente.Domicilio = null;
+      
+
+                ctx.Cliente.Add(newCliente);
+                ctx.SaveChanges();
+
+                return View("Index");
+            }
+
+            //this.LogRes.crearMenu(id);
+
+            return View("../Shared/Error");
+        }
+
+
     }
 }

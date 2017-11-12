@@ -18,6 +18,25 @@ namespace ReservAntes.Models
             return ListUsuario;
         }
 
+        // Listado Usuarios
+
+        public List<Usuario> GetUsuario()
+        {
+            List<Usuario> todosLosUsuarios = new List<Usuario>();
+            todosLosUsuarios = ctx.Usuario.ToList();
+
+            return todosLosUsuarios;
+        }
+
+        // Eliminar Usuarios
+
+        public void EliminarUs(int id)
+        {
+            var DeleteUsuario = (from Usuario in ctx.Usuario where Usuario.Id == id select Usuario).FirstOrDefault();
+            ctx.Usuario.Remove(DeleteUsuario);
+            ctx.SaveChanges();
+        }
+
 
         dbReservantesEntities ctx = new dbReservantesEntities();
 

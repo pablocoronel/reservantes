@@ -57,7 +57,7 @@ namespace ReservAntes.Controllers
 
         // POST: Restaurante/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult EditRestoran(int id, FormCollection collection)
         {
             try
             {

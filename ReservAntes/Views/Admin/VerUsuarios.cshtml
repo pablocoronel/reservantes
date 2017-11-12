@@ -1,0 +1,37 @@
+﻿@model List<Usuario>
+@{
+    ViewBag.Title = "VerUsuarios";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Listado Total de Usuarios</h2>
+
+<div class="jumbotron">
+    <div class="table table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <td>ID</td>
+                    <td>Email</td>
+                    <td>Usuario</td>
+                    <td>Contraseña</td>
+                    <td>Tipo de Usuario</td>
+                    <td>Eliminar</td>
+                </tr>
+            </thead>
+            @foreach (Usuario item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Email</td>
+                    <td>@item.Username</td>
+                    <td>@item.Password</td>
+                    <td>@item.TipoUsuarioId</td>
+                    <td><a href="~/Usuario/Delete/@item.Id" class="btn btn-danger">Eliminar</a></td>
+                </tr>
+            }
+            <tbody></tbody>
+
+        </table>
+    </div>
+</div>
