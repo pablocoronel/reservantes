@@ -11,7 +11,8 @@
     <table>
         <thead>
             <tr>
-            <td>Establecimiento</td>
+                <td>Establecimiento</td>
+                <td>Ciudad</td>
                 <td>Direccion</td>
                 <td>VerMenu</td>
 
@@ -23,6 +24,7 @@
             {
             <tr>
                 <td>@resto.Usuario.Username</td>
+                <td>@resto.Domicilio.Localidad.Descripcion</td>
                 <td>@resto.Domicilio.NombreCalle @resto.Domicilio.NumeroCalle</td>
                 <td><a href="@Url.Action("ListaPlatos", "Cliente", new {idResto = resto.IdRestaurante })" class="btn btn-info btn-xs">VerMenu</a></td>
             </tr>
