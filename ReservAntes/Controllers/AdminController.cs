@@ -19,6 +19,11 @@ namespace ReservAntes.Controllers
         // GET: Admin
         public ActionResult Index()
         {
+            ViewData["CantUsuarios"] = ctx.Usuario.Count();
+
+            //var cantus = ctx.Usuario.Count();
+
+
             return View();
         }
 

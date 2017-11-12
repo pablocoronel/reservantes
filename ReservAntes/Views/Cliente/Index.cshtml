@@ -1,4 +1,4 @@
-﻿
+﻿@model List<Restaurante>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutCliente.cshtml";
@@ -8,15 +8,27 @@
     <h2>Index</h2>
 
 <h4>Restaurantes disponibles en la zona:</h4>
-    <table>
+    <table class="table">
         <thead>
             <tr>
-            <td>Establecimiento</td>
+                <td>Establecimiento</td>
+                <td>Ciudad</td>
                 <td>Direccion</td>
-                <td>Foto</td>
-                <td><a href="">VerMenu</a></td>
+                <td>VerMenu</td>
 
             </tr>
         </thead>
+
+        <tbody>
+            @foreach (var resto in Model)
+            {
+            <tr>
+                <td>@resto.Usuario.Username</td>
+                <td>@resto.Domicilio.Localidad.Descripcion</td>
+                <td>@resto.Domicilio.NombreCalle @resto.Domicilio.NumeroCalle</td>
+                <td><a href="@Url.Action("ListaPlatos", "Cliente", new {idResto = resto.IdRestaurante })" class="btn btn-info btn-xs">VerMenu</a></td>
+            </tr>
+            }
+        </tbody>
 
     </table>

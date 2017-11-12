@@ -16,7 +16,9 @@ namespace ReservAntes.Controllers
         // GET: Cliente
         public ActionResult Index()
         {
-            return View();
+            List<Restaurante> listaDeResto = LogCliente.GetRestaurantes();
+
+            return View(model: listaDeResto);
         }
 
 
@@ -131,5 +133,13 @@ namespace ReservAntes.Controllers
         }
 
 
+
+        /* Lista de platos de cada restaurante */
+        public ActionResult ListaPlatos(int idResto)
+        {
+            List<Plato> listaDePlatos = LogCliente.ListarPlatosDelRestaurante(idResto);
+
+            return View("ListaPlatos", model: listaDePlatos);
+        }
     }
 }
