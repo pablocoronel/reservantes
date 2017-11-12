@@ -390,6 +390,14 @@ C:\ReservAntes\ReservAntes\bin\es\System.Web.Razor.resources.dll
 C:\ReservAntes\ReservAntes\bin\es\System.Web.WebPages.resources.dll
 C:\ReservAntes\ReservAntes\bin\es\System.Web.WebPages.Deployment.resources.dll
 C:\ReservAntes\ReservAntes\bin\es\System.Web.WebPages.Razor.resources.dll
-C:\ReservAntes\ReservAntes\obj\Debug\ReservAntes.csprojResolveAssemblyReference.cache
 C:\ReservAntes\ReservAntes\obj\Debug\ReservAntes.dll
 C:\ReservAntes\ReservAntes\obj\Debug\ReservAntes.pdb
+C:\ReservAntes\ReservAntes\bin\System.Net.Http.Formatting.dll
+C:\ReservAntes\ReservAntes\bin\System.Web.Http.dll
+C:\ReservAntes\ReservAntes\bin\System.Web.Http.WebHost.dll
+C:\ReservAntes\ReservAntes\bin\System.Net.Http.Formatting.xml
+C:\ReservAntes\ReservAntes\bin\System.Web.Http.xml
+C:\ReservAntes\ReservAntes\bin\System.Web.Http.WebHost.xml
+C:\ReservAntes\ReservAntes\bin\es\System.Net.Http.Formatting.resources.dll
+C:\ReservAntes\ReservAntes\bin\es\System.Web.Http.resources.dll
+C:\ReservAntes\ReservAntes\bin\es\System.Web.Http.WebHost.resources.dll

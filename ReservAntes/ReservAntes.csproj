@@ -317,7 +317,9 @@
     <Content Include="Views\Admin\VerClientes.cshtml" />
     <Content Include="Views\Admin\VerUsuarios.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Extensions\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
   </ItemGroup>
