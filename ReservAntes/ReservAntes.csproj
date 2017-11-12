@@ -165,6 +165,7 @@
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ReservaController.cs" />
     <Compile Include="Controllers\RestauranteController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="DatosBancarios.cs">
@@ -204,6 +205,7 @@
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\LogicaCliente.cs" />
+    <Compile Include="Models\LogicaReserva.cs" />
     <Compile Include="Models\LogicaRestaurante.cs" />
     <Compile Include="Models\LogicaUsuario.cs" />
     <Compile Include="Partido.cs">
@@ -317,8 +319,10 @@
     <Content Include="Views\Admin\VerClientes.cshtml" />
     <Content Include="Views\Admin\VerUsuarios.cshtml" />
   </ItemGroup>
+
   <ItemGroup>
     <Folder Include="Extensions\" />
+    <Folder Include="Views\Reserva\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
