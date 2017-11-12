@@ -24,7 +24,7 @@
             <tr>
                 <td>@resto.Usuario.Username</td>
                 <td>@resto.Domicilio.NombreCalle @resto.Domicilio.NumeroCalle</td>
-                <td><a href="" class="btn btn-info btn-xs">VerMenu</a></td>
+                <td><a href="@Url.Action("ListaPlatos", "Cliente", new {idResto = resto.IdRestaurante })" class="btn btn-info btn-xs">VerMenu</a></td>
             </tr>
             }
         </tbody>

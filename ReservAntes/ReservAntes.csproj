@@ -318,6 +318,7 @@
     <Content Include="Views\Restaurante\EditRestoran.cshtml" />
     <Content Include="Views\Admin\VerClientes.cshtml" />
     <Content Include="Views\Admin\VerUsuarios.cshtml" />
+    <Content Include="Views\Cliente\ListaPlatos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Extensions\" />

@@ -1,0 +1,16 @@
+﻿@model List<Plato>
+@{
+    ViewBag.Title = "Platos";
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutCliente.cshtml";
+}
+
+<h2>Platos disponibles</h2>
+<table>
+    @foreach (var plato in Model)
+    {
+        <tr>
+            <td>@plato.NombrePlato</td>
+        </tr>
+    }
+</table>

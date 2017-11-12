@@ -34,6 +34,21 @@ namespace ReservAntes.Models
         }
 
 
+
+        /* traer los platos del restaurante sin dar tantas vueltas*/
+        public List<Plato> ListarPlatosDelRestaurante(int idResto)
+        {
+            List<Plato> ListPlato = (from plato in ctx.Plato
+                                     join menu in ctx.Menu
+                                     on plato.MenuId equals
+                                           menu.Id
+                                     where plato.MenuId == menu.Id
+                                        &&
+                                           menu.RestauranteId == idResto
+                                     select plato).ToList();
+
+            return ListPlato;
+        }
     }
 
 }
