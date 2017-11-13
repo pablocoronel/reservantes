@@ -219,6 +219,8 @@
     <Compile Include="Models\LogicaDomicilio.cs" />
     <Compile Include="ViewModels\DatosBancariosViewModel.cs" />
     <Compile Include="ViewModels\DomicilioViewModel.cs" />
+    <Compile Include="ViewModels\Extensions\DomicilioViewModelExtension.cs" />
+    <Compile Include="ViewModels\Extensions\RestauranteViewModelExtension.cs" />
     <Compile Include="ViewModels\Extensions\TipoUsuarioViewModelExtension.cs" />
     <Compile Include="Models\LogicaCliente.cs" />
     <Compile Include="Models\LogicaReserva.cs" />
@@ -361,6 +363,12 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CapaServicio\CapaServicio.csproj">
+      <Project>{157af5be-5eca-46ac-a46b-ea9cdc3e177c}</Project>
+      <Name>CapaServicio</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -379,7 +387,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50110</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:50110/</IISUrl>
+          <IISUrl>http://localhost/ReservAntes/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

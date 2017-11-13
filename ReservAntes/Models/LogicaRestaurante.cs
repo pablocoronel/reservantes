@@ -25,6 +25,23 @@ namespace ReservAntes.Models
             return todosLosRestaurantes;
         }
 
+        public void CreateOrUpdate(Restaurante restaurante)
+        {
+            using (var db = new dbReservantesEntities())
+            {
+                if (restaurante.IdRestaurante != 0)
+                {
+                    var restauranteDb = db.Domicilio.SingleOrDefault(x => x.Id == restaurante.IdRestaurante);
+                    db.Entry(restauranteDb).CurrentValues.SetValues(restaurante);
+                }
+                else
+                {
+                    db.Restaurante.Add(restaurante);
+                }
+
+                db.SaveChanges();
+            }
+        }
         //Habilitar el restaurante
         public void HabilitarRestaurante(int idresto)
         {

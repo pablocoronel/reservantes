@@ -1,4 +1,7 @@
-﻿using ReservAntes.ViewModels;
+﻿using CapaServicio.Servicios;
+using ReservAntes.Models;
+using ReservAntes.ViewModels;
+using ReservAntes.ViewModels.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +14,8 @@ namespace ReservAntes.Controllers
     {
 
         dbReservantesEntities ctx = new dbReservantesEntities();
-
-        Models.LogicaRestaurante LogRes = new Models.LogicaRestaurante();
-
+        LogicaRestaurante LogRes = new LogicaRestaurante();
+        private LogicaDomicilio domicilioServicio = new LogicaDomicilio();
 
 
         // GET: Restaurante
@@ -171,15 +173,28 @@ namespace ReservAntes.Controllers
 
         public ActionResult RestoPerfil()
         {
-
-            return View();
+            var restauranteNuevo = new RestauranteViewModel();
+            var domicilioNuevo = new DomicilioViewModel();
+            var provinciaListado = ctx.Provincia.ToList();
+            var departamentoListado = ctx.Partido.ToList();
+            var localidadListado = ctx.Localidad.ToList();
+            domicilioNuevo.provincias = provinciaListado;
+            domicilioNuevo.partidos = departamentoListado;
+            domicilioNuevo.localidades = localidadListado;
+            restauranteNuevo.domicilio = domicilioNuevo;
+            return View(restauranteNuevo);
         }
 
         [HttpPost]
         public ActionResult RestoPerfil(RestauranteViewModel restaurante)
         {
-
-
+            restaurante.domicilio.Ubicacion = GeoPoint.CreatePoint(restaurante.domicilio.latitud, restaurante.domicilio.longitud);
+            restaurante.Estado = 0;
+            var restoDomicilio = restaurante.domicilio;
+            domicilioServicio.CreateOrUpdate(restoDomicilio.Map());
+            restaurante.DomicilioID = restoDomicilio.Id;
+            /*Buscar el usuario logueado*/
+           // restaurante.IdUsuario = ;
             return View();
         }
 

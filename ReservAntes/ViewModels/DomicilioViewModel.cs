@@ -13,5 +13,7 @@ namespace ReservAntes.ViewModels
         public List<Provincia> provincias { get; set; }
         public List<Partido> partidos { get; set; }
         public List<Localidad> localidades { get; set; }
+        public long latitud { get; set; }
+        public long longitud {get;set;}
     }
 }

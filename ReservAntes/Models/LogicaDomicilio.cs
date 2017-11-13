@@ -19,11 +19,29 @@ namespace ReservAntes.Models
             var partidos = ctx.Partido.Where(x => x.ProvinciaId == provinciaId).ToList();
             return partidos;
         }
-
+        /*Filtra localidades por partidoId*/
         public List<Localidad> GetByDepartamentoId (int partidoId)
         {
             var localidades = ctx.Localidad.Where(x => x.PartidoId == partidoId).ToList();
             return localidades;
+        }
+        /*Crear o actualizar domicilio*/
+        public void CreateOrUpdate (Domicilio domicilio)
+        {
+            using (var db = new dbReservantesEntities())
+            {
+                if (domicilio.Id != 0)
+                {
+                    var domicilioDb = db.Domicilio.SingleOrDefault(x => x.Id == domicilio.Id);
+                    db.Entry(domicilioDb).CurrentValues.SetValues(domicilio);
+                }
+                else
+                {
+                    db.Domicilio.Add(domicilio);
+                }
+
+                db.SaveChanges();
+            }
         }
 
     }
