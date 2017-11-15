@@ -10,14 +10,16 @@ using System.Web.Mvc;
 
 namespace ReservAntes.Controllers
 {
+    //[Authorize]
+    [HandleError]
     public class RestauranteController : Controller
     {
 
         dbReservantesEntities ctx = new dbReservantesEntities();
         LogicaRestaurante LogRes = new LogicaRestaurante();
         private LogicaDomicilio domicilioServicio = new LogicaDomicilio();
-
-
+        private LogicaDatosBancarios datosBancariosServicio = new LogicaDatosBancarios();
+        private LogicaReserva reservaServicio = new LogicaReserva();
         // GET: Restaurante
         public ActionResult Index()
         {
@@ -173,7 +175,62 @@ namespace ReservAntes.Controllers
 
         public ActionResult RestoPerfil()
         {
+            var IdUsuario = Session["usuarioId"];
             var restauranteNuevo = new RestauranteViewModel();
+            var restaurante = LogRes.GetByUserId(Convert.ToInt32(IdUsuario));
+            if ( restaurante!= null)
+            {
+                restauranteNuevo = restaurante.Map();
+            };
+            return View(restauranteNuevo);
+        }
+
+        [HttpPost]
+        public ActionResult RestoPerfil(RestauranteViewModel restaurante)
+        {
+            if (restaurante.IdRestaurante == 0)
+            {
+                restaurante.Estado = 0;
+                restaurante.IdUsuario = Convert.ToInt32(Session["usuarioId"]);
+            }
+            LogRes.CreateOrUpdate(restaurante.Map());
+            //Paso a la vista de domicilio
+            var domicilio = CargarListadosDomicilio();
+
+            if (restaurante.DomicilioID != null)
+            {
+                var domicilioResto = domicilioServicio.GetById(restaurante.DomicilioID.Value);
+                domicilio = domicilioResto.Map();
+            }
+            return View("Domicilio", domicilio);
+        }
+        public ActionResult Domicilio()
+        {
+            var domicilio = CargarListadosDomicilio();
+            return View("Domicilio", domicilio);
+        }
+        [HttpPost]
+        public ActionResult Domicilio(DomicilioViewModel domicilio)
+        {
+            var IdUsuario = Session["usuarioId"];
+            var restaurante = LogRes.GetByUserId(Convert.ToInt32(IdUsuario));
+
+            domicilio.Ubicacion = GeoPoint.CreatePoint(domicilio.latitud, domicilio.longitud);
+            domicilioServicio.CreateOrUpdate(domicilio.Map());
+            LogRes.ActualizaDomicilio(domicilio.Id, restaurante.IdRestaurante);
+
+            //paso a la vista de datos bancarios
+            var datoBancario = new DatosBancariosViewModel();
+            if (restaurante.DatosBancariosId != null)
+            {
+                var bancoResto=datosBancariosServicio.GetById(restaurante.DatosBancariosId.Value);
+                datoBancario = bancoResto.Map();
+            }
+            return View("DatosBancarios",datoBancario);
+
+        }
+        private DomicilioViewModel CargarListadosDomicilio()
+        {
             var domicilioNuevo = new DomicilioViewModel();
             var provinciaListado = ctx.Provincia.ToList();
             var departamentoListado = ctx.Partido.ToList();
@@ -181,28 +238,8 @@ namespace ReservAntes.Controllers
             domicilioNuevo.provincias = provinciaListado;
             domicilioNuevo.partidos = departamentoListado;
             domicilioNuevo.localidades = localidadListado;
-            restauranteNuevo.domicilio = domicilioNuevo;
-            return View(restauranteNuevo);
+            return (domicilioNuevo);
         }
-
-        [HttpPost]
-        public ActionResult RestoPerfil(RestauranteViewModel restaurante)
-        {
-            restaurante.domicilio.Ubicacion = GeoPoint.CreatePoint(restaurante.domicilio.latitud, restaurante.domicilio.longitud);
-            restaurante.Estado = 0;
-            var restoDomicilio = restaurante.domicilio;
-            domicilioServicio.CreateOrUpdate(restoDomicilio.Map());
-            restaurante.DomicilioID = restoDomicilio.Id;
-            /*Buscar el usuario logueado*/
-           // restaurante.IdUsuario = ;
-            return View();
-        }
-
-
-        // ----------------------------------------------------------------------------------------------------
-
-
-        // --------------------- Perfil Restoran -------------------------------------------------------------------------------
 
 
         public ActionResult DatosBancarios()
@@ -212,18 +249,24 @@ namespace ReservAntes.Controllers
         }
 
         [HttpPost]
-        public ActionResult DatosBancarios(Restaurante id)
+        public ActionResult DatosBancarios(DatosBancariosViewModel datosBancarios)
         {
-
-            return View();
+            var IdUsuario = Session["usuarioId"];
+            var restaurante = LogRes.GetByUserId(Convert.ToInt32(IdUsuario));
+            datosBancariosServicio.CreateOrupdate(datosBancarios.Map());
+            LogRes.ActualizaDatosBancarios(datosBancarios.Id, restaurante.IdRestaurante);
+            return View("Index");
         }
-
-
-        // ----------------------------------------------------------------------------------------------------
-
-
-
-        
-
+        [HttpGet]
+        public ActionResult Reservas()
+        {
+            var IdUsuario = Session["usuarioId"];
+            var restaurante = LogRes.GetByUserId(Convert.ToInt32(IdUsuario));
+            var listado = new List<Reserva>();
+            listado = reservaServicio.GetByRestauranteId(restaurante.IdRestaurante);
+            if (listado == null || listado.Count() == 0)
+                ModelState.AddModelError("SinReservas", "No se encontraron Reservas");
+            return View("Reservas",listado);
+        }
     }
 }

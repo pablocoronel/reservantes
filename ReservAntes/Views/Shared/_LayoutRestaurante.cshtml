@@ -15,8 +15,7 @@
         </div>
         <ul class="nav navbar-nav">
             <li>@Html.ActionLink("Home", "Index", "Restaurante")</li>
-            <li>@Html.ActionLink("About", "About", "Restaurante")</li>
-            <li>@Html.ActionLink("Contact", "Contact", "Restaurante")</li>
+            <li>@Html.ActionLink("Soporte", "Contact", "Restaurante")</li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a>@Session["usuarioNombre"]</a></li>
@@ -25,17 +24,17 @@
     </div>
 </nav>
 
-<!-- menu de cliente -->
+<!-- menu de Restaurante -->
 <div class="navbar navbar-default navbar-static-top">
     <div class="container">
         <div class="navbar-header">
             <div class="navbar-brand">
                 <span class="glyphicon glyphicon-th"></span>
                 <button onclick="location.href='@Url.Action("Index","Restaurante")'; return false;" class="btn btn-default">Inicio</button>
-                <button onclick="location.href='@Url.Action("DetalleRestaurante","Restaurante")'; return false;" class="btn btn-default">Mi Restoran</button>
-                <button onclick="location.href='@Url.Action("RestoPerfil","Restaurante")'; return false;" class="btn btn-default">Completar mi Restoran</button>
+                <button onclick="location.href='@Url.Action("DetalleRestaurante","Restaurante")'; return false;" class="btn btn-default">Mi Restaurante</button>
+                <button onclick="location.href='@Url.Action("RestoPerfil","Restaurante")'; return false;" class="btn btn-default">Editar mi Restaurante</button>
                 <button onclick="location.href='@Url.Action("Reservas","Restaurante")'; return false;" class="btn btn-default">Reservas</button>
-                <button onclick="location.href='@Url.Action("Reporte","Restaurante")'; return false;" class="btn btn-default">Reporte</button>
+                @*<button onclick="location.href='@Url.Action("Reporte","Restaurante")'; return false;" class="btn btn-default">Reporte</button>*@
                 <button onclick="location.href='@Url.Action("CreateMenu","Restaurante")'; return false;" class="btn btn-default">Crear Nuevo Menu</button>
                 <button onclick="location.href='@Url.Action("MiMenu","Restaurante")'; return false;" class="btn btn-default">Ver mi Menu</button>
             </div>
@@ -44,3 +43,4 @@
 </div>
 
 @RenderBody()
+@RenderSection("scripts", false)

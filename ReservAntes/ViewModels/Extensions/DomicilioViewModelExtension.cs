@@ -7,6 +7,19 @@ namespace ReservAntes.ViewModels.Extensions
 {
     public static class DomicilioViewModelExtension
     {
+        public static DomicilioViewModel Map (this Domicilio value)
+        {
+            return new DomicilioViewModel
+            {
+                Localidad = value.Localidad,
+                Id=value.Id,
+                NumeroCalle=value.NumeroCalle,
+                NombreCalle=value.NombreCalle,
+                NumeroDpto=value.NumeroDpto,
+                NumeroPiso=value.NumeroPiso,
+                
+            };
+        }
         public static Domicilio Map(this DomicilioViewModel model, Domicilio entity = null)
         {
             var edit = entity != null;

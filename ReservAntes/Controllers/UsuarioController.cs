@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ReservAntes.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,7 +11,7 @@ namespace ReservAntes.Controllers
     {
         dbReservantesEntities ctx = new dbReservantesEntities();
 
-        Models.LogicaUsuario LogUs = new Models.LogicaUsuario();
+        LogicaUsuario LogUs = new LogicaUsuario();
 
 
 

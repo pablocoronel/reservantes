@@ -1,0 +1,51 @@
+﻿@using ReservAntes.ViewModels
+@model  DomicilioViewModel
+@{
+    Layout = "~/Views/Shared/_LayoutRestaurante.cshtml";
+}
+
+<h2>Perfil del Restaurante</h2>
+<div class="jumbotron">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-6">
+            @using (Html.BeginForm("Domicilio", "Restaurante"))
+            {
+                <div>
+                    @Html.HiddenFor(u => u.Id)
+
+
+                    <h3>Ingrese datos de domicilio</h3>
+                    <div class="form-group">
+                        <label>Calle:</label>
+                        @Html.TextBoxFor(Model => Model.NombreCalle, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label>Número:</label>
+                        @Html.TextBoxFor(Model => Model.NumeroCalle, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label>Piso:</label>
+                        @Html.TextBoxFor(Model => Model.NumeroPiso, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label>Departamento:</label>
+                        @Html.TextBoxFor(Model => Model.NumeroDpto, new { @class = "form-control" })
+                    </div>
+
+                    <div class="form-group">
+                        <!--Localidades-->
+                        @Html.LabelFor(u => u.Localidad.Id, "Localidades", new { @class = "col-lg-2 control-label" })
+                        @Html.DropDownListFor(u => u.LocalidadId, new SelectList(Model.localidades, "Id", "Descripcion"), "Seleccione", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(u => u.LocalidadId)
+
+                    </div>
+                    <button type="submit" class="btn btn-primary">Ingresar</button>
+                    <button onclick="location.href='@Url.Action("Index", "Restaurante")';return false;" class="btn btn-danger">Cancelar</button>
+
+                </div>
+            }
+
+        </div>
+    </div>
+</div>

@@ -13,6 +13,8 @@
 
             @using (Html.BeginForm("DatosBancarios", "Restaurante"))
             {
+                @Html.HiddenFor(u => u.Id)
+
                 <div class="form-group">
                     <label>Numero de Cuenta:</label>
                     @Html.TextBoxFor(Model => Model.NumeroCuenta, new { @class = "form-control" })

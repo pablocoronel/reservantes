@@ -24,15 +24,45 @@ namespace ReservAntes.Models
 
             return todosLosRestaurantes;
         }
+        public void ActualizaEstado(int estado, int restauranteId)
+        {
+            using (var db = new dbReservantesEntities())
+            {
 
+                var restauranteDb = db.Restaurante.SingleOrDefault(x => x.IdRestaurante == restauranteId);
+                restauranteDb.Estado = estado;
+                db.SaveChanges();
+            }
+        }
+        public void ActualizaDomicilio(int domicilioId, int restauranteId)
+        {
+            using (var db = new dbReservantesEntities())
+            {
+                var restauranteDb = db.Restaurante.SingleOrDefault(x => x.IdRestaurante == restauranteId);
+                restauranteDb.DomicilioID = domicilioId;
+                db.SaveChanges();
+            }
+        }
+        public void ActualizaDatosBancarios(int datosBancariosId, int restauranteId)
+        {
+            using (var db = new dbReservantesEntities())
+            {
+                var restauranteDb = db.Restaurante.SingleOrDefault(x => x.IdRestaurante == restauranteId);
+                restauranteDb.DatosBancariosId = datosBancariosId;
+                db.SaveChanges();
+            }
+        }
         public void CreateOrUpdate(Restaurante restaurante)
         {
             using (var db = new dbReservantesEntities())
             {
                 if (restaurante.IdRestaurante != 0)
                 {
-                    var restauranteDb = db.Domicilio.SingleOrDefault(x => x.Id == restaurante.IdRestaurante);
-                    db.Entry(restauranteDb).CurrentValues.SetValues(restaurante);
+                    var restauranteDb = db.Restaurante.SingleOrDefault(x => x.IdRestaurante == restaurante.IdRestaurante);
+
+                    restauranteDb.CantClientes = restaurante.CantClientes;
+                    restaurante.RazonSocial = restaurante.RazonSocial;
+                    restaurante.CUIT = restaurante.CUIT;
                 }
                 else
                 {
@@ -134,10 +164,15 @@ namespace ReservAntes.Models
             return ListMenu;
         }
 
+        public Restaurante GetByUserId(int idUsuario)
+        {
+            return ctx.Restaurante.FirstOrDefault(x => x.IdUsuario == idUsuario);
+        }
+
 
 
 
         // -------------------------------------
-        
+
     }
 }

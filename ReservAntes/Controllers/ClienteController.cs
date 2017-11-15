@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ReservAntes.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,12 +7,14 @@ using System.Web.Mvc;
 
 namespace ReservAntes.Controllers
 {
+    //[Authorize]
+    [HandleError]
     public class ClienteController : Controller
     {
 
         dbReservantesEntities ctx = new dbReservantesEntities();
 
-        Models.LogicaCliente LogCliente = new Models.LogicaCliente();
+        LogicaCliente LogCliente = new LogicaCliente();
             
         // GET: Cliente
         public ActionResult Index()
@@ -33,8 +36,8 @@ namespace ReservAntes.Controllers
         public ActionResult EditCliente(int id, Cliente editCl)
         {
             
-                var IdUsuario = this.Session["usuarioId"];
-                var nomUsuario = this.Session["usuarioNombre"];
+                var IdUsuario = Session["usuarioId"];
+                var nomUsuario = Session["usuarioNombre"];
 
 
                 if (ModelState.IsValid)

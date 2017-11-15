@@ -10,5 +10,8 @@ namespace ReservAntes.ViewModels
     [MetadataType(typeof(ReservaExtension))]
     public class ReservaViewModel : Reserva
     {
+        public List<EstadoReserva> estadoS { get; set; }
+        public List<Cliente> clientes { get; set; }
+        public List<Restaurante> restaurantes { get; set; }
     }
 }

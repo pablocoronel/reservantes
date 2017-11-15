@@ -7,6 +7,22 @@ namespace ReservAntes.ViewModels.Extensions
 {
     public static class RestauranteViewModelExtension
     {
+        public static RestauranteViewModel Map(this Restaurante value)
+        {
+            return new RestauranteViewModel
+            {
+                IdRestaurante=value.IdRestaurante,
+                IdUsuario=value.IdUsuario,
+                DatosBancariosId=value.DatosBancariosId,
+                CantClientes=value.CantClientes,
+                CUIT=value.CUIT,
+                RazonSocial=value.RazonSocial,
+                Estado=value.Estado,
+                Foto=value.Foto,
+                DomicilioID=value.DomicilioID
+
+            };
+        }
         public static Restaurante Map(this RestauranteViewModel model, Restaurante entity = null)
         {
             var edit = entity != null;

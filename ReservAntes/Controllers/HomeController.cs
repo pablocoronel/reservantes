@@ -1,9 +1,9 @@
-﻿using System;
+﻿using ReservAntes.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
 namespace ReservAntes.Controllers
 {
     public class HomeController : Controller
@@ -12,7 +12,7 @@ namespace ReservAntes.Controllers
         {
             if(Session["usuarioTipo"] != null)
 {
-                switch (Session["usuarioTipo"])
+                switch (Convert.ToInt32(Session["usuarioTipo"]))
                 {
                     case 1:
                         Response.Redirect("/Admin/Index/");
@@ -35,16 +35,16 @@ namespace ReservAntes.Controllers
             return View();
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
+        //public ActionResult About()
+        //{
+        //    ViewBag.Message = "Your application description page.";
 
-            return View();
-        }
+        //    return View();
+        //}
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "CONTACTO";
 
             return View();
         }

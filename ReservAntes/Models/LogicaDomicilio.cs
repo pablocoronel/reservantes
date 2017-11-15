@@ -44,5 +44,10 @@ namespace ReservAntes.Models
             }
         }
 
+        public Domicilio GetById(int domicilioId)
+        {
+
+            return ctx.Domicilio.FirstOrDefault(x => x.Id == domicilioId);
+        }
     }
 }

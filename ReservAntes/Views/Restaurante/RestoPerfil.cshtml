@@ -15,6 +15,8 @@
 
             @using (Html.BeginForm("RestoPerfil", "Restaurante"))
             {
+                @Html.HiddenFor(u => u.IdRestaurante)
+
                 <div class="form-group">
                    <label>Razon Social:</label>
                     @Html.TextBoxFor(Model => Model.RazonSocial, new { @class = "form-control" })  
@@ -29,42 +31,6 @@
                     @Html.TextBoxFor(Model => Model.CantClientes, new { @class = "form-control" })
                 </div>
 
-                /*Domicilio*/
-                <div >
-                    <h3>Ingrese datos de domicilio</h3>
-                    <div class="form-group">
-                        <label>Calle:</label>
-                        @Html.TextBoxFor(Model => Model.Domicilio.NombreCalle, new { @class = "form-control" })
-                    </div>
-                    <div class="form-group">
-                        <label>Número:</label>
-                        @Html.TextBoxFor(Model => Model.Domicilio.NombreCalle, new { @class = "form-control" })
-                    </div>
-                    <div class="form-group">
-                        <label>Piso:</label>
-                        @Html.TextBoxFor(Model => Model.Domicilio.NombreCalle, new { @class = "form-control" })
-                    </div>
-                    <div class="form-group">
-                        <label>Departamento:</label>
-                        @Html.TextBoxFor(Model => Model.Domicilio.NombreCalle, new { @class = "form-control" })
-                    </div>
-
-                    <div class="form-group">
-                        <!--Localidades-->
-                        @Html.LabelFor(u => u.Domicilio.Localidad.Id, "Localidades", new { @class = "col-lg-2 control-label" })
-                        @Html.DropDownListFor(u => u.domicilio.LocalidadId, new SelectList(Model.domicilio.localidades, "Id", "Descripcion"), "Seleccione", new { @class = "form-control" })
-                        @Html.ValidationMessageFor(u => u.Domicilio.Localidad.Partido.ProvinciaId)
-
-                    </div>
-                    <div layout="row">
-                        <div map-lazy-load="https://maps.google.com/maps/api/js">
-                            <!-- map-lazy-load-params="{{domicilioCtrl.key}}" flex>-->
-                            <ng-map  center="Buenos Aires, Argentina" default-style="true" lazy-init="false" id="domicilioMap" draggable="true">
-                                <marker position="" title="Titulo" draggable="true" ></marker>
-                            </ng-map>
-                        </div>
-                    </div>
-                </div>
                     <button type="submit" class="btn btn-primary">Ingresar</button>
                     <button onclick="location.href='@Url.Action("Index", "Restaurante")';return false;" class="btn btn-danger">Cancelar</button>
             }

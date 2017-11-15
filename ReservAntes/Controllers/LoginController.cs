@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ReservAntes.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,7 +10,7 @@ namespace ReservAntes.Controllers
     public class LoginController : Controller
     {
         dbReservantesEntities ctx = new dbReservantesEntities();
-        Models.LogicaUsuario LogUs = new Models.LogicaUsuario();
+        LogicaUsuario LogUs = new LogicaUsuario();
 
         [HttpGet]
         public ActionResult Login()
@@ -31,8 +32,9 @@ namespace ReservAntes.Controllers
                 Session["usuarioId"] = existeUsuario.Id;
                 Session["usuarioTipo"] = existeUsuario.TipoUsuarioId;
                 Session["usuarioNombre"] = existeUsuario.Username;
-
-                switch (Session["usuarioTipo"])
+                switch (Convert.ToInt32(Session["usuarioTipo"]))
+           
+                //switch (Session["usuarioTipo"]) da error
                 {
                     case 1:
                         Response.Redirect("../Admin/Index");

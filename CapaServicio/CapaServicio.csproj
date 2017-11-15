@@ -133,6 +133,7 @@
     <Compile Include="Servicios\GeoPoint.cs" />
     <Compile Include="Servicios\GoogleHelper.cs" />
     <Compile Include="Dto\GoogleMapsDto.cs" />
+    <Compile Include="Servicios\HtmlHelper.cs" />
     <Compile Include="Servicios\LocalidadServicio.cs" />
     <Compile Include="Servicios\ProvinciaServicio.cs" />
   </ItemGroup>

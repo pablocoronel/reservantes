@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ReservAntes.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,14 +7,14 @@ using System.Web.Mvc;
 
 namespace ReservAntes.Controllers
 {
+    [Authorize]
+    [HandleError]
     public class AdminController : Controller
     {
         dbReservantesEntities ctx = new dbReservantesEntities();
-        Models.LogicaRestaurante LogResto = new Models.LogicaRestaurante();
-        Models.LogicaCliente LogCliente = new Models.LogicaCliente();
-        Models.LogicaUsuario LogUsuario = new Models.LogicaUsuario();
-
-
+        LogicaRestaurante LogResto = new LogicaRestaurante();
+        LogicaCliente LogCliente = new LogicaCliente();
+        LogicaUsuario LogUsuario = new LogicaUsuario();
 
 
         // GET: Admin
