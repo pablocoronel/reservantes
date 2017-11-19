@@ -378,6 +378,7 @@
     <Content Include="Views\Cliente\ListaPlatos.cshtml" />
     <Content Include="Views\Restaurante\Domicilio.cshtml" />
     <Content Include="Views\Restaurante\Reservas.cshtml" />
+    <Content Include="Views\Reserva\ReservaHorarios.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
