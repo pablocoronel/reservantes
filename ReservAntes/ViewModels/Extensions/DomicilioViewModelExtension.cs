@@ -33,7 +33,7 @@ namespace ReservAntes.ViewModels.Extensions
             entity.NumeroPiso = model.NumeroPiso;
             entity.NumeroDpto = model.NumeroDpto;
             entity.NombreCalle = model.NombreCalle;
-            entity.Localidad = model.Localidad;
+            entity.LocalidadId = model.LocalidadId;
             entity.Ubicacion = model.Ubicacion;
 
             return entity;

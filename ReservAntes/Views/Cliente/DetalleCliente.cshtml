@@ -17,11 +17,11 @@
                 @using (Html.BeginForm("DetalleCliente", "Cliente"))
             {
                     <div class="form-group">
-                        <label>Razon Social:</label>
+                        <label>Nombre:</label>
                         @Html.TextBoxFor(Model => Model.Nombre, new { @class = "form-control" })
                     </div>
                     <div class="form-group">
-                        <label>CUIT:</label>
+                        <label>Apellido:</label>
                         @Html.TextBoxFor(Model => Model.Apellido, new { @class = "form-control" })
                     </div>
                     @*<div class="form-group">

@@ -12,13 +12,11 @@
 <!-- menu principal -->
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="">ReservAntes</a>
-        </div>
+        @*<div class="navbar-header">
+            <img src="~/Imagenes/Logo.jpg" />
+        </div>*@
         <ul class="nav navbar-nav">
             <li>@Html.ActionLink("Home", "Index", "Admin")</li>
-            <li>@Html.ActionLink("About", "About", "Admin")</li>
-            <li>@Html.ActionLink("Contact", "Contact", "Admin")</li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a>@Session["usuarioNombre"]</a></li>

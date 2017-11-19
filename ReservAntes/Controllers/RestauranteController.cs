@@ -188,6 +188,7 @@ namespace ReservAntes.Controllers
         [HttpPost]
         public ActionResult RestoPerfil(RestauranteViewModel restaurante)
         {
+            
             if (restaurante.IdRestaurante == 0)
             {
                 restaurante.Estado = 0;
@@ -215,7 +216,7 @@ namespace ReservAntes.Controllers
             var IdUsuario = Session["usuarioId"];
             var restaurante = LogRes.GetByUserId(Convert.ToInt32(IdUsuario));
 
-            domicilio.Ubicacion = GeoPoint.CreatePoint(domicilio.latitud, domicilio.longitud);
+            //domicilio.Ubicacion = GeoPoint.CreatePoint(domicilio.latitud, domicilio.longitud);
             domicilioServicio.CreateOrUpdate(domicilio.Map());
             LogRes.ActualizaDomicilio(domicilio.Id, restaurante.IdRestaurante);
 

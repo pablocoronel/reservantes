@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_LayoutCliente.cshtml";
 }
 
-<h2>EditCliente</h2>
+<h2>Editar Datos Personales</h2>
 
 <div>
     <div class="jumbotron">
@@ -15,17 +15,17 @@
                 @using (Html.BeginForm("CompletarCliente", "Cliente"))
             {
                     <div class="form-group">
-                        <label>Razon Social:</label>
+                        <label>Nombre:</label>
                         @Html.TextBoxFor(Model => Model.Nombre, new { @class = "form-control" })
                     </div>
                     <div class="form-group">
-                        <label>CUIT:</label>
+                        <label>Apellido</label>
                         @Html.TextBoxFor(Model => Model.Apellido, new { @class = "form-control" })
                     </div>
-                    <div class="form-group">
+                    @*<div class="form-group">
                         <label>Domicilio:</label>
                         @Html.TextBoxFor(Model => Model.Domicilio, new { @class = "form-control" })
-                    </div>
+                    </div>*@
 
 
                     <button type="submit" class="btn btn-primary">Ingresar</button>
