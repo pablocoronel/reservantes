@@ -121,53 +121,7 @@ namespace ReservAntes.Controllers
 
         // --------------------------------------------------
 
-        // --------------------- MENU -------------------------------------------------------------------------------
-
-        public ActionResult MiMenu()
-        {
-            return View();
-        }
-
-        public ActionResult CreateMenu()
-        {
-
-            ViewBag.ListTiposMenus = LogRes.GetEstilosMenus();
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult CreateMenu(Menu us)
-        {
-
-            ViewBag.ListTiposMenus = LogRes.GetEstilosMenus();
-
-            var IdUsuario = this.Session["usuarioId"];
-            var nomUsuario = this.Session["usuarioNombre"];
-
-
-            if (ModelState.IsValid)
-            {
-
-            Menu newMenu = new Menu();
-
-            newMenu.RestauranteId = Convert.ToInt32(IdUsuario);
-            newMenu.Descripcion = us.Descripcion;
-            newMenu.EstiloMenuId = us.EstiloMenuId;
-
-            ctx.Menu.Add(newMenu);
-            ctx.SaveChanges();
-
-                return View("Index");
-            }
-
-            //this.LogRes.crearMenu(id);
-            
-            return View("../Shared/Error");
-        }
-
-        // ----------------------------------------------------------------------------------------------------
-
-
+       
 
         // --------------------- Perfil Restoran -------------------------------------------------------------------------------
 
