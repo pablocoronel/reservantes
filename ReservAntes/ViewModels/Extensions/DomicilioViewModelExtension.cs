@@ -11,12 +11,15 @@ namespace ReservAntes.ViewModels.Extensions
         {
             return new DomicilioViewModel
             {
-                Localidad = value.Localidad,
+                LocalidadId = value.LocalidadId,
                 Id=value.Id,
                 NumeroCalle=value.NumeroCalle,
                 NombreCalle=value.NombreCalle,
                 NumeroDpto=value.NumeroDpto,
                 NumeroPiso=value.NumeroPiso,
+                Longitud=value.Longitud,
+                Latitud=value.Latitud,
+                Ubicacion=value.Ubicacion
                 
             };
         }
@@ -33,8 +36,11 @@ namespace ReservAntes.ViewModels.Extensions
             entity.NumeroPiso = model.NumeroPiso;
             entity.NumeroDpto = model.NumeroDpto;
             entity.NombreCalle = model.NombreCalle;
+            entity.NumeroCalle = model.NumeroCalle;
             entity.LocalidadId = model.LocalidadId;
             entity.Ubicacion = model.Ubicacion;
+            entity.Latitud = model.Latitud;
+            entity.Longitud = model.Longitud;
 
             return entity;
 
