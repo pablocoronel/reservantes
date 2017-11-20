@@ -1,19 +1,15 @@
-﻿@model ReservAntes.Usuario
+﻿@m@model ReservAntes.Usuario
 
 @{
     ViewBag.Title = "CreateUser";
     Layout = "~/Views/Shared/_LayoutHome.cshtml";
 }
 
-<div class="container alturaMinimaDeSecciones" id="contenedorLogin">
+<div class="container">
     <div class="row">
-        <div class="col-md-4"></div>
-        @using (Html.BeginForm("CreateUser", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
-        {
-            @Html.ValidationSummary(true)
-            <div class="form-group col-md-4">
-
-                <div class="form-group">
+        <div class="col-md-3"></div>
+        <div class="jumbotron col-md-5">
+            <div @using (Html.BeginForm("CreateUser", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" })) { @Html.ValidationSummary(true)      <div class="form-group">
                     <label>Nombre de Usuario:</label>
                     @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.Username, "", new { @class = "text-danger" })
@@ -46,7 +42,10 @@
 
                 <p></p>
                 <div id=""><input type="submit" value="Registrarse" class="btn btn-info" /></div>
-            </div>
-        }
+
+                }
     </div>
+        </div>
+    </div>
+
 </div>
