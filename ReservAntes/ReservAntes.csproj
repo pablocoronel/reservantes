@@ -179,6 +179,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dto\GoogleMapsDto.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -271,6 +272,12 @@
     <Compile Include="Restaurante.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Servicios\DepartamentoServicio.cs" />
+    <Compile Include="Servicios\GeoPoint.cs" />
+    <Compile Include="Servicios\GoogleHelper.cs" />
+    <Compile Include="Servicios\HtmlHelper.cs" />
+    <Compile Include="Servicios\LocalidadServicio.cs" />
+    <Compile Include="Servicios\ProvinciaServicio.cs" />
     <Compile Include="sysdiagrams.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -394,12 +401,6 @@
   <ItemGroup />
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\CapaServicio\CapaServicio.csproj">
-      <Project>{157af5be-5eca-46ac-a46b-ea9cdc3e177c}</Project>
-      <Name>CapaServicio</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

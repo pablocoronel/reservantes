@@ -1,4 +1,4 @@
-﻿@m@model ReservAntes.Usuario
+﻿@model ReservAntes.Usuario
 
 @{
     ViewBag.Title = "CreateUser";
@@ -9,42 +9,45 @@
     <div class="row">
         <div class="col-md-3"></div>
         <div class="jumbotron col-md-5">
-            <div @using (Html.BeginForm("CreateUser", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" })) { @Html.ValidationSummary(true)      <div class="form-group">
-                    <label>Nombre de Usuario:</label>
-                    @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Username, "", new { @class = "text-danger" })
-                </div>
+            <div>
+                @using (Html.BeginForm("CreateUser", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                { @Html.ValidationSummary(true)
+                    <div class="form-group">
+                        <label>Nombre de Usuario:</label>
+                        @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Username, "", new { @class = "text-danger" })
+                    </div>
 
-                <div class="form-group">
-                    <label>Contraseña:</label>
-                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                </div>
+                    <div class="form-group">
+                        <label>Contraseña:</label>
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    </div>
 
-                <div class="form-group">
-                    <label>Repita Contraseña:</label>
-                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                </div>
+                    <div class="form-group">
+                        <label>Repita Contraseña:</label>
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    </div>
 
-                <div class="form-group">
-                    <label>Email:</label>
-                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                </div>
+                    <div class="form-group">
+                        <label>Email:</label>
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    </div>
 
-                <div class="form-group">
-                    <label>Tipo de Usuario:</label>
-                    @Html.DropDownList("TipoUsuarioId", new SelectList(ViewBag.ListUsuario, "Id", "Descripcion"), new { @class = "form-control" })
+                    <div class="form-group">
+                        <label>Tipo de Usuario:</label>
+                        @Html.DropDownList("TipoUsuarioId", new SelectList(ViewBag.ListUsuario, "Id", "Descripcion"), new { @class = "form-control" })
 
-                </div>
+                    </div>
 
 
-                <p></p>
-                <div id=""><input type="submit" value="Registrarse" class="btn btn-info" /></div>
+                    <p></p>
+                    <div id=""><input type="submit" value="Registrarse" class="btn btn-info" /></div>
 
                 }
-    </div>
+            </div>
         </div>
     </div>
 
