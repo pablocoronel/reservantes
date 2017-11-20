@@ -15,8 +15,8 @@ namespace ReservAntes.Controllers
             return View();
         }
 
-        // GET: Reserva/Details/5
-        public ActionResult Details(int id)
+     
+        public ActionResult ReservaHorarios()
         {
             return View();
         }

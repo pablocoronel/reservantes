@@ -8,16 +8,29 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link rel="icon" type="image/png" href="~/Imagenes/icono.png" />
+
+    <link href="https://fonts.googleapis.com/css?family=Oxygen" rel="stylesheet">
+
 </head>
 <body>
-                 <div class="body-content">
-                    @RenderBody()
-                    <hr />
+        @RenderBody()
+                    
                     <footer>
-                        <p>&copy; @DateTime.Now.Year - ReservAntes - Trabajo Practico Integrador 2017 2C</p>
+                        <div class="container">
+                            <div class="col-xs-12 col-sm-4">
+                                <h3>Inicio</h3>
+                            </div>
+                            <div class="col-xs-12 col-sm-4">
+                                <h3>ReservAntes</h3>
+                            </div>
+                            <div class="col-xs-12 col-sm-4">
+                                <h3>2017</h3>
+                            </div>
+                        </div>
+                        
                     </footer>
-                </div>
-
+               
                 @Scripts.Render("~/bundles/jquery")
                 @Scripts.Render("~/bundles/bootstrap")
                 @RenderSection("scripts", required: false)
