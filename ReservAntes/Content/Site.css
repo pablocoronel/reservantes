@@ -73,3 +73,12 @@ textarea {
         background-color: #FFFFFF;
     }
 }
+
+
+/** footer **/
+footer{
+    background-color: #000000;
+    color: #FFFFFF;
+    text-align: center;
+    min-height: 70px;
+}
