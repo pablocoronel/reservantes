@@ -19,6 +19,9 @@ textarea {
 }
 
 /** Layout **/
+body{
+    min-height: 500px;
+}
 #menuPrincipal {
     background-color: #fa2a2a;
 }
@@ -81,4 +84,23 @@ footer{
     color: #FFFFFF;
     text-align: center;
     min-height: 70px;
+}
+
+/** LOGIN **/
+#contenedorLogin{
+    min-height: 500px;
+}
+
+#contenedorLogin .row{
+    padding-top: 100px;
+}
+
+@media only screen and (max-width: 768px){
+    #contenedorLogin {
+        min-height: 400px;
+    }
+
+        #contenedorLogin .row {
+            padding-top: 100px;
+        }
 }
