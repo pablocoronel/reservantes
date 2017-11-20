@@ -8,8 +8,7 @@ namespace ReservAntes.Extensions
     public class DatosBancariosExtension
     {
         //Pendiente para corregir tipos de datos
-        public int? RestauranteId { get; set; }
         public string NumeroCuenta { get; set; }
-        public int CBU { get; set; }
+        public string CBU { get; set; }
     }
 }

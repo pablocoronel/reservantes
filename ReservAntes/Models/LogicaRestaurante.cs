@@ -24,13 +24,13 @@ namespace ReservAntes.Models
 
             return todosLosRestaurantes;
         }
-        public void ActualizaEstado(int estado, int restauranteId)
+        public void ActualizaEstado(bool estado, int restauranteId)
         {
             using (var db = new dbReservantesEntities())
             {
 
                 var restauranteDb = db.Restaurante.SingleOrDefault(x => x.IdRestaurante == restauranteId);
-                restauranteDb.Estado = estado;
+                restauranteDb.Habilitado = estado;
                 db.SaveChanges();
             }
         }
@@ -39,7 +39,7 @@ namespace ReservAntes.Models
             using (var db = new dbReservantesEntities())
             {
                 var restauranteDb = db.Restaurante.SingleOrDefault(x => x.IdRestaurante == restauranteId);
-                restauranteDb.DomicilioID = domicilioId;
+                restauranteDb.DomicilioId = domicilioId;
                 db.SaveChanges();
             }
         }
@@ -60,7 +60,7 @@ namespace ReservAntes.Models
                 {
                     var restauranteDb = db.Restaurante.SingleOrDefault(x => x.IdRestaurante == restaurante.IdRestaurante);
 
-                    restauranteDb.CantClientes = restaurante.CantClientes;
+                    restauranteDb.CantidadClientes = restaurante.CantidadClientes;
                     restaurante.RazonSocial = restaurante.RazonSocial;
                     restaurante.CUIT = restaurante.CUIT;
                 }
@@ -77,7 +77,7 @@ namespace ReservAntes.Models
         {
             Restaurante restaurante = ctx.Restaurante.FirstOrDefault(x => x.IdUsuario == idresto);
             // 0 => NO habilitado | 1 => Habilitado
-            restaurante.Estado = 1;
+            restaurante.Habilitado = true;
 
             ctx.SaveChanges();
         }

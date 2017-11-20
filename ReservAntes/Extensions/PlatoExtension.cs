@@ -14,7 +14,7 @@ namespace ReservAntes.Extensions
         [Required(ErrorMessage = "Este campo es obligatorio")]
         public decimal? Precio { get; set; }
         [Required(ErrorMessage = "Este campo es obligatorio")]
-        [StringLength(50)]
+        [StringLength(100)]
         public string Descripcion { get; set; }
         [Required(ErrorMessage = "Este campo es obligatorio")]
         public string Foto { get; set; }

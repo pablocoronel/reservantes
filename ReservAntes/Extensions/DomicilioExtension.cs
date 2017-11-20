@@ -18,6 +18,8 @@ namespace ReservAntes.Extensions
         public int NumeroDpto { get; set; }
         [Required(ErrorMessage = "Este campo es obligatorio")]
         public int LocalidadId { get; set; }
+        public double? Latitud { get; set; }
+        public double? Longitud { get; set; }
         public DbGeography Ubicacion { get; set; }
     }
 }

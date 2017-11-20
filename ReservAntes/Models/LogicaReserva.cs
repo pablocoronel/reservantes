@@ -11,7 +11,7 @@ namespace ReservAntes.Models
         {
             using (var db = new dbReservantesEntities())
             {
-                var reservasFiltradas = db.Reserva.Include("EstadoReserva").Include("Cliente").Where(x => x.RestaurenteId == restauranteId).ToList();
+                var reservasFiltradas = db.Reserva.Include("EstadoReserva").Include("Cliente").Where(x => x.RestauranteId == restauranteId).ToList();
                 return reservasFiltradas;
             }
         }

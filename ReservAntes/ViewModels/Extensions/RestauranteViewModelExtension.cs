@@ -14,12 +14,12 @@ namespace ReservAntes.ViewModels.Extensions
                 IdRestaurante=value.IdRestaurante,
                 IdUsuario=value.IdUsuario,
                 DatosBancariosId=value.DatosBancariosId,
-                CantClientes=value.CantClientes,
+                CantidadClientes=value.CantidadClientes,
                 CUIT=value.CUIT,
                 RazonSocial=value.RazonSocial,
-                Estado=value.Estado,
+                Habilitado=value.Habilitado,
                 Foto=value.Foto,
-                DomicilioID=value.DomicilioID
+                DomicilioId=value.DomicilioId
 
             };
         }
@@ -33,12 +33,12 @@ namespace ReservAntes.ViewModels.Extensions
                     IdRestaurante = model.IdRestaurante
                 };
             }
-            entity.CantClientes = model.CantClientes;
+            entity.CantidadClientes = model.CantidadClientes;
             entity.RazonSocial = model.RazonSocial;
             entity.IdUsuario = model.IdUsuario;
-            entity.DomicilioID = model.DomicilioID;
+            entity.DomicilioId = model.DomicilioId;
             entity.CUIT = model.CUIT;
-            entity.Estado = model.Estado;
+            entity.Habilitado = model.Habilitado;
             entity.Foto = model.Foto;
             entity.DatosBancariosId = model.DatosBancariosId;
             return entity;

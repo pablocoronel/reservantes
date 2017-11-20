@@ -12,18 +12,17 @@ namespace ReservAntes
     using System;
     using System.Collections.Generic;
     
-    public partial class Localidad
+    public partial class MedioPago
     {
-        public Localidad()
+        public MedioPago()
         {
-            this.Domicilio = new HashSet<Domicilio>();
+            this.Reserva = new HashSet<Reserva>();
         }
     
         public int Id { get; set; }
         public string Descripcion { get; set; }
-        public int PartidoId { get; set; }
+        public int EnumValue { get; set; }
     
-        public virtual ICollection<Domicilio> Domicilio { get; set; }
-        public virtual Partido Partido { get; set; }
+        public virtual ICollection<Reserva> Reserva { get; set; }
     }
 }

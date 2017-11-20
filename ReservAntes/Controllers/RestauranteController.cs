@@ -191,16 +191,16 @@ namespace ReservAntes.Controllers
             
             if (restaurante.IdRestaurante == 0)
             {
-                restaurante.Estado = 0;
+                restaurante.Habilitado =false;
                 restaurante.IdUsuario = Convert.ToInt32(Session["usuarioId"]);
             }
             LogRes.CreateOrUpdate(restaurante.Map());
             //Paso a la vista de domicilio
             var domicilio = CargarListadosDomicilio();
 
-            if (restaurante.DomicilioID != null)
+            if (restaurante.DomicilioId != null)
             {
-                var domicilioResto = domicilioServicio.GetById(restaurante.DomicilioID.Value);
+                var domicilioResto = domicilioServicio.GetById(restaurante.DomicilioId.Value);
                 domicilio = domicilioResto.Map();
             }
             return View("Domicilio", domicilio);

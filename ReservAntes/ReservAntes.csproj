@@ -189,11 +189,6 @@
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\GoogleMapsHelperController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Models\LogicaDatosBancarios.cs" />
-    <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Controllers\ReservaController.cs" />
-    <Compile Include="Controllers\RestauranteController.cs" />
-    <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="DatosBancarios.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -206,22 +201,10 @@
     <Compile Include="EstiloMenu.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Extensions\ClienteExtension.cs" />
-    <Compile Include="Extensions\DatosBancariosExtension.cs" />
-    <Compile Include="Extensions\DomicilioExtension.cs" />
-    <Compile Include="Extensions\Enums\EstadoReservaEnum.cs" />
-    <Compile Include="Extensions\Enums\TipoUsuarioEnum.cs" />
-    <Compile Include="Extensions\EstadoReservaExtension.cs" />
-    <Compile Include="Extensions\MenuExtension.cs" />
-    <Compile Include="Extensions\PlatoExtension.cs" />
-    <Compile Include="Extensions\ReservaExtension.cs" />
-    <Compile Include="Extensions\RestauranteExtension.cs" />
-    <Compile Include="Extensions\TipoUsuarioExtension.cs" />
-    <Compile Include="Extensions\UsuarioExtension.cs" />
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
     <Compile Include="Localidad.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MedioPago.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Menu.cs">
@@ -242,22 +225,30 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\LogicaDatosBancarios.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ReservaController.cs" />
+    <Compile Include="Controllers\RestauranteController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="Extensions\ClienteExtension.cs" />
+    <Compile Include="Extensions\DatosBancariosExtension.cs" />
+    <Compile Include="Extensions\DomicilioExtension.cs" />
+    <Compile Include="Extensions\Enums\EstadoReservaEnum.cs" />
+    <Compile Include="Extensions\Enums\TipoUsuarioEnum.cs" />
+    <Compile Include="Extensions\EstadoReservaExtension.cs" />
+    <Compile Include="Extensions\MenuExtension.cs" />
+    <Compile Include="Extensions\PlatoExtension.cs" />
+    <Compile Include="Extensions\ReservaExtension.cs" />
+    <Compile Include="Extensions\RestauranteExtension.cs" />
+    <Compile Include="Extensions\TipoUsuarioExtension.cs" />
+    <Compile Include="Extensions\UsuarioExtension.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
     <Compile Include="Models\LogicaDomicilio.cs" />
-    <Compile Include="ViewModels\DatosBancariosViewModel.cs" />
-    <Compile Include="ViewModels\DomicilioViewModel.cs" />
-    <Compile Include="ViewModels\Extensions\DatosBancariosViewModelExtension.cs" />
-    <Compile Include="ViewModels\Extensions\DomicilioViewModelExtension.cs" />
-    <Compile Include="ViewModels\Extensions\RestauranteViewModelExtension.cs" />
-    <Compile Include="ViewModels\Extensions\TipoUsuarioViewModelExtension.cs" />
-    <Compile Include="Models\LogicaCliente.cs" />
-    <Compile Include="Models\LogicaReserva.cs" />
-    <Compile Include="Models\LogicaRestaurante.cs" />
-    <Compile Include="Models\LogicaUsuario.cs" />
-    <Compile Include="ViewModels\MenuViewModel.cs" />
-    <Compile Include="ViewModels\PlatoViewModel.cs" />
-    <Compile Include="ViewModels\ReservaViewModel.cs" />
-    <Compile Include="ViewModels\RestauranteViewModel.cs" />
-    <Compile Include="ViewModels\TipoUsuarioViewModel.cs" />
+    <Compile Include="NivelRestaurante.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Partido.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -267,7 +258,6 @@
     <Compile Include="PlatosElegidos.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Provincia.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -286,6 +276,22 @@
     <Compile Include="Usuario.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\DatosBancariosViewModel.cs" />
+    <Compile Include="ViewModels\DomicilioViewModel.cs" />
+    <Compile Include="ViewModels\Extensions\DatosBancariosViewModelExtension.cs" />
+    <Compile Include="ViewModels\Extensions\DomicilioViewModelExtension.cs" />
+    <Compile Include="ViewModels\Extensions\RestauranteViewModelExtension.cs" />
+    <Compile Include="ViewModels\Extensions\TipoUsuarioViewModelExtension.cs" />
+    <Compile Include="Models\LogicaCliente.cs" />
+    <Compile Include="Models\LogicaReserva.cs" />
+    <Compile Include="Models\LogicaRestaurante.cs" />
+    <Compile Include="Models\LogicaUsuario.cs" />
+    <Compile Include="ViewModels\MenuViewModel.cs" />
+    <Compile Include="ViewModels\PlatoViewModel.cs" />
+    <Compile Include="ViewModels\ReservaViewModel.cs" />
+    <Compile Include="ViewModels\RestauranteViewModel.cs" />
+    <Compile Include="ViewModels\TipoUsuarioViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\UsuarioViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -302,6 +308,20 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Imagenes\Logo.jpg" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <EntityDeploy Include="Model.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Model.edmx.diagram">
+      <DependentUpon>Model.edmx</DependentUpon>
+    </Content>
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model.edmx</DependentUpon>
@@ -312,20 +332,6 @@
       <DependentUpon>Model.edmx</DependentUpon>
       <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
-    <Content Include="ApplicationInsights.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <EntityDeploy Include="Model.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Model.edmx.diagram">
-      <DependentUpon>Model.edmx</DependentUpon>
-    </Content>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

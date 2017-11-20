@@ -12,18 +12,18 @@ namespace ReservAntes
     using System;
     using System.Collections.Generic;
     
-    public partial class Localidad
+    public partial class NivelRestaurante
     {
-        public Localidad()
+        public NivelRestaurante()
         {
-            this.Domicilio = new HashSet<Domicilio>();
+            this.Restaurante = new HashSet<Restaurante>();
         }
     
         public int Id { get; set; }
+        public Nullable<decimal> Precio { get; set; }
         public string Descripcion { get; set; }
-        public int PartidoId { get; set; }
+        public int EnumValue { get; set; }
     
-        public virtual ICollection<Domicilio> Domicilio { get; set; }
-        public virtual Partido Partido { get; set; }
+        public virtual ICollection<Restaurante> Restaurante { get; set; }
     }
 }
