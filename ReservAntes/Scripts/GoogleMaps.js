@@ -13,7 +13,7 @@
 
     var data = [
         { "Id": 1, "PlaceName": "Casa Rosada Restaurant", "GeoLong": "-34.6080556", "GeoLat": "-58.3702778" },
-        //{ "Id": 2, "PlaceName": "McDonalds", "GeoLong": "-34.6088308783192", "GeoLat": "-58.37559700012207" },
+        //{"Id": 2, "PlaceName": "McDonalds", "GeoLong": "-34.6088308783192", "GeoLat": "-58.37559700012207" },
         { "Id": 3, "PlaceName": "Museo del Jamon", "GeoLong": "-34.6083363769076", "GeoLat": "-58.38213086128235" },
 
     ];
@@ -51,7 +51,7 @@
     searchBox.addListener('places_changed', function () {
         var places = searchBox.getPlaces();
 
-        if (places.length == 0) {
+        if (places.length === 0) {
             return;
         }
 
@@ -95,10 +95,3 @@
     });
 
 }
-
-
-
-//<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAptrGun-vHjygAsSermQUGiDvxOGQ_qJ8&libraries=places&callback=inicialar" async defer</script>
-
-<script src='http://maps.google.com/maps/api/js?key=AIzaSyCj0UbeSz2p0umVfycFjdqHJSKAS_cdLog&sensor=false&libraries=places' type="text/javascript"></script>
-
