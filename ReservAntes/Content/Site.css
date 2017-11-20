@@ -19,7 +19,7 @@ textarea {
 }
 
 /** Layout **/
-body{
+.alturaMinimaDeSecciones {
     min-height: 500px;
 }
 #menuPrincipal {
