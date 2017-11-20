@@ -21,8 +21,9 @@
             </a>
         </div>
         <div class="collapse navbar-collapse col-xs-12 col-sm-8 pull-right" id="mibarrita">
-            <li>@Html.ActionLink("Home", "Index", "Cliente")</li>
-            <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Home", "Index", "Cliente")</li>
+                <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -46,4 +47,7 @@
         </div>
     </div>
 </div>
-@RenderBody()
+
+<div class="container">
+    @RenderBody()
+</div>

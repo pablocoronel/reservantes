@@ -104,3 +104,15 @@ footer{
             padding-top: 100px;
         }
 }
+
+/** registro **/
+.btn-info {
+    background-color: #fa2a2a;
+    color: #FFFFFF;
+    border: 1px solid #FFFFFF;
+}
+.btn-info:hover {
+    background-color: #FFFFFF;
+    color: #fa2a2a;
+    border: 1px solid #fa2a2a;
+}

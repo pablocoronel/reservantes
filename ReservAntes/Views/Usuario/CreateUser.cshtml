@@ -5,9 +5,7 @@
     Layout = "~/Views/Shared/_LayoutHome.cshtml";
 }
 
-<h2>Nuevo Usuario</h2>
-
-<div class="jumbotron">
+<div class="container" id="contenedorLogin">
     <div class="row">
         <div class="col-md-4"></div>
         @using (Html.BeginForm("CreateUser", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
