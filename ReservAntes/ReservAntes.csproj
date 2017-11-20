@@ -179,27 +179,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dto\GoogleMapsDto.cs" />
-    <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Cliente.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\ClienteController.cs" />
-    <Compile Include="Controllers\GoogleMapsHelperController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DatosBancarios.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Domicilio.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Dto\GoogleMapsDto.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\ClienteController.cs" />
+    <Compile Include="Controllers\GoogleMapsHelperController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="EstadoReserva.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EstiloMenu.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Extensions\Enums\MedioPagoEnum.cs" />
@@ -210,9 +207,6 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="MedioPago.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Menu.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model.Context.cs">
@@ -241,7 +235,6 @@
     <Compile Include="Extensions\Enums\EstadoReservaEnum.cs" />
     <Compile Include="Extensions\Enums\TipoUsuarioEnum.cs" />
     <Compile Include="Extensions\EstadoReservaExtension.cs" />
-    <Compile Include="Extensions\MenuExtension.cs" />
     <Compile Include="Extensions\PlatoExtension.cs" />
     <Compile Include="Extensions\ReservaExtension.cs" />
     <Compile Include="Extensions\RestauranteExtension.cs" />
@@ -278,9 +271,6 @@
     <Compile Include="Servicios\HtmlHelper.cs" />
     <Compile Include="Servicios\LocalidadServicio.cs" />
     <Compile Include="Servicios\ProvinciaServicio.cs" />
-    <Compile Include="sysdiagrams.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="TipoUsuario.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -297,7 +287,6 @@
     <Compile Include="Models\LogicaReserva.cs" />
     <Compile Include="Models\LogicaRestaurante.cs" />
     <Compile Include="Models\LogicaUsuario.cs" />
-    <Compile Include="ViewModels\MenuViewModel.cs" />
     <Compile Include="ViewModels\PlatoViewModel.cs" />
     <Compile Include="ViewModels\ReservaViewModel.cs" />
     <Compile Include="ViewModels\RestauranteViewModel.cs" />
@@ -346,6 +335,7 @@
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\GoogleMaps.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />

@@ -39,12 +39,7 @@ namespace ReservAntes.Models
         public List<Plato> ListarPlatosDelRestaurante(int idResto)
         {
             List<Plato> ListPlato = (from plato in ctx.Plato
-                                     join menu in ctx.Menu
-                                     on plato.MenuId equals
-                                           menu.Id
-                                     where plato.MenuId == menu.Id
-                                        &&
-                                           menu.RestauranteId == idResto
+                                     where idResto == plato.RestauranteId
                                      select plato).ToList();
 
             return ListPlato;

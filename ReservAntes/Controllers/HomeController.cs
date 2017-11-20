@@ -4,14 +4,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.SqlClient;
+using System.Configuration;
+
+
+
 namespace ReservAntes.Controllers
 {
     public class HomeController : Controller
     {
         public ActionResult Index()
         {
+            dbReservantesEntities ctx = new dbReservantesEntities();
+
+          
+
             if(Session["usuarioTipo"] != null)
-{
+                {
                 switch (Convert.ToInt32(Session["usuarioTipo"]))
                 {
                     case 1:

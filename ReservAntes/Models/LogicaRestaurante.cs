@@ -83,14 +83,7 @@ namespace ReservAntes.Models
         }
 
 
-        public List<EstiloMenu> GetEstilosMenus()
-        {
-            List<EstiloMenu> ListTiposMenus = new List<EstiloMenu>();
-            ListTiposMenus = ctx.EstiloMenu.ToList();
-
-            return ListTiposMenus;
-        }
-
+      
 
         public void CrearPlato(Plato plate)
         {
@@ -139,10 +132,10 @@ namespace ReservAntes.Models
         // ----------------- Platos ---------------------
 
 
-        public List<Plato> GetPlato(int idMenu)
+        public List<Plato> GetPlato(int idResto)
         {
             List<Plato> ListPlato = (from m in ctx.Plato
-                                   where m.MenuId == idMenu
+                                   where m.RestauranteId == idResto
                                      select m).ToList();
 
             return ListPlato;
@@ -151,18 +144,7 @@ namespace ReservAntes.Models
         // -------------------------------------
 
 
-        // ----------------- Menu ---------------------
-
-       
-
-        public List<Menu> GetMenu(int idMenu)
-        {
-            List<Menu> ListMenu = (from m in ctx.Menu
-                                     where m.Id == idMenu
-                                   select m).ToList();
-
-            return ListMenu;
-        }
+        
 
         public Restaurante GetByUserId(int idUsuario)
         {
