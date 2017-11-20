@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace ReservAntes.Controllers
 {
-    [Authorize]
+    
     [HandleError]
     public class AdminController : Controller
     {

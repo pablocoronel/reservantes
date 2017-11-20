@@ -1,13 +1,10 @@
-﻿using CapaServicio.Dto;
+﻿using Reservantes.Dto;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Web.ModelBinding;
 using System.Xml.Linq;
-using System.Web.Http;
-using System.Web.Helpers;
 using ModelStateDictionary = System.Web.Http.ModelBinding.ModelStateDictionary;
 namespace ReservAntes.Servicios
 {

@@ -1,15 +1,12 @@
-﻿using CapaServicio.Servicios;
-using System;
+﻿using ReservAntes.Servicios;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Http;
 
 namespace ReservAntes.Controllers
 {
 
-  //  [Authorize]
+    //  [Authorize]
     [RoutePrefix("api/GoogleMapsHelper")]
     public class GoogleMapsHelperController : ApiController
     {
