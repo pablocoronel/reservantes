@@ -121,3 +121,13 @@ footer{
     font-family: font-family, 'Oxygen', sans-serif;
     margin:20px 0 0 20px;
 }
+
+
+
+/*MAPA DE HOME*/
+#map {
+    height: 100%;
+}
+/* Optional: Makes the sample page fill the window. */
+
+
