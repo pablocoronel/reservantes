@@ -10,16 +10,16 @@
     @Scripts.Render("~/bundles/modernizr")
     <link rel="icon" type="image/png" href="~/Imagenes/icono.png" />
 
+    <link href="https://fonts.googleapis.com/css?family=Oxygen" rel="stylesheet">
+
 </head>
 <body>
-                 <div class="body-content">
                     @RenderBody()
                     <hr />
                     <footer>
                         <p>&copy; @DateTime.Now.Year - ReservAntes - Trabajo Practico Integrador 2017 2C</p>
                     </footer>
-                </div>
-
+               
                 @Scripts.Render("~/bundles/jquery")
                 @Scripts.Render("~/bundles/bootstrap")
                 @RenderSection("scripts", required: false)

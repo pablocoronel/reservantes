@@ -1,10 +1,4 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
-    background-color:antiquewhite;
-}
-
-/* Set padding to keep content from hitting the edges */
+﻿/* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
@@ -22,4 +16,60 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+/** Layout **/
+#menuPrincipal {
+    background-color: #fa2a2a;
+}
+
+#mibarrita ul li {
+    height: 61px;
+}
+
+#mibarrita ul li:hover {
+    background-color: #FFFFFF;
+    color: #fa2a2a;
+}
+#mibarrita ul li a {
+    font-size: 18px;
+    font-family: font-family: 'Oxygen', sans-serif;
+    color: #FFFFFF !important;
+    padding-top: 20px;
+}
+
+    #mibarrita ul li a:hover {
+        font-size: 18px;
+        font-family: font-family: 'Oxygen', sans-serif;
+        color: #fa2a2a !important;
+    }
+
+.navbar{
+    margin-bottom: 0px;
+}
+
+.jumbotron {
+    background-color: #fcfcfc;
+}
+
+@media only screen and (max-width: 768px) {
+    #menuPrincipal img {
+        max-height: 50px;
+    }
+
+    #mibarrita ul li {
+        height: 45px;
+    }
+
+    .navbar-default .navbar-toggle .icon-bar {
+        background-color: #FFFFFF;
+    }
+
+    .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+        background-color: #fa2a2a;
+        border: 1px solid #FFFFFF;
+    }
+    .navbar-default .navbar-toggle .icon-bar:hover {
+        background-color: #FFFFFF;
+    }
 }
