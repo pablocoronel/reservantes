@@ -14,14 +14,17 @@ namespace ReservAntes.Extensions
         [Required(ErrorMessage = "Este campo es obligatorio")]
         [StringLength(50)]
         public string RazonSocial { get; set; }
+        [StringLength(50)]
+        public string NombreComercial { get; set; }
         public int? DatosBancariosId { get; set; }
         [Required(ErrorMessage = "Este campo es obligatorio")]
-        public int CUIT { get; set; }
-        public byte[] Foto { get; set; }
+        public string CUIT { get; set; }
+        public string Foto { get; set; }
         [Required(ErrorMessage = "Este campo es obligatorio")]
-        public int CantClientes { get; set; }
+        public int CantidadClientes { get; set; }
         [Required(ErrorMessage = "Este campo es obligatorio")]
-        public int Estado { get; set; }
-        public int? DomicilioID { get; set; }
+        public bool Habilitado { get; set; }
+        public int? DomicilioId { get; set; } 
+        public int? NivelId { get; set; }
     }
 }

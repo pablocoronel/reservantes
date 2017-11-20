@@ -201,6 +201,10 @@
     <Compile Include="EstiloMenu.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Extensions\Enums\MedioPagoEnum.cs" />
+    <Compile Include="Extensions\Enums\NivelRestauranteEnum.cs" />
+    <Compile Include="Extensions\MedioPagoExtension.cs" />
+    <Compile Include="Extensions\NivelRestauranteExtension.cs" />
     <Compile Include="Localidad.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

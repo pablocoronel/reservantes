@@ -19,7 +19,9 @@ namespace ReservAntes.ViewModels.Extensions
                 RazonSocial=value.RazonSocial,
                 Habilitado=value.Habilitado,
                 Foto=value.Foto,
-                DomicilioId=value.DomicilioId
+                DomicilioId=value.DomicilioId,
+                NombreComercial=value.NombreComercial,
+                NivelId=value.NivelId
 
             };
         }
@@ -41,6 +43,8 @@ namespace ReservAntes.ViewModels.Extensions
             entity.Habilitado = model.Habilitado;
             entity.Foto = model.Foto;
             entity.DatosBancariosId = model.DatosBancariosId;
+            entity.NombreComercial = model.NombreComercial;
+            entity.NivelId = model.NivelId;
             return entity;
 
         }
