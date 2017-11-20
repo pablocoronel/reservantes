@@ -19,7 +19,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NumeroCuenta" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="CBU" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
@@ -27,15 +27,15 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NombreCalle" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="NumeroCalle" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="NumeroPiso" Type="int" />
           <Property Name="NumeroDpto" Type="nvarchar" MaxLength="2" />
           <Property Name="LocalidadId" Type="int" Nullable="false" />
           <Property Name="Ubicacion" Type="geography" />
-          <Property Name="Latitud" Type="float" />
-          <Property Name="Longitud" Type="float" />
+          <Property Name="Latitud" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Longitud" Type="numeric" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="EstadoReserva">
           <Key>
@@ -57,7 +57,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="EnumValue" Type="int" Nullable="false" />
         </EntityType>
@@ -93,7 +93,7 @@
           <Key>
             <PropertyRef Name="ReservaId" />
           </Key>
-          <Property Name="ReservaId" Type="int" Nullable="false" />
+          <Property Name="ReservaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PlatoId" Type="int" Nullable="false" />
           <Property Name="Cantidad" Type="int" />
         </EntityType>
@@ -108,7 +108,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ClienteId" Type="int" Nullable="false" />
           <Property Name="RestauranteId" Type="int" Nullable="false" />
           <Property Name="Observaciones" Type="nvarchar" MaxLength="150" />
@@ -117,12 +117,13 @@
           <Property Name="CodigoReserva" Type="nvarchar" MaxLength="50" />
           <Property Name="FechaHoraOperacion" Type="datetime" Nullable="false" />
           <Property Name="MedioPagoId" Type="int" />
+          <Property Name="CantidadComensales" Type="int" />
         </EntityType>
         <EntityType Name="Restaurante">
           <Key>
             <PropertyRef Name="IdRestaurante" />
           </Key>
-          <Property Name="IdRestaurante" Type="int" Nullable="false" />
+          <Property Name="IdRestaurante" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdUsuario" Type="int" Nullable="false" />
           <Property Name="RazonSocial" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="NombreComercial" Type="nvarchar" MaxLength="200" Nullable="false" />
@@ -463,7 +464,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NumeroCuenta" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CBU" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Restaurante" Relationship="Self.FK_Restaurante_DatosBancarios" FromRole="DatosBancarios" ToRole="Restaurante" />
@@ -472,15 +473,15 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NombreCalle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="NumeroCalle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="NumeroPiso" Type="Int32" />
           <Property Name="NumeroDpto" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
           <Property Name="LocalidadId" Type="Int32" Nullable="false" />
           <Property Name="Ubicacion" Type="Geography" />
-          <Property Name="Latitud" Type="Double" />
-          <Property Name="Longitud" Type="Double" />
+          <Property Name="Latitud" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Longitud" Type="Decimal" Precision="18" Scale="0" />
           <NavigationProperty Name="Cliente" Relationship="Self.FK_Cliente_Domicilio" FromRole="Domicilio" ToRole="Cliente" />
           <NavigationProperty Name="Localidad" Relationship="Self.FK_Domicilio_Localidad" FromRole="Domicilio" ToRole="Localidad" />
           <NavigationProperty Name="Restaurante" Relationship="Self.FK_Restaurante_Domicilio" FromRole="Domicilio" ToRole="Restaurante" />
@@ -508,7 +509,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="EnumValue" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Reserva" Relationship="Self.FK_Reserva_MedioPago" FromRole="MedioPago" ToRole="Reserva" />
@@ -550,7 +551,7 @@
           <Key>
             <PropertyRef Name="ReservaId" />
           </Key>
-          <Property Name="ReservaId" Type="Int32" Nullable="false" />
+          <Property Name="ReservaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PlatoId" Type="Int32" Nullable="false" />
           <Property Name="Cantidad" Type="Int32" />
           <NavigationProperty Name="Plato" Relationship="Self.FK_PlatosElegidos_Plato" FromRole="PlatosElegidos" ToRole="Plato" />
@@ -568,7 +569,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ClienteId" Type="Int32" Nullable="false" />
           <Property Name="RestauranteId" Type="Int32" Nullable="false" />
           <Property Name="Observaciones" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
@@ -577,6 +578,7 @@
           <Property Name="CodigoReserva" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="FechaHoraOperacion" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="MedioPagoId" Type="Int32" />
+          <Property Name="CantidadComensales" Type="Int32" />
           <NavigationProperty Name="Cliente" Relationship="Self.FK_Reserva_Cliente" FromRole="Reserva" ToRole="Cliente" />
           <NavigationProperty Name="EstadoReserva" Relationship="Self.FK_Reserva_EstadoReserva" FromRole="Reserva" ToRole="EstadoReserva" />
           <NavigationProperty Name="MedioPago" Relationship="Self.FK_Reserva_MedioPago" FromRole="Reserva" ToRole="MedioPago" />
@@ -587,7 +589,7 @@
           <Key>
             <PropertyRef Name="IdRestaurante" />
           </Key>
-          <Property Name="IdRestaurante" Type="Int32" Nullable="false" />
+          <Property Name="IdRestaurante" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdUsuario" Type="Int32" Nullable="false" />
           <Property Name="RazonSocial" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="NombreComercial" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
@@ -1044,6 +1046,7 @@
                 <ScalarProperty Name="CodigoReserva" ColumnName="CodigoReserva" />
                 <ScalarProperty Name="FechaHoraOperacion" ColumnName="FechaHoraOperacion" />
                 <ScalarProperty Name="MedioPagoId" ColumnName="MedioPagoId" />
+                <ScalarProperty Name="CantidadComensales" ColumnName="CantidadComensales" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1101,7 +1104,7 @@
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="true" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
