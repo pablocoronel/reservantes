@@ -7,16 +7,19 @@
 
 <nav class="navbar navbar-default" id="menuPrincipal">
     <div class="container">
-        <div class="navbar-header col-xs-12 col-sm-offset-1 col-sm-3">
+        <div class="navbar-header col-xs-5 col-sm-offset-1 col-sm-2">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mibarrita">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
+    
             </button>
             <a onclick="location.href='@Url.Action("Index", "Home")';return false;" >
-                <img src="~/Imagenes/Logo.jpg" alt="Reservantes" class="img-responsive"/>
+                <img src="~/Imagenes/Logo.png" alt="Reservantes" class="img-responsive"/>
             </a>
-        </div>
+
+          </div>
+        <div class="slogan col-xs-5"><label ><em>"No esperes la comida, la comida te espera a vos"</em></label></div>
+
+
+
         <div class="collapse navbar-collapse col-xs-12 col-sm-8 pull-right" id="mibarrita">
             <ul class="nav navbar-nav">
                 <li>@Html.ActionLink("Home", "Index", "Home")</li>
@@ -30,6 +33,7 @@
     </div>
 </nav>
 <div class="container alturaMinimaDeSecciones">
+    <br />
     @RenderBody()
 </div>
 

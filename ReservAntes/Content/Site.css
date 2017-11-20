@@ -23,7 +23,7 @@ textarea {
     min-height: 500px;
 }
 #menuPrincipal {
-    background-color: #fa2a2a;
+    background-color: #FFFFFF;
 }
 
 #mibarrita ul li {
@@ -31,29 +31,26 @@ textarea {
 }
 
 #mibarrita ul li:hover {
-    background-color: #FFFFFF;
+    background-color: #fa2a2a;
     color: #fa2a2a;
 }
 #mibarrita ul li a {
     font-size: 18px;
-    font-family: font-family: 'Oxygen', sans-serif;
-    color: #FFFFFF !important;
+    font-family: font-family, 'Oxygen', sans-serif;
+    color: #fa2a2a !important;
     padding-top: 20px;
 }
 
     #mibarrita ul li a:hover {
         font-size: 18px;
-        font-family: font-family: 'Oxygen', sans-serif;
-        color: #fa2a2a !important;
+        font-family: font-family, 'Oxygen', sans-serif;
+        color: #FFFFFF !important;
     }
 
 .navbar{
     margin-bottom: 0px;
 }
 
-.jumbotron {
-    background-color: #fcfcfc;
-}
 
 @media only screen and (max-width: 768px) {
     #menuPrincipal img {
@@ -69,7 +66,7 @@ textarea {
     }
 
     .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
-        background-color: #fa2a2a;
+        background-color: #FFFFFF;
         border: 1px solid #FFFFFF;
     }
     .navbar-default .navbar-toggle .icon-bar:hover {
@@ -80,7 +77,7 @@ textarea {
 
 /** footer **/
 footer{
-    background-color: #000000;
+    background-color: #383838;
     color: #FFFFFF;
     text-align: center;
     min-height: 70px;
@@ -115,4 +112,12 @@ footer{
     background-color: #FFFFFF;
     color: #fa2a2a;
     border: 1px solid #fa2a2a;
+}
+
+
+
+.slogan {
+    font-size: 14px;
+    font-family: font-family, 'Oxygen', sans-serif;
+    margin:20px 0 0 20px;
 }
