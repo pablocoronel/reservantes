@@ -32,7 +32,7 @@ namespace ReservAntes.Models
             using (var db = new dbReservantesEntities())
             {
                 var restauranteId = db.Restaurante.FirstOrDefault(x => x.IdUsuario == usuarioId).IdRestaurante;
-                var reservasFiltradasXFecha = db.Reserva.Include("EstadoReserva").Include("Cliente").Where(x => x.RestauranteId == restauranteId && x.FechaHoraReserva >= DateTime.Today).ToList();
+                var reservasFiltradasXFecha = db.Reserva.Include("EstadoReserva").Include("Cliente").Where(x => x.RestauranteId == restauranteId && x.FechaHoraReserva == DateTime.Today).ToList();
 
 
 
@@ -45,7 +45,7 @@ namespace ReservAntes.Models
         {
 
             List<Reserva> freservas = (from r in ctx.Reserva
-                                       where r.RestauranteId == id && r.FechaHoraReserva == DateTime.Today
+                                       where r.RestauranteId == id && r.FechaHoraReserva == fechaFil
                                        select r).ToList();  
 
             return freservas; 
