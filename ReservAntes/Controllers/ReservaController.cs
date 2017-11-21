@@ -25,6 +25,26 @@ namespace ReservAntes.Controllers
             return View(MisReservasResto);
         }
 
+        [HttpPost]
+        public ActionResult ReporteReservas(FormCollection form)
+        {
+            var IdUsuario = this.Session["usuarioId"];
+            int numID = Convert.ToInt32(IdUsuario);
+
+            //var fechaFil = form["FFiltro"];
+            //Convert.ToDateTime(fechaFil);
+            DateTime fechaFil = Convert.ToDateTime(form["FFiltro"]);
+
+            List<Reserva> reservaFiltro = LogRes.FiltroReservas(numID, fechaFil);
+
+            
+            return View(reservaFiltro);
+        }
+
+
+
+
+
         public ActionResult ReservaHorarios()
         {
             return View();

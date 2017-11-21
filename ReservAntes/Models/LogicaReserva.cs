@@ -26,6 +26,31 @@ namespace ReservAntes.Models
                 return reservasFiltradas;
             }
         }
+
+        public List<Reserva> GetByUsuarioIdFechaActual(int usuarioId)
+        {
+            using (var db = new dbReservantesEntities())
+            {
+                var restauranteId = db.Restaurante.FirstOrDefault(x => x.IdUsuario == usuarioId).IdRestaurante;
+                var reservasFiltradasXFecha = db.Reserva.Include("EstadoReserva").Include("Cliente").Where(x => x.RestauranteId == restauranteId && x.FechaHoraReserva >= DateTime.Today).ToList();
+
+
+
+                return reservasFiltradasXFecha;
+            }
+        }
+
+
+        public List<Reserva> FiltroReservas(int id, DateTime fechaFil)
+        {
+
+            List<Reserva> freservas = (from r in ctx.Reserva
+                                       where r.RestauranteId == id && r.FechaHoraReserva == DateTime.Today
+                                       select r).ToList();  
+
+            return freservas; 
+        }
+
         //Para filtrar por fechas
         //public List<Reserva> GetByFecha(DateTime fechaInicio,DateTime fechaFin,int restauranteId)
         //{
