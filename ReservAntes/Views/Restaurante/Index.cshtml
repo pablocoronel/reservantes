@@ -5,7 +5,7 @@
 }
                     
 <br />
-<div class="thumbnail"><h4> Reservas de Hoy</h4></div>
+<div class="thumbnail"><h4> Reservas de Hoy</h4> <div class="thumbnail"><h5>Cantidad de Comensales que vendran hoy: @DateTime.Now.Day/@DateTime.Now.Month/@DateTime.Now.Year</h5></div></div>
 <br />
 
 <div>
@@ -15,7 +15,6 @@
                 <tr>
                     <th>Codigo de Reserva</th>
                     <th>Usuario</th>
-                    <th>Fecha</th>
                     <th>Observaciones</th>
                 </tr>
             </thead>
@@ -25,7 +24,6 @@
                     <tr>
                         <th>@item.CodigoReserva</th>
                         <th>@item.ClienteId</th>
-                        <th>@item.FechaHoraReserva</th>
                         <th>@item.Observaciones</th>
                     </tr>
                 }

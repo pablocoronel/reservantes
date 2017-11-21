@@ -42,9 +42,7 @@ namespace ReservAntes.Controllers
         }
 
 
-
-
-
+  
         public ActionResult ReservaHorarios()
         {
             return View();
@@ -73,7 +71,7 @@ namespace ReservAntes.Controllers
         }
 
         // GET: Reserva/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult CancelarReserva(int id)
         {
             return View();
         }
