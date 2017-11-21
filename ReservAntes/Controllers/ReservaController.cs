@@ -9,13 +9,40 @@ namespace ReservAntes.Controllers
 {
     public class ReservaController : Controller
     {
+
+        dbReservantesEntities ctx = new dbReservantesEntities();
+
+        ReservAntes.Models.LogicaReserva LogRes = new LogicaReserva();
+
         // GET: Reserva
-        public ActionResult Index()
+        public ActionResult ReporteReservas()
         {
-            return View();
+            var IdUsuario = this.Session["usuarioId"];
+            int numID = Convert.ToInt32(IdUsuario);
+
+            List<Reserva> MisReservasResto = LogRes.GetByUsuarioId(numID);
+
+            return View(MisReservasResto);
         }
 
-     
+        [HttpPost]
+        public ActionResult ReporteReservas(FormCollection form)
+        {
+            var IdUsuario = this.Session["usuarioId"];
+            int numID = Convert.ToInt32(IdUsuario);
+
+            //var fechaFil = form["FFiltro"];
+            //Convert.ToDateTime(fechaFil);
+            DateTime fechaFil = Convert.ToDateTime(form["FFiltro"]);
+
+            List<Reserva> reservaFiltro = LogRes.FiltroReservas(numID, fechaFil);
+
+            
+            return View(reservaFiltro);
+        }
+
+
+  
         public ActionResult ReservaHorarios()
         {
             return View();
@@ -44,7 +71,7 @@ namespace ReservAntes.Controllers
         }
 
         // GET: Reserva/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult CancelarReserva(int id)
         {
             return View();
         }

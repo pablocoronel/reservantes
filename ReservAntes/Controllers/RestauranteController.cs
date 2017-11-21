@@ -16,13 +16,23 @@ namespace ReservAntes.Controllers
 
         dbReservantesEntities ctx = new dbReservantesEntities();
         LogicaRestaurante LogRes = new LogicaRestaurante();
+        LogicaReserva LogRsv = new LogicaReserva();
         private LogicaDomicilio domicilioServicio = new LogicaDomicilio();
         private LogicaDatosBancarios datosBancariosServicio = new LogicaDatosBancarios();
         private LogicaReserva reservaServicio = new LogicaReserva();
         // GET: Restaurante
+
+
         public ActionResult Index()
+
         {
-            return View();
+
+            var IdUsuario = this.Session["usuarioId"];
+            int numID = Convert.ToInt32(IdUsuario);
+
+            List<Reserva> MisReservasResto = LogRsv.GetByUsuarioIdFechaActual(numID);
+
+            return View(MisReservasResto);
         }
 
         // GET: Restaurante/Details/5

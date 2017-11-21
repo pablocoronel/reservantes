@@ -1,7 +1,34 @@
-﻿@{
+﻿@model List<Reserva>
+@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutRestaurante.cshtml";
 }
                     
+<br />
+<div class="thumbnail"><h4> Reservas de Hoy</h4> <div class="thumbnail"><h5>Cantidad de Comensales que vendran hoy: @DateTime.Now.Day/@DateTime.Now.Month/@DateTime.Now.Year</h5></div></div>
+<br />
 
-<p>Desde aquí podrá gestionar sus datos personales y ver las reservas de sus clientes</p>
+<div>
+    <div class="thumbnail">
+        <table class="table table-bordered table-responsive table-striped">
+            <thead>
+                <tr>
+                    <th>Codigo de Reserva</th>
+                    <th>Usuario</th>
+                    <th>Observaciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Reserva item in Model)
+                {
+                    <tr>
+                        <th>@item.CodigoReserva</th>
+                        <th>@item.ClienteId</th>
+                        <th>@item.Observaciones</th>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>
