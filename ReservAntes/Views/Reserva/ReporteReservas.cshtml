@@ -1,0 +1,35 @@
+﻿@model List<Reserva>
+@{
+    ViewBag.Title = "ReporteReservas";
+    Layout = "~/Views/Shared/_LayoutRestaurante.cshtml";
+}
+
+<h2 class="thumbnail">Reporte de Reservas</h2>
+
+<div class="jumbotron">
+    <table class="table-bordered">
+        <thead>
+            <tr>
+                <th>Codigo de Reserva</th>
+                <th>Usuario</th>
+                <th>Fecha</th>
+                <th>Plato</th>
+                <th>Observaciones</th>
+                <th>Confirmar/Cancelar</th>
+                <th>Pagado</th>
+             </tr>
+        </thead>
+        <tbody>
+        @foreach (Reserva item in Model) { 
+            <tr>
+                <th>@item.CodigoReserva</th>
+                <th>@item.ClienteId</th>
+                <th>@item.FechaHoraReserva</th>
+                <th>@item.PlatosElegidos</th>
+                <th>@item.Observaciones</th>
+                <th><a href="~/Usuario/Delete/@item.Id" class="btn btn-primary">Aprobar</a>/<a href="~/Usuario/Delete/@item.Id" class="btn btn-danger">Cancelar</a></th>
+                <th><a href="~/Usuario/Delete/@item.Id" class="btn btn-success">Pagado</a></th>
+            </tr>
+        }</tbody>
+    </table>
+</div>

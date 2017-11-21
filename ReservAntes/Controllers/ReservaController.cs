@@ -9,13 +9,23 @@ namespace ReservAntes.Controllers
 {
     public class ReservaController : Controller
     {
+
+        dbReservantesEntities ctx = new dbReservantesEntities();
+
+        ReservAntes.Models.LogicaReserva LogRes = new LogicaReserva();
+
         // GET: Reserva
-        public ActionResult Index()
+         public ActionResult ReporteReservas()
         {
-            return View();
+            var IdUsuario = this.Session["usuarioId"];
+
+            var listaReservas = from r in ctx.Restaurante where IdUsuario == r.Usuario && r.Reserva == ctx.Reserva select r;
+
+            //List < Reserva > MisReservasResto = LogRes.GetReservasPorRestaurante();
+
+            return View(listaReservas);
         }
 
-     
         public ActionResult ReservaHorarios()
         {
             return View();
