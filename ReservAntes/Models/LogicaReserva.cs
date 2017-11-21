@@ -9,19 +9,6 @@ namespace ReservAntes.Models
     {
         dbReservantesEntities ctx = new dbReservantesEntities();
 
-        //public List<Reserva> GetReservasPorRestaurante(int RestoID)
-        //{
-        //    var ReservasRestaurante = from r in ctx.Restaurante where r.Equals(r.IdRestaurante) select r;
-           
-
-        //    //List < Reserva > ReservasRestaurante = new List<Reserva>();
-        //    //ReservasRestaurante = ctx.Reserva.ToList();
-
-        //    return ReservasRestaurante(r);
-        //}
-
-
-
         public List<Reserva> GetByRestauranteId(int idUS)
         {
             using (var db = new dbReservantesEntities())
