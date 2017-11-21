@@ -1,9 +1,6 @@
 ﻿using ReservAntes.Extensions;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace ReservAntes.ViewModels
 {
@@ -13,5 +10,6 @@ namespace ReservAntes.ViewModels
         public List<EstadoReserva> estadoS { get; set; }
         public List<Cliente> clientes { get; set; }
         public List<Restaurante> restaurantes { get; set; }
+        public double total { get; set; }
     }
 }

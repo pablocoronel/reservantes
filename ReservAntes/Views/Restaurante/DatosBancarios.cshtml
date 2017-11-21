@@ -18,10 +18,15 @@
                 <div class="form-group">
                     <label>Numero de Cuenta:</label>
                     @Html.TextBoxFor(Model => Model.NumeroCuenta, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(Model => Model.NumeroCuenta, "", new { @class = "text-danger" })
+
+
                 </div>
                 <div class="form-group">
                     <label>CBU:</label>
                     @Html.TextBoxFor(Model => Model.CBU, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(Model => Model.CBU, "", new { @class = "text-danger" })
+
                 </div>
            
                 <button type="submit" class="btn btn-primary">Cargar</button>

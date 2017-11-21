@@ -20,19 +20,29 @@
                 <div class="form-group">
                    <label>Razon Social:</label>
                     @Html.TextBoxFor(Model => Model.RazonSocial, new { @class = "form-control" })  
+                    @Html.ValidationMessageFor(p => p.RazonSocial, "", new { @class = "text-danger" })
+
+
                 </div>
                 <div class="form-group">
                     <label>Nombre Restaurante:</label>
                     @Html.TextBoxFor(Model => Model.NombreComercial, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(p => p.NombreComercial, "", new { @class = "text-danger" })
+
+
                 </div>
                 <div class="form-group">
                     <label>CUIT:</label>
                     @Html.TextBoxFor(Model => Model.CUIT, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(p => p.CUIT, "", new { @class = "text-danger" })
+
                 </div>
 
                 <div class="form-group">
                     <label>Cantidad máxima de clientes:</label>
                     @Html.TextBoxFor(Model => Model.CantidadClientes, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(p => p.CantidadClientes, "", new { @class = "text-danger" })
+
                 </div>
 
                     <button type="submit" class="btn btn-primary">Ingresar</button>

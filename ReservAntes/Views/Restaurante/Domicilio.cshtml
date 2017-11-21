@@ -19,18 +19,26 @@
                     <div class="form-group">
                         <label>Calle:</label>
                         @Html.TextBoxFor(Model => Model.NombreCalle, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(u => u.NombreCalle)
                     </div>
                     <div class="form-group">
                         <label>Número:</label>
                         @Html.TextBoxFor(Model => Model.NumeroCalle, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(u => u.NumeroCalle)
+
                     </div>
                     <div class="form-group">
                         <label>Piso:</label>
                         @Html.TextBoxFor(Model => Model.NumeroPiso, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(u => u.NumeroPiso)
+
                     </div>
                     <div class="form-group">
                         <label>Departamento:</label>
                         @Html.TextBoxFor(Model => Model.NumeroDpto, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(u => u.NumeroDpto)
+
+
                     </div>
 
                     <div class="form-group">

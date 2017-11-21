@@ -203,6 +203,7 @@
     <Compile Include="Extensions\Enums\NivelRestauranteEnum.cs" />
     <Compile Include="Extensions\MedioPagoExtension.cs" />
     <Compile Include="Extensions\NivelRestauranteExtension.cs" />
+    <Compile Include="Extensions\PlatosElegidosExtension.cs" />
     <Compile Include="Localidad.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -281,12 +282,14 @@
     <Compile Include="ViewModels\DomicilioViewModel.cs" />
     <Compile Include="ViewModels\Extensions\DatosBancariosViewModelExtension.cs" />
     <Compile Include="ViewModels\Extensions\DomicilioViewModelExtension.cs" />
+    <Compile Include="ViewModels\Extensions\PlatoViewModelExtension.cs" />
     <Compile Include="ViewModels\Extensions\RestauranteViewModelExtension.cs" />
     <Compile Include="ViewModels\Extensions\TipoUsuarioViewModelExtension.cs" />
     <Compile Include="Models\LogicaCliente.cs" />
     <Compile Include="Models\LogicaReserva.cs" />
     <Compile Include="Models\LogicaRestaurante.cs" />
     <Compile Include="Models\LogicaUsuario.cs" />
+    <Compile Include="ViewModels\PlatosElegidosViewModel.cs" />
     <Compile Include="ViewModels\PlatoViewModel.cs" />
     <Compile Include="ViewModels\ReservaViewModel.cs" />
     <Compile Include="ViewModels\RestauranteViewModel.cs" />

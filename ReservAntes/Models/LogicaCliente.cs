@@ -28,7 +28,7 @@ namespace ReservAntes.Models
         public List<Restaurante> GetRestaurantes()
         {
             List<Restaurante> todosLosRestaurantes = new List<Restaurante>();
-            todosLosRestaurantes = ctx.Restaurante.ToList();
+            todosLosRestaurantes = ctx.Restaurante.Include("Domicilio").Include("Localidad").ToList();
 
             return todosLosRestaurantes;
         }
