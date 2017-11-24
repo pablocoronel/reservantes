@@ -1,46 +1,40 @@
 ﻿@using ReservAntes.ViewModels
-@model  List<PlatoViewModel>
+@model  RestauranteViewModel
 @{
     ViewBag.Title = "Platos";
     //ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutCliente.cshtml";
 }
 
-<h2>Platos disponibles</h2>
+<h2 class="thumbnail">@Model.NombreComercial</h2>
+<h4>Menú</h4>
 <div class="table-responsive">
-    @using (Html.BeginForm("PlatosElegidos", "Cliente"))
-    {
-        <table class="table">
-            <thead>
-                <tr>
-                    <td>Nombre</td>
-                    <td>Precio</td>
-                    <td>Elegir</td>
-                    <td>Cantidad</td>
-                </tr>
+    @*@using (Html.BeginForm("Reservar", "Cliente", new (idResto =)
+        {*@
+    @Html.HiddenFor(u => u.IdRestaurante)
 
-            <thead />
-            <tbody>
+    <table class="table">
+        <thead>
+            <tr>
+                <td>Nombre</td>
+                <td>Precio</td>
+            </tr>
 
-
-                @foreach (var plato in Model)
-                {
+        <thead />
+        <tbody>
+            @foreach (var plato in Model.listadoPlatos)
+            {
                 <tr>
                     <td>@plato.NombrePlato</td>
                     <td>$@plato.Precio</td>
-
-                    <td>@Html.CheckBox("elegido", true) // @Html.CheckBoxFor(m => plato.elegido)</td>
-                    @*<td><a href="#" class="btn btn-xs btn-success">Elegir</a></td>*@
-                    <td>
-                        @Html.DropDownListFor(u => plato.cantidad, new SelectList(plato.cantidadPlatos), "Cantidad", new { @class = "form-control" })
-                    </td>
                 </tr>
-                }
+            }
 
 
-            </tbody>
-        </table>
-        <button type="submit" class="btn btn-primary">ElegirPlatos</button>
-        <button onclick="location.href='@Url.Action("Index", "Cliente")';return false;" class="btn btn-danger">Cancelar</button>
-    }
+        </tbody>
+    </table>
+    @Html.ActionLink("Reservar", "Reserva", "Cliente", new { idResto = Model.IdRestaurante }, new { @class = "btn btn-default btn-success btn-lg btn-block" })
+    @*<button type="submit" class="btn btn-primary">Reservar</button>*@
+    <button onclick="location.href='@Url.Action("Index", "Cliente")';return false;" class="btn btn-danger">Cancelar</button>
+    
 </div>

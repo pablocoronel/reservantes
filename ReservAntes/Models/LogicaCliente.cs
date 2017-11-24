@@ -24,17 +24,6 @@ namespace ReservAntes.Models
 
         //----------------------------------------------------------------------------------
 
-        //Listado de restaurantes
-        public List<Restaurante> GetRestaurantes()
-        {
-            List<Restaurante> todosLosRestaurantes = new List<Restaurante>();
-            todosLosRestaurantes = ctx.Restaurante.Include("Domicilio").Include("Localidad").ToList();
-
-            return todosLosRestaurantes;
-        }
-
-
-
         /* traer los platos del restaurante sin dar tantas vueltas*/
         public List<Plato> ListarPlatosDelRestaurante(int idResto)
         {
@@ -43,6 +32,11 @@ namespace ReservAntes.Models
                                      select plato).ToList();
 
             return ListPlato;
+        }
+
+        public Cliente GetByUserId(int userId)
+        {
+            return ctx.Cliente.FirstOrDefault(x => x.IdUsuario == userId);
         }
     }
 

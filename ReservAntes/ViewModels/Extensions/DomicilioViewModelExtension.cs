@@ -12,6 +12,9 @@ namespace ReservAntes.ViewModels.Extensions
             return new DomicilioViewModel
             {
                 LocalidadId = value.LocalidadId,
+                localidadDescripcion = value.Localidad.Descripcion,
+                partidoDescripcion = value.Localidad.Partido.Descripcion,
+                provinciaDescripcion=value.Localidad.Partido.Provincia.Descripcion,
                 Id=value.Id,
                 NumeroCalle=value.NumeroCalle,
                 NombreCalle=value.NombreCalle,

@@ -1,0 +1,119 @@
+﻿@using ReservAntes.ViewModels
+@model  ReservaViewModel
+@{
+    ViewBag.Title = "Reservar";
+    Layout = "~/Views/Shared/_LayoutCliente.cshtml";
+}
+
+<h2 class="thumbnail">Reservar en @Model.restauranteNombre</h2>
+
+
+
+
+    @using (Html.BeginForm("Reserva", "Cliente", FormMethod.Post))
+    {
+        @Html.HiddenFor(u => u.RestauranteId)
+        <div class="table-responsive thumbnail">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <td>Nombre</td>
+                        <td>Precio</td>
+                        <td>Elegir</td>
+                        <td>Cantidad</td>
+                    </tr>
+
+                <thead />
+                <tbody>
+
+
+                    @foreach (var plato in Model.platos)
+                    {
+                        @Html.HiddenFor(m => plato.Id)
+                        <tr>
+                            <td>@plato.NombrePlato</td>
+                            <td>$@plato.Precio</td>
+                            <td>@Html.CheckBoxFor(m => plato.elegido)</td>
+                            <td>
+                                @Html.DropDownListFor(u => plato.cantidad, new SelectList(plato.cantidadPlatos), "Cantidad", new { @class = "form-control" })
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+        <br />
+
+        <div class="thumbnail">
+            Hora:
+            <select name="@Model.hora" form="@Model.hora">
+                <option value="9">9:00</option>
+                <option value="10">10:00</option>
+                <option value="11">11:00</option>
+                <option value="12">12:00</option>
+                <option value="13">13:00</option>
+                <option value="14">14:00</option>
+                <option value="20">20:00</option>
+                <option value="21">21:00</option>
+                <option value="22">22:00</option>
+                <option value="23">23:00</option>
+            </select>
+        </div>
+        <div>
+            Cantidad de Personas:
+            @Html.DropDownListFor(u => u.CantidadComensales, new SelectList(Model.cantidadMaxima), "Cantidad de Comensales", new { @class = "form-control" })
+
+        </div>
+        @*@Html.ActionLink("Reservar", "PlatosElegidos", "Cliente", new { @reserva = @Model }, new { @class = "btn btn-default btn-success btn-lg btn-block" })*@
+        <button type="submit" class="btn btn-primary">Reservar</button>
+}
+@if (Model != null && Model.platosElegidos != null && Model.platosElegidos.Count > 0)
+
+{
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Plato</th>
+                <th>Cantidad</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model.platosElegidos)
+                    {
+
+                    <tr class="active">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.nombrePlato)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cantidad)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.total)
+                        </td>
+                    </tr>
+                    }
+
+        </tbody>
+
+    </table>
+            <div>
+                @Html.ActionLink("Confirmar Reserva", "ConfirmaReserva", "Cliente", new { @reservaFinal = Model }, new { @class = "btn btn-default btn-success btn-lg btn-block" })
+            </div>
+            @*<button type="submit" class="btn btn-primary">Reservar</button>*@
+            <p>Cantidad de Comensales: @Html.DisplayFor(model => model.CantidadComensales)</p>
+
+            <p>Horario: @Html.DisplayFor(model => model.hora) :00 horas </p>
+            <h3>Total: $ @Html.DisplayFor(model => model.total)  </h3>
+}
+
+<button onclick="location.href='@Url.Action("Index", "Cliente")';return false;" class="btn btn-danger">Cancelar</button>
+
+    
+@*<a href="<% Response.Write(preference[" response"]["init_point"]); %>">Pagar</a>*@
+

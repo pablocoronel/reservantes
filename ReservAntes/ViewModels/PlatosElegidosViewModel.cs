@@ -11,7 +11,7 @@ namespace ReservAntes.ViewModels
     public class PlatosElegidosViewModel : PlatosElegidos
     {
         //public List<PlatoViewModel> platos { get; set; }
-        public PlatoViewModel plato {get;set;}
+        public string nombrePlato {get;set;}
         public double? total { get; set; }
     }
 }

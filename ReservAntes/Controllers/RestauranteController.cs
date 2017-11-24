@@ -26,7 +26,6 @@ namespace ReservAntes.Controllers
         public ActionResult Index()
 
         {
-
             var IdUsuario = this.Session["usuarioId"];
             int numID = Convert.ToInt32(IdUsuario);
 

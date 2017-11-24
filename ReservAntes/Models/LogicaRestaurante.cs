@@ -24,11 +24,43 @@ namespace ReservAntes.Models
 
             return todosLosRestaurantes;
         }
+
+        public List<Restaurante> GetRestaurantesHabilitados()
+        {
+            List<Restaurante> restaurantesHabilidatos = new List<Restaurante>();
+            restaurantesHabilidatos = ctx.Restaurante.Where(x=>x.Habilitado==true).ToList();
+
+            return restaurantesHabilidatos;
+        }
+        public List<Restaurante> GetRestaurantesNoHabilitados()
+        {
+            List<Restaurante> restaurantesNoHabilidatos = new List<Restaurante>();
+            restaurantesNoHabilidatos = ctx.Restaurante.Where(x => x.Habilitado == false).ToList();
+
+            return restaurantesNoHabilidatos;
+        }
+
+        //Listado de restaurantes
+        //public List<Restaurante> GetRestaurantes()
+        //{
+        //    List<Restaurante> todosLosRestaurantes = new List<Restaurante>();
+        //    todosLosRestaurantes = ctx.Restaurante.Include("Domicilio").ToList();
+
+        //    return todosLosRestaurantes;
+        //}
+
+        //Listado de restaurantes
+        public List<Restaurante> GetRestaurantesByLocalidad(int localidadId)
+        {
+            List<Restaurante> todosLosRestaurantes = new List<Restaurante>();
+            todosLosRestaurantes = ctx.Restaurante.Include("Domicilio").ToList();
+
+            return todosLosRestaurantes;
+        }
         public void ActualizaEstado(bool estado, int restauranteId)
         {
             using (var db = new dbReservantesEntities())
             {
-
                 var restauranteDb = db.Restaurante.SingleOrDefault(x => x.IdRestaurante == restauranteId);
                 restauranteDb.Habilitado = estado;
                 db.SaveChanges();
@@ -141,10 +173,15 @@ namespace ReservAntes.Models
             return ListPlato;
         }
 
+        public Restaurante GetById(int idResto)
+        {
+            return ctx.Restaurante.FirstOrDefault(x => x.IdRestaurante == idResto);
+        }
+
         // -------------------------------------
 
 
-        
+
 
         public Restaurante GetByUserId(int idUsuario)
         {

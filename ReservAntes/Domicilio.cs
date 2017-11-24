@@ -11,7 +11,8 @@ namespace ReservAntes
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Data.Entity.Spatial;
+
     public partial class Domicilio
     {
         public Domicilio()
@@ -26,7 +27,7 @@ namespace ReservAntes
         public Nullable<int> NumeroPiso { get; set; }
         public string NumeroDpto { get; set; }
         public int LocalidadId { get; set; }
-        public System.Data.Spatial.DbGeography Ubicacion { get; set; }
+        public DbGeography Ubicacion { get; set; }
         public Nullable<decimal> Latitud { get; set; }
         public Nullable<decimal> Longitud { get; set; }
     

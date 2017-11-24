@@ -19,6 +19,6 @@ namespace ReservAntes.Extensions
         [Required(ErrorMessage = "Este campo es obligatorio")]
         public string Foto { get; set; }
         [Required(ErrorMessage = "Este campo es obligatorio")]
-        public int MenuId { get; set; }
+        public int RestauranteId { get; set; }
     }
 }

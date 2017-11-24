@@ -1,5 +1,5 @@
 ﻿using System.Globalization;
-using System.Data.Spatial;
+using System.Data.Entity.Spatial;
 
 namespace ReservAntes.Servicios
 

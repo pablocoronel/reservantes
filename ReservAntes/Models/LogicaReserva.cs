@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Services.Description;
 
 namespace ReservAntes.Models
 {
-    public class LogicaReserva
+    public class LogicaReserva 
     {
         dbReservantesEntities ctx = new dbReservantesEntities();
 
@@ -68,6 +69,27 @@ namespace ReservAntes.Models
             {
                 var reservasFiltradas = db.Reserva.Include("EstadoReserva").Include("Restaurante").Where(x => x.ClienteId == cliente).ToList();
                 return reservasFiltradas;
+            }
+        }
+        public void CreateOrUpdate(Reserva reserva)
+        {
+            using (var db = new dbReservantesEntities())
+            {
+
+                db.Reserva.Add(reserva);
+                db.SaveChanges();
+            }
+        }
+        public void CreatePlatos(List<PlatosElegidos> platosElegidos)
+        {
+            using (var db = new dbReservantesEntities())
+            {
+                foreach (var item in platosElegidos)
+                {
+                    db.PlatosElegidos.Add(item);
+
+                }
+                db.SaveChanges();
             }
         }
     }

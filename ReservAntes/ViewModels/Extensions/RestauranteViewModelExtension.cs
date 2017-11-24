@@ -11,17 +11,17 @@ namespace ReservAntes.ViewModels.Extensions
         {
             return new RestauranteViewModel
             {
-                IdRestaurante=value.IdRestaurante,
-                IdUsuario=value.IdUsuario,
-                DatosBancariosId=value.DatosBancariosId,
-                CantidadClientes=value.CantidadClientes,
-                CUIT=value.CUIT,
-                RazonSocial=value.RazonSocial,
-                Habilitado=value.Habilitado,
-                Foto=value.Foto,
-                DomicilioId=value.DomicilioId,
-                NombreComercial=value.NombreComercial,
-                NivelId=value.NivelId
+                IdRestaurante = value.IdRestaurante,
+                IdUsuario = value.IdUsuario,
+                DatosBancariosId = value.DatosBancariosId,
+                CantidadClientes = value.CantidadClientes,
+                CUIT = value.CUIT,
+                RazonSocial = value.RazonSocial,
+                Habilitado = value.Habilitado,
+                Foto = value.Foto,
+                DomicilioId = value.DomicilioId,
+                NombreComercial = value.NombreComercial,
+                NivelId = value.NivelId,
 
             };
         }

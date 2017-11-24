@@ -4,23 +4,23 @@
 
 
     var mapOptions = {
-        center: new google.maps.LatLng(-34.6290089, -58.4071996),
-        zoom: 12,
+        center: new google.maps.LatLng(-34.642850400, -58.565065500),
+        zoom: 16,
         //mapTypeId: google.maps.MapTypeId.G_NORMAL_MAP
     }
 
     var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
 
     var data = [
-        { "Id": 1, "PlaceName": "Casa Rosada Restaurant", "GeoLong": "-34.6080556", "GeoLat": "-58.3702778" },
+        { "Id": 1, "PlaceName": "Gourmet SRL", "GeoLong": "-58.565065500", "GeoLat": "-34.642850400" },
         //{"Id": 2, "PlaceName": "McDonalds", "GeoLong": "-34.6088308783192", "GeoLat": "-58.37559700012207" },
-        { "Id": 3, "PlaceName": "Museo del Jamon", "GeoLong": "-34.6083363769076", "GeoLat": "-58.38213086128235" },
+        { "Id": 3, "PlaceName": "Parrilla", "GeoLong": "-58.5656050006", "GeoLat": "-34.643773400" },
 
     ];
 
     $.each(data, function (i, item) {
         var marker = new google.maps.Marker({
-            'position': new google.maps.LatLng(item.GeoLong, item.GeoLat),
+            'position': new google.maps.LatLng(item.GeoLat, item.GeoLong),
             'map': map,
             'title': item.PlaceName
         });

@@ -7,9 +7,15 @@ namespace ReservAntes.ViewModels
     [MetadataType(typeof(ReservaExtension))]
     public class ReservaViewModel : Reserva
     {
-        public List<EstadoReserva> estadoS { get; set; }
-        public List<Cliente> clientes { get; set; }
-        public List<Restaurante> restaurantes { get; set; }
-        public double total { get; set; }
+        public List<EstadoReserva> estados { get; set; }
+        //public List<Cliente> clientes { get; set; }
+        //public ClienteViewModel cliente { get; set; }
+        public int? hora { get; set; }
+        public List<int> cantidadMaxima { get; set; }
+        public string restauranteNombre { get; set; }
+        public double? total { get; set; }
+        public List<PlatoViewModel> platos { get; set; }
+        public List<PlatosElegidosViewModel> platosElegidos { get; set; }
+
     }
 }
