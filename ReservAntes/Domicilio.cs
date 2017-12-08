@@ -16,7 +16,7 @@ namespace ReservAntes
     public partial class Domicilio
     {
         public Domicilio()
-        {
+        {   
             this.Cliente = new HashSet<Cliente>();
             this.Restaurante = new HashSet<Restaurante>();
         }

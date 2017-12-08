@@ -4,9 +4,10 @@ using System.Linq;
 using System.Web;
 using System.Web.Services.Description;
 
+
 namespace ReservAntes.Models
 {
-    public class LogicaReserva 
+    public class LogicaReserva
     {
         dbReservantesEntities ctx = new dbReservantesEntities();
 
@@ -47,9 +48,9 @@ namespace ReservAntes.Models
 
             List<Reserva> freservas = (from r in ctx.Reserva
                                        where r.RestauranteId == id && r.FechaHoraReserva == fechaFil
-                                       select r).ToList();  
+                                       select r).ToList();
 
-            return freservas; 
+            return freservas;
         }
 
         //Para filtrar por fechas
