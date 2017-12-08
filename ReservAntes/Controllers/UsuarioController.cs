@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ReservAntes.Extensions;
 
 namespace ReservAntes.Controllers
 {
@@ -48,15 +49,19 @@ namespace ReservAntes.Controllers
         public ActionResult CreateUser(Usuario user)
         {
 
-            ViewBag.ListUsuario = LogUs.GetTiposDeUs();
-
             {
                 if (ModelState.IsValid)
-                    
+                {
+                    ViewBag.ListUsuario = LogUs.GetTiposDeUs();
                     this.LogUs.CrearUsuario(user);
+                    return View("../Home/Index");
+                }
+                else { 
+
 
 
                 return View("../Home/Index");
+                }
             }
 
         }
