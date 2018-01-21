@@ -51,6 +51,14 @@ textarea {
     margin-bottom: 0px;
 }
 
+#menuPrincipal a img{
+    max-height: 50px;
+}
+
+#menuPrincipal .navbar-header button {
+    width: 42px;
+    height: 36px;
+}
 
 @media only screen and (max-width: 768px) {
     #menuPrincipal img {
@@ -61,16 +69,20 @@ textarea {
         height: 45px;
     }
 
+    .navbar-default .navbar-toggle {
+        border: 1px solid #FF0000;
+    }
+
     .navbar-default .navbar-toggle .icon-bar {
-        background-color: #FFFFFF;
+        background-color: #FF0000;
     }
 
     .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
         background-color: #FFFFFF;
-        border: 1px solid #FFFFFF;
+        border: 1px solid #FF0000;
     }
     .navbar-default .navbar-toggle .icon-bar:hover {
-        background-color: #FFFFFF;
+        background-color: #FF0000;
     }
 }
 
@@ -119,7 +131,13 @@ footer{
 .slogan {
     font-size: 14px;
     font-family: font-family, 'Oxygen', sans-serif;
-    margin:20px 0 0 20px;
+    margin:20px 0px 0px 0px;
+    height: 15px !important;
+}
+
+.slogan:hover {
+    background-color: transparent !important;
+    color: #000000 !important;
 }
 
 

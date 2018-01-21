@@ -7,27 +7,30 @@
 
 <nav class="navbar navbar-default" id="menuPrincipal">
     <div class="container">
-        <div class="navbar-header col-xs-5 col-sm-offset-1 col-sm-2">
+        <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mibarrita">
-    
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
             </button>
+
             <a href='@Url.Action("Index", "Home")' >
                 <img src="~/Imagenes/Logo.png" alt="Reservantes" class="img-responsive"/>
             </a>
-
           </div>
-        <div class="slogan col-xs-5"><label ><em>"No esperes la comida, la comida te espera a vos"</em></label></div>
 
+        <div class="collapse navbar-collapse" id="mibarrita">
+            <ul class="nav navbar-nav hidden-xs hidden-sm hidden-md">
+                <li class="slogan">
+                    <em>No esperes la comida, la comida te espera a vos</em>
+                </li>
+            </ul>
 
-
-        <div class="collapse navbar-collapse col-xs-12 col-sm-8 pull-right" id="mibarrita">
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav navbar-right">
                 <li>@Html.ActionLink("Home", "Index", "Home")</li>
                 <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li>@*<span class="glyphicon glyphicon-user"></span>*@@Html.ActionLink("Registrarse", "CreateUser", "Usuario")</li>
-                <li>@*<span class="glyphicon glyphicon-log-in"></span>*@@Html.ActionLink("Login", "Login", "Login")</li>
+                <li>@Html.ActionLink("Registrarse", "CreateUser", "Usuario")</li>
+                <li>@Html.ActionLink("Login", "Login", "Login")</li>
             </ul>
         </div>
     </div>
