@@ -40,20 +40,38 @@
     </div>
 </nav>
 <!-- menu de cliente -->
-<div class="navbar navbar-default navbar-static-top">
+<nav class="navbar navbar-default navbar-static-top">
     <div class="container">
         <div class="navbar-header">
-            <div class="navbar-brand">
-                <span class="glyphicon glyphicon-th"></span>
-                <button onclick="location.href='@Url.Action("Index","Cliente")'; return false;" class="btn btn-warning">Inicio</button>
-                <button onclick="location.href='@Url.Action("DetalleCliente","Cliente")'; return false;" class="btn btn-warning">Mi Perfil</button>
-                <button onclick="location.href='@Url.Action("ReservCliente","Cliente")'; return false;" class="btn btn-warning">Mis Reservas</button>
-                <button onclick="location.href='@Url.Action("EditCliente","Cliente")'; return false;" class="btn btn-warning">Editar Perfil</button>
-            </div>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#barraAdministracion">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <label class="hidden-lg hidden-md hidden-sm">Administración</label>
+
+        </div>
+        <div class="collapse navbar-collapse" id="barraAdministracion">
+            <ul class="nav navbar-nav">
+                <li>
+                    <button onclick="location.href='@Url.Action("Index","Cliente")'; return false;" class="btn btn-gris">Inicio</button>
+                </li>
+                <li>
+                    <button onclick="location.href='@Url.Action("DetalleCliente","Cliente")'; return false;" class="btn btn-gris">Mi Perfil</button>
+                </li>
+                <li>
+                    <button onclick="location.href='@Url.Action("ReservCliente","Cliente")'; return false;" class="btn btn-gris">Mis Reservas</button>
+                </li>
+                <li>
+                    <button onclick="location.href='@Url.Action("EditCliente","Cliente")'; return false;" class="btn btn-gris">Editar Perfil</button>
+                </li>
+            </ul>
         </div>
     </div>
+    </nav>
     <br />
-</div>
+
 
 <div class="container alturaMinimaDeSecciones">
     @RenderBody()

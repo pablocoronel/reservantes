@@ -38,20 +38,37 @@
     </div>
 </nav>
 <!-- menu de Restaurante -->
-<div class="navbar navbar-default navbar-static-top">
+<nav class="navbar navbar-default navbar-static-top">
     <div class="container">
         <div class="navbar-header">
-            <div class="navbar-brand">
-                <span class="glyphicon glyphicon-th"></span>
-                <button onclick="location.href='@Url.Action("Index","Restaurante")'; return false;" class="btn btn-warning">Inicio</button>
-                <button onclick="location.href='@Url.Action("RestoPerfil","Restaurante")'; return false;" class="btn btn-warning">Editar mi Restaurante</button>
-                <button onclick="location.href='@Url.Action("ReporteReservas","Reserva")'; return false;" class="btn btn-warning">Reservas</button>
-                <button onclick="location.href='@Url.Action("MiMenu","Restaurante")'; return false;" class="btn btn-warning">Ver mi Menu</button>
-            </div>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#barraAdministracion">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <label class="hidden-lg hidden-md hidden-sm">Administración</label>
+
+        </div>
+        <div class="collapse navbar-collapse" id="barraAdministracion">
+            <ul class="nav navbar-nav">
+                <li>
+                    <button onclick="location.href='@Url.Action("Index","Restaurante")'; return false;" class="btn btn-warning">Inicio</button>
+                </li>
+                <li>
+                    <button onclick="location.href='@Url.Action("RestoPerfil","Restaurante")'; return false;" class="btn btn-warning">Editar mi Restaurante</button>
+                </li>
+                <li>
+                    <button onclick="location.href='@Url.Action("ReporteReservas","Reserva")'; return false;" class="btn btn-warning">Reservas</button>
+                </li>
+                <li>
+                    <button onclick="location.href='@Url.Action("MiMenu","Restaurante")'; return false;" class="btn btn-warning">Ver mi Menu</button>
+                </li>
+            </ul>
         </div>
     </div>
+    </nav>
     <br />
-</div>
 <br />
 
 <div class="container alturaMinimaDeSecciones">

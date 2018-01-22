@@ -196,6 +196,41 @@ footer{
         font-family: 'Raleway';
     }
 
+.btn-gris {
+    background-color: #FFFFFF;
+    border-radius: 0px;
+    border: 1px solid #606060;
+    color: #606060;
+    font-family: 'Raleway';
+}
+
+    .btn-gris:hover, .btn-gris:focus, .btn-gris::selection, .btn-gris:active {
+        background-color: #FFFFFF;
+        border-radius: 0px;
+        border: 1px solid #606060;
+        color: #606060;
+        font-family: 'Raleway';
+    }
+
+
+#barraAdministracion ul li{
+    text-align: center;
+}
+#barraAdministracion button{
+    width: 130px;
+    margin-top: 8px;
+}
+
+.navbar-header label{
+    margin-top: 15px;
+    margin-left: 10px;
+}
+
+@media only screen and (max-width: 768px) {
+    #barraAdministracion button {
+        width: 100%;
+    }
+}
 
 /*MAPA DE HOME*/
 #map {

@@ -37,22 +37,39 @@
         </div>
     </div>
 </nav>
+
 <!-- menu de admin -->
-<div class="navbar navbar-default navbar-static-top">
+<nav class="navbar navbar-default" id="menuPrincipal">
     <div class="container">
         <div class="navbar-header">
-            <div class="navbar-brand">
-                <span class="glyphicon glyphicon-th"></span>
-                <button onclick="location.href='@Url.Action("Index","Admin")'; return false;" class="btn btn-warning">Inicio</button>
-                <button onclick="location.href='@Url.Action("VerRestaurantes","Admin")'; return false;" class="btn btn-warning">Ver Restaurantes</button>
-                <button onclick="location.href='@Url.Action("VerClientes","Admin")'; return false;" class="btn btn-warning">Ver Clientes</button>
-                <button onclick="location.href='@Url.Action("VerUsuarios","Admin")'; return false;" class="btn btn-warning">Ver Usuarios</button>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#barraAdministracion">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
 
-            </div>
+            <label class="hidden-lg hidden-md hidden-sm">Administración</label>
+                        
+        </div>
+        <div class="collapse navbar-collapse" id="barraAdministracion">
+            <ul class="nav navbar-nav">
+                <li>
+                    <button onclick="location.href='@Url.Action("Index","Admin")'; return false;" class="btn btn-rojo">Inicio</button>
+                </li>
+                <li>
+                    <button onclick="location.href='@Url.Action("VerRestaurantes","Admin")'; return false;" class="btn btn-rojo">Ver Restaurantes</button>
+                </li>
+                <li>
+                    <button onclick="location.href='@Url.Action("VerClientes","Admin")'; return false;" class="btn btn-rojo">Ver Clientes</button>
+                </li>
+                <li>
+                    <button onclick="location.href='@Url.Action("VerUsuarios","Admin")'; return false;" class="btn btn-rojo">Ver Usuarios</button>
+                </li>
+            </ul>
         </div>
     </div>
-    <br />
-</div>
+</nav>
+
 <br />
 
 <div class="container alturaMinimaDeSecciones">
