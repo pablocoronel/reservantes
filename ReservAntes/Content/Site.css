@@ -19,6 +19,23 @@ textarea {
 }
 
 /** Layout **/
+label{
+    font-family: 'Raleway';
+    font-size: 16px;
+    color: #000000;
+    font-weight: 500;
+}
+
+input[type="text"], input[type="password"], select{
+    border: 1px solid #808080 !important;
+    border-radius: 0px !important;
+    width: 100%;
+}
+
+.jumbotron {
+    background-color: #ffffff !important;
+}
+
 .alturaMinimaDeSecciones {
     min-height: 500px;
 }
@@ -95,6 +112,12 @@ footer{
     min-height: 70px;
 }
 
+    footer h6 {
+        font-family: 'Raleway';
+        font-size: 14px;
+        color: #FFFFFF;
+    }
+
 /** LOGIN **/
 #contenedorLogin{
     min-height: 500px;
@@ -140,6 +163,38 @@ footer{
     color: #000000 !important;
 }
 
+/** BOTONES **/
+.btn-rojo{
+    background-color: #FFFFFF;
+    border-radius: 0px;
+    border: 1px solid #FF0000;
+    color: #FF0000;
+    font-family: 'Raleway';
+}
+
+    .btn-rojo:hover, .btn-rojo:focus, .btn-rojo::selection, .btn-rojo:active {
+        background-color: #FFFFFF;
+        border-radius: 0px;
+        border: 1px solid #FF0000;
+        color: #FF0000;
+        font-family: 'Raleway';
+    }
+
+.btn-verde {
+    background-color: #FFFFFF;
+    border-radius: 0px;
+    border: 1px solid #006600;
+    color: #006600;
+    font-family: 'Raleway';
+}
+
+    .btn-verde:hover, .btn-verde:focus, .btn-verde::selection, .btn-verde:active {
+        background-color: #FFFFFF;
+        border-radius: 0px;
+        border: 1px solid #006600;
+        color: #006600;
+        font-family: 'Raleway';
+    }
 
 
 /*MAPA DE HOME*/
