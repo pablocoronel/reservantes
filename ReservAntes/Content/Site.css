@@ -176,7 +176,7 @@ footer{
     font-family: 'Raleway';
 }
 
-    .btn-rojo:hover, .btn-rojo:focus, .btn-rojo::selection, .btn-rojo:active {
+    .btn-rojo:hover, .btn-rojo:focus, .btn-rojo::selection, .btn-rojo:active, .btn:link, .btn:visited {
         background-color: #FFFFFF;
         border-radius: 0px;
         border: 1px solid #da1212;
