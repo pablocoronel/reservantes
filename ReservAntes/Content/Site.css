@@ -19,6 +19,10 @@ textarea {
 }
 
 /** Layout **/
+body {
+    background-color: #da1212 !important;
+}
+
 label{
     font-family: 'Raleway';
     font-size: 16px;
@@ -47,16 +51,16 @@ input[type="text"], input[type="password"], select{
     height: 61px;
 }
 
-#mibarrita ul li:hover {
-    background-color: #fa2a2a;
-    color: #fa2a2a;
-}
-#mibarrita ul li a {
-    font-size: 18px;
-    font-family: font-family, 'Oxygen', sans-serif;
-    color: #fa2a2a !important;
-    padding-top: 20px;
-}
+    #mibarrita ul li:hover {
+        background-color: #da1212;
+        color: #da1212;
+    }
+    #mibarrita ul li a {
+        font-size: 18px;
+        font-family: font-family, 'Oxygen', sans-serif;
+        color: #da1212 !important;
+        padding-top: 20px;
+    }
 
     #mibarrita ul li a:hover {
         font-size: 18px;
@@ -87,20 +91,20 @@ input[type="text"], input[type="password"], select{
     }
 
     .navbar-default .navbar-toggle {
-        border: 1px solid #FF0000;
+        border: 1px solid #da1212;
     }
 
-    .navbar-default .navbar-toggle .icon-bar {
-        background-color: #FF0000;
-    }
+        .navbar-default .navbar-toggle .icon-bar {
+            background-color: #da1212;
+        }
 
-    .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
-        background-color: #FFFFFF;
-        border: 1px solid #FF0000;
-    }
-    .navbar-default .navbar-toggle .icon-bar:hover {
-        background-color: #FF0000;
-    }
+        .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+            background-color: #FFFFFF;
+            border: 1px solid #da1212;
+        }
+        .navbar-default .navbar-toggle .icon-bar:hover {
+            background-color: #da1212;
+        }
 }
 
 
@@ -139,15 +143,15 @@ footer{
 
 /** registro **/
 .btn-info {
-    background-color: #fa2a2a;
+    background-color: #da1212;
     color: #FFFFFF;
     border: 1px solid #FFFFFF;
 }
-.btn-info:hover {
-    background-color: #FFFFFF;
-    color: #fa2a2a;
-    border: 1px solid #fa2a2a;
-}
+    .btn-info:hover {
+        background-color: #FFFFFF;
+        color: #da1212;
+        border: 1px solid #da1212;
+    }
 
 
 
@@ -164,19 +168,19 @@ footer{
 }
 
 /** BOTONES **/
-.btn-rojo{
+.btn-rojo {
     background-color: #FFFFFF;
     border-radius: 0px;
-    border: 1px solid #FF0000;
-    color: #FF0000;
+    border: 1px solid #da1212;
+    color: #da1212;
     font-family: 'Raleway';
 }
 
     .btn-rojo:hover, .btn-rojo:focus, .btn-rojo::selection, .btn-rojo:active {
         background-color: #FFFFFF;
         border-radius: 0px;
-        border: 1px solid #FF0000;
-        color: #FF0000;
+        border: 1px solid #da1212;
+        color: #da1212;
         font-family: 'Raleway';
     }
 
