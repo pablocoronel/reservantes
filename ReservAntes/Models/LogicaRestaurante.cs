@@ -195,13 +195,13 @@ namespace ReservAntes.Models
         // -------------------------------------
 
         /* disponibilidad del restaurante */
-        public int CantidadDeComensalesAhora(int idRestaurante)
+        public int VerCantidadDeComensales(int idRestaurante, DateTime fechaHora)
         {
             Reserva reservaDeRestaurante = new Reserva();
             List<Reserva> reservasDelRestaurante = ctx.Reserva.Where(x => x.RestauranteId == idRestaurante).ToList();
 
-            List<Reserva> reservasDeHoy = reservasDelRestaurante.Where(x => x.FechaHoraReserva.Date == DateTime.Now.Date).ToList();
-            List<Reserva> reservasDeEstaHora = reservasDeHoy.Where(x => x.FechaHoraReserva.Hour == DateTime.Now.Hour).ToList();
+            List<Reserva> reservasDeHoy = reservasDelRestaurante.Where(x => x.FechaHoraReserva.Date == fechaHora.Date).ToList();
+            List<Reserva> reservasDeEstaHora = reservasDeHoy.Where(x => x.FechaHoraReserva.Hour == fechaHora.Hour).ToList();
             List<Reserva> reservasAceptadas = reservasDeEstaHora.Where(x => x.EstadoReserva.Descripcion == "Aceptado" || x.EstadoReserva.Descripcion == "Pagado").ToList();
 
             int totalComensalesActuales = 0;

@@ -3,6 +3,7 @@ using ReservAntes.ViewModels;
 using ReservAntes.ViewModels.Extensions;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -31,11 +32,32 @@ namespace ReservAntes.Controllers
 
             List<Reserva> MisReservasResto = LogRsv.GetByUsuarioIdFechaActual(numID);
 
-            //Disponibilidad de lugares libres
-            ViewBag.OcupacionActual = this.AsientosReservadosDelRestaurante();
+            //Disponibilidad ACTUAL de lugares libres
+            ViewBag.OcupacionActual = this.AsientosReservadosDelRestaurante(DateTime.Now);
             ViewBag.CapacidadTotal = this.CapacidadTotalDelRestaurante();
-
+            
             return View(MisReservasResto);
+        }
+
+        [HttpPost]
+        public ActionResult CapacidadPorFecha()
+
+        {
+            //Lugares disponibles por busqueda
+            String[] fechaArray = Request.Form["buscarPorFecha"].Split('-');
+            Int32.TryParse(fechaArray.ElementAt(0), out int anio);
+            Int32.TryParse(fechaArray.ElementAt(1), out int mes);
+            Int32.TryParse(fechaArray.ElementAt(2), out int dia);
+
+            String[] horaArray = Request.Form["buscarPorHora"].Split(':');
+            Int32.TryParse(horaArray.ElementAt(0), out int hora);
+            Int32.TryParse(horaArray.ElementAt(1), out int minuto);
+            
+            DateTime fechaHoraBuscada = new DateTime(anio, mes, dia, hora, minuto, 0);
+
+            TempData["OcupacionPorFecha"] = this.AsientosReservadosDelRestaurante(fechaHoraBuscada);
+
+            return RedirectToAction("Index");
         }
 
         // GET: Restaurante/Details/5
@@ -135,12 +157,12 @@ namespace ReservAntes.Controllers
         // --------------------------------------------------
 
        /* capacidad disponible del restaurante */
-       public int AsientosReservadosDelRestaurante()
+       public int AsientosReservadosDelRestaurante(DateTime fechaHora)
         {
             Int32.TryParse(Session["usuarioId"].ToString(), out int idUsuario);
             Restaurante restaurante = ctx.Restaurante.Where(x => x.IdUsuario == idUsuario).FirstOrDefault();
             
-            return LogRes.CantidadDeComensalesAhora(restaurante.IdRestaurante);
+            return LogRes.VerCantidadDeComensales(restaurante.IdRestaurante, fechaHora);
         }
 
         /* capacidad total del restaurante */
@@ -153,6 +175,8 @@ namespace ReservAntes.Controllers
         }
        
 
+
+        
         // --------------------- Perfil Restoran -------------------------------------------------------------------------------
 
 
