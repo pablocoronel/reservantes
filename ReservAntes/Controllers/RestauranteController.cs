@@ -31,6 +31,10 @@ namespace ReservAntes.Controllers
 
             List<Reserva> MisReservasResto = LogRsv.GetByUsuarioIdFechaActual(numID);
 
+            //Disponibilidad de lugares libres
+            ViewBag.OcupacionActual = this.AsientosReservadosDelRestaurante();
+            ViewBag.CapacidadTotal = this.CapacidadTotalDelRestaurante();
+
             return View(MisReservasResto);
         }
 
@@ -130,6 +134,23 @@ namespace ReservAntes.Controllers
 
         // --------------------------------------------------
 
+       /* capacidad disponible del restaurante */
+       public int AsientosReservadosDelRestaurante()
+        {
+            Int32.TryParse(Session["usuarioId"].ToString(), out int idUsuario);
+            Restaurante restaurante = ctx.Restaurante.Where(x => x.IdUsuario == idUsuario).FirstOrDefault();
+            
+            return LogRes.CantidadDeComensalesAhora(restaurante.IdRestaurante);
+        }
+
+        /* capacidad total del restaurante */
+        public int CapacidadTotalDelRestaurante()
+        {
+            Int32.TryParse(Session["usuarioId"].ToString(), out int idUsuario);
+            Restaurante restaurante = ctx.Restaurante.Where(x => x.IdUsuario == idUsuario).FirstOrDefault();
+
+            return restaurante.CantidadClientes.Value;
+        }
        
 
         // --------------------- Perfil Restoran -------------------------------------------------------------------------------

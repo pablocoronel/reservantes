@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.IO;
 using System.Data;
+using System.Data.Entity;
 
 
 
@@ -192,6 +193,25 @@ namespace ReservAntes.Models
 
 
         // -------------------------------------
+
+        /* disponibilidad del restaurante */
+        public int CantidadDeComensalesAhora(int idRestaurante)
+        {
+            Reserva reservaDeRestaurante = new Reserva();
+            List<Reserva> reservasDelRestaurante = ctx.Reserva.Where(x => x.RestauranteId == idRestaurante).ToList();
+
+            List<Reserva> reservasDeHoy = reservasDelRestaurante.Where(x => x.FechaHoraReserva.Date == DateTime.Now.Date).ToList();
+            List<Reserva> reservasDeEstaHora = reservasDeHoy.Where(x => x.FechaHoraReserva.Hour == DateTime.Now.Hour).ToList();
+            List<Reserva> reservasAceptadas = reservasDeEstaHora.Where(x => x.EstadoReserva.Descripcion == "Aceptado" || x.EstadoReserva.Descripcion == "Pagado").ToList();
+
+            int totalComensalesActuales = 0;
+            foreach (Reserva reserva in reservasAceptadas)
+            {
+                totalComensalesActuales = totalComensalesActuales + reserva.CantidadComensales.Value;
+            }
+            
+            return totalComensalesActuales;
+        }
 
     }
 }

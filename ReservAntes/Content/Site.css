@@ -223,6 +223,7 @@ footer{
 #barraAdministracion button{
     width: 130px;
     margin-top: 8px;
+    margin-right: 10px;
 }
 
 .navbar-header label{
@@ -233,7 +234,24 @@ footer{
 @media only screen and (max-width: 768px) {
     #barraAdministracion button {
         width: 100%;
+        margin-right: 0px;
     }
+}
+
+
+/* Grafico de ocupacion del restaurante */
+.sillaOcupada{
+    height: 15px;
+    background-color: #da1212;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.sillaLibre {
+    height: 15px;
+    background-color: darkgreen;
+    margin-right: 5px;
+    margin-bottom: 5px;
 }
 
 /*MAPA DE HOME*/
