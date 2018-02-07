@@ -253,5 +253,10 @@ namespace ReservAntes.Controllers
 
 
         }
+
+        public ActionResult ReservaCliente()
+        {
+            return View();
+        }
     }
 }

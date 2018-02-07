@@ -61,10 +61,10 @@
                     <button onclick="location.href='@Url.Action("DetalleCliente","Cliente")'; return false;" class="btn btn-gris">Mi Perfil</button>
                 </li>
                 <li>
-                    <button onclick="location.href='@Url.Action("ReservCliente","Cliente")'; return false;" class="btn btn-gris">Mis Reservas</button>
+                    <button onclick="location.href='@Url.Action("ReservaCliente","Cliente")'; return false;" class="btn btn-gris">Mis Reservas</button>
                 </li>
                 <li>
-                    <button onclick="location.href='@Url.Action("EditCliente","Cliente")'; return false;" class="btn btn-gris">Editar Perfil</button>
+                    <button onclick="location.href='@Url.Action("EditCliente","Cliente", new { id = Session["usuarioId"]})'; return false;" class="btn btn-gris">Editar Perfil</button>
                 </li>
             </ul>
         </div>
