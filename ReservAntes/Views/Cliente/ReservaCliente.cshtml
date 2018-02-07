@@ -1,10 +1,43 @@
-﻿@{
-    Layout = "~/Views/Shared/_LayoutCliente.cshtml";
-}
+﻿@using System.Globalization
+@model List<Reserva>
 @{
+    Layout = "~/Views/Shared/_LayoutCliente.cshtml";
+
     ViewBag.Title = "ReservaCliente";
 }
 
-<h2>ReservaCliente</h2>
+<h2>Mis reservas</h2>
 
-d
+@foreach (Reserva reserva in Model)
+{
+    <div class="thumbnail">
+        <div class="row">
+            <div class="col-xs-12 col-sm-3">
+                Fecha y hora
+            </div>
+            <div class="col-xs-12 col-sm-3">
+                Restaurante
+            </div>
+            <div class="col-xs-12 col-sm-3">
+                Código
+            </div>
+            <div class="col-xs-12 col-sm-3">
+                Comensales
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-3">
+                @reserva.FechaHoraReserva.ToLongDateString() a las @reserva.FechaHoraReserva.ToShortTimeString()
+            </div>
+            <div class="col-xs-12 col-sm-3">
+                @reserva.Restaurante.NombreComercial
+            </div>
+            <div class="col-xs-12 col-sm-3">
+                @reserva.CodigoReserva
+            </div>
+            <div class="col-xs-12 col-sm-3">
+                @reserva.CantidadComensales
+            </div>
+        </div>
+    </div>
+}

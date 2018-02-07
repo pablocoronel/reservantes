@@ -256,7 +256,11 @@ namespace ReservAntes.Controllers
 
         public ActionResult ReservaCliente()
         {
-            return View();
+            Int32.TryParse(Session["usuarioId"].ToString(), out int usuarioId);
+
+            List<Reserva> reservas = LogCliente.GetReservasDelCliente(usuarioId);
+
+            return View(reservas);
         }
     }
 }
