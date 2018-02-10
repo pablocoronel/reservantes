@@ -10,13 +10,14 @@
 
 
     <div class="thumbnail table-responsive">
-        <table class="table-bordered table-striped">
+        <table class="table-bordered table-striped table-condensed" style="width: 100%;">
             <thead>
                 <tr>
-                    <th>Fecha y hora</th>
                     <th>Restaurante</th>
+                    <th>Fecha y hora</th>
                     <th>Código</th>
                     <th>Comensales</th>
+                    <th>Observaciones</th>
                 </tr>
             </thead>
 
@@ -25,16 +26,19 @@
                 {
                 <tr>
                     <td>
-                        @reserva.FechaHoraReserva.ToLongDateString() a las @reserva.FechaHoraReserva.ToShortTimeString()
+                        @reserva.Restaurante.NombreComercial
                     </td>
                     <td>
-                        @reserva.Restaurante.NombreComercial
+                        @reserva.FechaHoraReserva.ToLongDateString() a las @reserva.FechaHoraReserva.ToShortTimeString()
                     </td>
                     <td>
                         @reserva.CodigoReserva
                     </td>
                     <td>
                         @reserva.CantidadComensales
+                    </td>
+                    <td>
+                        @reserva.Observaciones
                     </td>
                 </tr>
                 }
