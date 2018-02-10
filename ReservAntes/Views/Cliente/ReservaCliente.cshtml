@@ -8,36 +8,36 @@
 
 <h2>Mis reservas</h2>
 
-@foreach (Reserva reserva in Model)
-{
-    <div class="thumbnail">
-        <div class="row">
-            <div class="col-xs-12 col-sm-3">
-                Fecha y hora
-            </div>
-            <div class="col-xs-12 col-sm-3">
-                Restaurante
-            </div>
-            <div class="col-xs-12 col-sm-3">
-                Código
-            </div>
-            <div class="col-xs-12 col-sm-3">
-                Comensales
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 col-sm-3">
-                @reserva.FechaHoraReserva.ToLongDateString() a las @reserva.FechaHoraReserva.ToShortTimeString()
-            </div>
-            <div class="col-xs-12 col-sm-3">
-                @reserva.Restaurante.NombreComercial
-            </div>
-            <div class="col-xs-12 col-sm-3">
-                @reserva.CodigoReserva
-            </div>
-            <div class="col-xs-12 col-sm-3">
-                @reserva.CantidadComensales
-            </div>
-        </div>
+
+    <div class="thumbnail table-responsive">
+        <table class="table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Fecha y hora</th>
+                    <th>Restaurante</th>
+                    <th>Código</th>
+                    <th>Comensales</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (Reserva reserva in Model)
+                {
+                <tr>
+                    <td>
+                        @reserva.FechaHoraReserva.ToLongDateString() a las @reserva.FechaHoraReserva.ToShortTimeString()
+                    </td>
+                    <td>
+                        @reserva.Restaurante.NombreComercial
+                    </td>
+                    <td>
+                        @reserva.CodigoReserva
+                    </td>
+                    <td>
+                        @reserva.CantidadComensales
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
     </div>
-}
