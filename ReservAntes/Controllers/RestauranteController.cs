@@ -133,31 +133,101 @@ namespace ReservAntes.Controllers
         }
 
 
-        // --------------------- CREAR PLATO -----------------------------
+        // --------------------- PLATO -----------------------------
 
+        //crear
         public ActionResult CreatePlato()
         {
+            if (Session["usuarioId"] != null)
+            {
+                Int32.TryParse(Session["usuarioId"].ToString(), out int usuarioId);
+                Restaurante restaurante = LogRes.GetByUserId(usuarioId);
+                ViewBag.idResto = restaurante.IdRestaurante;
+            }
+            
+
             return View();
         }
 
         [HttpPost]
-        public ActionResult CreatePlato(Plato id, HttpPostedFile imagen)
+        public ActionResult CreatePlato(Plato plato)
         {
+            //if (ModelState.IsValid)
+
+            bool resultado = this.LogRes.CrearPlato(plato);
+
+            ViewBag.Guardado = resultado;
+            return View();
+        }
+
+        //listado de platos
+        public ActionResult MiMenu()
+        {
+            List<Plato> platos = new List<Plato>();
+            if (Session["usuarioId"] != null)
             {
-                if (ModelState.IsValid)
+                Int32.TryParse(Session["usuarioId"].ToString(), out int idUsuario);
 
-                    this.LogRes.CrearPlato(id);
+                Restaurante restaurante = LogRes.GetByUserId(idUsuario);
 
-
-                return View("Index");
+                platos = LogRes.GetPlato(restaurante.IdRestaurante);
             }
 
+           /* if (ViewData["ResultadoEliminarPlato"] != null)
+            {
+                ViewData["ResultadoEliminarPlato"] = "si";
+            }
+            */
+
+            return View(platos);
+        }
+
+        //borrar platos
+        [HttpGet]
+        public ActionResult EliminarPlato(int idPlato)
+        {
+            bool resultado = LogRes.EliminarPlato(idPlato);
+
+            if (resultado)
+            {
+                TempData["ResultadoEliminarPlato"] = "si";
+            }
+
+
+            return RedirectToAction("MiMenu");
+        }
+
+
+        //editar platos
+        [HttpGet]
+        public ActionResult EditarPlato(int idPlato)
+        {
+            Plato plato = ctx.Plato.Find(idPlato);
+
+            return View(plato);
+        }
+
+        
+        [HttpPost]
+        public ActionResult EditarPlato(Plato plato)
+        {
+            //if (ModelState.IsValid)
+            //{
+                bool resultado = LogRes.EditarPlato(plato);
+
+                if (resultado)
+                {
+                    ViewBag.Guardado = true;
+                }
+            //}
+
+            return View();
         }
 
         // --------------------------------------------------
 
-       /* capacidad disponible del restaurante */
-       public int AsientosReservadosDelRestaurante(DateTime fechaHora)
+        /* capacidad disponible del restaurante */
+        public int AsientosReservadosDelRestaurante(DateTime fechaHora)
         {
             Int32.TryParse(Session["usuarioId"].ToString(), out int idUsuario);
             Restaurante restaurante = ctx.Restaurante.Where(x => x.IdUsuario == idUsuario).FirstOrDefault();

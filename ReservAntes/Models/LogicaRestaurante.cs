@@ -116,15 +116,16 @@ namespace ReservAntes.Models
         }
 
 
-      
+        // ----------------- Platos ---------------------
 
-        public void CrearPlato(Plato plate)
+        public bool CrearPlato(Plato plate)
         {
 
-            //Plato NewPlato = new Plato();
-            //NewPlato.NombrePlato = plate.NombrePlato;
-            //NewPlato.NombrePlato = plate.Descripcion;
-            //NewPlato.Precio = plate.Precio;
+            Plato NewPlato = new Plato();
+            NewPlato.NombrePlato = plate.NombrePlato;
+            NewPlato.Descripcion = plate.Descripcion;
+            NewPlato.Precio = plate.Precio;
+            NewPlato.RestauranteId = plate.RestauranteId;
 
 
             //// IMAGEN
@@ -156,15 +157,23 @@ namespace ReservAntes.Models
             //    // -------------------------------------------
 
 
-            //    ctx.Plato.Add(NewPlato);
-            //    ctx.SaveChanges();
+               ctx.Plato.Add(NewPlato);
+               int filasAfectadas = ctx.SaveChanges();
+
+            bool resultado = false;
+            if (filasAfectadas == 1)
+            {
+                resultado = true;
+            }
+
+            return resultado;
             //}
 
         }
 
-        // ----------------- Platos ---------------------
+        
 
-
+        //Lista de todos los platos del restaurante
         public List<Plato> GetPlato(int idResto)
         {
             List<Plato> ListPlato = (from m in ctx.Plato
@@ -173,7 +182,44 @@ namespace ReservAntes.Models
 
             return ListPlato;
         }
+        
+        public bool EliminarPlato(int idPlato)
+        {
+            bool resultado = false;
+            Plato plato = ctx.Plato.Find(idPlato);
 
+            ctx.Plato.Remove(plato);
+            int filasAfectadas = ctx.SaveChanges();
+
+            if (filasAfectadas == 1)
+            {
+                resultado = true;
+            }
+
+            return resultado;
+        }
+
+        //Editar plato
+        public bool EditarPlato(Plato plato)
+        {
+            bool resultado = false;
+            Plato platoEditable = ctx.Plato.Find(plato.Id);
+
+            platoEditable.NombrePlato = plato.NombrePlato;
+            platoEditable.Precio = plato.Precio;
+            platoEditable.Descripcion = plato.Descripcion;
+
+            int filasAfectadas = ctx.SaveChanges();
+
+            if (filasAfectadas == 1)
+            {
+                resultado = true;
+            }
+
+            return resultado;
+        }
+
+        //retorna restaurante por su id
         public Restaurante GetById(int idResto)
         {
             return ctx.Restaurante.FirstOrDefault(x => x.IdRestaurante == idResto);
@@ -183,7 +229,7 @@ namespace ReservAntes.Models
 
 
 
-
+        // retorna restaurante por el id de usuario
         public Restaurante GetByUserId(int idUsuario)
         {
             return ctx.Restaurante.FirstOrDefault(x => x.IdUsuario == idUsuario);
