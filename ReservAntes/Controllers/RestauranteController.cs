@@ -150,7 +150,7 @@ namespace ReservAntes.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreatePlato(Plato plato)
+        public ActionResult CreatePlato(PlatoViewModel plato)
         {
             //if (ModelState.IsValid)
 
