@@ -1,0 +1,54 @@
+﻿@model Plato
+@{
+    ViewBag.Title = "EditarPlato";
+    Layout = "~/Views/Shared/_LayoutRestaurante.cshtml";
+}
+
+<h2>EditarPlato</h2>
+
+<div class="jumbotron">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            @{
+                if (ViewBag.Guardado != null && ViewBag.Guardado == true)
+                {
+                    <div class="alert alert-success">
+                        Plato editado correctamente
+                    </div>
+                }
+            }
+        </div>
+    </div>
+    <div class="row">
+        @using (Html.BeginForm("EditarPlato", "Restaurante", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+            @Html.ValidationSummary(true)
+            <div class="form-group col-md-4 col-md-offset-4">
+                @Html.HiddenFor(p => p.Id)
+                <div class="form-group">
+                    <label>Nombre del Plato:</label>
+                    @Html.TextBoxFor(p => p.NombrePlato, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(p => p.NombrePlato, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <label>Descripcion:</label>
+                    @Html.TextAreaFor(p => p.Descripcion, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(p => p.Descripcion, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    <label>Precio:</label>
+                    @Html.TextBoxFor(p => p.Precio, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(p => p.Precio, "", new { @class = "text-danger" })
+                </div>
+                @*     <div class="form-group">
+                        <label>Foto:</label>
+                        @Html.TextBoxFor(Model => Model.Foto, new { type = "file" })
+
+                    </div>*@
+                <div><input type="submit" value="Guardar cambios" class="btn btn-info" /></div>
+            </div>
+
+        }
+    </div>
+</div>
