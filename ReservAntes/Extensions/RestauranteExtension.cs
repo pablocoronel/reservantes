@@ -9,7 +9,6 @@ namespace ReservAntes.Extensions
     public class RestauranteExtension
     {
         public int IdRestaurante { get; set; }
-        [Required(ErrorMessage = "Este campo es obligatorio")]
         public int IdUsuario { get; set; }
         [Required(ErrorMessage = "Este campo es obligatorio")]
         [StringLength(50)]

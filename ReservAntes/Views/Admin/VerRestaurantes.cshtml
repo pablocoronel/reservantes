@@ -17,16 +17,16 @@
             @foreach (var resto in Model)
             {
                 String estado = "";
-                if (resto.Estado == 1) {
+                if (resto.Habilitado) {
                     estado = "Habilitado";
                 } else {
                     estado = "NO habilitado";
                 }
 
                 <tr>
-                    <td>@resto.ClienteId</td>
+                    <td>@resto.NombreComercial</td>
                     <td>@estado</td>
-                    <td><a href="@Url.Action("HabilitarRestaurante","Admin", new { idResto = resto.Id })" class="btn btn-success">Habilitar</a></td>
+                    <td><a href="@Url.Action("HabilitarRestaurante","Admin", new { idResto = resto.IdRestaurante })" class="btn btn-success">Habilitar</a></td>
                 </tr>
             }
         </tbody>

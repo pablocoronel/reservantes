@@ -15,39 +15,42 @@
 
             @using (Html.BeginForm("RestoPerfil", "Restaurante"))
             {
-                @Html.HiddenFor(Model => Model.IdRestaurante);
+                @*@Html.HttpMethodOverride(HttpVerbs.Put)*@
 
-                <div class="form-group">
-                   <label>Razon Social:</label>
-                    @Html.TextBoxFor(Model => Model.RazonSocial, new { @class = "form-control" })  
-                    @Html.ValidationMessageFor(p => p.RazonSocial, "", new { @class = "text-danger" })
+        @*@Html.HiddenFor(Model => Model.IdRestaurante);*@
 
-
-                </div>
-                <div class="form-group">
-                    <label>Nombre Comercial:</label>
-                    @Html.TextBoxFor(Model => Model.NombreComercial, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(p => p.NombreComercial, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <label>Razon Social:</label>
+                @Html.TextBoxFor(x => x.RazonSocial, new { @class = "form-control" })
+                @Html.ValidationMessageFor(p => p.RazonSocial, "", new { @class = "text-danger" })
 
 
-                </div>
-                <div class="form-group">
-                    <label>CUIT:</label>
-                    @Html.TextBoxFor(Model => Model.CUIT, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(p => p.CUIT, "", new { @class = "text-danger" })
 
-                </div>
+            </div>
+        <div class="form-group">
+            <label>Nombre Comercial:</label>
+            @Html.TextBoxFor(Model => Model.NombreComercial, new { @class = "form-control" })
+            @Html.ValidationMessageFor(p => p.NombreComercial, "", new { @class = "text-danger" })
 
-                <div class="form-group">
-                    <label>Cantidad máxima de clientes:</label>
-                    @Html.TextBoxFor(Model => Model.CantidadClientes, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(p => p.CantidadClientes, "", new { @class = "text-danger" })
 
-                </div>
+        </div>
+        <div class="form-group">
+            <label>CUIT:</label>
+            @Html.TextBoxFor(Model => Model.CUIT, new { @class = "form-control" })
+            @Html.ValidationMessageFor(p => p.CUIT, "", new { @class = "text-danger" })
 
-                    <button type="submit" class="btn btn-primary">Ingresar</button>
-                    <button onclick="location.href='@Url.Action("Index", "Restaurante")';return false;" class="btn btn-danger">Cancelar</button>
-            }
+        </div>
+
+        <div class="form-group">
+            <label>Cantidad máxima de clientes:</label>
+            @Html.TextBoxFor(Model => Model.CantidadClientes, new { @class = "form-control" })
+            @Html.ValidationMessageFor(p => p.CantidadClientes, "", new { @class = "text-danger" })
+
+        </div>
+
+        <button type="submit" class="btn btn-primary">Ingresar</button>
+        <button onclick="location.href='@Url.Action("Domicilio", "Restaurante")';return false;" class="btn btn-success">Siguiente</button>
+}
         </div>
     </div>
 </div>
