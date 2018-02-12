@@ -94,8 +94,8 @@ namespace ReservAntes.Models
                     var restauranteDb = db.Restaurante.SingleOrDefault(x => x.IdRestaurante == restaurante.IdRestaurante);
 
                     restauranteDb.CantidadClientes = restaurante.CantidadClientes;
-                    restaurante.RazonSocial = restaurante.RazonSocial;
-                    restaurante.CUIT = restaurante.CUIT;
+                    restauranteDb.RazonSocial = restaurante.RazonSocial;
+                    restauranteDb.CUIT = restaurante.CUIT;
                 }
                 else
                 {
