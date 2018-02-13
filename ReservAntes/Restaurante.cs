@@ -7,7 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-
 namespace ReservAntes
 {
     using System;
@@ -20,7 +19,7 @@ namespace ReservAntes
         {
             this.Plato = new HashSet<Plato>();
             this.Reserva = new HashSet<Reserva>();
-        }
+            }
     
         public int IdRestaurante { get; set; }
         public int IdUsuario { get; set; }

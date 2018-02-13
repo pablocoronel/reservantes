@@ -7,6 +7,7 @@ using System.IO;
 using System.Data;
 using System.Data.Entity;
 using ReservAntes.ViewModels;
+using ReservAntes.Extensions;
 
 namespace ReservAntes.Models
 {
@@ -28,7 +29,7 @@ namespace ReservAntes.Models
         public List<Restaurante> GetRestaurantesHabilitados()
         {
             List<Restaurante> restaurantesHabilidatos = new List<Restaurante>();
-            restaurantesHabilidatos = ctx.Restaurante.Where(x=>x.Habilitado==true).ToList();
+            restaurantesHabilidatos = ctx.Restaurante.Where(x => x.Habilitado == true).ToList();
 
             return restaurantesHabilidatos;
         }
@@ -74,6 +75,7 @@ namespace ReservAntes.Models
                 db.SaveChanges();
             }
         }
+
         public void ActualizaDatosBancarios(int datosBancariosId, int restauranteId)
         {
             using (var db = new dbReservantesEntities())
@@ -83,7 +85,8 @@ namespace ReservAntes.Models
                 db.SaveChanges();
             }
         }
-        public void CreateOrUpdate(Restaurante restaurante)
+
+        public void CreateOrUpdate(RestauranteExtension restaurante)
         {
             using (var db = new dbReservantesEntities())
             {
@@ -91,16 +94,38 @@ namespace ReservAntes.Models
                 {
                     var restauranteDb = db.Restaurante.SingleOrDefault(x => x.IdRestaurante == restaurante.IdRestaurante);
 
+                    restauranteDb.NombreComercial = restaurante.NombreComercial;
                     restauranteDb.CantidadClientes = restaurante.CantidadClientes;
-                    restaurante.CUIT = restaurante.CUIT;
                     restauranteDb.CUIT = restaurante.CUIT;
-                }
-                else
-                {
-                    db.Restaurante.Add(restaurante);
-                }
 
-                db.SaveChanges();
+                    HttpPostedFileBase foto = restaurante.Foto;
+                    HttpPostedFileBase constAFIP = restaurante.ConstAFIP;
+
+                    if (foto != null && foto.ContentLength > 0 && constAFIP != null && constAFIP.ContentLength > 0)
+
+                    {
+                        var fileName = Path.GetFileName(foto.FileName);
+
+
+                        using (MemoryStream ms = new MemoryStream())
+                        {
+                            foto.InputStream.CopyTo(ms);
+                            byte[] array = ms.GetBuffer();
+
+                            restauranteDb.NombreComercial = restaurante.NombreComercial;
+                            restauranteDb.Foto = array;
+                            restauranteDb.ConstAFIP = array;
+
+
+                        }
+                    }
+                    else
+                    {
+                        db.Restaurante.Add(restauranteDb);
+                    }
+
+                    db.SaveChanges();
+                }
             }
         }
         //Habilitar el restaurante

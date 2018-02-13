@@ -5,7 +5,7 @@
         Layout = "~/Views/Shared/_LayoutHome.cshtml";
 
     }
-    <body>
+
         <div class="row">
 
             @if (Session["usuarioTipo"] != null)
@@ -63,7 +63,7 @@
 
     var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
 
-    $.get("@Url.Action("GetAllLocation", "Home")", function (data) {
+      $.get("@Url.Action("GetAllLocation", "Home")", function (data) {
         var marker = [];
         var contents = [];
         var infowindows = [];
@@ -155,4 +155,4 @@
 
 }
         </script>
-    </body>
+  

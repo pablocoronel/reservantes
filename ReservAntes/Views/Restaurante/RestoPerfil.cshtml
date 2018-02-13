@@ -4,46 +4,138 @@
     ViewBag.Title = "RestoPerfil";
     Layout = "~/Views/Shared/_LayoutRestaurante.cshtml";
 }
-
-<h4> Para poder completar el registro debe llenar los siguientes campos:</h4>
-
-<h2>Perfil del Restaurante</h2>
 <div class="jumbotron">
+
+    <h4> Para poder completar el registro debe llenar los siguientes campos:</h4>
+
+    <hr />
+
     <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-6">
+        <div class="col-md-1"></div>
+        <div class="col-md-11">
 
             @using (Html.BeginForm("RestoPerfil", "Restaurante"))
-            {
-                @*@Html.HttpMethodOverride(HttpVerbs.Put)*@
+    {
+        @*@Html.HttpMethodOverride(HttpVerbs.Put)*@
 
         @*@Html.HiddenFor(Model => Model.IdRestaurante);*@
 
-            
+
         <div class="form-group">
-            <label>Nombre Comercial:</label>
+            <label><b>Nombre Comercial:</b></label>
             @Html.TextBoxFor(Model => Model.NombreComercial, new { @class = "form-control" })
             @Html.ValidationMessageFor(p => p.NombreComercial, "", new { @class = "text-danger" })
 
 
         </div>
         <div class="form-group">
-            <label>CUIT:</label>
+            <label><b>CUIT:</b></label>
             @Html.TextBoxFor(Model => Model.CUIT, new { @class = "form-control" })
             @Html.ValidationMessageFor(p => p.CUIT, "", new { @class = "text-danger" })
 
         </div>
 
         <div class="form-group">
-            <label>Cantidad máxima de clientes:</label>
+            <label><b>Cantidad máxima de clientes:</b></label>
             @Html.TextBoxFor(Model => Model.CantidadClientes, new { @class = "form-control" })
             @Html.ValidationMessageFor(p => p.CantidadClientes, "", new { @class = "text-danger" })
 
         </div>
+        <div class="form-group">
+            <label><b>Foto:</b></label>
+            @Html.TextBoxFor(Model => Model.Foto, new { type = "file" })
+            @Html.ValidationMessageFor(p => p.Foto, "", new { @class = "text-danger" })
+
+        </div>
+        <div class="form-group">
+            <label><b>Constancia de inscripcion a la AFIP:</b></label>
+            @Html.TextBoxFor(Model => Model.ConstAFIP, new { type = "file" })
+            @Html.ValidationMessageFor(p => p.ConstAFIP, "", new { @class = "text-danger" })
+
+        </div>
+
+        <style>
+            #map-canvas {
+                width: 300px;
+                height: 350px;
+                background-color: grey;
+                border: solid 1px;
+            }
+        </style>
+
+        <div style="width:320px; margin:-350px 0 0 500px;">
+            <div> Direccion : @Html.TextBox("direccion", "", new { @class = "form-control" }) </div>
+            <br />
+            <div> Coordenadas : @Html.TextBox("coordenadas", "", new { @class = "form-control" }) </div>
+            <br />
+            <span id="geocoding"></span>
+            <div id="map-canvas"></div>
+
+        </div>
+        <p></p>
+        }
+    
 
         <button type="submit" class="btn btn-primary">Ingresar</button>
-        <button onclick="location.href='@Url.Action("Domicilio", "Restaurante")';return false;" class="btn btn-success">Siguiente</button>
-}
+        <button onclick="location.href='@Url.Action("DatosBancarios", "Restaurante")';return false;" class="btn btn-success pull-right">Siguiente</button>
+
         </div>
     </div>
 </div>
+
+
+<script>
+    var map;
+    var geocoder;
+    var infoWindow;
+    var marker;
+
+    function iniciarNuevo() {
+
+        var latLng = new google.maps.LatLng(-34.642850400, -58.565065500);
+        var mapOptions = {
+            center: new google.maps.LatLng(-34.642850400, -58.565065500),
+            zoom: 15,
+            mapTypeId: google.maps.MapTypeId.G_NORMAL_MAP
+        };
+        var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+        geocoder = new google.maps.Geocoder();
+        infowindow = new google.maps.InfoWindow();
+
+        google.maps.event.addListener(map, 'click', function (event) {
+            geocoder.geocode(
+                { 'latLng': event.latLng },
+                function (results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        if (results[0]) {
+                            document.getElementById('direccion').value = results[0].formatted_address;
+                            document.getElementById('coordenadas').value = results[0].geometry.location;
+                            if (marker) {
+                                marker.setPosition(event.latLng);
+                            } else {
+                                marker = new google.maps.Marker({
+                                    position: event.latLng,
+                                    map: map
+                                });
+                            }
+                            infowindow.setContent(results[0].formatted_address + '<br/> Coordenadas: ' + results[0].geometry.location);
+                            infowindow.open(map, marker);
+                        } else {
+                            document.getElementById('geocoding').innerHTML =
+                                'No se encontraron resultados';
+                        }
+                    } else {
+                        document.getElementById('geocoding').innerHTML =
+                            'Geocodificación  ha fallado debido a: ' + status;
+                    }
+                });
+        });
+
+    }
+
+
+
+
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAptrGun-vHjygAsSermQUGiDvxOGQ_qJ8&libraries=places&callback=iniciarNuevo" async defer></script>
