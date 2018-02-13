@@ -16,8 +16,9 @@ namespace ReservAntes.Controllers
     public class HomeController : Controller
     {
         dbReservantesEntities ctx = new dbReservantesEntities();
+        ReservAntes.Models.LogicaRestaurante LogiRes = new ReservAntes.Models.LogicaRestaurante();
         
-        
+
          public ActionResult Index()
         {
                     
@@ -49,7 +50,7 @@ namespace ReservAntes.Controllers
 
         public JsonResult GetAllLocation()
         {
-            var data = ctx.Restaurante.ToList();
+            var data = this.LogiRes.GetRestaurantes();
             return Json(data, JsonRequestBehavior.AllowGet);
 
         }
