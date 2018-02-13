@@ -247,8 +247,6 @@ namespace ReservAntes.Controllers
 
         public ActionResult RestoPerfil()
         {
-            
-            return View("Index");
             var IdUsuario = Session["usuarioId"];
             var restauranteNuevo = new RestauranteViewModel();
             var restaurante = LogRes.GetByUserId(Convert.ToInt32(IdUsuario));
