@@ -29,28 +29,35 @@ namespace ReservAntes.Controllers
 
             if (existeUsuario != null)
             {
-                Session["usuarioId"] = existeUsuario.Id;
-                Session["usuarioTipo"] = existeUsuario.TipoUsuarioId;
-                Session["usuarioNombre"] = existeUsuario.Username;
-                switch (Convert.ToInt32(Session["usuarioTipo"]))
-           
-                //switch (Session["usuarioTipo"]) da error
+                if (existeUsuario.Activo == true)
                 {
-                    case 1:
-                        Response.Redirect("../Admin/Index");
-                        break;
-                    case 2:
-                        Response.Redirect("../Cliente/Index");
-                        break;
-                    case 3:
-                        Response.Redirect("../Restaurante/Index");
-                        break;
+                    Session["usuarioId"] = existeUsuario.Id;
+                    Session["usuarioTipo"] = existeUsuario.TipoUsuarioId;
+                    Session["usuarioNombre"] = existeUsuario.Username;
 
-                    default:
-                        Response.Redirect("../Home/Index");
-                        break;
+                    switch (Convert.ToInt32(Session["usuarioTipo"]))
+                    {
+                        case 1:
+                            Response.Redirect("../Admin/Index");
+                            break;
+                        case 2:
+                            Response.Redirect("../Cliente/Index");
+                            break;
+                        case 3:
+                            Response.Redirect("../Restaurante/Index");
+                            break;
+
+                        default:
+                            Response.Redirect("../Home/Index");
+                            break;
+                    }
+
                 }
-
+                else
+                {
+                    //usuario deshabilitado
+                    ViewBag.UsuarioDeshabilitado = true;
+                }
 
             }
             else

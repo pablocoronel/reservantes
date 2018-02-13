@@ -21,6 +21,11 @@ namespace ReservAntes.ViewModels.Extensions
                 NombreComercial = value.NombreComercial,
                 NivelId = value.NivelId,
 
+                Latitud = value.Latitud,
+                Longitud = value.Longitud,
+                ConstAFIP = value.ConstAFIP,
+                Domicilio = value.Domicilio
+                
             };
         }
         public static Restaurante Map(this RestauranteViewModel model, Restaurante entity = null)
