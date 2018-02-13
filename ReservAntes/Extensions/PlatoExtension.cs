@@ -24,5 +24,7 @@ namespace ReservAntes.Extensions
 
         [Required(ErrorMessage = "Este campo es obligatorio")]
         public int RestauranteId { get; set; }
+
+        public bool Activo { get; set; }
     }
 }
