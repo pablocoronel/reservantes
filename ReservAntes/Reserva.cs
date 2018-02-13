@@ -14,6 +14,12 @@ namespace ReservAntes
     
     public partial class Reserva
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Reserva()
+        {
+            this.PlatosElegidos = new HashSet<PlatosElegidos>();
+        }
+    
         public int Id { get; set; }
         public int ClienteId { get; set; }
         public int RestauranteId { get; set; }
@@ -28,7 +34,8 @@ namespace ReservAntes
         public virtual Cliente Cliente { get; set; }
         public virtual EstadoReserva EstadoReserva { get; set; }
         public virtual MedioPago MedioPago { get; set; }
-        public virtual PlatosElegidos PlatosElegidos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PlatosElegidos> PlatosElegidos { get; set; }
         public virtual Restaurante Restaurante { get; set; }
     }
 }

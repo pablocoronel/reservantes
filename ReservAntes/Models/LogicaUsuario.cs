@@ -40,7 +40,7 @@ namespace ReservAntes.Models
             usuario.Activo = false;
 
             //Desactivar el restaurante del usuario
-            if (usuario.TipoUsuario.TipoUsuarioEnum == 3)
+            if (usuario.TipoUsuarioId == 3)
             {
                 Restaurante restaurante = ctx.Restaurante.Where(x => x.IdUsuario == usuario.Id).FirstOrDefault();
 
