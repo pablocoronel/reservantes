@@ -18,7 +18,6 @@ namespace ReservAntes.Controllers
         dbReservantesEntities ctx = new dbReservantesEntities();
         LogicaRestaurante LogRes = new LogicaRestaurante();
         LogicaReserva LogRsv = new LogicaReserva();
-        private LogicaDomicilio domicilioServicio = new LogicaDomicilio();
         private LogicaDatosBancarios datosBancariosServicio = new LogicaDatosBancarios();
         private LogicaReserva reservaServicio = new LogicaReserva();
         // GET: Restaurante
@@ -150,13 +149,14 @@ namespace ReservAntes.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreatePlato(Plato plato)
+        public ActionResult CreatePlato(PlatoViewModel plato)
         {
-            //if (ModelState.IsValid)
+            if (ModelState.IsValid)
+            {
+                bool resultado = this.LogRes.CrearPlato(plato);
 
-            bool resultado = this.LogRes.CrearPlato(plato);
-
-            ViewBag.Guardado = resultado;
+                ViewBag.Guardado = resultado;
+            }
             return View();
         }
 
@@ -172,12 +172,6 @@ namespace ReservAntes.Controllers
 
                 platos = LogRes.GetPlato(restaurante.IdRestaurante);
             }
-
-           /* if (ViewData["ResultadoEliminarPlato"] != null)
-            {
-                ViewData["ResultadoEliminarPlato"] = "si";
-            }
-            */
 
             return View(platos);
         }
@@ -202,24 +196,25 @@ namespace ReservAntes.Controllers
         [HttpGet]
         public ActionResult EditarPlato(int idPlato)
         {
-            Plato plato = ctx.Plato.Find(idPlato);
+            Plato platoBuscado= ctx.Plato.Find(idPlato);
 
+            PlatoViewModel plato = platoBuscado.Map();
             return View(plato);
         }
 
         
         [HttpPost]
-        public ActionResult EditarPlato(Plato plato)
+        public ActionResult EditarPlato(PlatoViewModel plato)
         {
-            //if (ModelState.IsValid)
-            //{
+            if (ModelState.IsValid)
+            {
                 bool resultado = LogRes.EditarPlato(plato);
 
                 if (resultado)
                 {
                     ViewBag.Guardado = true;
                 }
-            //}
+            }
 
             return View();
         }
@@ -279,66 +274,11 @@ namespace ReservAntes.Controllers
 
             var restauranteId = LogRes.GetByUserId(Convert.ToInt32(IdUsuario)).IdRestaurante;
             restaurante.IdRestaurante = restauranteId;
-            LogRes.CreateOrUpdate(restaurante.Map());
-            //Paso a la vista de domicilio
-            var domicilio = CargarListadosDomicilio();
-
-            if (restaurante.DomicilioId != null)
-            {
-                var domicilioResto = domicilioServicio.GetById(restaurante.DomicilioId.Value);
-                domicilio = domicilioResto.Map();
-            }
-            return View("Domicilio", domicilio);
-        }
-        public ActionResult Domicilio()
-        {
-            var domicilio = CargarListadosDomicilio();
-            return View("Domicilio", domicilio);
-        }
-        [HttpPost]
-        public ActionResult Domicilio(DomicilioViewModel domicilio)
-        {
-            var IdUsuario = Session["usuarioId"];
-            var restaurante = LogRes.GetByUserId(Convert.ToInt32(IdUsuario));
-            Domicilio domicilioDb = domicilio.Map();
-            //domicilio.Ubicacion = GeoPoint.CreatePoint(domicilio.latitud, domicilio.longitud);
-            domicilioServicio.CreateOrUpdate(domicilioDb);
-            LogRes.ActualizaDomicilio(domicilioDb.Id, restaurante.IdRestaurante);
-
-            //paso a la vista de datos bancarios
-            var datoBancario = new DatosBancariosViewModel();
-            if (restaurante.DatosBancariosId != null)
-            {
-                var bancoResto=datosBancariosServicio.GetById(restaurante.DatosBancariosId.Value);
-                datoBancario = bancoResto.Map();
-            }
-            return View("DatosBancarios",datoBancario);
-
-        }
-        private DomicilioViewModel CargarListadosDomicilio()
-        {
-            var IdUsuario = Session["usuarioId"];
-            var domicilioNuevo = new DomicilioViewModel();
-            var restaurante = LogRes.GetByUserId(Convert.ToInt32(IdUsuario));
-
-            if (restaurante.DatosBancariosId != null)
-            {
-                var bancoResto = domicilioServicio.GetById(restaurante.DomicilioId.Value);
-                domicilioNuevo = bancoResto.Map();
-            }
-            var provinciaListado = ctx.Provincia.ToList();
-            var departamentoListado = ctx.Partido.ToList();
-            //Restringido a La Matanza temporalmente
-            var partidoLaMatanza = ctx.Partido.FirstOrDefault(x=>x.Descripcion=="La Matanza");
-            var localidadesLaMatanza = ctx.Localidad.Where(x => x.PartidoId == partidoLaMatanza.Id).ToList();
-            //var localidadListado = ctx.Localidad.ToList();
-            domicilioNuevo.provincias = provinciaListado;
-            domicilioNuevo.partidos = departamentoListado;
-            //domicilioNuevo.localidades = localidadListado;
-            domicilioNuevo.localidades = localidadesLaMatanza;
-            return (domicilioNuevo);
+           
+            return View();
         }
 
+        
 
         public ActionResult DatosBancarios()
         {

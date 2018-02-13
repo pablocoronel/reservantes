@@ -1,50 +1,158 @@
-﻿
-@{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+﻿@model IEnumerable<Restaurante>
 
-}
-<body onload="inicialar()">
-    <div class="row">
+    @{
+        ViewBag.Title = "Index";
+        Layout = "~/Views/Shared/_LayoutHome.cshtml";
 
-        @if (Session["usuarioTipo"] != null)
-        {
-
-            <p>tipo de usuario: </p>
-            @Session["usuarioTipo"].ToString();
-            <br>
-            <p>ID de usuario: </p>
-            @Session["usuarioId"].ToString();
-            <br>
-            <p>nombre de usuario: </p>
-            @Session["usuarioNombre"].ToString();
-
-        }
-    </div>
-
-
-    <style>
-        #map-canvas {
-            width: 100%;
-            height: 400px;
-            background-color: grey;
-            border:solid 1px;
-        }
-
-
-    </style>
-
-    <div class="jumbotron">
-
-
-        <input id="pac-input" class="form-control" type="text" placeholder="Buscar Restaurante por direccion">
-  
-        <br />
-
+    }
+    <body>
         <div class="row">
-            <div id="map-canvas"></div>
+
+            @if (Session["usuarioTipo"] != null)
+            {
+
+                <p>tipo de usuario: </p>
+                @Session["usuarioTipo"].ToString();
+                <br>
+                <p>ID de usuario: </p>
+                @Session["usuarioId"].ToString();
+                <br>
+                <p>nombre de usuario: </p>
+                @Session["usuarioNombre"].ToString();
+
+            }
         </div>
 
-    </div>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAptrGun-vHjygAsSermQUGiDvxOGQ_qJ8&libraries=places&callback=inicialar" async defer> </script>
-      </body>
+
+        <style>
+            #map-canvas {
+                width: 100%;
+                height: 400px;
+                background-color: grey;
+                border: solid 1px;
+            }
+        </style>
+
+        <div class="jumbotron">
+
+
+            <input id="pac-input" class="form-control" type="text" placeholder="Buscar Restaurante por direccion">
+
+            <br />
+
+            <div class="row">
+                <div id="map-canvas"></div>
+            </div>
+
+        </div>
+
+        <script src="https://maps.googleapis.com/maps/api/js?&key=AIzaSyAptrGun-vHjygAsSermQUGiDvxOGQ_qJ8&libraries=places&callback=inicialar" async defer></script>
+
+        <script>
+
+        function inicialar() {
+
+
+    var mapCanvas = document.getElementById('map-canvas');
+
+    var mapOptions = {
+        center: new google.maps.LatLng(-34.611170889697334, -58.40778350830078),
+        zoom: 12,
+        mapTypeId: google.maps.MapTypeId.G_NORMAL_MAP
+    };
+
+    var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+
+    $.get("@Url.Action("GetAllLocation", "Home")", function (data) {
+        var marker = [];
+        var contents = [];
+        var infowindows = [];
+
+        for (var i = 0; i < data.length; i++) {
+
+            marker[i] = new google.maps.Marker({
+                position: { lat: data[i].Latitud, lng: data[i].Longitud },
+                map: map,
+            });
+
+            contents[i] = '<div class=container>' +
+                '<p><h4>' + data[i].NombreComercial + '</h4></p> | <a href="https://www.ole.com.ar/">Ver Menu</a>' +
+                '</div>';
+
+            infowindows[i] = new google.maps.InfoWindow({
+                content: contents[i]
+            });
+
+            var mdl = marker[i];
+            google.maps.event.addListener(marker[i], 'click', (function (mdl, i) {
+                return function () {
+                    infowindows[i].open(map, marker[i]);
+                }
+
+            })
+                (marker[i], i));
+
+        }
+
+    })
+
+    var input = document.getElementById('pac-input');
+    var searchBox = new google.maps.places.SearchBox(input);
+
+    // Bias the SearchBox results towards current map's viewport.
+    map.addListener('bounds_changed', function () {
+        searchBox.setBounds(map.getBounds());
+    });
+
+    var markers = [];
+    // Listen for the event fired when the user selects a prediction and retrieve
+    // more details for that place.
+    searchBox.addListener('places_changed', function () {
+        var places = searchBox.getPlaces();
+
+        if (places.length === 0) {
+            return;
+        }
+
+        // Clear out the old markers.
+        markers.forEach(function (marker) {
+            marker.setMap(null);
+        });
+        markers = [];
+
+        // For each place, get the icon, name and location.
+        var bounds = new google.maps.LatLngBounds();
+        places.forEach(function (place) {
+            if (!place.geometry) {
+                console.log("Returned place contains no geometry");
+                return;
+            }
+            var icon = {
+                url: place.icon,
+                size: new google.maps.Size(71, 71),
+                origin: new google.maps.Point(0, 0),
+                anchor: new google.maps.Point(17, 34),
+                scaledSize: new google.maps.Size(25, 25)
+            };
+
+            // Create a marker for each place.
+            markers.push(new google.maps.Marker({
+                map: map,
+                icon: icon,
+                title: place.name,
+                position: place.geometry.location
+            }));
+
+            if (place.geometry.viewport) {
+                // Only geocodes have viewport.
+                bounds.union(place.geometry.viewport);
+            } else {
+                bounds.extend(place.geometry.location);
+            }
+        });
+        map.fitBounds(bounds);
+    });
+
+}
+        </script>
+    </body>

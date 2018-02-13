@@ -6,8 +6,7 @@ using System.Web.Mvc;
 using System.IO;
 using System.Data;
 using System.Data.Entity;
-
-
+using ReservAntes.ViewModels;
 
 namespace ReservAntes.Models
 {
@@ -21,7 +20,7 @@ namespace ReservAntes.Models
         public List<Restaurante> GetRestaurantes()
         {
             List<Restaurante> todosLosRestaurantes = new List<Restaurante>(); 
-            todosLosRestaurantes = ctx.Restaurante.ToList();
+            todosLosRestaurantes = ctx.Restaurante.Where(x => x.Habilitado == true).ToList();
 
             return todosLosRestaurantes;
         }
@@ -72,7 +71,6 @@ namespace ReservAntes.Models
             using (var db = new dbReservantesEntities())
             {
                 var restauranteDb = db.Restaurante.SingleOrDefault(x => x.IdRestaurante == restauranteId);
-                restauranteDb.DomicilioId = domicilioId;
                 db.SaveChanges();
             }
         }
@@ -94,7 +92,7 @@ namespace ReservAntes.Models
                     var restauranteDb = db.Restaurante.SingleOrDefault(x => x.IdRestaurante == restaurante.IdRestaurante);
 
                     restauranteDb.CantidadClientes = restaurante.CantidadClientes;
-                    restauranteDb.RazonSocial = restaurante.RazonSocial;
+                    restaurante.CUIT = restaurante.CUIT;
                     restauranteDb.CUIT = restaurante.CUIT;
                 }
                 else
@@ -108,7 +106,7 @@ namespace ReservAntes.Models
         //Habilitar el restaurante
         public void HabilitarRestaurante(int idresto)
         {
-            Restaurante restaurante = ctx.Restaurante.FirstOrDefault(x => x.IdUsuario == idresto);
+            Restaurante restaurante = ctx.Restaurante.FirstOrDefault(x => x.IdRestaurante == idresto);
             // 0 => NO habilitado | 1 => Habilitado
             restaurante.Habilitado = true;
 
@@ -118,7 +116,7 @@ namespace ReservAntes.Models
 
         // ----------------- Platos ---------------------
 
-        public bool CrearPlato(Plato plate)
+        public bool CrearPlato(PlatoViewModel plate)
         {
 
             Plato NewPlato = new Plato();
@@ -200,7 +198,7 @@ namespace ReservAntes.Models
         }
 
         //Editar plato
-        public bool EditarPlato(Plato plato)
+        public bool EditarPlato(PlatoViewModel plato)
         {
             bool resultado = false;
             Plato platoEditable = ctx.Plato.Find(plato.Id);

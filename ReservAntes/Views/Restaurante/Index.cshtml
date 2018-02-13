@@ -7,7 +7,12 @@
 <!-- declaracion y seteo de variables -->
 @{
     /* actual */
-    int asientosLibres = ViewBag.CapacidadTotal - ViewBag.OcupacionActual;
+    int asientosLibres = 0;
+    if (ViewBag.CapacidadTotal != null && ViewBag.OcupacionActual != null)
+    {
+        asientosLibres = ViewBag.CapacidadTotal - ViewBag.OcupacionActual;
+    }
+
 
     /* busqueda */
     int ocupacionPorFecha;
@@ -21,7 +26,13 @@
         Int32.TryParse(TempData["OcupacionPorFecha"].ToString(), out ocupacionPorFecha);
     }
 
-    int asientosLibresPorFecha = ViewBag.CapacidadTotal - ocupacionPorFecha;
+    int asientosLibresPorFecha = 0;
+    if (ViewBag.CapacidadTotal != null)
+    {
+        asientosLibresPorFecha = ViewBag.CapacidadTotal - ocupacionPorFecha;
+    }
+
+
 }
                     
 <br />
@@ -100,13 +111,15 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (Reserva item in Model)
-                {
-                    <tr>
-                        <th>@item.CodigoReserva</th>
-                        <th>@item.ClienteId</th>
-                        <th>@item.Observaciones</th>
-                    </tr>
+                @if(Model != null) {
+                    foreach (Reserva item in Model)
+                    {
+                        <tr>
+                            <th>@item.CodigoReserva</th>
+                            <th>@item.ClienteId</th>
+                            <th>@item.Observaciones</th>
+                        </tr>
+                    }
                 }
             </tbody>
         </table>

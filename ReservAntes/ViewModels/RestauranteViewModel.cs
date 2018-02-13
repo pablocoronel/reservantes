@@ -10,7 +10,6 @@ namespace ReservAntes.ViewModels
     [MetadataType(typeof(RestauranteExtension))]
     public class RestauranteViewModel : Restaurante
     {
-        public DomicilioViewModel domicilio { get; set; }
         public List<PlatoViewModel> listadoPlatos { get; set; }
     }
 }

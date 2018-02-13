@@ -6,6 +6,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Threading.Tasks;
+using System.Net;
 
 
 
@@ -13,11 +15,13 @@ namespace ReservAntes.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
-        {
-            dbReservantesEntities ctx = new dbReservantesEntities();
+        dbReservantesEntities ctx = new dbReservantesEntities();
+        ReservAntes.Models.LogicaRestaurante LogiRes = new ReservAntes.Models.LogicaRestaurante();
+        
 
-          
+         public ActionResult Index()
+        {
+                    
 
             if(Session["usuarioTipo"] != null)
                 {
@@ -44,12 +48,12 @@ namespace ReservAntes.Controllers
             return View();
         }
 
-        //public ActionResult About()
-        //{
-        //    ViewBag.Message = "Your application description page.";
+        public JsonResult GetAllLocation()
+        {
+            var data = this.LogiRes.GetRestaurantes();
+            return Json(data, JsonRequestBehavior.AllowGet);
 
-        //    return View();
-        //}
+        }
 
         public ActionResult Contact()
         {

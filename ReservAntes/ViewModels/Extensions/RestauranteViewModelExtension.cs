@@ -16,13 +16,16 @@ namespace ReservAntes.ViewModels.Extensions
                 DatosBancariosId = value.DatosBancariosId,
                 CantidadClientes = value.CantidadClientes,
                 CUIT = value.CUIT,
-                RazonSocial = value.RazonSocial,
                 Habilitado = value.Habilitado,
                 Foto = value.Foto,
-                DomicilioId = value.DomicilioId,
                 NombreComercial = value.NombreComercial,
                 NivelId = value.NivelId,
 
+                Latitud = value.Latitud,
+                Longitud = value.Longitud,
+                ConstAFIP = value.ConstAFIP,
+                Domicilio = value.Domicilio
+                
             };
         }
         public static Restaurante Map(this RestauranteViewModel model, Restaurante entity = null)
@@ -36,9 +39,7 @@ namespace ReservAntes.ViewModels.Extensions
                 };
             }
             entity.CantidadClientes = model.CantidadClientes;
-            entity.RazonSocial = model.RazonSocial;
             entity.IdUsuario = model.IdUsuario;
-            entity.DomicilioId = model.DomicilioId;
             entity.CUIT = model.CUIT;
             entity.Habilitado = model.Habilitado;
             entity.Foto = model.Foto;

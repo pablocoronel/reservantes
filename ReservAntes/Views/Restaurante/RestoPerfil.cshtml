@@ -19,14 +19,7 @@
 
         @*@Html.HiddenFor(Model => Model.IdRestaurante);*@
 
-            <div class="form-group">
-                <label>Razon Social:</label>
-                @Html.TextBoxFor(x => x.RazonSocial, new { @class = "form-control" })
-                @Html.ValidationMessageFor(p => p.RazonSocial, "", new { @class = "text-danger" })
-
-
-
-            </div>
+            
         <div class="form-group">
             <label>Nombre Comercial:</label>
             @Html.TextBoxFor(Model => Model.NombreComercial, new { @class = "form-control" })
