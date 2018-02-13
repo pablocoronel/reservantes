@@ -7,6 +7,7 @@ using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ReservAntes.Extensions;
 
 namespace ReservAntes.Controllers
 {
@@ -258,7 +259,7 @@ namespace ReservAntes.Controllers
         }
 
         [HttpPost]
-        public ActionResult RestoPerfil(RestauranteViewModel restaurante)
+        public ActionResult RestoPerfil(RestauranteExtension restaurante)
         {
             var IdUsuario = Session["usuarioId"];
             if (restaurante == null)
@@ -274,7 +275,10 @@ namespace ReservAntes.Controllers
 
             var restauranteId = LogRes.GetByUserId(Convert.ToInt32(IdUsuario)).IdRestaurante;
             restaurante.IdRestaurante = restauranteId;
-           
+
+            this.LogRes.CreateOrUpdate(restaurante);
+
+
             return View();
         }
 

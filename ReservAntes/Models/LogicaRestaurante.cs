@@ -88,11 +88,10 @@ namespace ReservAntes.Models
 
         public void CreateOrUpdate(RestauranteExtension restaurante)
         {
-            using (var db = new dbReservantesEntities())
-            {
+       
                 if (restaurante.IdRestaurante != 0)
                 {
-                    var restauranteDb = db.Restaurante.SingleOrDefault(x => x.IdRestaurante == restaurante.IdRestaurante);
+                    var restauranteDb = ctx.Restaurante.SingleOrDefault(x => x.IdRestaurante == restaurante.IdRestaurante);
 
                     restauranteDb.NombreComercial = restaurante.NombreComercial;
                     restauranteDb.CantidadClientes = restaurante.CantidadClientes;
@@ -101,32 +100,40 @@ namespace ReservAntes.Models
                     HttpPostedFileBase foto = restaurante.Foto;
                     HttpPostedFileBase constAFIP = restaurante.ConstAFIP;
 
-                    if (foto != null && foto.ContentLength > 0 && constAFIP != null && constAFIP.ContentLength > 0)
+                if (foto != null && foto.ContentLength > 0 && constAFIP != null && constAFIP.ContentLength > 0)
 
+                {
+                    var fileName = Path.GetFileName(foto.FileName);
+
+
+                    using (MemoryStream ms = new MemoryStream())
                     {
-                        var fileName = Path.GetFileName(foto.FileName);
+                        foto.InputStream.CopyTo(ms);
+                        byte[] array = ms.GetBuffer();
+
+                        restauranteDb.NombreComercial = restaurante.NombreComercial;
+                        restauranteDb.Foto = array;
+                        restauranteDb.ConstAFIP = array;
 
 
-                        using (MemoryStream ms = new MemoryStream())
-                        {
-                            foto.InputStream.CopyTo(ms);
-                            byte[] array = ms.GetBuffer();
-
-                            restauranteDb.NombreComercial = restaurante.NombreComercial;
-                            restauranteDb.Foto = array;
-                            restauranteDb.ConstAFIP = array;
-
-
-                        }
                     }
-                    else
-                    {
-                        db.Restaurante.Add(restauranteDb);
-                    }
-
-                    db.SaveChanges();
                 }
             }
+
+                  else
+                    {
+                          var restauranteDb = ctx.Restaurante.SingleOrDefault(x => x.IdRestaurante == restaurante.IdRestaurante);
+
+                            restauranteDb.NombreComercial = restaurante.NombreComercial;
+                            restauranteDb.CantidadClientes = restaurante.CantidadClientes;
+                            restauranteDb.CUIT = restaurante.CUIT;
+
+                            ctx.Restaurante.Add(restauranteDb);
+                    }
+
+                   
+              ctx.SaveChanges();
+            
         }
         //Habilitar el restaurante
         public void HabilitarRestaurante(int idresto)

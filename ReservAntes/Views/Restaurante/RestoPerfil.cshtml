@@ -18,7 +18,7 @@
     {
         @*@Html.HttpMethodOverride(HttpVerbs.Put)*@
 
-        @*@Html.HiddenFor(Model => Model.IdRestaurante);*@
+        @Html.HiddenFor(Model => Model.IdRestaurante);
 
 
         <div class="form-group">
@@ -39,13 +39,14 @@
             <label><b>Cantidad máxima de clientes:</b></label>
             @Html.TextBoxFor(Model => Model.CantidadClientes, new { @class = "form-control" })
             @Html.ValidationMessageFor(p => p.CantidadClientes, "", new { @class = "text-danger" })
+            <p></p>
 
         </div>
         <div class="form-group">
             <label><b>Foto:</b></label>
             @Html.TextBoxFor(Model => Model.Foto, new { type = "file" })
             @Html.ValidationMessageFor(p => p.Foto, "", new { @class = "text-danger" })
-
+            <p></p>
         </div>
         <div class="form-group">
             <label><b>Constancia de inscripcion a la AFIP:</b></label>
@@ -73,11 +74,12 @@
 
         </div>
         <p></p>
-        }
-    
-
         <button type="submit" class="btn btn-primary">Ingresar</button>
-        <button onclick="location.href='@Url.Action("DatosBancarios", "Restaurante")';return false;" class="btn btn-success pull-right">Siguiente</button>
+
+}
+
+
+            <button onclick="location.href='@Url.Action("DatosBancarios", "Restaurante")';return false;" class="btn btn-success pull-right">Siguiente</button>
 
         </div>
     </div>
