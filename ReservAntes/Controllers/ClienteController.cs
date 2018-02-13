@@ -240,5 +240,20 @@ namespace ReservAntes.Controllers
 
 
         }
+
+        public ActionResult ReservaCliente()
+        {
+            List<Reserva> reservas = new List<Reserva>();
+
+            if (Session["usuarioId"] != null)
+            {
+                Int32.TryParse(Session["usuarioId"].ToString(), out int usuarioId);
+
+                reservas = LogCliente.GetReservasDelCliente(usuarioId);
+            }
+            
+
+            return View(reservas);
+        }
     }
 }

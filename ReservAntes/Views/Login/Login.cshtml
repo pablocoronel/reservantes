@@ -11,6 +11,13 @@
         <div class="col-md-3"></div>
         <div class="col-md-6">
             <div class="jumbotron">
+                @if (ViewBag.LoginIncorrecto != null && ViewBag.LoginIncorrecto == true)
+                {
+                    <div class="alert alert-warning">
+                        Usuario y/o contraseña incorrecto
+                    </div>
+                }
+
                 @using (Html.BeginForm("Login", "Login"))
             {
                     <div class="form-group">
@@ -27,10 +34,10 @@
                         @Html.ValidationMessageFor(Model => Model.Password, "", new { @class = "text-danger" })
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Ingresar</button>
-                    <button onclick="location.href='@Url.Action("Index", "Home")';return false;" class="btn btn-danger">Cancelar</button>
+                    <button type="submit" class="btn btn-rojo">Ingresar</button>
+                    <button onclick="location.href='@Url.Action("Index", "Home")';return false;" class="btn btn-rojo">Cancelar</button>
                 }
-            </div>
+            </div>        
         </div>
 
     </div>

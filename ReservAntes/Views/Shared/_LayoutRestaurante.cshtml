@@ -8,23 +8,29 @@
 <!-- menu principal -->
 <nav class="navbar navbar-default" id="menuPrincipal">
     <div class="container">
-        <div class="navbar-header col-xs-5 col-sm-offset-1 col-sm-2">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mibarrita"></button>
-            <a onclick="location.href='@Url.Action("Index", "Home")';return false;">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mibarrita">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <a href='@Url.Action("Index", "Restaurante")'>
                 <img src="~/Imagenes/Logo.png" alt="Reservantes" class="img-responsive" />
             </a>
 
         </div>
-        <div class="slogan col-xs-5"><label><em>"No esperes la comida, la comida te espera a vos"</em></label></div>
 
+        <div class="collapse navbar-collapse" id="mibarrita">
+            <ul class="nav navbar-nav hidden-xs hidden-sm hidden-md">
+                <li class="slogan">
+                    <em>No esperes la comida, la comida te espera a vos</em>
+                </li>
+            </ul>
 
-        <div class="collapse navbar-collapse col-xs-12 col-sm-8 pull-right" id="mibarrita">
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav navbar-right">
                 <li>@Html.ActionLink("Home", "Index", "Restaurante")</li>
                 <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
-
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
                 <li><a>@Session["usuarioNombre"]</a></li>
                 <li>@Html.ActionLink("Salir", "Logout", "Login")</li>
             </ul>
@@ -32,20 +38,37 @@
     </div>
 </nav>
 <!-- menu de Restaurante -->
-<div class="navbar navbar-default navbar-static-top">
+<nav class="navbar navbar-default navbar-static-top">
     <div class="container">
         <div class="navbar-header">
-            <div class="navbar-brand">
-                <span class="glyphicon glyphicon-th"></span>
-                <button onclick="location.href='@Url.Action("Index","Restaurante")'; return false;" class="btn btn-warning">Inicio</button>
-                <button onclick="location.href='@Url.Action("RestoPerfil","Restaurante")'; return false;" class="btn btn-warning">Editar mi Restaurante</button>
-                <button onclick="location.href='@Url.Action("ReporteReservas","Reserva")'; return false;" class="btn btn-warning">Reservas</button>
-                <button onclick="location.href='@Url.Action("MiMenu","Restaurante")'; return false;" class="btn btn-warning">Ver mi Menu</button>
-            </div>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#barraAdministracion">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <label class="hidden-lg hidden-md hidden-sm">Administración</label>
+
+        </div>
+        <div class="collapse navbar-collapse" id="barraAdministracion">
+            <ul class="nav navbar-nav">
+                <li>
+                    <button onclick="location.href='@Url.Action("Index","Restaurante")'; return false;" class="btn btn-warning">Inicio</button>
+                </li>
+                <li>
+                    <button onclick="location.href='@Url.Action("RestoPerfil","Restaurante")'; return false;" class="btn btn-warning">Mi Restaurante</button>
+                </li>
+                <li>
+                    <button onclick="location.href='@Url.Action("ReporteReservas","Reserva")'; return false;" class="btn btn-warning">Reservas</button>
+                </li>
+                <li>
+                    <button onclick="location.href='@Url.Action("MiMenu","Restaurante")'; return false;" class="btn btn-warning">Ver Menú</button>
+                </li>
+            </ul>
         </div>
     </div>
+    </nav>
     <br />
-</div>
 <br />
 
 <div class="container alturaMinimaDeSecciones">

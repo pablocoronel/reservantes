@@ -3,10 +3,91 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutRestaurante.cshtml";
 }
+
+<!-- declaracion y seteo de variables -->
+@{
+    /* actual */
+    int asientosLibres = ViewBag.CapacidadTotal - ViewBag.OcupacionActual;
+
+    /* busqueda */
+    int ocupacionPorFecha;
+
+    if (TempData["OcupacionPorFecha"] == null)
+    {
+        ocupacionPorFecha = 0;
+    }
+    else
+    {
+        Int32.TryParse(TempData["OcupacionPorFecha"].ToString(), out ocupacionPorFecha);
+    }
+
+    int asientosLibresPorFecha = ViewBag.CapacidadTotal - ocupacionPorFecha;
+}
                     
 <br />
-<div class="thumbnail"><h4> Reservas de Hoy -- @DateTime.Now.Day/@DateTime.Now.Month/@DateTime.Now.Year</h4> <div class="thumbnail"><h5>Cantidad de Comensales que vendran hoy: @DateTime.Now.Day/@DateTime.Now.Month/@DateTime.Now.Year</h5></div></div>
+<div class="thumbnail"><h4> Reservas de Hoy -- @DateTime.Now.Day/@DateTime.Now.Month/@DateTime.Now.Year</h4> 
+    <div class="thumbnail"><h5>Cantidad de Comensales que vendran hoy: @DateTime.Now.Day/@DateTime.Now.Month/@DateTime.Now.Year</h5></div></div>
 <br />
+
+<div class="thumbnail">
+    <h3>Capacidad disponible ahora:</h3>
+   
+    <!-- grafico actual -->
+    <p>@asientosLibres lugares libres de @ViewBag.CapacidadTotal disponibles</p>
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                @for (int i = 1; i <= asientosLibres; i++)
+                {
+                    <div class="sillaLibre col-xs-1">
+
+                    </div>
+                }
+
+                @for (int i = 1; i <= @ViewBag.OcupacionActual; i++ )
+                {
+                    <div class="sillaOcupada col-xs-1">
+                        
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+<!-- disponibilidad por fecha y hora -->
+<div class="thumbnail">
+    <h3>Capacidad disponible por fecha y hora:</h3>
+    
+    <!-- formulario del buscador -->
+    @using (Html.BeginForm("CapacidadPorFecha", "Restaurante", FormMethod.Post))
+    {
+        <input type="date" name="buscarPorFecha" />
+        <input type="time" name="buscarPorHora" />
+
+        <input type="submit" value="Ver" />
+    }
+
+    <!-- grafico de busqueda -->
+    <p>@asientosLibresPorFecha lugares libres de @ViewBag.CapacidadTotal disponibles</p>
+
+    <div class="row">
+        <div class="col-xs-12 col-md-6">
+            @for (int i = 1; i <= asientosLibresPorFecha; i++)
+            {
+                <div class="sillaLibre col-xs-1">
+
+                </div>
+            }
+
+            @for (int i = 1; i <= ocupacionPorFecha; i++)
+            {
+                <div class="sillaOcupada col-xs-1">
+
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
 
 <div>
     <div class="thumbnail">

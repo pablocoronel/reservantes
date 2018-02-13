@@ -3,6 +3,7 @@ using ReservAntes.ViewModels;
 using ReservAntes.ViewModels.Extensions;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -30,7 +31,32 @@ namespace ReservAntes.Controllers
 
             List<Reserva> MisReservasResto = LogRsv.GetByUsuarioIdFechaActual(numID);
 
+            //Disponibilidad ACTUAL de lugares libres
+            ViewBag.OcupacionActual = this.AsientosReservadosDelRestaurante(DateTime.Now);
+            ViewBag.CapacidadTotal = this.CapacidadTotalDelRestaurante();
+            
             return View(MisReservasResto);
+        }
+
+        [HttpPost]
+        public ActionResult CapacidadPorFecha()
+
+        {
+            //Lugares disponibles por busqueda
+            String[] fechaArray = Request.Form["buscarPorFecha"].Split('-');
+            Int32.TryParse(fechaArray.ElementAt(0), out int anio);
+            Int32.TryParse(fechaArray.ElementAt(1), out int mes);
+            Int32.TryParse(fechaArray.ElementAt(2), out int dia);
+
+            String[] horaArray = Request.Form["buscarPorHora"].Split(':');
+            Int32.TryParse(horaArray.ElementAt(0), out int hora);
+            Int32.TryParse(horaArray.ElementAt(1), out int minuto);
+            
+            DateTime fechaHoraBuscada = new DateTime(anio, mes, dia, hora, minuto, 0);
+
+            TempData["OcupacionPorFecha"] = this.AsientosReservadosDelRestaurante(fechaHoraBuscada);
+
+            return RedirectToAction("Index");
         }
 
         // GET: Restaurante/Details/5
@@ -106,38 +132,211 @@ namespace ReservAntes.Controllers
         }
 
 
-        // --------------------- CREAR PLATO -----------------------------
+        // --------------------- PLATO -----------------------------
 
+        //crear
         public ActionResult CreatePlato()
         {
+            if (Session["usuarioId"] != null)
+            {
+                Int32.TryParse(Session["usuarioId"].ToString(), out int usuarioId);
+                Restaurante restaurante = LogRes.GetByUserId(usuarioId);
+                ViewBag.idResto = restaurante.IdRestaurante;
+            }
+            
+
             return View();
         }
 
         [HttpPost]
-        public ActionResult CreatePlato(Plato id, HttpPostedFile imagen)
+        public ActionResult CreatePlato(PlatoViewModel plato)
         {
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
+                bool resultado = this.LogRes.CrearPlato(plato);
 
-                    this.LogRes.CrearPlato(id);
+                ViewBag.Guardado = resultado;
+            }
+            return View();
+        }
 
+        //listado de platos
+        public ActionResult MiMenu()
+        {
+            List<Plato> platos = new List<Plato>();
+            if (Session["usuarioId"] != null)
+            {
+                Int32.TryParse(Session["usuarioId"].ToString(), out int idUsuario);
 
-                return View("Index");
+                Restaurante restaurante = LogRes.GetByUserId(idUsuario);
+
+                platos = LogRes.GetPlato(restaurante.IdRestaurante);
             }
 
+            return View(platos);
+        }
+
+        //borrar platos
+        [HttpGet]
+        public ActionResult EliminarPlato(int idPlato)
+        {
+            bool resultado = LogRes.EliminarPlato(idPlato);
+
+            if (resultado)
+            {
+                TempData["ResultadoEliminarPlato"] = "si";
+            }
+
+
+            return RedirectToAction("MiMenu");
+        }
+
+
+        //editar platos
+        [HttpGet]
+        public ActionResult EditarPlato(int idPlato)
+        {
+            Plato platoBuscado= ctx.Plato.Find(idPlato);
+
+            PlatoViewModel plato = platoBuscado.Map();
+            return View(plato);
+        }
+
+        
+        [HttpPost]
+        public ActionResult EditarPlato(PlatoViewModel plato)
+        {
+            if (ModelState.IsValid)
+            {
+                bool resultado = LogRes.EditarPlato(plato);
+
+                if (resultado)
+                {
+                    ViewBag.Guardado = true;
+                }
+            }
+
+            return View();
         }
 
         // --------------------------------------------------
 
+        /* capacidad disponible del restaurante */
+        public int AsientosReservadosDelRestaurante(DateTime fechaHora)
+        {
+            Int32.TryParse(Session["usuarioId"].ToString(), out int idUsuario);
+            Restaurante restaurante = ctx.Restaurante.Where(x => x.IdUsuario == idUsuario).FirstOrDefault();
+            
+            return LogRes.VerCantidadDeComensales(restaurante.IdRestaurante, fechaHora);
+        }
+
+        /* capacidad total del restaurante */
+        public int CapacidadTotalDelRestaurante()
+        {
+            Int32.TryParse(Session["usuarioId"].ToString(), out int idUsuario);
+            Restaurante restaurante = ctx.Restaurante.Where(x => x.IdUsuario == idUsuario).FirstOrDefault();
+
+            return restaurante.CantidadClientes.Value;
+        }
        
 
+
+        
         // --------------------- Perfil Restoran -------------------------------------------------------------------------------
 
 
         public ActionResult RestoPerfil()
         {
+<<<<<<< HEAD
             
             return View("Index");
+=======
+            var IdUsuario = Session["usuarioId"];
+            var restauranteNuevo = new RestauranteViewModel();
+            var restaurante = LogRes.GetByUserId(Convert.ToInt32(IdUsuario));
+            if ( restaurante!= null)
+            {
+                restauranteNuevo = restaurante.Map();
+            };
+            return View(restauranteNuevo);
+        }
+
+        [HttpPost]
+        public ActionResult RestoPerfil(RestauranteViewModel restaurante)
+        {
+            var IdUsuario = Session["usuarioId"];
+            if (restaurante == null)
+            {
+                throw new ArgumentNullException(nameof(restaurante));
+            }
+
+            if (restaurante.IdRestaurante == 0)
+            {
+                restaurante.Habilitado =false;
+                restaurante.IdUsuario = Convert.ToInt32(Session["usuarioId"]);
+            }
+
+            var restauranteId = LogRes.GetByUserId(Convert.ToInt32(IdUsuario)).IdRestaurante;
+            restaurante.IdRestaurante = restauranteId;
+            LogRes.CreateOrUpdate(restaurante.Map());
+            //Paso a la vista de domicilio
+            var domicilio = CargarListadosDomicilio();
+
+            if (restaurante.DomicilioId != null)
+            {
+                var domicilioResto = domicilioServicio.GetById(restaurante.DomicilioId.Value);
+                domicilio = domicilioResto.Map();
+            }
+            return View("Domicilio", domicilio);
+        }
+        public ActionResult Domicilio()
+        {
+            var domicilio = CargarListadosDomicilio();
+            return View("Domicilio", domicilio);
+        }
+        [HttpPost]
+        public ActionResult Domicilio(DomicilioViewModel domicilio)
+        {
+            var IdUsuario = Session["usuarioId"];
+            var restaurante = LogRes.GetByUserId(Convert.ToInt32(IdUsuario));
+            Domicilio domicilioDb = domicilio.Map();
+            //domicilio.Ubicacion = GeoPoint.CreatePoint(domicilio.latitud, domicilio.longitud);
+            domicilioServicio.CreateOrUpdate(domicilioDb);
+            LogRes.ActualizaDomicilio(domicilioDb.Id, restaurante.IdRestaurante);
+
+            //paso a la vista de datos bancarios
+            var datoBancario = new DatosBancariosViewModel();
+            if (restaurante.DatosBancariosId != null)
+            {
+                var bancoResto=datosBancariosServicio.GetById(restaurante.DatosBancariosId.Value);
+                datoBancario = bancoResto.Map();
+            }
+            return View("DatosBancarios",datoBancario);
+
+        }
+        private DomicilioViewModel CargarListadosDomicilio()
+        {
+            var IdUsuario = Session["usuarioId"];
+            var domicilioNuevo = new DomicilioViewModel();
+            var restaurante = LogRes.GetByUserId(Convert.ToInt32(IdUsuario));
+
+            if (restaurante.DatosBancariosId != null)
+            {
+                var bancoResto = domicilioServicio.GetById(restaurante.DomicilioId.Value);
+                domicilioNuevo = bancoResto.Map();
+            }
+            var provinciaListado = ctx.Provincia.ToList();
+            var departamentoListado = ctx.Partido.ToList();
+            //Restringido a La Matanza temporalmente
+            var partidoLaMatanza = ctx.Partido.FirstOrDefault(x=>x.Descripcion=="La Matanza");
+            var localidadesLaMatanza = ctx.Localidad.Where(x => x.PartidoId == partidoLaMatanza.Id).ToList();
+            //var localidadListado = ctx.Localidad.ToList();
+            domicilioNuevo.provincias = provinciaListado;
+            domicilioNuevo.partidos = departamentoListado;
+            //domicilioNuevo.localidades = localidadListado;
+            domicilioNuevo.localidades = localidadesLaMatanza;
+            return (domicilioNuevo);
+>>>>>>> fe10fdd1b92793230c9e52b012837d94cf003207
         }
 
         
@@ -153,9 +352,11 @@ namespace ReservAntes.Controllers
         {
             var IdUsuario = Session["usuarioId"];
             var restaurante = LogRes.GetByUserId(Convert.ToInt32(IdUsuario));
-            datosBancariosServicio.CreateOrupdate(datosBancarios.Map());
-            LogRes.ActualizaDatosBancarios(datosBancarios.Id, restaurante.IdRestaurante);
-            return View("Index");
+            DatosBancarios datosBancariosDb = datosBancarios.Map();
+            datosBancariosServicio.CreateOrupdate(datosBancariosDb);
+            LogRes.ActualizaDatosBancarios(datosBancariosDb.Id, restaurante.IdRestaurante);
+            //Todo: Agregar vista success
+            return View();
         }
         [HttpGet]
         public ActionResult Reservas()

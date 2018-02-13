@@ -19,6 +19,27 @@ textarea {
 }
 
 /** Layout **/
+body {
+    background-color: #da1212 !important;
+}
+
+label{
+    font-family: 'Raleway';
+    font-size: 16px;
+    color: #000000;
+    font-weight: 500;
+}
+
+input[type="text"], input[type="password"], select{
+    border: 1px solid #808080 !important;
+    border-radius: 0px !important;
+    width: 100%;
+}
+
+.jumbotron {
+    background-color: #ffffff !important;
+}
+
 .alturaMinimaDeSecciones {
     min-height: 500px;
 }
@@ -30,16 +51,16 @@ textarea {
     height: 61px;
 }
 
-#mibarrita ul li:hover {
-    background-color: #fa2a2a;
-    color: #fa2a2a;
-}
-#mibarrita ul li a {
-    font-size: 18px;
-    font-family: font-family, 'Oxygen', sans-serif;
-    color: #fa2a2a !important;
-    padding-top: 20px;
-}
+    #mibarrita ul li:hover {
+        background-color: #da1212;
+        color: #da1212;
+    }
+    #mibarrita ul li a {
+        font-size: 18px;
+        font-family: font-family, 'Oxygen', sans-serif;
+        color: #da1212 !important;
+        padding-top: 20px;
+    }
 
     #mibarrita ul li a:hover {
         font-size: 18px;
@@ -51,6 +72,14 @@ textarea {
     margin-bottom: 0px;
 }
 
+#menuPrincipal a img{
+    max-height: 50px;
+}
+
+#menuPrincipal .navbar-header button {
+    width: 42px;
+    height: 36px;
+}
 
 @media only screen and (max-width: 768px) {
     #menuPrincipal img {
@@ -61,17 +90,21 @@ textarea {
         height: 45px;
     }
 
-    .navbar-default .navbar-toggle .icon-bar {
-        background-color: #FFFFFF;
+    .navbar-default .navbar-toggle {
+        border: 1px solid #da1212;
     }
 
-    .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
-        background-color: #FFFFFF;
-        border: 1px solid #FFFFFF;
-    }
-    .navbar-default .navbar-toggle .icon-bar:hover {
-        background-color: #FFFFFF;
-    }
+        .navbar-default .navbar-toggle .icon-bar {
+            background-color: #da1212;
+        }
+
+        .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+            background-color: #FFFFFF;
+            border: 1px solid #da1212;
+        }
+        .navbar-default .navbar-toggle .icon-bar:hover {
+            background-color: #da1212;
+        }
 }
 
 
@@ -82,6 +115,12 @@ footer{
     text-align: center;
     min-height: 70px;
 }
+
+    footer h6 {
+        font-family: 'Raleway';
+        font-size: 14px;
+        color: #FFFFFF;
+    }
 
 /** LOGIN **/
 #contenedorLogin{
@@ -104,25 +143,116 @@ footer{
 
 /** registro **/
 .btn-info {
-    background-color: #fa2a2a;
+    background-color: #da1212;
     color: #FFFFFF;
     border: 1px solid #FFFFFF;
 }
-.btn-info:hover {
-    background-color: #FFFFFF;
-    color: #fa2a2a;
-    border: 1px solid #fa2a2a;
-}
+    .btn-info:hover {
+        background-color: #FFFFFF;
+        color: #da1212;
+        border: 1px solid #da1212;
+    }
 
 
 
 .slogan {
     font-size: 14px;
     font-family: font-family, 'Oxygen', sans-serif;
-    margin:20px 0 0 20px;
+    margin:20px 0px 0px 0px;
+    height: 15px !important;
+}
+
+.slogan:hover {
+    background-color: transparent !important;
+    color: #000000 !important;
+}
+
+/** BOTONES **/
+.btn-rojo {
+    background-color: #FFFFFF;
+    border-radius: 0px;
+    border: 1px solid #da1212;
+    color: #da1212;
+    font-family: 'Raleway';
+}
+
+    .btn-rojo:hover, .btn-rojo:focus, .btn-rojo::selection, .btn-rojo:active, .btn:link, .btn:visited {
+        background-color: #FFFFFF;
+        border-radius: 0px;
+        border: 1px solid #da1212;
+        color: #da1212;
+        font-family: 'Raleway';
+    }
+
+.btn-verde {
+    background-color: #FFFFFF;
+    border-radius: 0px;
+    border: 1px solid #006600;
+    color: #006600;
+    font-family: 'Raleway';
+}
+
+    .btn-verde:hover, .btn-verde:focus, .btn-verde::selection, .btn-verde:active {
+        background-color: #FFFFFF;
+        border-radius: 0px;
+        border: 1px solid #006600;
+        color: #006600;
+        font-family: 'Raleway';
+    }
+
+.btn-gris {
+    background-color: #FFFFFF;
+    border-radius: 0px;
+    border: 1px solid #606060;
+    color: #606060;
+    font-family: 'Raleway';
+}
+
+    .btn-gris:hover, .btn-gris:focus, .btn-gris::selection, .btn-gris:active {
+        background-color: #FFFFFF;
+        border-radius: 0px;
+        border: 1px solid #606060;
+        color: #606060;
+        font-family: 'Raleway';
+    }
+
+
+#barraAdministracion ul li{
+    text-align: center;
+}
+#barraAdministracion button{
+    width: 130px;
+    margin-top: 8px;
+    margin-right: 10px;
+}
+
+.navbar-header label{
+    margin-top: 15px;
+    margin-left: 10px;
+}
+
+@media only screen and (max-width: 768px) {
+    #barraAdministracion button {
+        width: 100%;
+        margin-right: 0px;
+    }
 }
 
 
+/* Grafico de ocupacion del restaurante */
+.sillaOcupada{
+    height: 15px;
+    background-color: #da1212;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.sillaLibre {
+    height: 15px;
+    background-color: darkgreen;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
 
 /*MAPA DE HOME*/
 #map {

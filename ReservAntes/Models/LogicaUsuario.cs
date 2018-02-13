@@ -43,15 +43,24 @@ namespace ReservAntes.Models
         dbReservantesEntities ctx = new dbReservantesEntities();
 
         public void CrearUsuario (Usuario us)
-        {
-            
-            Usuario NewUsuario = new Usuario();
-            Restaurante nuevoRestaurante = new Restaurante();
-            NewUsuario = us;
-          
-            ctx.Usuario.Add(NewUsuario);
+        {          
+            ctx.Usuario.Add(us);
             ctx.SaveChanges();
-            
+
+            //Crear restaurante si el usuario corresponde a un resto
+            if (us.TipoUsuarioId == 3)
+            {
+                Restaurante restaurante = new Restaurante();
+                restaurante.IdUsuario = us.Id;
+                restaurante.RazonSocial = "por defecto";
+                restaurante.NombreComercial = "por defecto";
+                restaurante.CUIT = "00-00000000-0";
+                restaurante.CantidadClientes = 0;
+                restaurante.Habilitado = false;
+                
+                ctx.Restaurante.Add(restaurante);
+                ctx.SaveChanges();
+            }           
 
         }
 

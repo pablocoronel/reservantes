@@ -51,11 +51,15 @@ namespace ReservAntes.Controllers
                         break;
                 }
 
-                
+
+            }
+            else
+            {
+                //si no hay session
+                ViewBag.LoginIncorrecto = true;
             }
 
-            //si no hay session
-            return View("../Home/Index");
+            return View("Login");
         }
 
     
