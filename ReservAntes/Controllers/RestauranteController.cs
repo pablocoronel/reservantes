@@ -152,11 +152,12 @@ namespace ReservAntes.Controllers
         [HttpPost]
         public ActionResult CreatePlato(PlatoViewModel plato)
         {
-            //if (ModelState.IsValid)
+            if (ModelState.IsValid)
+            {
+                bool resultado = this.LogRes.CrearPlato(plato);
 
-            bool resultado = this.LogRes.CrearPlato(plato);
-
-            ViewBag.Guardado = resultado;
+                ViewBag.Guardado = resultado;
+            }
             return View();
         }
 
@@ -172,12 +173,6 @@ namespace ReservAntes.Controllers
 
                 platos = LogRes.GetPlato(restaurante.IdRestaurante);
             }
-
-           /* if (ViewData["ResultadoEliminarPlato"] != null)
-            {
-                ViewData["ResultadoEliminarPlato"] = "si";
-            }
-            */
 
             return View(platos);
         }
@@ -202,24 +197,25 @@ namespace ReservAntes.Controllers
         [HttpGet]
         public ActionResult EditarPlato(int idPlato)
         {
-            Plato plato = ctx.Plato.Find(idPlato);
+            Plato platoBuscado= ctx.Plato.Find(idPlato);
 
+            PlatoViewModel plato = platoBuscado.Map();
             return View(plato);
         }
 
         
         [HttpPost]
-        public ActionResult EditarPlato(Plato plato)
+        public ActionResult EditarPlato(PlatoViewModel plato)
         {
-            //if (ModelState.IsValid)
-            //{
+            if (ModelState.IsValid)
+            {
                 bool resultado = LogRes.EditarPlato(plato);
 
                 if (resultado)
                 {
                     ViewBag.Guardado = true;
                 }
-            //}
+            }
 
             return View();
         }

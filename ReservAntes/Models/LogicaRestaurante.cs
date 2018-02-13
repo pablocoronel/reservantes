@@ -6,8 +6,7 @@ using System.Web.Mvc;
 using System.IO;
 using System.Data;
 using System.Data.Entity;
-
-
+using ReservAntes.ViewModels;
 
 namespace ReservAntes.Models
 {
@@ -118,7 +117,7 @@ namespace ReservAntes.Models
 
         // ----------------- Platos ---------------------
 
-        public bool CrearPlato(Plato plate)
+        public bool CrearPlato(PlatoViewModel plate)
         {
 
             Plato NewPlato = new Plato();
@@ -200,7 +199,7 @@ namespace ReservAntes.Models
         }
 
         //Editar plato
-        public bool EditarPlato(Plato plato)
+        public bool EditarPlato(PlatoViewModel plato)
         {
             bool resultado = false;
             Plato platoEditable = ctx.Plato.Find(plato.Id);
