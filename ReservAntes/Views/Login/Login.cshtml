@@ -16,6 +16,11 @@
                     <div class="alert alert-warning">
                         Usuario y/o contraseña incorrecto
                     </div>
+                }else if (ViewBag.UsuarioDeshabilitado != null && ViewBag.UsuarioDeshabilitado == true)
+                {
+                    <div class="alert alert-warning">
+                        La cuenta está suspendida o pendiente de habilitación
+                    </div>
                 }
 
                 @using (Html.BeginForm("Login", "Login"))
