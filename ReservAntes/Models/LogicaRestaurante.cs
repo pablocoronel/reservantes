@@ -156,6 +156,7 @@ namespace ReservAntes.Models
             NewPlato.Descripcion = plate.Descripcion;
             NewPlato.Precio = plate.Precio;
             NewPlato.RestauranteId = plate.RestauranteId;
+            NewPlato.Activo = true;
 
 
             //// IMAGEN
@@ -207,7 +208,7 @@ namespace ReservAntes.Models
         public List<Plato> GetPlato(int idResto)
         {
             List<Plato> ListPlato = (from m in ctx.Plato
-                                   where m.RestauranteId == idResto
+                                   where m.RestauranteId == idResto && m.Activo == true
                                      select m).ToList();
 
             return ListPlato;
@@ -218,7 +219,8 @@ namespace ReservAntes.Models
             bool resultado = false;
             Plato plato = ctx.Plato.Find(idPlato);
 
-            ctx.Plato.Remove(plato);
+            //ctx.Plato.Remove(plato);
+            plato.Activo = false;
             int filasAfectadas = ctx.SaveChanges();
 
             if (filasAfectadas == 1)
