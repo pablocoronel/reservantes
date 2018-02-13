@@ -297,6 +297,10 @@ namespace ReservAntes.Controllers
             //Todo: Agregar vista success
             return View();
         }
+
+
+
+
         [HttpGet]
         public ActionResult Reservas()
         {
