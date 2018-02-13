@@ -282,8 +282,15 @@ namespace ReservAntes.Controllers
 
         public ActionResult DatosBancarios()
         {
-
-            return View();
+            var IdUsuario = Session["usuarioId"];
+            var restaurante = LogRes.GetByUserId(Convert.ToInt32(IdUsuario));
+            var datoBancario = new DatosBancariosViewModel();
+            if (restaurante.DatosBancariosId != null)
+            {
+                var bancoResto = datosBancariosServicio.GetById(restaurante.DatosBancariosId.Value);
+                datoBancario = bancoResto.Map();
+            }
+            return View("DatosBancarios", datoBancario);
         }
 
         [HttpPost]
