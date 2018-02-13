@@ -92,12 +92,8 @@ namespace ReservAntes.Models
                     var restauranteDb = db.Restaurante.SingleOrDefault(x => x.IdRestaurante == restaurante.IdRestaurante);
 
                     restauranteDb.CantidadClientes = restaurante.CantidadClientes;
-<<<<<<< HEAD
                     restaurante.CUIT = restaurante.CUIT;
-=======
-                    restauranteDb.RazonSocial = restaurante.RazonSocial;
                     restauranteDb.CUIT = restaurante.CUIT;
->>>>>>> fe10fdd1b92793230c9e52b012837d94cf003207
                 }
                 else
                 {

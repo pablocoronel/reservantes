@@ -1,54 +1,54 @@
-﻿@model IEnumerable<Restaurante>
+﻿@model IEnumerable<Ubicacion>
 
-@{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+    @{
+        ViewBag.Title = "Index";
+        Layout = "~/Views/Shared/_LayoutHome.cshtml";
 
-}
-<body>
-    <div class="row">
-
-        @if (Session["usuarioTipo"] != null)
-        {
-
-            <p>tipo de usuario: </p>
-            @Session["usuarioTipo"].ToString();
-            <br>
-            <p>ID de usuario: </p>
-            @Session["usuarioId"].ToString();
-            <br>
-            <p>nombre de usuario: </p>
-            @Session["usuarioNombre"].ToString();
-
-        }
-    </div>
-
-
-    <style>
-        #map-canvas {
-            width: 100%;
-            height: 400px;
-            background-color: grey;
-            border: solid 1px;
-        }
-    </style>
-
-    <div class="jumbotron">
-
-
-        <input id="pac-input" class="form-control" type="text" placeholder="Buscar Restaurante por direccion">
-
-        <br />
-
+    }
+    <body>
         <div class="row">
-            <div id="map-canvas"></div>
+
+            @if (Session["usuarioTipo"] != null)
+            {
+
+                <p>tipo de usuario: </p>
+                @Session["usuarioTipo"].ToString();
+                <br>
+                <p>ID de usuario: </p>
+                @Session["usuarioId"].ToString();
+                <br>
+                <p>nombre de usuario: </p>
+                @Session["usuarioNombre"].ToString();
+
+            }
         </div>
 
-    </div>
 
-    <script src="https://maps.googleapis.com/maps/api/js?signed_in=true&key=AIzaSyAptrGun-vHjygAsSermQUGiDvxOGQ_qJ8&libraries=places&callback=inicialar" async defer></script>
+        <style>
+            #map-canvas {
+                width: 100%;
+                height: 400px;
+                background-color: grey;
+                border: solid 1px;
+            }
+        </style>
 
-    <script>
+        <div class="jumbotron">
+
+
+            <input id="pac-input" class="form-control" type="text" placeholder="Buscar Restaurante por direccion">
+
+            <br />
+
+            <div class="row">
+                <div id="map-canvas"></div>
+            </div>
+
+        </div>
+
+        <script src="https://maps.googleapis.com/maps/api/js?signed_in=true&key=AIzaSyAptrGun-vHjygAsSermQUGiDvxOGQ_qJ8&libraries=places&callback=inicialar" async defer></script>
+
+        <script>
 
         function inicialar() {
 
@@ -91,7 +91,7 @@
 
             })
                 (marker[i], i));
-            
+
         }
 
     })
@@ -154,5 +154,5 @@
     });
 
 }
-    </script>
-</body>
+        </script>
+    </body>
