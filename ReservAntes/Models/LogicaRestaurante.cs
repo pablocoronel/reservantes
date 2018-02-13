@@ -20,7 +20,7 @@ namespace ReservAntes.Models
         public List<Restaurante> GetRestaurantes()
         {
             List<Restaurante> todosLosRestaurantes = new List<Restaurante>(); 
-            todosLosRestaurantes = ctx.Restaurante.ToList();
+            todosLosRestaurantes = ctx.Restaurante.Where(x => x.Habilitado == true).ToList();
 
             return todosLosRestaurantes;
         }
@@ -106,7 +106,7 @@ namespace ReservAntes.Models
         //Habilitar el restaurante
         public void HabilitarRestaurante(int idresto)
         {
-            Restaurante restaurante = ctx.Restaurante.FirstOrDefault(x => x.IdUsuario == idresto);
+            Restaurante restaurante = ctx.Restaurante.FirstOrDefault(x => x.IdRestaurante == idresto);
             // 0 => NO habilitado | 1 => Habilitado
             restaurante.Habilitado = true;
 

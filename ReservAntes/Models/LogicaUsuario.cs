@@ -25,7 +25,7 @@ namespace ReservAntes.Models
         public List<Usuario> GetUsuario()
         {
             List<Usuario> todosLosUsuarios = new List<Usuario>();
-            todosLosUsuarios = ctx.Usuario.ToList();
+            todosLosUsuarios = ctx.Usuario.Where(x => x.Activo == true).ToList();
 
             return todosLosUsuarios;
         }
@@ -34,8 +34,23 @@ namespace ReservAntes.Models
 
         public void EliminarUs(int id)
         {
-            var DeleteUsuario = (from Usuario in ctx.Usuario where Usuario.Id == id select Usuario).FirstOrDefault();
-            ctx.Usuario.Remove(DeleteUsuario);
+            var usuario = (from Usuario in ctx.Usuario where Usuario.Id == id select Usuario).FirstOrDefault();
+            
+            //Desactivar usuario
+            usuario.Activo = false;
+
+            //Desactivar el restaurante del usuario
+            if (usuario.TipoUsuario.TipoUsuarioEnum == 3)
+            {
+                Restaurante restaurante = ctx.Restaurante.Where(x => x.IdUsuario == usuario.Id).FirstOrDefault();
+
+                if (restaurante != null)
+                {
+                    restaurante.Habilitado = false;
+                }
+                
+            }
+
             ctx.SaveChanges();
         }
 
