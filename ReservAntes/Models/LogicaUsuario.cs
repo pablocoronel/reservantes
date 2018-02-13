@@ -52,7 +52,6 @@ namespace ReservAntes.Models
             {
                 Restaurante restaurante = new Restaurante();
                 restaurante.IdUsuario = us.Id;
-                restaurante.RazonSocial = "por defecto";
                 restaurante.NombreComercial = "por defecto";
                 restaurante.CUIT = "00-00000000-0";
                 restaurante.CantidadClientes = 0;
