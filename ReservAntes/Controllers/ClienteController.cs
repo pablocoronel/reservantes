@@ -19,23 +19,12 @@ namespace ReservAntes.Controllers
 
         LogicaCliente LogCliente = new LogicaCliente();
         LogicaRestaurante restauranteServicio = new LogicaRestaurante();
-        LogicaDomicilio domicilioServicio = new LogicaDomicilio();
         LogicaReserva logicaReserva = new LogicaReserva();
         // GET: Cliente
         public ActionResult Index()
         {
             List<RestauranteViewModel> listadoRestaurante = new List<RestauranteViewModel>();
-            List<Restaurante> listaDeResto = restauranteServicio.GetRestaurantesHabilitados();
-            foreach(var resto in listaDeResto)
-            {
-                var restaurante = new RestauranteViewModel();
-                var domicilioResto = new DomicilioViewModel();
-                domicilioResto = domicilioServicio.GetById(resto.DomicilioId.Value).Map();
-                restaurante = resto.Map();
-                restaurante.domicilio = domicilioResto;
-                listadoRestaurante.Add(restaurante);
-            }
-            
+         
             return View(listadoRestaurante);
         }
 
@@ -64,7 +53,6 @@ namespace ReservAntes.Controllers
                     EditCliente.IdUsuario = Convert.ToInt32(IdUsuario);
                     EditCliente.Nombre = editCl.Nombre;
                     EditCliente.Apellido = editCl.Apellido;
-                    EditCliente.Domicilio = null;
 
                      ctx.Cliente.Add(EditCliente);
                     ctx.SaveChanges();
@@ -133,7 +121,6 @@ namespace ReservAntes.Controllers
                 newCliente.IdUsuario = Convert.ToInt32(IdUsuario);
                 newCliente.Nombre = cl.Nombre;
                 newCliente.Apellido = cl.Apellido;
-                newCliente.Domicilio = null;
       
 
                 ctx.Cliente.Add(newCliente);

@@ -71,7 +71,6 @@ namespace ReservAntes.Models
             using (var db = new dbReservantesEntities())
             {
                 var restauranteDb = db.Restaurante.SingleOrDefault(x => x.IdRestaurante == restauranteId);
-                restauranteDb.DomicilioId = domicilioId;
                 db.SaveChanges();
             }
         }
@@ -93,7 +92,6 @@ namespace ReservAntes.Models
                     var restauranteDb = db.Restaurante.SingleOrDefault(x => x.IdRestaurante == restaurante.IdRestaurante);
 
                     restauranteDb.CantidadClientes = restaurante.CantidadClientes;
-                    restaurante.RazonSocial = restaurante.RazonSocial;
                     restaurante.CUIT = restaurante.CUIT;
                 }
                 else

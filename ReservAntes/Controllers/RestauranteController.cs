@@ -17,7 +17,6 @@ namespace ReservAntes.Controllers
         dbReservantesEntities ctx = new dbReservantesEntities();
         LogicaRestaurante LogRes = new LogicaRestaurante();
         LogicaReserva LogRsv = new LogicaReserva();
-        private LogicaDomicilio domicilioServicio = new LogicaDomicilio();
         private LogicaDatosBancarios datosBancariosServicio = new LogicaDatosBancarios();
         private LogicaReserva reservaServicio = new LogicaReserva();
         // GET: Restaurante
@@ -137,73 +136,11 @@ namespace ReservAntes.Controllers
 
         public ActionResult RestoPerfil()
         {
-            var IdUsuario = Session["usuarioId"];
-            var restauranteNuevo = new RestauranteViewModel();
-            var restaurante = LogRes.GetByUserId(Convert.ToInt32(IdUsuario));
-            if ( restaurante!= null)
-            {
-                restauranteNuevo = restaurante.Map();
-            };
-            return View(restauranteNuevo);
-        }
-
-        [HttpPost]
-        public ActionResult RestoPerfil(RestauranteViewModel restaurante)
-        {
             
-            if (restaurante.IdRestaurante == 0)
-            {
-                restaurante.Habilitado =false;
-                restaurante.IdUsuario = Convert.ToInt32(Session["usuarioId"]);
-            }
-            LogRes.CreateOrUpdate(restaurante.Map());
-            //Paso a la vista de domicilio
-            var domicilio = CargarListadosDomicilio();
-
-            if (restaurante.DomicilioId != null)
-            {
-                var domicilioResto = domicilioServicio.GetById(restaurante.DomicilioId.Value);
-                domicilio = domicilioResto.Map();
-            }
-            return View("Domicilio", domicilio);
-        }
-        public ActionResult Domicilio()
-        {
-            var domicilio = CargarListadosDomicilio();
-            return View("Domicilio", domicilio);
-        }
-        [HttpPost]
-        public ActionResult Domicilio(DomicilioViewModel domicilio)
-        {
-            var IdUsuario = Session["usuarioId"];
-            var restaurante = LogRes.GetByUserId(Convert.ToInt32(IdUsuario));
-
-            //domicilio.Ubicacion = GeoPoint.CreatePoint(domicilio.latitud, domicilio.longitud);
-            domicilioServicio.CreateOrUpdate(domicilio.Map());
-            LogRes.ActualizaDomicilio(domicilio.Id, restaurante.IdRestaurante);
-
-            //paso a la vista de datos bancarios
-            var datoBancario = new DatosBancariosViewModel();
-            if (restaurante.DatosBancariosId != null)
-            {
-                var bancoResto=datosBancariosServicio.GetById(restaurante.DatosBancariosId.Value);
-                datoBancario = bancoResto.Map();
-            }
-            return View("DatosBancarios",datoBancario);
-
-        }
-        private DomicilioViewModel CargarListadosDomicilio()
-        {
-            var domicilioNuevo = new DomicilioViewModel();
-            var provinciaListado = ctx.Provincia.ToList();
-            var departamentoListado = ctx.Partido.ToList();
-            var localidadListado = ctx.Localidad.ToList();
-            domicilioNuevo.provincias = provinciaListado;
-            domicilioNuevo.partidos = departamentoListado;
-            domicilioNuevo.localidades = localidadListado;
-            return (domicilioNuevo);
+            return View("Index");
         }
 
+        
 
         public ActionResult DatosBancarios()
         {

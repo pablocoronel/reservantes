@@ -13,7 +13,6 @@
           <Property Name="IdUsuario" Type="int" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Apellido" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="DomicilioId" Type="int" />
         </EntityType>
         <EntityType Name="DatosBancarios">
           <Key>
@@ -23,20 +22,6 @@
           <Property Name="NumeroCuenta" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="CBU" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
-        <EntityType Name="Domicilio">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="NombreCalle" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="NumeroCalle" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="NumeroPiso" Type="int" />
-          <Property Name="NumeroDpto" Type="nvarchar" MaxLength="2" />
-          <Property Name="LocalidadId" Type="int" Nullable="false" />
-          <Property Name="Ubicacion" Type="geography" />
-          <Property Name="Latitud" Type="numeric" Precision="18" Scale="0" />
-          <Property Name="Longitud" Type="numeric" Precision="18" Scale="0" />
-        </EntityType>
         <EntityType Name="EstadoReserva">
           <Key>
             <PropertyRef Name="Id" />
@@ -44,14 +29,6 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="50" />
           <Property Name="EstadoReservaEnum" Type="int" />
-        </EntityType>
-        <EntityType Name="Localidad">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="PartidoId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="MedioPago">
           <Key>
@@ -69,14 +46,6 @@
           <Property Name="Precio" Type="decimal" Precision="5" Scale="2" />
           <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="EnumValue" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Partido">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
-          <Property Name="ProvinciaId" Type="int" />
         </EntityType>
         <EntityType Name="Plato">
           <Key>
@@ -96,13 +65,6 @@
           <Property Name="ReservaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PlatoId" Type="int" Nullable="false" />
           <Property Name="Cantidad" Type="int" />
-        </EntityType>
-        <EntityType Name="Provincia">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Reserva">
           <Key>
@@ -125,15 +87,17 @@
           </Key>
           <Property Name="IdRestaurante" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdUsuario" Type="int" Nullable="false" />
-          <Property Name="RazonSocial" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="NombreComercial" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="DatosBancariosId" Type="int" />
-          <Property Name="DomicilioId" Type="int" />
           <Property Name="CUIT" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="CantidadClientes" Type="int" />
           <Property Name="Habilitado" Type="bit" Nullable="false" />
-          <Property Name="Foto" Type="nvarchar" MaxLength="200" />
+          <Property Name="Foto" Type="image" />
+          <Property Name="ConstAFIP" Type="image" />
           <Property Name="NivelId" Type="int" />
+          <Property Name="Domicilio" Type="varchar" MaxLength="50" />
+          <Property Name="Latitud" Type="float" />
+          <Property Name="Longitud" Type="float" />
         </EntityType>
         <EntityType Name="TipoUsuario">
           <Key>
@@ -152,19 +116,8 @@
           <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="TipoUsuarioId" Type="int" Nullable="false" />
+          <Property Name="Activo" Type="bit" />
         </EntityType>
-        <Association Name="FK_Cliente_Domicilio">
-          <End Role="Domicilio" Type="Self.Domicilio" Multiplicity="0..1" />
-          <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Domicilio">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Cliente">
-              <PropertyRef Name="DomicilioId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Cliente_Usuario">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
           <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
@@ -174,42 +127,6 @@
             </Principal>
             <Dependent Role="Cliente">
               <PropertyRef Name="IdUsuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Domicilio_Localidad">
-          <End Role="Localidad" Type="Self.Localidad" Multiplicity="1" />
-          <End Role="Domicilio" Type="Self.Domicilio" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Localidad">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Domicilio">
-              <PropertyRef Name="LocalidadId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Localidad_Partido">
-          <End Role="Partido" Type="Self.Partido" Multiplicity="1" />
-          <End Role="Localidad" Type="Self.Localidad" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Partido">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Localidad">
-              <PropertyRef Name="PartidoId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Partido_Provincia">
-          <End Role="Provincia" Type="Self.Provincia" Multiplicity="0..1" />
-          <End Role="Partido" Type="Self.Partido" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Provincia">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Partido">
-              <PropertyRef Name="ProvinciaId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -309,18 +226,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Restaurante_Domicilio">
-          <End Role="Domicilio" Type="Self.Domicilio" Multiplicity="0..1" />
-          <End Role="Restaurante" Type="Self.Restaurante" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Domicilio">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Restaurante">
-              <PropertyRef Name="DomicilioId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Restaurante_Nivel">
           <End Role="NivelRestaurante" Type="Self.NivelRestaurante" Multiplicity="0..1" />
           <End Role="Restaurante" Type="Self.Restaurante" Multiplicity="*" />
@@ -360,38 +265,18 @@
         <EntityContainer Name="dbReservantesModelStoreContainer">
           <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DatosBancarios" EntityType="Self.DatosBancarios" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Domicilio" EntityType="Self.Domicilio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EstadoReserva" EntityType="Self.EstadoReserva" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Localidad" EntityType="Self.Localidad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MedioPago" EntityType="Self.MedioPago" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NivelRestaurante" EntityType="Self.NivelRestaurante" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Partido" EntityType="Self.Partido" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Plato" EntityType="Self.Plato" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PlatosElegidos" EntityType="Self.PlatosElegidos" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Provincia" EntityType="Self.Provincia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reserva" EntityType="Self.Reserva" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Restaurante" EntityType="Self.Restaurante" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoUsuario" EntityType="Self.TipoUsuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Cliente_Domicilio" Association="Self.FK_Cliente_Domicilio">
-            <End Role="Domicilio" EntitySet="Domicilio" />
-            <End Role="Cliente" EntitySet="Cliente" />
-          </AssociationSet>
           <AssociationSet Name="FK_Cliente_Usuario" Association="Self.FK_Cliente_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Cliente" EntitySet="Cliente" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Domicilio_Localidad" Association="Self.FK_Domicilio_Localidad">
-            <End Role="Localidad" EntitySet="Localidad" />
-            <End Role="Domicilio" EntitySet="Domicilio" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Localidad_Partido" Association="Self.FK_Localidad_Partido">
-            <End Role="Partido" EntitySet="Partido" />
-            <End Role="Localidad" EntitySet="Localidad" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Partido_Provincia" Association="Self.FK_Partido_Provincia">
-            <End Role="Provincia" EntitySet="Provincia" />
-            <End Role="Partido" EntitySet="Partido" />
           </AssociationSet>
           <AssociationSet Name="FK_Plato_Restaurante" Association="Self.FK_Plato_Restaurante">
             <End Role="Restaurante" EntitySet="Restaurante" />
@@ -425,10 +310,6 @@
             <End Role="DatosBancarios" EntitySet="DatosBancarios" />
             <End Role="Restaurante" EntitySet="Restaurante" />
           </AssociationSet>
-          <AssociationSet Name="FK_Restaurante_Domicilio" Association="Self.FK_Restaurante_Domicilio">
-            <End Role="Domicilio" EntitySet="Domicilio" />
-            <End Role="Restaurante" EntitySet="Restaurante" />
-          </AssociationSet>
           <AssociationSet Name="FK_Restaurante_Nivel" Association="Self.FK_Restaurante_Nivel">
             <End Role="NivelRestaurante" EntitySet="NivelRestaurante" />
             <End Role="Restaurante" EntitySet="Restaurante" />
@@ -455,8 +336,6 @@
           <Property Name="IdUsuario" Type="Int32" Nullable="false" />
           <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="DomicilioId" Type="Int32" />
-          <NavigationProperty Name="Domicilio" Relationship="Self.FK_Cliente_Domicilio" FromRole="Cliente" ToRole="Domicilio" />
           <NavigationProperty Name="Usuario" Relationship="Self.FK_Cliente_Usuario" FromRole="Cliente" ToRole="Usuario" />
           <NavigationProperty Name="Reserva" Relationship="Self.FK_Reserva_Cliente" FromRole="Cliente" ToRole="Reserva" />
         </EntityType>
@@ -469,23 +348,6 @@
           <Property Name="CBU" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Restaurante" Relationship="Self.FK_Restaurante_DatosBancarios" FromRole="DatosBancarios" ToRole="Restaurante" />
         </EntityType>
-        <EntityType Name="Domicilio">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NombreCalle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="NumeroCalle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="NumeroPiso" Type="Int32" />
-          <Property Name="NumeroDpto" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
-          <Property Name="LocalidadId" Type="Int32" Nullable="false" />
-          <Property Name="Ubicacion" Type="Geography" />
-          <Property Name="Latitud" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="Longitud" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="Cliente" Relationship="Self.FK_Cliente_Domicilio" FromRole="Domicilio" ToRole="Cliente" />
-          <NavigationProperty Name="Localidad" Relationship="Self.FK_Domicilio_Localidad" FromRole="Domicilio" ToRole="Localidad" />
-          <NavigationProperty Name="Restaurante" Relationship="Self.FK_Restaurante_Domicilio" FromRole="Domicilio" ToRole="Restaurante" />
-        </EntityType>
         <EntityType Name="EstadoReserva">
           <Key>
             <PropertyRef Name="Id" />
@@ -494,16 +356,6 @@
           <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="EstadoReservaEnum" Type="Int32" />
           <NavigationProperty Name="Reserva" Relationship="Self.FK_Reserva_EstadoReserva" FromRole="EstadoReserva" ToRole="Reserva" />
-        </EntityType>
-        <EntityType Name="Localidad">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="PartidoId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Domicilio" Relationship="Self.FK_Domicilio_Localidad" FromRole="Localidad" ToRole="Domicilio" />
-          <NavigationProperty Name="Partido" Relationship="Self.FK_Localidad_Partido" FromRole="Localidad" ToRole="Partido" />
         </EntityType>
         <EntityType Name="MedioPago">
           <Key>
@@ -523,16 +375,6 @@
           <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="EnumValue" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Restaurante" Relationship="Self.FK_Restaurante_Nivel" FromRole="NivelRestaurante" ToRole="Restaurante" />
-        </EntityType>
-        <EntityType Name="Partido">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ProvinciaId" Type="Int32" />
-          <NavigationProperty Name="Localidad" Relationship="Self.FK_Localidad_Partido" FromRole="Partido" ToRole="Localidad" />
-          <NavigationProperty Name="Provincia" Relationship="Self.FK_Partido_Provincia" FromRole="Partido" ToRole="Provincia" />
         </EntityType>
         <EntityType Name="Plato">
           <Key>
@@ -556,14 +398,6 @@
           <Property Name="Cantidad" Type="Int32" />
           <NavigationProperty Name="Plato" Relationship="Self.FK_PlatosElegidos_Plato" FromRole="PlatosElegidos" ToRole="Plato" />
           <NavigationProperty Name="Reserva" Relationship="Self.FK_PlatosElegidos_Reserva" FromRole="PlatosElegidos" ToRole="Reserva" />
-        </EntityType>
-        <EntityType Name="Provincia">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Partido" Relationship="Self.FK_Partido_Provincia" FromRole="Provincia" ToRole="Partido" />
         </EntityType>
         <EntityType Name="Reserva">
           <Key>
@@ -591,17 +425,18 @@
           </Key>
           <Property Name="IdRestaurante" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdUsuario" Type="Int32" Nullable="false" />
-          <Property Name="RazonSocial" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="NombreComercial" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DatosBancariosId" Type="Int32" />
-          <Property Name="DomicilioId" Type="Int32" />
           <Property Name="CUIT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CantidadClientes" Type="Int32" />
           <Property Name="Habilitado" Type="Boolean" Nullable="false" />
-          <Property Name="Foto" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Foto" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="ConstAFIP" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="NivelId" Type="Int32" />
+          <Property Name="Domicilio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Latitud" Type="Double" />
+          <Property Name="Longitud" Type="Double" />
           <NavigationProperty Name="DatosBancarios" Relationship="Self.FK_Restaurante_DatosBancarios" FromRole="Restaurante" ToRole="DatosBancarios" />
-          <NavigationProperty Name="Domicilio" Relationship="Self.FK_Restaurante_Domicilio" FromRole="Restaurante" ToRole="Domicilio" />
           <NavigationProperty Name="NivelRestaurante" Relationship="Self.FK_Restaurante_Nivel" FromRole="Restaurante" ToRole="NivelRestaurante" />
           <NavigationProperty Name="Plato" Relationship="Self.FK_Plato_Restaurante" FromRole="Restaurante" ToRole="Plato" />
           <NavigationProperty Name="Reserva" Relationship="Self.FK_Reserva_Restaurante" FromRole="Restaurante" ToRole="Reserva" />
@@ -625,22 +460,11 @@
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="TipoUsuarioId" Type="Int32" Nullable="false" />
+          <Property Name="Activo" Type="Boolean" />
           <NavigationProperty Name="Cliente" Relationship="Self.FK_Cliente_Usuario" FromRole="Usuario" ToRole="Cliente" />
           <NavigationProperty Name="Restaurante" Relationship="Self.FK_Restaurante_Usuario" FromRole="Usuario" ToRole="Restaurante" />
           <NavigationProperty Name="TipoUsuario" Relationship="Self.FK_TipoUsuario" FromRole="Usuario" ToRole="TipoUsuario" />
         </EntityType>
-        <Association Name="FK_Cliente_Domicilio">
-          <End Role="Domicilio" Type="Self.Domicilio" Multiplicity="0..1" />
-          <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Domicilio">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Cliente">
-              <PropertyRef Name="DomicilioId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Cliente_Usuario">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
           <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
@@ -677,30 +501,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Domicilio_Localidad">
-          <End Role="Localidad" Type="Self.Localidad" Multiplicity="1" />
-          <End Role="Domicilio" Type="Self.Domicilio" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Localidad">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Domicilio">
-              <PropertyRef Name="LocalidadId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Restaurante_Domicilio">
-          <End Role="Domicilio" Type="Self.Domicilio" Multiplicity="0..1" />
-          <End Role="Restaurante" Type="Self.Restaurante" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Domicilio">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Restaurante">
-              <PropertyRef Name="DomicilioId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Reserva_EstadoReserva">
           <End Role="EstadoReserva" Type="Self.EstadoReserva" Multiplicity="1" />
           <End Role="Reserva" Type="Self.Reserva" Multiplicity="*" />
@@ -710,18 +510,6 @@
             </Principal>
             <Dependent Role="Reserva">
               <PropertyRef Name="EstadoReservaId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Localidad_Partido">
-          <End Role="Partido" Type="Self.Partido" Multiplicity="1" />
-          <End Role="Localidad" Type="Self.Localidad" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Partido">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Localidad">
-              <PropertyRef Name="PartidoId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -746,18 +534,6 @@
             </Principal>
             <Dependent Role="Restaurante">
               <PropertyRef Name="NivelId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Partido_Provincia">
-          <End Role="Provincia" Type="Self.Provincia" Multiplicity="0..1" />
-          <End Role="Partido" Type="Self.Partido" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Provincia">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Partido">
-              <PropertyRef Name="ProvinciaId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -836,23 +612,15 @@
         <EntityContainer Name="dbReservantesEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Cliente" EntityType="Self.Cliente" />
           <EntitySet Name="DatosBancarios" EntityType="Self.DatosBancarios" />
-          <EntitySet Name="Domicilio" EntityType="Self.Domicilio" />
           <EntitySet Name="EstadoReserva" EntityType="Self.EstadoReserva" />
-          <EntitySet Name="Localidad" EntityType="Self.Localidad" />
           <EntitySet Name="MedioPago" EntityType="Self.MedioPago" />
           <EntitySet Name="NivelRestaurante" EntityType="Self.NivelRestaurante" />
-          <EntitySet Name="Partido" EntityType="Self.Partido" />
           <EntitySet Name="Plato" EntityType="Self.Plato" />
           <EntitySet Name="PlatosElegidos" EntityType="Self.PlatosElegidos" />
-          <EntitySet Name="Provincia" EntityType="Self.Provincia" />
           <EntitySet Name="Reserva" EntityType="Self.Reserva" />
           <EntitySet Name="Restaurante" EntityType="Self.Restaurante" />
           <EntitySet Name="TipoUsuario" EntityType="Self.TipoUsuario" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" />
-          <AssociationSet Name="FK_Cliente_Domicilio" Association="Self.FK_Cliente_Domicilio">
-            <End Role="Domicilio" EntitySet="Domicilio" />
-            <End Role="Cliente" EntitySet="Cliente" />
-          </AssociationSet>
           <AssociationSet Name="FK_Cliente_Usuario" Association="Self.FK_Cliente_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Cliente" EntitySet="Cliente" />
@@ -865,21 +633,9 @@
             <End Role="DatosBancarios" EntitySet="DatosBancarios" />
             <End Role="Restaurante" EntitySet="Restaurante" />
           </AssociationSet>
-          <AssociationSet Name="FK_Domicilio_Localidad" Association="Self.FK_Domicilio_Localidad">
-            <End Role="Localidad" EntitySet="Localidad" />
-            <End Role="Domicilio" EntitySet="Domicilio" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Restaurante_Domicilio" Association="Self.FK_Restaurante_Domicilio">
-            <End Role="Domicilio" EntitySet="Domicilio" />
-            <End Role="Restaurante" EntitySet="Restaurante" />
-          </AssociationSet>
           <AssociationSet Name="FK_Reserva_EstadoReserva" Association="Self.FK_Reserva_EstadoReserva">
             <End Role="EstadoReserva" EntitySet="EstadoReserva" />
             <End Role="Reserva" EntitySet="Reserva" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Localidad_Partido" Association="Self.FK_Localidad_Partido">
-            <End Role="Partido" EntitySet="Partido" />
-            <End Role="Localidad" EntitySet="Localidad" />
           </AssociationSet>
           <AssociationSet Name="FK_Reserva_MedioPago" Association="Self.FK_Reserva_MedioPago">
             <End Role="MedioPago" EntitySet="MedioPago" />
@@ -888,10 +644,6 @@
           <AssociationSet Name="FK_Restaurante_Nivel" Association="Self.FK_Restaurante_Nivel">
             <End Role="NivelRestaurante" EntitySet="NivelRestaurante" />
             <End Role="Restaurante" EntitySet="Restaurante" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Partido_Provincia" Association="Self.FK_Partido_Provincia">
-            <End Role="Provincia" EntitySet="Provincia" />
-            <End Role="Partido" EntitySet="Partido" />
           </AssociationSet>
           <AssociationSet Name="FK_Plato_Restaurante" Association="Self.FK_Plato_Restaurante">
             <End Role="Restaurante" EntitySet="Restaurante" />
@@ -931,7 +683,6 @@
                 <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Apellido" ColumnName="Apellido" />
-                <ScalarProperty Name="DomicilioId" ColumnName="DomicilioId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -944,36 +695,12 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Domicilio">
-            <EntityTypeMapping TypeName="dbReservantesModel.Domicilio">
-              <MappingFragment StoreEntitySet="Domicilio">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="NombreCalle" ColumnName="NombreCalle" />
-                <ScalarProperty Name="NumeroCalle" ColumnName="NumeroCalle" />
-                <ScalarProperty Name="NumeroPiso" ColumnName="NumeroPiso" />
-                <ScalarProperty Name="NumeroDpto" ColumnName="NumeroDpto" />
-                <ScalarProperty Name="LocalidadId" ColumnName="LocalidadId" />
-                <ScalarProperty Name="Ubicacion" ColumnName="Ubicacion" />
-                <ScalarProperty Name="Latitud" ColumnName="Latitud" />
-                <ScalarProperty Name="Longitud" ColumnName="Longitud" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="EstadoReserva">
             <EntityTypeMapping TypeName="dbReservantesModel.EstadoReserva">
               <MappingFragment StoreEntitySet="EstadoReserva">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="EstadoReservaEnum" ColumnName="EstadoReservaEnum" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Localidad">
-            <EntityTypeMapping TypeName="dbReservantesModel.Localidad">
-              <MappingFragment StoreEntitySet="Localidad">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="PartidoId" ColumnName="PartidoId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -993,15 +720,6 @@
                 <ScalarProperty Name="Precio" ColumnName="Precio" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="EnumValue" ColumnName="EnumValue" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Partido">
-            <EntityTypeMapping TypeName="dbReservantesModel.Partido">
-              <MappingFragment StoreEntitySet="Partido">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="ProvinciaId" ColumnName="ProvinciaId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1026,14 +744,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Provincia">
-            <EntityTypeMapping TypeName="dbReservantesModel.Provincia">
-              <MappingFragment StoreEntitySet="Provincia">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Reserva">
             <EntityTypeMapping TypeName="dbReservantesModel.Reserva">
               <MappingFragment StoreEntitySet="Reserva">
@@ -1055,15 +765,17 @@
               <MappingFragment StoreEntitySet="Restaurante">
                 <ScalarProperty Name="IdRestaurante" ColumnName="IdRestaurante" />
                 <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="RazonSocial" ColumnName="RazonSocial" />
                 <ScalarProperty Name="NombreComercial" ColumnName="NombreComercial" />
                 <ScalarProperty Name="DatosBancariosId" ColumnName="DatosBancariosId" />
-                <ScalarProperty Name="DomicilioId" ColumnName="DomicilioId" />
                 <ScalarProperty Name="CUIT" ColumnName="CUIT" />
                 <ScalarProperty Name="CantidadClientes" ColumnName="CantidadClientes" />
                 <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
                 <ScalarProperty Name="Foto" ColumnName="Foto" />
+                <ScalarProperty Name="ConstAFIP" ColumnName="ConstAFIP" />
                 <ScalarProperty Name="NivelId" ColumnName="NivelId" />
+                <ScalarProperty Name="Domicilio" ColumnName="Domicilio" />
+                <ScalarProperty Name="Latitud" ColumnName="Latitud" />
+                <ScalarProperty Name="Longitud" ColumnName="Longitud" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1084,6 +796,7 @@
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="TipoUsuarioId" ColumnName="TipoUsuarioId" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1103,7 +816,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
       </DesignerInfoPropertySet>
     </Options>
