@@ -12,6 +12,6 @@ namespace ReservAntes.ViewModels
     {
         public bool elegido { get; set; }
         public List<int> cantidadPlatos { get; set; }
-        public int cantidad { get; set; }
+        public int? cantidad { get; set; }
     }
 }
