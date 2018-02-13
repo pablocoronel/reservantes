@@ -28,5 +28,7 @@ namespace ReservAntes.Extensions
 
         [Required(ErrorMessage = "Este campo es obligatorio")]
         public int TipoUsuarioId { get; set; }
+
+        public bool Activo { get; set; }
     }
 }
