@@ -43,6 +43,7 @@ namespace ReservAntes.ViewModels.Extensions
             entity.CUIT = model.CUIT;
             entity.Habilitado = model.Habilitado;
             entity.Foto = model.Foto;
+            entity.ConstAFIP = model.ConstAFIP;
             entity.DatosBancariosId = model.DatosBancariosId;
             entity.NombreComercial = model.NombreComercial;
             entity.NivelId = model.NivelId;
