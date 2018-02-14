@@ -41,14 +41,7 @@ namespace ReservAntes.Models
             return restaurantesNoHabilidatos;
         }
 
-        //Listado de restaurantes
-        //public List<Restaurante> GetRestaurantes()
-        //{
-        //    List<Restaurante> todosLosRestaurantes = new List<Restaurante>();
-        //    todosLosRestaurantes = ctx.Restaurante.Include("Domicilio").ToList();
-
-        //    return todosLosRestaurantes;
-        //}
+        
 
         //Listado de restaurantes
         public List<Restaurante> GetRestaurantesByLocalidad(int localidadId)
