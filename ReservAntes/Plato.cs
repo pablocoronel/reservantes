@@ -28,7 +28,6 @@ namespace ReservAntes
         public int RestauranteId { get; set; }
         public Nullable<bool> Activo { get; set; }
     
-        public virtual Restaurante Restaurante { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PlatosElegidos> PlatosElegidos { get; set; }
     }

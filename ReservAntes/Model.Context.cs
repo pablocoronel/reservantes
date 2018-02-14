@@ -34,7 +34,6 @@ namespace ReservAntes
         public virtual DbSet<PlatosElegidos> PlatosElegidos { get; set; }
         public virtual DbSet<Reserva> Reserva { get; set; }
         public virtual DbSet<Restaurante> Restaurante { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<TipoUsuario> TipoUsuario { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
     }

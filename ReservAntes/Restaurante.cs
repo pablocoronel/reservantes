@@ -17,7 +17,6 @@ namespace ReservAntes
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Restaurante()
         {
-            this.Plato = new HashSet<Plato>();
             this.Reserva = new HashSet<Reserva>();
         }
     
@@ -37,8 +36,6 @@ namespace ReservAntes
     
         public virtual DatosBancarios DatosBancarios { get; set; }
         public virtual NivelRestaurante NivelRestaurante { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Plato> Plato { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Reserva> Reserva { get; set; }
         public virtual Usuario Usuario { get; set; }
