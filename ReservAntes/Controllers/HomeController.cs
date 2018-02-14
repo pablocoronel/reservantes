@@ -50,7 +50,7 @@ namespace ReservAntes.Controllers
 
         public JsonResult GetAllLocation()
         {
-            var data = this.LogiRes.GetRestaurantesHabilitados();
+            var data = LogiRes.GetRestaurantesHabilitados();
             return Json(data, JsonRequestBehavior.AllowGet);
 
         }
