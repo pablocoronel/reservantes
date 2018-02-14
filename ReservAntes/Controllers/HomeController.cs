@@ -58,7 +58,7 @@ namespace ReservAntes.Controllers
 
             return Json(new
             {
-                Result = (from obj in ctx.Restaurante.Where(x => x.Habilitado == true) select new { Latitud = obj.Latitud, Longitud = obj.Longitud})
+                Restaurantes= (from obj in ctx.Restaurante.Where(x => x.Habilitado == true) select new { Latitud = obj.Latitud, Longitud = obj.Longitud, NombreComercial = obj.NombreComercial})
             }, JsonRequestBehavior.AllowGet);
         }
 
