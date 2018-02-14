@@ -8,8 +8,8 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.Threading.Tasks;
 using System.Net;
-
-
+using System.Web.Script.Serialization;
+using System.Web.Http.Results;
 
 namespace ReservAntes.Controllers
 {
@@ -45,14 +45,21 @@ namespace ReservAntes.Controllers
                 }
 
             }
+
+            
             return View();
         }
 
         public JsonResult GetAllLocation()
         {
-            var data = LogiRes.GetRestaurantesHabilitados();
-            return Json(data, JsonRequestBehavior.AllowGet);
+            //var data = LogiRes.GetRestaurantesHabilitados();
+            //return Json(data, JsonRequestBehavior.AllowGet);
+            //return Json(query, JsonRequestBehavior.AllowGet);
 
+            return Json(new
+            {
+                Result = (from obj in ctx.Restaurante.Where(x => x.Habilitado == true) select new { Latitud = obj.Latitud, Longitud = obj.Longitud})
+            }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Contact()

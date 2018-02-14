@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<Restaurante>
-
     @{
         ViewBag.Title = "Index";
         Layout = "~/Views/Shared/_LayoutHome.cshtml";
@@ -39,7 +38,8 @@
             <input id="pac-input" class="form-control" type="text" placeholder="Buscar Restaurante por direccion">
 
             <br />
-
+            
+            
             <div class="row">
                 <div id="map-canvas"></div>
             </div>
@@ -49,60 +49,63 @@
         <script src="https://maps.googleapis.com/maps/api/js?&key=AIzaSyAptrGun-vHjygAsSermQUGiDvxOGQ_qJ8&libraries=places&callback=inicialar" async defer></script>
 
         <script>
-
+            
+                
+           
         function inicialar() {
+            var mapCanvas = document.getElementById('map-canvas');
 
+            var mapOptions = {
+                center: new google.maps.LatLng(-34.611170889697334, -58.40778350830078),
+                zoom: 12,
+                mapTypeId: google.maps.MapTypeId.G_NORMAL_MAP
+            };
 
-    var mapCanvas = document.getElementById('map-canvas');
+            var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+            
+            var algo = $.get("@Url.Action("GetAllLocation", "Home")", function (data) {
+                
+                var marker = [];
+                var contents = [];
+                var infowindows = [];
+                
 
-    var mapOptions = {
-        center: new google.maps.LatLng(-34.611170889697334, -58.40778350830078),
-        zoom: 12,
-        mapTypeId: google.maps.MapTypeId.G_NORMAL_MAP
-    };
+                for (var i = 0; i < data.length; i++) {
+                    marker[i] = new google.maps.Marker({
+                        position: { lat: data[i].Latitud, lng: data[i].Longitud },
+                        map: map,
+                    });
 
-    var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+                    contents[i] = '<div class=container>' +
+                        '<p><h4>' + data[i].NombreComercial + '</h4></p> | <a href="https://www.ole.com.ar/">Ver Menu</a>' +
+                        '</div>';
 
-      $.get("@Url.Action("GetAllLocation", "Home")", function (data) {
-        var marker = [];
-        var contents = [];
-        var infowindows = [];
+                    infowindows[i] = new google.maps.InfoWindow({
+                        content: contents[i]
+                    });
 
-        for (var i = 0; i < data.length; i++) {
+                    var mdl = marker[i];
+                    google.maps.event.addListener(marker[i], 'click', (function (mdl, i) {
+                        return function () {
+                            infowindows[i].open(map, marker[i]);
+                        }
 
-            marker[i] = new google.maps.Marker({
-                position: { lat: data[i].Latitud, lng: data[i].Longitud },
-                map: map,
-            });
+                    })
+                        (marker[i], i));
 
-            contents[i] = '<div class=container>' +
-                '<p><h4>' + data[i].NombreComercial + '</h4></p> | <a href="https://www.ole.com.ar/">Ver Menu</a>' +
-                '</div>';
-
-            infowindows[i] = new google.maps.InfoWindow({
-                content: contents[i]
-            });
-
-            var mdl = marker[i];
-            google.maps.event.addListener(marker[i], 'click', (function (mdl, i) {
-                return function () {
-                    infowindows[i].open(map, marker[i]);
                 }
 
             })
-                (marker[i], i));
 
-        }
+            console.log(algo);
+              
+            var input = document.getElementById('pac-input');
+            var searchBox = new google.maps.places.SearchBox(input);
 
-    })
-
-    var input = document.getElementById('pac-input');
-    var searchBox = new google.maps.places.SearchBox(input);
-
-    // Bias the SearchBox results towards current map's viewport.
-    map.addListener('bounds_changed', function () {
-        searchBox.setBounds(map.getBounds());
-    });
+            // Bias the SearchBox results towards current map's viewport.
+            map.addListener('bounds_changed', function () {
+                searchBox.setBounds(map.getBounds());
+            });
 
     var markers = [];
     // Listen for the event fired when the user selects a prediction and retrieve
@@ -121,8 +124,8 @@
         markers = [];
 
         // For each place, get the icon, name and location.
-        var bounds = new google.maps.LatLngBounds();
-        places.forEach(function (place) {
+            var bounds = new google.maps.LatLngBounds();
+            algo.forEach(function (place) {
             if (!place.geometry) {
                 console.log("Returned place contains no geometry");
                 return;
@@ -153,6 +156,7 @@
         map.fitBounds(bounds);
     });
 
-}
+        }
+
+            
         </script>
-  

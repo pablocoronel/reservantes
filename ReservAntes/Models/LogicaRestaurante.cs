@@ -33,6 +33,7 @@ namespace ReservAntes.Models
 
             return restaurantesHabilidatos;
         }
+
         public List<Restaurante> GetRestaurantesNoHabilitados()
         {
             List<Restaurante> restaurantesNoHabilidatos = new List<Restaurante>();
