@@ -76,9 +76,9 @@
                     });
 
                     contents[i] = '<div class=container>' +
-                        '<p><h4>' + data.Restaurantes[i].NombreComercial + '</h4></p> | <a href="https://www.ole.com.ar/">Ver Menu</a>' +
-                        '</div>';
-
+                        '<p><h4>' + data.Restaurantes[i].NombreComercial + '</h4></p> | <a href="Cliente/ListaPlatos/?idResto='+ data.Restaurantes[i].IdRestaurante+'">Ver Menu</a>' +
+                            '</div>';
+                    
                     infowindows[i] = new google.maps.InfoWindow({
                         content: contents[i]
                     });
