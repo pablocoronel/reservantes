@@ -282,7 +282,29 @@ namespace ReservAntes.Controllers
             return View();
         }
 
-        
+        //TRAER LAS IMAGENES 
+
+        public FileContentResult getImgFoto(int id)
+        {
+            byte[] byteArrayFoto = ctx.Restaurante.Find(id).Foto;
+
+            return byteArrayFoto != null
+                ? new FileContentResult(byteArrayFoto, "image/jpeg/png")
+                : null;
+
+
+        }
+
+        public FileContentResult getImgAFIP(int id)
+        {
+            byte[] byteArrayAFIP = ctx.Restaurante.Find(id).ConstAFIP;
+
+            return byteArrayAFIP != null
+                ? new FileContentResult(byteArrayAFIP, "image/jpeg/png")
+                : null;
+        }
+
+
 
         public ActionResult DatosBancarios()
         {

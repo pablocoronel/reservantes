@@ -1,4 +1,5 @@
 ﻿@using ReservAntes.ViewModels
+
 @model  RestauranteViewModel
 @{
     ViewBag.Title = "RestoPerfil";
@@ -14,10 +15,10 @@
         <div class="col-md-1"></div>
         <div class="col-md-11">
 
-            @using (Html.BeginForm("RestoPerfil", "Restaurante"))
+            @using (Html.BeginForm("RestoPerfil", "Restaurante", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @*@Html.HttpMethodOverride(HttpVerbs.Put)*@
-
+        @Html.AntiForgeryToken()
         @Html.HiddenFor(Model => Model.IdRestaurante);
 
 

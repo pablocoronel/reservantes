@@ -100,7 +100,7 @@ namespace ReservAntes.Models
                     HttpPostedFileBase foto = restaurante.Foto;
                     HttpPostedFileBase constAFIP = restaurante.ConstAFIP;
 
-                if (foto != null && foto.ContentLength > 0 && constAFIP != null && constAFIP.ContentLength > 0)
+                if (foto != null && foto.ContentLength > 0 || constAFIP != null && constAFIP.ContentLength > 0)
 
                 {
                     var fileName = Path.GetFileName(foto.FileName);
@@ -109,11 +109,13 @@ namespace ReservAntes.Models
                     using (MemoryStream ms = new MemoryStream())
                     {
                         foto.InputStream.CopyTo(ms);
-                        byte[] array = ms.GetBuffer();
+                        byte[] arrayFoto = ms.GetBuffer();
+                        byte[] arrayAFIP = ms.GetBuffer();
+
 
                         restauranteDb.NombreComercial = restaurante.NombreComercial;
-                        restauranteDb.Foto = array;
-                        restauranteDb.ConstAFIP = array;
+                        restauranteDb.Foto = arrayFoto;
+                        restauranteDb.ConstAFIP = arrayAFIP;
 
 
                     }
