@@ -2,17 +2,17 @@
     ViewBag.Title = "Cliente";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
-    /*
+    //redireccion por permisos
     var nombreDeVista = Request.Url.Segments[3];
-    
+
     if (nombreDeVista != "ListaPlatos/")
     {
         if (Session["usuarioTipo"] == null || Session["usuarioTipo"].ToString() != "2")
         {
-            Response.Redirect("/Home/Index/");
+            Response.Redirect("/ReservAntes/Home/Index/");
         }
     }
-    */
+
 
     <!-- menu principal -->
     if (Session["usuarioTipo"] == null)
