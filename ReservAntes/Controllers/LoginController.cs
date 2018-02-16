@@ -35,6 +35,7 @@ namespace ReservAntes.Controllers
                     Session["usuarioTipo"] = existeUsuario.TipoUsuarioId;
                     Session["usuarioNombre"] = existeUsuario.Username;
 
+                    /*
                     switch (Convert.ToInt32(Session["usuarioTipo"]))
                     {
                         case 1:
@@ -51,6 +52,8 @@ namespace ReservAntes.Controllers
                             Response.Redirect("../Home/Index");
                             break;
                     }
+                    */
+                    Response.Redirect("../Home/Index");
 
                 }
                 else

@@ -388,6 +388,10 @@
     <Content Include="Scripts\jquery-3.2.1.min.map" />
     <Content Include="Views\Cliente\ReservaCliente.cshtml" />
     <Content Include="Views\Restaurante\EditarPlato.cshtml" />
+    <Content Include="Views\Shared\_NavegacionVisitante.cshtml" />
+    <Content Include="Views\Shared\_NavegacionAdmin.cshtml" />
+    <Content Include="Views\Shared\_NavegacionCliente.cshtml" />
+    <Content Include="Views\Shared\_NavegacionRestaurante.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

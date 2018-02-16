@@ -21,8 +21,7 @@ namespace ReservAntes.Controllers
 
          public ActionResult Index()
         {
-                    
-
+            /*
             if(Session["usuarioTipo"] != null)
                 {
                 switch (Convert.ToInt32(Session["usuarioTipo"]))
@@ -45,7 +44,7 @@ namespace ReservAntes.Controllers
                 }
 
             }
-
+            */
             
             return View();
         }

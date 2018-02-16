@@ -1,75 +1,31 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Admin";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    //redireccion por permisos
+    if (Session["usuarioTipo"] == null || Session["usuarioTipo"].ToString() != "1")
+    {
+        Response.Redirect("/Home/Index/");
+    }
+
+    <!-- menu principal -->
+    if (Session["usuarioTipo"] == null)
+    {
+        @Html.Partial("~/Views/Shared/_NavegacionVisitante.cshtml")
+    }
+    else if (Session["usuarioTipo"].ToString() == "1")
+    {
+        @Html.Partial("~/Views/Shared/_NavegacionAdmin.cshtml")
+    }
+    else if (Session["usuarioTipo"].ToString() == "2")
+    {
+        @Html.Partial("~/Views/Shared/_NavegacionCliente.cshtml")
+    }
+    else if (Session["usuarioTipo"].ToString() == "3")
+    {
+        @Html.Partial("~/Views/Shared/_NavegacionRestaurante.cshtml")
+    }
 }
-@if (Session["usuarioTipo"] == null || Session["usuarioTipo"].ToString() != "1")
-{
-    Response.Redirect("/Home/Index/");
-}
-<!-- menu principal -->
-<nav class="navbar navbar-default" id="menuPrincipal">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mibarrita">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-
-            <a href='@Url.Action("Index", "Admin")'>
-                <img src="~/Imagenes/Logo.png" alt="Reservantes" class="img-responsive" />
-            </a>
-
-        </div>
-        <div class="collapse navbar-collapse" id="mibarrita">
-            <ul class="nav navbar-nav hidden-xs hidden-sm hidden-md">
-                <li class="slogan">
-                    <em>No esperes la comida, la comida te espera a vos</em>
-                </li>
-            </ul>
-                
-            <ul class="nav navbar-nav navbar-right">
-                <li>@Html.ActionLink("Home", "Index", "Admin")</li>
-                <li><a>@Session["usuarioNombre"]</a></li>
-                <li>@Html.ActionLink("Salir", "Logout", "Login")</li>
-            </ul>
-        </div>
-    </div>
-</nav>
-
-<!-- menu de admin -->
-<nav class="navbar navbar-default" id="menuPrincipal">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#barraAdministracion">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-
-            <label class="hidden-lg hidden-md hidden-sm">Administración</label>
-                        
-        </div>
-        <div class="collapse navbar-collapse" id="barraAdministracion">
-            <ul class="nav navbar-nav">
-                <li>
-                    <button onclick="location.href='@Url.Action("Index","Admin")'; return false;" class="btn btn-rojo">Inicio</button>
-                </li>
-                <li>
-                    <button onclick="location.href='@Url.Action("VerRestaurantes","Admin")'; return false;" class="btn btn-rojo">Ver Restaurantes</button>
-                </li>
-                <li>
-                    <button onclick="location.href='@Url.Action("VerClientes","Admin")'; return false;" class="btn btn-rojo">Ver Clientes</button>
-                </li>
-                <li>
-                    <button onclick="location.href='@Url.Action("VerUsuarios","Admin")'; return false;" class="btn btn-rojo">Ver Usuarios</button>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-
 <br />
 
 <div class="container alturaMinimaDeSecciones">
