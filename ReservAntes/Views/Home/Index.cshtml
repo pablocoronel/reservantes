@@ -48,10 +48,20 @@
 
         <script src="https://maps.googleapis.com/maps/api/js?&key=AIzaSyAptrGun-vHjygAsSermQUGiDvxOGQ_qJ8&libraries=places&callback=inicialar" async defer></script>
 
-        <script>
-            
-                
-           
+        @if (Session["usuarioTipo"] == null)
+        {
+            <script>
+                var urlSegunUsuario = "../Cliente/";
+            </script>
+        }
+        else
+        {
+            <script>
+                var urlSegunUsuario = "Cliente/";
+            </script>
+        }
+
+        <script>           
         function inicialar() {
             var mapCanvas = document.getElementById('map-canvas');
 
@@ -76,7 +86,7 @@
                     });
 
                     contents[i] = '<div class=container>' +
-                        '<p><h4>' + data.Restaurantes[i].NombreComercial + '</h4></p> | <a href="Cliente/ListaPlatos/?idResto='+ data.Restaurantes[i].IdRestaurante+'">Ver Menu</a>' +
+                        '<p><h4>' + data.Restaurantes[i].NombreComercial + '</h4></p> | <a href="' + urlSegunUsuario+'ListaPlatos/?idResto='+ data.Restaurantes[i].IdRestaurante+'">Ver Menu</a>' +
                             '</div>';
                     
                     infowindows[i] = new google.maps.InfoWindow({
