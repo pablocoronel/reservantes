@@ -53,7 +53,7 @@ namespace ReservAntes.Controllers
                             break;
                     }
                     */
-                    Response.Redirect("../Home/Index");
+                    Response.Redirect("../");
 
                 }
                 else
@@ -80,7 +80,7 @@ namespace ReservAntes.Controllers
         {
             Session.Abandon();
             Response.Cookies.Add(new HttpCookie("ASP.NET_SessionId", ""));
-            Response.Redirect("../Home/Index");
+            Response.Redirect("/ReservAntes");
         }
 
     }
