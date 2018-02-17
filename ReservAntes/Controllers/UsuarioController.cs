@@ -46,7 +46,7 @@ namespace ReservAntes.Controllers
 
         // POST: Usuario/Create
         [HttpPost]
-        public ActionResult CreateUser(Usuario user)
+        public ActionResult CreateUser(UsuarioExtension user)
         {
 
             {
@@ -54,14 +54,12 @@ namespace ReservAntes.Controllers
                 {
                     ViewBag.ListUsuario = LogUs.GetTiposDeUs();
                     this.LogUs.CrearUsuario(user);
-                    return View("../Home/Index");
+                    ViewBag.Guardado = "si";
                 }
-                else { 
 
-
-
-                return View("../Home/Index");
-                }
+                ViewBag.ListUsuario = LogUs.GetTiposDeUs();
+                return View();
+                
             }
 
         }
