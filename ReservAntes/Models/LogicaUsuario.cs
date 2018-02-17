@@ -79,7 +79,7 @@ namespace ReservAntes.Models
                 restaurante.NombreComercial = "por defecto";
                 restaurante.CUIT = "00-00000000-0";
                 restaurante.CantidadClientes = 0;
-                restaurante.Habilitado = true;
+                restaurante.Habilitado = false;
                 restaurante.NivelId = 1;
                 
                 ctx.Restaurante.Add(restaurante);
