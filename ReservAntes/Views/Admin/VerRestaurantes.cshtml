@@ -26,7 +26,16 @@
                 <tr>
                     <td>@resto.NombreComercial</td>
                     <td>@estado</td>
-                    <td><a href="@Url.Action("HabilitarRestaurante","Admin", new { idResto = resto.IdRestaurante })" class="btn btn-success">Habilitar</a></td>
+                    <td>
+                        @if (resto.Habilitado)
+                        {
+                            <a href="@Url.Action("SuspenderRestaurante","Admin", new { idResto = resto.IdRestaurante })" class="btn btn-success">Suspender</a>
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("HabilitarRestaurante","Admin", new { idResto = resto.IdRestaurante })" class="btn btn-success">Habilitar</a>
+                        }
+                    </td>
                 </tr>
             }
         </tbody>

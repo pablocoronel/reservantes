@@ -7,6 +7,17 @@
 
 <div class="container">
     <div class="row">
+        <div class="col-xs-12 col-md-5 col-md-offset-3">
+            @if (ViewBag.Guardado != null)
+            {
+            <div class="alert alert-success">
+                @ViewBag.Guardado;
+            </div>
+            }
+        </div>
+    </div>
+
+    <div class="row">
         <div class="col-md-3"></div>
         <div class="jumbotron col-md-5">
             <div>
@@ -29,8 +40,8 @@
 
                     <div class="form-group">
                         <label>Repita Contraseña:</label>
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Password)
+                        @Html.PasswordFor(m => m.RePass, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.RePass)
                     </div>
 
                     <div class="form-group">

@@ -27,6 +27,7 @@ namespace ReservAntes
         public string Password { get; set; }
         public int TipoUsuarioId { get; set; }
         public Nullable<bool> Activo { get; set; }
+        public Nullable<System.DateTime> FechaDeRegistro { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cliente> Cliente { get; set; }

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web.Script.Serialization;
 using System.Web.Http.Results;
+using System.Net.Mail;
 
 namespace ReservAntes.Controllers
 {
@@ -51,20 +52,52 @@ namespace ReservAntes.Controllers
 
         public JsonResult GetAllLocation()
         {
-            //var data = LogiRes.GetRestaurantesHabilitados();
-            //return Json(data, JsonRequestBehavior.AllowGet);
-            //return Json(query, JsonRequestBehavior.AllowGet);
-
+           
             return Json(new
             {
                 Restaurantes= (from obj in ctx.Restaurante.Where(x => x.Habilitado == true) select new { Latitud = obj.Latitud, Longitud = obj.Longitud, IdRestaurante = obj.IdRestaurante, NombreComercial = obj.NombreComercial})
             }, JsonRequestBehavior.AllowGet);
         }
 
+
         public ActionResult Contact()
         {
-            ViewBag.Message = "CONTACTO";
+            
 
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Contact(LogicaEmail model)
+        {
+            if (ModelState.IsValid)
+            {
+                
+                var message = new MailMessage();
+                message.From = new MailAddress(model.EmailConsu);
+                message.To.Add("reservantesapp@gmail.com");
+                message.Subject = "Contacto con ReservAntes";
+                message.Body = model.MensajeConsu;
+                message.IsBodyHtml = true;
+                message.Priority = MailPriority.Normal;
+
+
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = "smtp.gmail.com";
+                smtp.Port = 25;
+                smtp.EnableSsl = true;
+                string sCorreoReservAntes = "reservantesapp@gmail.com";
+                string sPsswordReservantes = "ReservAntes007";
+                smtp.Credentials = new System.Net.NetworkCredential(sCorreoReservAntes, sPsswordReservantes);
+                smtp.Send(message);
+                return RedirectToAction("Sent");
+            }
+            return View(model);
+        }
+
+        public ActionResult Sent()
+        {
             return View();
         }
     }

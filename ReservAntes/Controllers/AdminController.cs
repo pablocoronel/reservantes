@@ -61,7 +61,14 @@ namespace ReservAntes.Controllers
             return RedirectToAction(actionName: "VerRestaurantes");
         }
 
-       
+        
+        [HttpGet]
+        public ActionResult SuspenderRestaurante(int idResto)
+        {
+            LogResto.SuspenderRestaurante(idResto);
+
+            return RedirectToAction(actionName: "VerRestaurantes");
+        }
 
 
     }

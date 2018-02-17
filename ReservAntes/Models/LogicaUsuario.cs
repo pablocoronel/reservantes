@@ -5,6 +5,7 @@ using System.Web;
 using System.IO;
 using System.Data;
 using ReservAntes.Extensions.Enums;
+using ReservAntes.Extensions;
 
 namespace ReservAntes.Models
 {
@@ -57,20 +58,29 @@ namespace ReservAntes.Models
 
         dbReservantesEntities ctx = new dbReservantesEntities();
 
-        public void CrearUsuario (Usuario us)
-        {          
-            ctx.Usuario.Add(us);
+        public void CrearUsuario (UsuarioExtension us)
+        {
+            Usuario usuario = new Usuario();
+            usuario.Username = us.Username;
+            usuario.Email = us.Email;
+            usuario.Password = us.Password;
+            usuario.TipoUsuarioId = us.TipoUsuarioId;
+            usuario.Activo = true;
+            usuario.FechaDeRegistro = DateTime.Now;
+
+            ctx.Usuario.Add(usuario);
             ctx.SaveChanges();
 
             //Crear restaurante si el usuario corresponde a un resto
             if (us.TipoUsuarioId == 3)
             {
                 Restaurante restaurante = new Restaurante();
-                restaurante.IdUsuario = us.Id;
+                restaurante.IdUsuario = usuario.Id;
                 restaurante.NombreComercial = "por defecto";
                 restaurante.CUIT = "00-00000000-0";
                 restaurante.CantidadClientes = 0;
                 restaurante.Habilitado = false;
+                restaurante.NivelId = 1;
                 
                 ctx.Restaurante.Add(restaurante);
                 ctx.SaveChanges();

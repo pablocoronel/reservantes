@@ -1,4 +1,4 @@
-﻿
+﻿@model ReservAntes.Models.LogicaEmail
 @{
     ViewBag.Title = "Contacto";
     Layout = "~/Views/Shared/_LayoutHome.cshtml";
@@ -7,17 +7,42 @@
 <br />
 <br />
 <div class="jumbotron">
-    <h3>@ViewBag.Message</h3>
+    <h2>@ViewBag.Title.</h2>
 
-    @*<address>
-            One Microsoft Way<br />
-            Redmond, WA 98052-6399<br />
-            <abbr title="Phone">P:</abbr>
-            425.555.0100
-        </address>*@
 
-    <address>
-        <strong>Soporte:</strong>   <a href="mailto:ReservAntesapp@gmail.com">ReservAntesapp@gmail.com</a><br />
-    </address>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <hr />
+        <div class="form-group">
+            <div class="col-md-2 control-label">Nombre:</div>
+                @Html.TextBoxFor(m => m.NombreConsu, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.NombreConsu)
+            </div>
+        <br />
+        <div class="form-group">
+            <div class="col-md-2 control-label">Email:</div>
+
+                @Html.TextBoxFor(m => m.EmailConsu, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.EmailConsu)
+            </div>
+        <br />
+        <div class="form-group">
+            <div class="col-md-2 control-label">Mensaje:</div>
+                @Html.TextAreaFor(m => m.MensajeConsu, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.MensajeConsu)
+            </div>
+        <br />
+        <div class="form-group">
+            <div class="">
+                <input type="submit" class="btn btn-primary" value="Enviar" />
+                <div class="btn btn-danger">@Html.ActionLink("Cancelar", "Index", "Home")</div>
+
+            </div>
+        </div>
+    }
+
+
 
 </div>

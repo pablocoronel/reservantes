@@ -233,6 +233,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\LogicaEmail.cs" />
     <Compile Include="NivelRestaurante.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -392,6 +393,7 @@
     <Content Include="Views\Shared\_NavegacionAdmin.cshtml" />
     <Content Include="Views\Shared\_NavegacionCliente.cshtml" />
     <Content Include="Views\Shared\_NavegacionRestaurante.cshtml" />
+    <Content Include="Views\Home\Sent.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

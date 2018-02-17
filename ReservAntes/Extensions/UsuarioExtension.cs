@@ -30,5 +30,7 @@ namespace ReservAntes.Extensions
         public int TipoUsuarioId { get; set; }
 
         public bool Activo { get; set; }
+
+        public DateTime FechaDeRegistro { get; set; }
     }
 }
