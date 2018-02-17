@@ -33,6 +33,7 @@ namespace ReservAntes.Models
 
             return restaurantesHabilidatos;
         }
+
         public List<Restaurante> GetRestaurantesNoHabilitados()
         {
             List<Restaurante> restaurantesNoHabilidatos = new List<Restaurante>();
@@ -41,14 +42,7 @@ namespace ReservAntes.Models
             return restaurantesNoHabilidatos;
         }
 
-        //Listado de restaurantes
-        //public List<Restaurante> GetRestaurantes()
-        //{
-        //    List<Restaurante> todosLosRestaurantes = new List<Restaurante>();
-        //    todosLosRestaurantes = ctx.Restaurante.Include("Domicilio").ToList();
-
-        //    return todosLosRestaurantes;
-        //}
+        
 
         //Listado de restaurantes
         public List<Restaurante> GetRestaurantesByLocalidad(int localidadId)
@@ -158,6 +152,7 @@ namespace ReservAntes.Models
             NewPlato.Descripcion = plate.Descripcion;
             NewPlato.Precio = plate.Precio;
             NewPlato.RestauranteId = plate.RestauranteId;
+            NewPlato.Activo = true;
 
 
             //// IMAGEN
@@ -209,7 +204,7 @@ namespace ReservAntes.Models
         public List<Plato> GetPlato(int idResto)
         {
             List<Plato> ListPlato = (from m in ctx.Plato
-                                   where m.RestauranteId == idResto
+                                   where m.RestauranteId == idResto && m.Activo == true
                                      select m).ToList();
 
             return ListPlato;
@@ -220,7 +215,8 @@ namespace ReservAntes.Models
             bool resultado = false;
             Plato plato = ctx.Plato.Find(idPlato);
 
-            ctx.Plato.Remove(plato);
+            //ctx.Plato.Remove(plato);
+            plato.Activo = false;
             int filasAfectadas = ctx.SaveChanges();
 
             if (filasAfectadas == 1)

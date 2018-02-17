@@ -17,7 +17,8 @@ namespace ReservAntes.ViewModels.Extensions
                 NombrePlato = value.NombrePlato,
                 Foto = value.Foto,
                 Descripcion = value.Descripcion,
-                Precio = value.Precio
+                Precio = value.Precio,
+                Activo = value.Activo
             };
         }
         public static Plato Map(this PlatoViewModel model, Plato entity = null)

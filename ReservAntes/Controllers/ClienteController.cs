@@ -7,6 +7,7 @@ using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 
 namespace ReservAntes.Controllers
 {
@@ -207,6 +208,7 @@ namespace ReservAntes.Controllers
             }
             resto.listadoPlatos = listadoPlatos;
             //platosElegidos.platos=listadoPlatos;
+
             return View("ListaPlatos", resto);
         }
 
