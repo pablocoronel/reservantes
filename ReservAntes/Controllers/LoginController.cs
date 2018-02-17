@@ -35,6 +35,7 @@ namespace ReservAntes.Controllers
                     Session["usuarioTipo"] = existeUsuario.TipoUsuarioId;
                     Session["usuarioNombre"] = existeUsuario.Username;
 
+                    /*
                     switch (Convert.ToInt32(Session["usuarioTipo"]))
                     {
                         case 1:
@@ -51,6 +52,8 @@ namespace ReservAntes.Controllers
                             Response.Redirect("../Home/Index");
                             break;
                     }
+                    */
+                    Response.Redirect("../");
 
                 }
                 else
@@ -77,7 +80,7 @@ namespace ReservAntes.Controllers
         {
             Session.Abandon();
             Response.Cookies.Add(new HttpCookie("ASP.NET_SessionId", ""));
-            Response.Redirect("../Home/Index");
+            Response.Redirect("/ReservAntes");
         }
 
     }

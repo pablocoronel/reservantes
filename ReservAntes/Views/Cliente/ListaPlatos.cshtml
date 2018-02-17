@@ -33,8 +33,14 @@
 
         </tbody>
     </table>
-    @Html.ActionLink("Reservar", "Reserva", "Cliente", new { idResto = Model.IdRestaurante }, new { @class = "btn btn-default btn-success btn-lg btn-block" })
+
+    @*@2 es cliente *@
+    @if (Session["usuarioTipo"] != null && Session["usuarioTipo"].ToString() == "2")
+    {
+        @Html.ActionLink("Reservar", "Reserva", "Cliente", new { idResto = Model.IdRestaurante }, new { @class = "btn btn-default btn-success btn-lg btn-block" })
+    }
+
     @*<button type="submit" class="btn btn-primary">Reservar</button>*@
-    <button onclick="location.href='@Url.Action("Index", "Cliente")';return false;" class="btn btn-danger">Cancelar</button>
-    
-</div>
+    @*<button onclick="location.href='@Url.Action("Index", "Cliente")';return false;" class="btn btn-danger">Cancelar</button>*@
+
+    </div>

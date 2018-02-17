@@ -6,8 +6,8 @@
     }
 
         <div class="row">
-
-            @if (Session["usuarioTipo"] != null)
+            
+            @*@if (Session["usuarioTipo"] != null)
             {
 
                 <p>tipo de usuario: </p>
@@ -19,7 +19,7 @@
                 <p>nombre de usuario: </p>
                 @Session["usuarioNombre"].ToString();
 
-            }
+            }*@
         </div>
 
 
@@ -48,48 +48,46 @@
 
         <script src="https://maps.googleapis.com/maps/api/js?&key=AIzaSyAptrGun-vHjygAsSermQUGiDvxOGQ_qJ8&libraries=places&callback=inicialar" async defer></script>
 
-        <script>
-            
-                
-           
-        function inicialar() {
-            var mapCanvas = document.getElementById('map-canvas');
+        
+                  <script>
+                  function inicialar() {
+                        var mapCanvas = document.getElementById('map-canvas');
 
-            var mapOptions = {
+                        var mapOptions = {
                 center: new google.maps.LatLng(-34.611170889697334, -58.40778350830078),
                 zoom: 12,
                 mapTypeId: google.maps.MapTypeId.G_NORMAL_MAP
-            };
+                      };
 
-            var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
-            var algo = $.get("@Url.Action("GetAllLocation", "Home")", function (data) {
-                console.log(data.Restaurantes);
+                    var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+                    var algo = $.get("@Url.Action("GetAllLocation", "Home")", function (data) {
+                        console.log(data.Restaurantes);
 
-                var marker = [];
-                var contents = [];
-                var infowindows = [];
+                        var marker = [];
+                        var contents = [];
+                        var infowindows = [];
 
-                for (var i = 0; i < data.Restaurantes.length; i++) {
-                    marker[i] = new google.maps.Marker({
+                        for (var i = 0; i < data.Restaurantes.length; i++) {
+                            marker[i] = new google.maps.Marker({
                         position: { lat: data.Restaurantes[i].Latitud, lng: data.Restaurantes[i].Longitud },
                         map: map,
                     });
 
-                    contents[i] = '<div class=container>' +
-                        '<p><h4>' + data.Restaurantes[i].NombreComercial + '</h4></p> | <a href="Cliente/ListaPlatos/?idResto='+ data.Restaurantes[i].IdRestaurante+'">Ver Menu</a>' +
-                            '</div>';
-                    
-                    infowindows[i] = new google.maps.InfoWindow({
+                        contents[i] = '<div class=container>' +
+                            '<p><h4>' + data.Restaurantes[i].NombreComercial + '</h4></p> | <a href="/ReservAntes/Cliente/ListaPlatos/?idResto='+ data.Restaurantes[i].IdRestaurante+'">Ver Menu</a>' +
+                                '</div>';
+
+                        infowindows[i] = new google.maps.InfoWindow({
                         content: contents[i]
                     });
 
-                    var mdl = marker[i];
-                    google.maps.event.addListener(marker[i], 'click', (function (mdl, i) {
+                        var mdl = marker[i];
+                        google.maps.event.addListener(marker[i], 'click', (function (mdl, i) {
                         return function () {
-                            infowindows[i].open(map, marker[i]);
-                        }
+                        infowindows[i].open(map, marker[i]);
+                    }
 
-                    })
+                })
                     
                         (marker[i], i));
                     
@@ -123,11 +121,11 @@
                 // For each place, get the icon, name and location.
                 var bounds = new google.maps.LatLngBounds();
                 forEach(function (place) {
-                if (!place.geometry) {
-                    console.log("Returned place contains no geometry");
-                    return;
-                }
-                var icon = {
+                    if (!place.geometry) {
+                        console.log("Returned place contains no geometry");
+                        return;
+                    }
+                    var icon = {
                     url: place.icon,
                     size: new google.maps.Size(71, 71),
                     origin: new google.maps.Point(0, 0),
