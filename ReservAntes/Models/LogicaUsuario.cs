@@ -58,7 +58,8 @@ namespace ReservAntes.Models
         dbReservantesEntities ctx = new dbReservantesEntities();
 
         public void CrearUsuario (Usuario us)
-        {          
+        {
+            us.Activo = true;
             ctx.Usuario.Add(us);
             ctx.SaveChanges();
 
