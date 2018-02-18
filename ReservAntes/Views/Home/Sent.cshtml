@@ -1,16 +1,23 @@
 ﻿
 @{
-    ViewBag.Title = "MailEnviado";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Contacto";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
 }
 
 <div class="thumbnail">
     <div class="row">
 
-        <div class="col-lg-4"></div>
-        <div class="col-lg-5">
-            <h4 class="center-block">Your message has been sent</h4>
-            <div class="btn btn-primary">@Html.ActionLink("Volver al Inicio", "Index", "Home")</div>
+        <div class="col-lg-5"></div>
+        <div class="col-lg-7">
+            <h4>Tu consulta se ha enviado.</h4>
+            <br />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-5"></div>
+        <div class="col-lg-6">
+            <div>@Html.ActionLink("Volver al Inicio", "Index", "Home", new { @class = "btn btn-default"})</div>
         </div>
     </div>
 </div>
+

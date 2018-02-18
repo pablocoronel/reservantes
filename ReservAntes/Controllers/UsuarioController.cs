@@ -5,6 +5,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ReservAntes.Extensions;
+using System.Net.Mail;
+
 
 namespace ReservAntes.Controllers
 {
@@ -44,8 +46,8 @@ namespace ReservAntes.Controllers
             return View();
         }
 
-        // POST: Usuario/Create
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult CreateUser(UsuarioExtension user)
         {
 
@@ -55,6 +57,25 @@ namespace ReservAntes.Controllers
                     ViewBag.ListUsuario = LogUs.GetTiposDeUs();
                     this.LogUs.CrearUsuario(user);
                     ViewBag.Guardado = "si";
+
+                    var message = new MailMessage();
+                    message.From = new MailAddress("reservantesapp@gmail.com");
+                    message.To.Add(user.Email);
+                    message.Subject = "Registro ReservAntes";
+                    message.Body = "<div> Felicidades usted se ha registrado con Exito en ReservAntes </div>";
+                    message.IsBodyHtml = true;
+                    message.Priority = MailPriority.Normal;
+
+
+                    SmtpClient smtp = new SmtpClient();
+                    smtp.Host = "smtp.gmail.com";
+                    smtp.Port = 25;
+                    smtp.EnableSsl = true;
+                    string sCorreoReservAntes = "reservantesapp@gmail.com";
+                    string sPsswordReservantes = "ReservAntes007";
+                    smtp.Credentials = new System.Net.NetworkCredential(sCorreoReservAntes, sPsswordReservantes);
+                    smtp.Send(message);
+                    return RedirectToAction("Sent");
                 }
 
                 ViewBag.ListUsuario = LogUs.GetTiposDeUs();
