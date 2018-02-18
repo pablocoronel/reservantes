@@ -6,9 +6,12 @@
     Layout = "~/Views/Shared/_LayoutCliente.cshtml";
 }
 
-<h2 class="thumbnail">@Model.NombreComercial</h2>
-<h4>Menú</h4>
-<div class="table-responsive">
+<div class="jumbotron">
+    <h2>@Model.NombreComercial</h2>
+    @Model.Domicilio <p></p>
+</div>
+<h4 class="thumbnail text-center">Menú</h4>
+<div class=" thumbnail">
     @*@using (Html.BeginForm("Reservar", "Cliente", new (idResto =)
         {*@
     @Html.HiddenFor(u => u.IdRestaurante)
@@ -21,7 +24,7 @@
             </tr>
 
         <thead />
-        <tbody>
+        <tbody class="table-bordered table-bordered">
             @foreach (var plato in Model.listadoPlatos)
             {
                 <tr>
