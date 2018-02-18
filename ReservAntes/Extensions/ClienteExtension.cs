@@ -16,6 +16,5 @@ namespace ReservAntes.Extensions
         [Required(ErrorMessage = "Este campo es obligatorio")]
         [StringLength(50)]
         public string Apellido { get; set; }
-        public int? DomicilioId { get; set; }
     }
 }

@@ -264,6 +264,7 @@
     <Compile Include="Usuario.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\ClienteViewModel.cs" />
     <Compile Include="ViewModels\DatosBancariosViewModel.cs" />
     <Compile Include="ViewModels\Extensions\PlatosElegidosViewModelExtension.cs" />
     <Compile Include="ViewModels\Extensions\ReservaViewModelExtension.cs" />

@@ -24,11 +24,10 @@ namespace ReservAntes.Models
 
         //----------------------------------------------------------------------------------
 
-        /* traer los platos del restaurante sin dar tantas vueltas*/
         public List<Plato> ListarPlatosDelRestaurante(int idResto)
         {
             List<Plato> ListPlato = (from plato in ctx.Plato
-                                     where idResto == plato.RestauranteId
+                                     where idResto == plato.RestauranteId && plato.Activo.Value==true
                                      select plato).ToList();
 
             return ListPlato;
