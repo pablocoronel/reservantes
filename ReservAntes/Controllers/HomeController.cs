@@ -77,7 +77,7 @@ namespace ReservAntes.Controllers
                 var message = new MailMessage();
                 message.From = new MailAddress(model.EmailConsu);
                 message.To.Add("reservantesapp@gmail.com");
-                message.Subject = "Contacto con ReservAntes -- Mail de:"+ model.EmailConsu;
+                message.Subject = "Contacto con ReservAntes -- :"+ model.EmailConsu;
                 message.Body = model.MensajeConsu;
                 message.IsBodyHtml = true;
                 message.Priority = MailPriority.Normal;

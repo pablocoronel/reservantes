@@ -56,13 +56,18 @@ namespace ReservAntes.Controllers
                 {
                     ViewBag.ListUsuario = LogUs.GetTiposDeUs();
                     this.LogUs.CrearUsuario(user);
-                    ViewBag.Guardado = "Felicidades. Usted se ha registrado con exito";
+                    ViewBag.Guardado = "Felicidades. Usted se ha registrado con exito." +
+                        "Verifique por favor que ha recibido el mail de confirmacion.";
 
                     var message = new MailMessage();
                     message.From = new MailAddress("reservantesapp@gmail.com");
                     message.To.Add(user.Email);
                     message.Subject = "Registro ReservAntes";
-                    message.Body = "<div> Felicidades usted se ha registrado con Exito en ReservAntes </div>";
+                    message.Body = "<div class='container'>" +
+                        " <h4>Felicidades " + user.Username  + " usted se ha registrado con Exito en ReservAntes </h4> " +
+                        "En caso de cualquier detalle tecnico le pedimos por favor que se comunique con reservantesapp@gmail.com" +
+                        "La contraseña que usted ha ingresado es: "+ user.Password +
+                        "</div>";
                     message.IsBodyHtml = true;
                     message.Priority = MailPriority.Normal;
 
