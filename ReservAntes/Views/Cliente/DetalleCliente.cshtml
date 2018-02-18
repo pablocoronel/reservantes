@@ -5,8 +5,48 @@
 }
 
 <div>
+    <div class="jumbotron">
+        <div class="table-responsive">
+            <table class="table table-bordered table-condensed table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            Usuario
+                        </th>
+                        <th>
+                            Nombre
+                        </th>
+                        <th>
+                            Apellido
+                        </th>
+                        <th>
+                            Email
+                        </th>
+                    </tr>
+                </thead>
 
-    <h4 class="breadcrumb">Para poder continuar con el registro debe completar los siguientes datos:</h4>
+                <tbody>
+                    <tr>
+                        <td>
+                            @Model.Usuario.Username
+                        </td>
+                        <td>
+                            @Model.Nombre
+                        </td>
+                        <td>
+                            @Model.Apellido
+                        </td>
+                        <td>
+                            @Model.Usuario.Email
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+    </div>
+
+    <h4 class="breadcrumb">Complete y/o edite sus datos:</h4>
     <div class="jumbotron">
         <div class="row">
             <div class="col-md-4"></div>
@@ -14,6 +54,8 @@
 
                 @using (Html.BeginForm("DetalleCliente", "Cliente"))
             {
+                    @Html.Hidden("IdUsuario", Model.IdUsuario)
+
                     <div class="form-group">
                         <label>Nombres :</label>
                         @Html.TextBoxFor(Model => Model.Nombre, new { @class = "form-control" })
