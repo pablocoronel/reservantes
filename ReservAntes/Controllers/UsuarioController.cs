@@ -56,7 +56,7 @@ namespace ReservAntes.Controllers
                 {
                     ViewBag.ListUsuario = LogUs.GetTiposDeUs();
                     this.LogUs.CrearUsuario(user);
-                    ViewBag.Guardado = "si";
+                    ViewBag.Guardado = "Felicidades. Usted se ha registrado con exito";
 
                     var message = new MailMessage();
                     message.From = new MailAddress("reservantesapp@gmail.com");
@@ -75,7 +75,6 @@ namespace ReservAntes.Controllers
                     string sPsswordReservantes = "ReservAntes007";
                     smtp.Credentials = new System.Net.NetworkCredential(sCorreoReservAntes, sPsswordReservantes);
                     smtp.Send(message);
-                    return RedirectToAction("Sent");
                 }
 
                 ViewBag.ListUsuario = LogUs.GetTiposDeUs();
