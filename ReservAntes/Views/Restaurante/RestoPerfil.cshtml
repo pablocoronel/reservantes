@@ -66,15 +66,18 @@
         </style>
 
         <div style="width:320px; margin:-350px 0 0 500px;">
-            <div> Direccion : @Html.TextBox("direccion", "", new { @class = "form-control" }) </div>
+            <label><b>Direccion:</b></label>
+            @Html.TextBoxFor(Model => Model.Domicilio, new { @class = "form-control", id = "direccion" })
             <br />
-            <div> Coordenadas : @Html.TextBox("coordenadas", "", new { @class = "form-control" }) </div>
+            <div> Coordenadas : @Html.TextBox("coordenadas", "", new { @class = "form-control", id = "coordenadas" }) </div>
             <br />
             <span id="geocoding"></span>
             <div id="map-canvas"></div>
 
         </div>
         <p></p>
+        <p></p>
+
         <button type="submit" class="btn btn-primary">Ingresar</button>
 
 }
