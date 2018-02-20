@@ -101,38 +101,40 @@ namespace ReservAntes.Controllers
             return View();
         }
 
-        
-        public ActionResult DetalleCliente()
+        [HttpGet]
+        public ActionResult DetalleCliente(int id)
         {
-            return View();
+            Cliente cliente = new Cliente();
+            cliente = ctx.Cliente.Where(x => x.IdUsuario == id).FirstOrDefault();
+            
+            return View(cliente);
         }
 
         [HttpPost]
         public ActionResult DetalleCliente(Cliente cl)
         {
-            var IdUsuario = this.Session["usuarioId"];
-            var nomUsuario = this.Session["usuarioNombre"];
+            Int32.TryParse(Session["usuarioId"].ToString(), out int idUsuario);
+            Cliente cliente = ctx.Cliente.Where(x => x.IdUsuario == cl.IdUsuario).FirstOrDefault();
 
-
-            if (ModelState.IsValid)
+            //1 es admin
+            if (cl.IdUsuario == idUsuario || Session["usuarioTipo"].ToString() == "1")
             {
+                if (ModelState.IsValid)
+                {
+                    if (cliente != null)
+                    {
+                        cliente.Nombre = cl.Nombre;
+                        cliente.Apellido = cl.Apellido;
 
-                Cliente newCliente = new Cliente();
+                        ctx.SaveChanges();
+                    }
+                }
 
-                newCliente.IdUsuario = Convert.ToInt32(IdUsuario);
-                newCliente.Nombre = cl.Nombre;
-                newCliente.Apellido = cl.Apellido;
-      
-
-                ctx.Cliente.Add(newCliente);
-                ctx.SaveChanges();
-
-                return View("Index");
+                return View(cliente);
             }
 
-            //this.LogRes.crearMenu(id);
-
-            return View("../Shared/Error");
+            return RedirectToRoute("Home/Index");
+            
         }
 
         public ActionResult Reserva(int idResto)

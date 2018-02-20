@@ -264,6 +264,7 @@
     <Compile Include="Usuario.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\ClienteViewModel.cs" />
     <Compile Include="ViewModels\DatosBancariosViewModel.cs" />
     <Compile Include="ViewModels\Extensions\PlatosElegidosViewModelExtension.cs" />
     <Compile Include="ViewModels\Extensions\ReservaViewModelExtension.cs" />
@@ -380,7 +381,6 @@
     <Content Include="Views\Admin\VerRestaurantes.cshtml" />
     <Content Include="Views\Restaurante\RestoPerfil.cshtml" />
     <Content Include="Views\Restaurante\DatosBancarios.cshtml" />
-    <Content Include="Views\Cliente\EditCliente.cshtml" />
     <Content Include="Views\Admin\VerClientes.cshtml" />
     <Content Include="Views\Admin\VerUsuarios.cshtml" />
     <Content Include="Views\Cliente\ListaPlatos.cshtml" />
