@@ -95,8 +95,8 @@ namespace ReservAntes.Models
                     restauranteDb.Longitud = restaurante.Longitud;
 
 
-                HttpPostedFileBase foto = restaurante.Foto;
-                    HttpPostedFileBase constAFIP = restaurante.ConstAFIP;
+                    HttpPostedFileBase foto = restaurante.Foto;
+                        HttpPostedFileBase constAFIP = restaurante.ConstAFIP;
 
                 if (foto != null && foto.ContentLength > 0 || constAFIP != null && constAFIP.ContentLength > 0)
 
@@ -130,10 +130,32 @@ namespace ReservAntes.Models
                             restauranteDb.Domicilio = restaurante.Domicilio;
                             restauranteDb.Latitud = restaurante.Latitud;
                             restauranteDb.Longitud = restaurante.Longitud;
+                            HttpPostedFileBase foto = restaurante.Foto;
+                            HttpPostedFileBase constAFIP = restaurante.ConstAFIP;
 
 
+                            if (foto != null && foto.ContentLength > 0 || constAFIP != null && constAFIP.ContentLength > 0)
+
+                            {
+                                var fileName = Path.GetFileName(foto.FileName);
+
+
+                                using (MemoryStream ms = new MemoryStream())
+                                {
+                                    foto.InputStream.CopyTo(ms);
+                                    byte[] arrayFoto = ms.GetBuffer();
+                                    byte[] arrayAFIP = ms.GetBuffer();
+
+
+                                    restauranteDb.NombreComercial = restaurante.NombreComercial;
+                                    restauranteDb.Foto = arrayFoto;
+                                    restauranteDb.ConstAFIP = arrayAFIP;
+
+
+                                }
+                            }
                 ctx.Restaurante.Add(restauranteDb);
-                    }
+                  }
 
                    
               ctx.SaveChanges();

@@ -104,10 +104,9 @@
 
     function iniciarNuevo() {
 
-        var latLng = new google.maps.LatLng(-34.642850400, -58.565065500);
         var mapOptions = {
-            center: new google.maps.LatLng(-34.642850400, -58.565065500),
-            zoom: 15,
+            center: new google.maps.LatLng(-34.611170889697334, -58.40778350830078),
+            zoom: 11,
             mapTypeId: google.maps.MapTypeId.G_NORMAL_MAP
         };
         var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
@@ -125,13 +124,15 @@
                             var coord = document.getElementById('coordenadas');
                             coord.value = results[0].geometry.location;    
 
-                            Lado1 = coord.value.replace("(", "").replace(")", "")/*.replace(".",",")*/;
-                            coord.value = Lado1;
+                            coord.value = coord.value.replace("(", "").replace(")", "");
+                           
+                            var arrD = coord.value.split(',');
+                            document.getElementById('Latitud').value = arrD[0].replace(".",",");
+                            document.getElementById('Longitud').value = arrD[1].replace(".", ",");
 
-                            var arrD = Lado1.split(',');
-                            document.getElementById('Latitud').value = arrD[0];
-                            document.getElementById('Longitud').value = arrD[1];
 
+
+    
 
 
 

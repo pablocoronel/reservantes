@@ -262,9 +262,7 @@ namespace ReservAntes.Controllers
         public ActionResult RestoPerfil(RestauranteExtension restaurante)
         {
             
-              
-
-                var IdUsuario = Session["usuarioId"];
+            var IdUsuario = Session["usuarioId"];
             if (restaurante == null)
             {
                 throw new ArgumentNullException(nameof(restaurante));
