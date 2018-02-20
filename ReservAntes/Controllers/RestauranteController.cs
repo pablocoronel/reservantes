@@ -261,7 +261,10 @@ namespace ReservAntes.Controllers
         [HttpPost]
         public ActionResult RestoPerfil(RestauranteExtension restaurante)
         {
-            var IdUsuario = Session["usuarioId"];
+            
+              
+
+                var IdUsuario = Session["usuarioId"];
             if (restaurante == null)
             {
                 throw new ArgumentNullException(nameof(restaurante));
@@ -273,12 +276,14 @@ namespace ReservAntes.Controllers
                 restaurante.IdUsuario = Convert.ToInt32(Session["usuarioId"]);
             }
 
+            
             var restauranteId = LogRes.GetByUserId(Convert.ToInt32(IdUsuario)).IdRestaurante;
             restaurante.IdRestaurante = restauranteId;
 
             this.LogRes.CreateOrUpdate(restaurante);
+              
 
-
+            
             return View();
         }
 

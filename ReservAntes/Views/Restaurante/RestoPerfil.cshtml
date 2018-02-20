@@ -69,7 +69,12 @@
             <label><b>Direccion:</b></label>
             @Html.TextBoxFor(Model => Model.Domicilio, new { @class = "form-control", id = "direccion" })
             <br />
-            <div> Coordenadas : @Html.TextBox("coordenadas", "", new { @class = "form-control", id = "coordenadas" }) </div>
+            <label><b>Coordenadas:</b></label>
+            <input type="text" id="coordenadas" style="visibility:hidden" />
+
+            @Html.TextBoxFor(Model => Model.Latitud, new { @class = "form-control", id = "latitud" })
+            @Html.TextBoxFor(Model => Model.Longitud, new { @class = "form-control", id = "longitud" })
+
             <br />
             <span id="geocoding"></span>
             <div id="map-canvas"></div>
@@ -114,8 +119,23 @@
                 function (results, status) {
                     if (status == google.maps.GeocoderStatus.OK) {
                         if (results[0]) {
+
                             document.getElementById('direccion').value = results[0].formatted_address;
-                            document.getElementById('coordenadas').value = results[0].geometry.location;
+                            var coord = document.getElementById('coordenadas');
+                            coord.value = results[0].geometry.location;    
+
+                            alert(coord.value)
+                            Lado1 = coord.value.replace("(", "").replace(")", "")/*.replace(".",",")*/;
+                            coord.value = Lado1;
+
+                            var arrD = Lado1.split(',');
+                            alert(arrD[0]);
+                            document.getElementById('latitud').value = arrD[0];
+                            document.getElementById('longitud').value = arrD[1];
+
+
+
+
                             if (marker) {
                                 marker.setPosition(event.latLng);
                             } else {
@@ -124,8 +144,13 @@
                                     map: map
                                 });
                             }
+
+
+
                             infowindow.setContent(results[0].formatted_address + '<br/> Coordenadas: ' + results[0].geometry.location);
                             infowindow.open(map, marker);
+                                
+
                         } else {
                             document.getElementById('geocoding').innerHTML =
                                 'No se encontraron resultados';
