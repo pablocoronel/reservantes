@@ -72,8 +72,9 @@
             <label><b>Coordenadas:</b></label>
             <input type="text" id="coordenadas" style="visibility:hidden" />
 
-            @Html.TextBoxFor(Model => Model.Latitud, new { @class = "form-control", id = "latitud" })
-            @Html.TextBoxFor(Model => Model.Longitud, new { @class = "form-control", id = "longitud" })
+            @Html.TextBoxFor(Model => Model.Latitud, new { @class = "form-control", id = "Latitud" })
+
+            @Html.TextBoxFor(Model => Model.Longitud, new { @class = "form-control", id = "Longitud" })
 
             <br />
             <span id="geocoding"></span>
@@ -84,7 +85,7 @@
         <p></p>
 
         <button type="submit" class="btn btn-primary">Ingresar</button>
-
+        <hr style="color:#000000";/>
 }
 
 
@@ -124,14 +125,12 @@
                             var coord = document.getElementById('coordenadas');
                             coord.value = results[0].geometry.location;    
 
-                            alert(coord.value)
                             Lado1 = coord.value.replace("(", "").replace(")", "")/*.replace(".",",")*/;
                             coord.value = Lado1;
 
                             var arrD = Lado1.split(',');
-                            alert(arrD[0]);
-                            document.getElementById('latitud').value = arrD[0];
-                            document.getElementById('longitud').value = arrD[1];
+                            document.getElementById('Latitud').value = arrD[0];
+                            document.getElementById('Longitud').value = arrD[1];
 
 
 

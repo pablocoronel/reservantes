@@ -33,6 +33,7 @@ namespace ReservAntes.Extensions
 
         public Nullable<int> NivelId { get; set; }
         public string Domicilio { get; set; }
+
         public Nullable<double> Latitud { get; set; }
         public Nullable<double> Longitud { get; set; }
 
