@@ -1,4 +1,5 @@
-﻿
+﻿@model ReservAntes.ViewModels.RestauranteViewModel
+
 @{
     ViewBag.Title = "OpcionesResto";
     Layout = "~/Views/Shared/_LayoutRestaurante.cshtml";
@@ -8,7 +9,9 @@
     <h3>Opciones de Pago</h3>
     <hr />
 
-    <a mp-mode="dftl" href="http://mpago.la/S1Ay" name="MP-payButton" class='blue-ar-m-ov-undefined'>Pagar Servicio</a>
+
+
+    <a mp-mode="dftl" href="http://mpago.la/VuME" name="MP-payButton" class='orange-ar-m-ov-undefined'>Pagar Servicio</a>
     <script type="text/javascript">
         (function () {
             function $MPC_load() {
@@ -26,8 +29,30 @@
         })();
     </script>
 
+
+
     <hr />
 
 
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(Model => Model.IdRestaurante);
+
+        <div><input type="submit" value="Dar de Baja el Servicio" class="btn btn-danger" /></div>
+
+    }
+
+    <div class="row">
+        <div class="col-xs-12 col-md-5 col-md-offset-3">
+            @if (ViewBag.Guardado != null)
+            {
+                <div class="alert alert-info">
+                    @ViewBag.Guardado;
+                </div>
+            }
+        </div>
+    </div>
 
 </div>

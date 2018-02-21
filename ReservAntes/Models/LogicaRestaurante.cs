@@ -43,7 +43,6 @@ namespace ReservAntes.Models
         }
 
         
-
         //Listado de restaurantes
         public List<Restaurante> GetRestaurantesByLocalidad(int localidadId)
         {
