@@ -49,6 +49,7 @@ input[type="text"], input[type="password"], select{
 
 #mibarrita ul li {
     height: 61px;
+    z-index : 0;
 }
 
     #mibarrita ul li:hover {

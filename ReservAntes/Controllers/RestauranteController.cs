@@ -8,6 +8,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ReservAntes.Extensions;
+using mercadopago;
+using System.Net.Mail;
 
 namespace ReservAntes.Controllers
 {
@@ -348,5 +350,15 @@ namespace ReservAntes.Controllers
                 ModelState.AddModelError("SinReservas", "No se encontraron Reservas");
             return View("Reservas",listado);
         }
+
+
+        public ActionResult OpcionesResto()
+        {
+
+            MP mp = new MP("3569046944289967", "VKUe2kZa2BemjDp7vgNHu3ZTLStjlIhh");
+
+            return View();
+        }
     }
+
 }

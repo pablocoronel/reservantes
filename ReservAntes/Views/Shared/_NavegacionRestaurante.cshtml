@@ -1,5 +1,5 @@
 ﻿<!-- menu principal -->
-<nav class="navbar navbar-default" id="menuPrincipal">
+<nav class="navbar navbar-default" id="menuPrincipal" style="z-index:0;">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mibarrita">
@@ -14,14 +14,14 @@
 
         </div>
 
-        <div class="collapse navbar-collapse" id="mibarrita">
+        <div class="collapse navbar-collapse" id="mibarrita" >
             <ul class="nav navbar-nav hidden-xs hidden-sm hidden-md">
                 <li class="slogan">
                     <em>No esperes la comida, la comida te espera a vos</em>
                 </li>
             </ul>
 
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav navbar-right" >
                 <li>@Html.ActionLink("Home", "Index", "Home")</li>
                 <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
                 <li><a>@Session["usuarioNombre"]</a></li>
@@ -56,6 +56,9 @@
                 </li>
                 <li>
                     <button onclick="location.href='@Url.Action("MiMenu","Restaurante")'; return false;" class="btn btn-warning">Ver Menú</button>
+                </li>
+                <li>
+                    <button onclick="location.href='@Url.Action("OpcionesResto","Restaurante")'; return false;" class="btn btn-warning">Opciones</button>
                 </li>
             </ul>
         </div>
