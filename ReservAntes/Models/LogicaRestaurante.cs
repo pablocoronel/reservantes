@@ -169,7 +169,8 @@ namespace ReservAntes.Models
 
             ctx.SaveChanges();
         }
-        
+
+
         //Habilitar el restaurante
         public void SuspenderRestaurante(int idresto)
         {
@@ -325,5 +326,7 @@ namespace ReservAntes.Models
             return totalComensalesActuales;
         }
 
+       
+
+        }
     }
-}

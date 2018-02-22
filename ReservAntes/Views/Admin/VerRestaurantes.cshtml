@@ -9,8 +9,11 @@
         <thead class="table-bordered">
             <tr>
                 <th>Restaurante</th>
+                <th>Direccion</th>
                 <th>Estado</th>
                 <th>Estado</th>
+                <th>Constacia de AFIP</th>
+
             </tr>
         </thead>
         <tbody>
@@ -23,20 +26,31 @@
                     estado = "NO habilitado";
                 }
 
-                <tr>
-                    <td>@resto.NombreComercial</td>
-                    <td>@estado</td>
-                    <td>
-                        @if (resto.Habilitado)
-                        {
-                            <a href="@Url.Action("SuspenderRestaurante","Admin", new { idResto = resto.IdRestaurante })" class="btn btn-success">Suspender</a>
-                        }
-                        else
-                        {
-                            <a href="@Url.Action("HabilitarRestaurante","Admin", new { idResto = resto.IdRestaurante })" class="btn btn-success">Habilitar</a>
-                        }
-                    </td>
-                </tr>
+            <tr>
+                <td>@resto.NombreComercial</td>
+                <td>@resto.Domicilio</td>
+
+                <td>@estado</td>
+
+                <td>
+                  @if (resto.Habilitado)
+                  {
+            <a href="@Url.Action("SuspenderRestaurante","Admin", new { idResto = resto.IdRestaurante })" class="btn btn-success">Suspender</a>
+                    }
+                else
+                {
+            <a href="@Url.Action("HabilitarRestaurante","Admin", new { idResto = resto.IdRestaurante })" class="btn btn-success">Habilitar</a>
+                }
+                </td>
+                <th>
+
+
+             <a href="@Url.Action("DownloadPDF","Admin", new { idResto = resto.IdRestaurante,  })" class="btn btn-success">Ver Const. AFIP</a>
+
+
+                </th>
+
+            </tr>
             }
         </tbody>
     </table>
