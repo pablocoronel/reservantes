@@ -38,13 +38,13 @@ namespace ReservAntes.Controllers
         public ActionResult VerRestaurantes()
         {
             List<Restaurante> restaurantes = LogResto.GetRestaurantes();
+            
+
 
             return View(model: restaurantes);
         }
 
-       
-
-
+        
         // Listado Clientes
 
         public ActionResult VerClientes()
