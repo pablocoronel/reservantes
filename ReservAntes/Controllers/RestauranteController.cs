@@ -8,6 +8,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ReservAntes.Extensions;
+using mercadopago;
+using System.Net.Mail;
 
 namespace ReservAntes.Controllers
 {
@@ -348,5 +350,58 @@ namespace ReservAntes.Controllers
                 ModelState.AddModelError("SinReservas", "No se encontraron Reservas");
             return View("Reservas",listado);
         }
+
+
+        public ActionResult OpcionesResto()
+        {
+            var IdUsuario = Session["usuarioId"];
+            var restauranteNuevo = new RestauranteViewModel();
+            var restaurante = LogRes.GetByUserId(Convert.ToInt32(IdUsuario));
+            if (restaurante != null)
+            {
+                restauranteNuevo = restaurante.Map();
+            };
+
+
+            MP mp = new MP("3569046944289967", "VKUe2kZa2BemjDp7vgNHu3ZTLStjlIhh");
+
+            return View(restauranteNuevo);
+
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult OpcionesResto(RestauranteViewModel restoDeBaja)
+        {
+
+
+
+            ViewBag.Guardado = "Se le envio un mail al administrador para dar de baja el servicio." +
+                        "Le pedimos por favor que aguarde que nosotros nos contactaremos con usted.";
+
+
+            var message = new MailMessage();
+            message.From = new MailAddress("reservantesapp@gmail.com");
+            message.To.Add("reservantesapp@gmail.com");
+            message.Subject = "CANCELAR SUSCRIPCION";
+            message.Body = "<div class='container'>" +
+                " <h4>El Restoran " + restoDeBaja.NombreComercial  + " ha solicitado la baja del servicio </h4> " +
+                "</div>";
+            message.IsBodyHtml = true;
+            message.Priority = MailPriority.Normal;
+
+
+            SmtpClient smtp = new SmtpClient();
+            smtp.Host = "smtp.gmail.com";
+            smtp.Port = 25;
+            smtp.EnableSsl = true;
+            string sCorreoReservAntes = "reservantesapp@gmail.com";
+            string sPsswordReservantes = "ReservAntes007";
+            smtp.Credentials = new System.Net.NetworkCredential(sCorreoReservAntes, sPsswordReservantes);
+            smtp.Send(message);
+
+            return View();
+        }
     }
+
 }

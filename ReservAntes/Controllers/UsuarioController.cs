@@ -65,8 +65,8 @@ namespace ReservAntes.Controllers
                     message.Subject = "Registro ReservAntes";
                     message.Body = "<div class='container'>" +
                         " <h4>Felicidades " + user.Username  + " usted se ha registrado con Exito en ReservAntes </h4> " +
-                        "En caso de cualquier detalle tecnico le pedimos por favor que se comunique con reservantesapp@gmail.com" +
-                        "La contraseña que usted ha ingresado es: "+ user.Password +
+                        "En caso de cualquier detalle tecnico le pedimos por favor que se comunique con reservantesapp@gmail.com " +
+                        "La contraseña que usted ha ingresado es: " + user.Password +
                         "</div>";
                     message.IsBodyHtml = true;
                     message.Priority = MailPriority.Normal;

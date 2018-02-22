@@ -43,7 +43,6 @@ namespace ReservAntes.Models
         }
 
         
-
         //Listado de restaurantes
         public List<Restaurante> GetRestaurantesByLocalidad(int localidadId)
         {
@@ -96,31 +95,52 @@ namespace ReservAntes.Models
 
 
                     HttpPostedFileBase foto = restaurante.Foto;
-                        HttpPostedFileBase constAFIP = restaurante.ConstAFIP;
+                    HttpPostedFileBase constAFIP = restaurante.ConstAFIP;
 
-                if (foto != null && foto.ContentLength > 0 || constAFIP != null && constAFIP.ContentLength > 0)
-
+                if (foto != null && foto.ContentLength > 0)
                 {
-                    var fileName = Path.GetFileName(foto.FileName);
-
-
+                   var fileName = Path.GetFileName(foto.FileName);
                     using (MemoryStream ms = new MemoryStream())
                     {
                         foto.InputStream.CopyTo(ms);
                         byte[] arrayFoto = ms.GetBuffer();
-                        byte[] arrayAFIP = ms.GetBuffer();
 
 
                         restauranteDb.NombreComercial = restaurante.NombreComercial;
-                        restauranteDb.Foto = arrayFoto;
-                        restauranteDb.ConstAFIP = arrayAFIP;
+                        restauranteDb.ConstAFIP = arrayFoto;
 
 
                     }
                 }
+                else
+                {
+
+                    if (constAFIP != null && constAFIP.ContentLength > 0)
+                    {
+                        var fileName = Path.GetFileName(constAFIP.FileName);
+
+
+                        using (MemoryStream ms = new MemoryStream())
+                        {
+                            constAFIP.InputStream.CopyTo(ms);
+                            byte[] arrayAFIP = ms.GetBuffer();
+
+
+                            restauranteDb.NombreComercial = restaurante.NombreComercial;
+                            restauranteDb.ConstAFIP = arrayAFIP;
+
+
+                        }
+                    }
+
+                }
+
+
+
+
             }
 
-                  else
+            else
                     {
                           var restauranteDb = ctx.Restaurante.SingleOrDefault(x => x.IdRestaurante == restaurante.IdRestaurante);
 
@@ -170,7 +190,8 @@ namespace ReservAntes.Models
 
             ctx.SaveChanges();
         }
-        
+
+
         //Habilitar el restaurante
         public void SuspenderRestaurante(int idresto)
         {
@@ -326,5 +347,7 @@ namespace ReservAntes.Models
             return totalComensalesActuales;
         }
 
+       
+
+        }
     }
-}
