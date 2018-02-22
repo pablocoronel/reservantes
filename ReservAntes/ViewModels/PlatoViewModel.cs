@@ -10,7 +10,7 @@ namespace ReservAntes.ViewModels
     [MetadataType(typeof(PlatoExtension))]
     public class PlatoViewModel : Plato
     {
-        public bool elegido { get; set; }
+        //public bool elegido { get; set; }
         public List<int> cantidadPlatos { get; set; }
         public int? cantidad { get; set; }
     }

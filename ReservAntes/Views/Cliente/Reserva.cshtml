@@ -19,7 +19,6 @@
                     <tr>
                         <td>Nombre</td>
                         <td>Precio</td>
-                        <td>Elegir</td>
                         <td>Cantidad</td>
                     </tr>
 
@@ -33,7 +32,6 @@
                         <tr>
                             <td>@plato.NombrePlato</td>
                             <td>$@plato.Precio</td>
-                            <td>@Html.CheckBoxFor(m => plato.elegido)</td>
                             <td>
                                 @Html.DropDownListFor(u => plato.cantidad, new SelectList(plato.cantidadPlatos), "Cantidad", new { @class = "form-control" })
                             </td>
@@ -45,7 +43,7 @@
         </div>
         <br />
 
-        <div class="thumbnail">
+       <div class="thumbnail">
             Hora:
             <select name="@Model.hora" form="@Model.hora">
                 <option value="9">9:00</option>
@@ -60,12 +58,12 @@
                 <option value="23">23:00</option>
             </select>
         </div>
-        <div>
+        @*<div>
             Cantidad de Personas:
             @Html.DropDownListFor(u => u.CantidadComensales, new SelectList(Model.cantidadMaxima), "Cantidad de Comensales", new { @class = "form-control" })
 
-        </div>
-        @*@Html.ActionLink("Reservar", "PlatosElegidos", "Cliente", new { @reserva = @Model }, new { @class = "btn btn-default btn-success btn-lg btn-block" })*@
+        </div>*@
+        @*@Html.ActionLink("Reservar", "Reserva", "Cliente", new { @reserva = Model }, new { @class = "btn btn-default btn-success btn-lg btn-block" })*@
         <button type="submit" class="btn btn-primary">Reservar</button>
 }
 @if (Model != null && Model.platosElegidos != null && Model.platosElegidos.Count > 0)

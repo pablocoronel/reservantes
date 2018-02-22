@@ -148,11 +148,8 @@ namespace ReservAntes.Controllers
             List<Plato> listaDePlatos = LogCliente.ListarPlatosDelRestaurante(idResto);
             List<PlatoViewModel> listadoPlatos = new List<PlatoViewModel>();
             List<int> cantidades = new List<int>();
-            var cantidad = 0;
-            for (cantidad = 0; cantidad < 20; cantidad++)
-            {
-                cantidades.Add(cantidad);
-            }
+            var cantidad = 1;
+
             foreach (Plato plato in listaDePlatos)
             {
                 listadoPlatos.Add(plato.Map());
@@ -164,9 +161,13 @@ namespace ReservAntes.Controllers
             //Creo listado para elegir cantidad comensales
             List<int> comensales = new List<int>();
             var persona = 1;
-            for (persona = 1; persona < cantidadMaxima; persona++)
+            for (persona = 1; persona <= cantidadMaxima; persona++)
             {
                 comensales.Add(persona);
+            }
+            for (cantidad = 1; cantidad < comensales.Max(); cantidad++)
+            {
+                cantidades.Add(cantidad);
             }
             reserva.cantidadMaxima = comensales;
             reserva.platos = listadoPlatos;
@@ -181,7 +182,7 @@ namespace ReservAntes.Controllers
             var reservaRealizada = new Reserva();
             foreach(var plato in reserva.platos)
             {
-                if (plato.elegido && plato.cantidad!=0)
+                if (plato.cantidad!=null && plato.cantidad!=0)
                 {
                     var platoElegido = new PlatosElegidosViewModel();
                     platoElegido.PlatoId = plato.Id;
