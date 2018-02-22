@@ -11,7 +11,7 @@ namespace ReservAntes.Extensions
     public class UsuarioExtension
     {
         [Required(ErrorMessage = "Este campo es obligatorio")]
-        [StringLength(10, ErrorMessage = "Supera el Limite de Campos")]
+        [StringLength(20, ErrorMessage = "Supera el Limite de Campos")]
         public string Username { get; set; }
             
 

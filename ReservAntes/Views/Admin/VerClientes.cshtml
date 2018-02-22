@@ -15,15 +15,16 @@
                 <td>Apellido</td>
             </tr>
         </thead>
-        @foreach (Cliente item in Model)
+        <tbody>
+            @foreach (Cliente item in Model)
         {
             <tr>
                 <td>@item.IdUsuario</td>
                 <td>@item.Nombre</td>
                 <td>@item.Apellido</td>
             </tr>
-        }
-        <tbody></tbody>
+    }
+        </tbody>
 
     </table>
 </div>

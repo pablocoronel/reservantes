@@ -66,21 +66,30 @@
         </style>
 
         <div style="width:320px; margin:-350px 0 0 500px;">
-            <div> Direccion : @Html.TextBox("direccion", "", new { @class = "form-control" }) </div>
-            <br />
-            <div> Coordenadas : @Html.TextBox("coordenadas", "", new { @class = "form-control" }) </div>
-            <br />
+            <label><b>Direccion:</b></label>
+            @Html.TextBoxFor(Model => Model.Domicilio, new { @class = "form-control", id = "direccion" })
+            <p></p>
             <span id="geocoding"></span>
             <div id="map-canvas"></div>
 
         </div>
-        <p></p>
-        <button type="submit" class="btn btn-primary">Ingresar</button>
+        <div style="visibility:hidden">
+            <label><b>Coordenadas:</b></label>
+            <input type="text" id="coordenadas" />
 
+            @Html.TextBoxFor(Model => Model.Latitud, new { @class = "form-control", id = "Latitud" })
+
+            @Html.TextBoxFor(Model => Model.Longitud, new { @class = "form-control", id = "Longitud" })
+        </div>
+
+        <p></p>
+
+        <button type="submit" class="btn btn-primary">Ingresar</button>
+        <hr style="color:#000000" ; />
 }
 
 
-            <button onclick="location.href='@Url.Action("DatosBancarios", "Restaurante")';return false;" class="btn btn-success pull-right">Siguiente</button>
+            <button onclick="location.href='@Url.Action("DatosBancarios", "Restaurante")';return false;" class="btn btn-success pull-right">Cargar Datos Bancarios</button>
 
         </div>
     </div>
@@ -95,10 +104,9 @@
 
     function iniciarNuevo() {
 
-        var latLng = new google.maps.LatLng(-34.642850400, -58.565065500);
         var mapOptions = {
-            center: new google.maps.LatLng(-34.642850400, -58.565065500),
-            zoom: 15,
+            center: new google.maps.LatLng(-34.611170889697334, -58.40778350830078),
+            zoom: 11,
             mapTypeId: google.maps.MapTypeId.G_NORMAL_MAP
         };
         var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
@@ -111,8 +119,17 @@
                 function (results, status) {
                     if (status == google.maps.GeocoderStatus.OK) {
                         if (results[0]) {
+
                             document.getElementById('direccion').value = results[0].formatted_address;
-                            document.getElementById('coordenadas').value = results[0].geometry.location;
+                            var coord = document.getElementById('coordenadas');
+                            coord.value = results[0].geometry.location;    
+
+                            coord.value = coord.value.replace("(", "").replace(")", "");
+                           
+                            var arrD = coord.value.split(',');
+                            document.getElementById('Latitud').value = arrD[0].replace(".",",");
+                            document.getElementById('Longitud').value = arrD[1].replace(".", ",");
+                            
                             if (marker) {
                                 marker.setPosition(event.latLng);
                             } else {
@@ -121,8 +138,13 @@
                                     map: map
                                 });
                             }
+
+
+
                             infowindow.setContent(results[0].formatted_address + '<br/> Coordenadas: ' + results[0].geometry.location);
                             infowindow.open(map, marker);
+                                
+
                         } else {
                             document.getElementById('geocoding').innerHTML =
                                 'No se encontraron resultados';

@@ -74,7 +74,8 @@
                     });
 
                         contents[i] = '<div>' +
-                            '<p><h4>' + data.Restaurantes[i].NombreComercial + '</h4></p> | <a href="/ReservAntes/Cliente/ListaPlatos/?idResto='+ data.Restaurantes[i].IdRestaurante+'">Ver Menu</a>' +
+                            '<p><h4>' + data.Restaurantes[i].NombreComercial + '</h4></p> | <a href="/ReservAntes/Cliente/ListaPlatos/?idResto=' + data.Restaurantes[i].IdRestaurante + '">Ver Menu</a><br/>' +
+                            '<p><h5>' + data.Restaurantes[i].Domicilio + '</h5></p>' +
                                 '</div>';
 
                         infowindows[i] = new google.maps.InfoWindow({

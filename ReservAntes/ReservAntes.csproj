@@ -56,6 +56,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="mercadopago">
+      <HintPath>..\..\..\..\Downloads\sdk-dotnet-master\bin\mercadopago.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.4.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
     </Reference>
@@ -397,6 +400,7 @@
     <Content Include="Views\Shared\_NavegacionCliente.cshtml" />
     <Content Include="Views\Shared\_NavegacionRestaurante.cshtml" />
     <Content Include="Views\Home\Sent.cshtml" />
+    <Content Include="Views\Restaurante\OpcionesResto.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

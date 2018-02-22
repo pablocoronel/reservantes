@@ -97,7 +97,7 @@
           <Property Name="Foto" Type="image" />
           <Property Name="ConstAFIP" Type="image" />
           <Property Name="NivelId" Type="int" />
-          <Property Name="Domicilio" Type="varchar" MaxLength="50" />
+          <Property Name="Domicilio" Type="nvarchar(max)" />
           <Property Name="Latitud" Type="float" />
           <Property Name="Longitud" Type="float" />
         </EntityType>
@@ -449,7 +449,7 @@
           <Property Name="Foto" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="ConstAFIP" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="NivelId" Type="Int32" />
-          <Property Name="Domicilio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Domicilio" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Latitud" Type="Double" />
           <Property Name="Longitud" Type="Double" />
           <NavigationProperty Name="DatosBancarios" Relationship="Self.FK_Restaurante_DatosBancarios1" FromRole="Restaurante" ToRole="DatosBancarios" />
