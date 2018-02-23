@@ -45,14 +45,16 @@
                 <td>
 
                     @{
-                         String base64EncodedPdf = System.Convert.ToBase64String(resto.ConstAFIP);
-                    }
+                            if (resto.ConstAFIP != null)
+                            {
+                                String base64EncodedPdf = System.Convert.ToBase64String(resto.ConstAFIP);
+                                var nombreModal = string.Concat("modal", resto.IdRestaurante.ToString());
 
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#@nombreModal">
                         Ver constancia de AFIP
                     </button>
 
-                    <div class="modal fade bd-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade bd-example-modal-lg" id="@nombreModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
                                 @*<div class="modal-header">
@@ -67,8 +69,8 @@
                             </div>
                         </div>
                     </div>
-
-
+                        }
+                    }
 
 
 
