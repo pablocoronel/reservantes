@@ -9,8 +9,11 @@
         <thead class="table-bordered">
             <tr>
                 <th>Restaurante</th>
+                <th>Direccion</th>
                 <th>Estado</th>
                 <th>Estado</th>
+                <th>Constacia de AFIP</th>
+
             </tr>
         </thead>
         <tbody>
@@ -23,21 +26,59 @@
                     estado = "NO habilitado";
                 }
 
-                <tr>
-                    <td>@resto.NombreComercial</td>
-                    <td>@estado</td>
-                    <td>
-                        @if (resto.Habilitado)
-                        {
-                            <a href="@Url.Action("SuspenderRestaurante","Admin", new { idResto = resto.IdRestaurante })" class="btn btn-success">Suspender</a>
+            <tr>
+                <td>@resto.NombreComercial</td>
+                <td>@resto.Domicilio</td>
+
+                <td>@estado</td>
+
+                <td>
+                  @if (resto.Habilitado)
+                  {
+            <a href="@Url.Action("SuspenderRestaurante","Admin", new { idResto = resto.IdRestaurante })" class="btn btn-success">Suspender</a>
+                    }
+                else
+                {
+                <a href="@Url.Action("HabilitarRestaurante","Admin", new { idResto = resto.IdRestaurante })" class="btn btn-success">Habilitar</a>
+                }
+                </td>
+                <td>
+
+                    @{
+                            if (resto.ConstAFIP != null)
+                            {
+                                String base64EncodedPdf = System.Convert.ToBase64String(resto.ConstAFIP);
+                                var nombreModal = string.Concat("modal", resto.IdRestaurante.ToString());
+
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#@nombreModal">
+                        Ver constancia de AFIP
+                    </button>
+
+                    <div class="modal fade bd-example-modal-lg" id="@nombreModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                @*<div class="modal-header">
+                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>*@
+                                <div class="modal-body">
+                                    <object data="data:application/pdf;base64,@base64EncodedPdf"
+                                            width="870" height="600" type="application/pdf"></object>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                         }
-                        else
-                        {
-                            <a href="@Url.Action("HabilitarRestaurante","Admin", new { idResto = resto.IdRestaurante })" class="btn btn-success">Habilitar</a>
+                    }
+
+
+
+
+                </td>
+
+            </tr>
                         }
-                    </td>
-                </tr>
-            }
         </tbody>
     </table>
 </div>
