@@ -24,7 +24,7 @@ namespace ReservAntes
         public string NombrePlato { get; set; }
         public decimal Precio { get; set; }
         public string Descripcion { get; set; }
-        public string Foto { get; set; }
+        public byte[] Foto { get; set; }
         public int RestauranteId { get; set; }
         public bool Activo { get; set; }
     

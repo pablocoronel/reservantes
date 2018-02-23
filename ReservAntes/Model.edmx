@@ -51,11 +51,11 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Precio" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NombrePlato" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Precio" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Descripcion" Type="nvarchar" MaxLength="200" />
-          <Property Name="Foto" Type="nvarchar" MaxLength="200" />
+          <Property Name="Foto" Type="image" />
           <Property Name="RestauranteId" Type="int" Nullable="false" />
           <Property Name="Activo" Type="bit" Nullable="false" />
         </EntityType>
@@ -387,7 +387,7 @@
           <Property Name="NombrePlato" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Precio" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Foto" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Foto" Type="Binary" />
           <Property Name="RestauranteId" Type="Int32" Nullable="false" />
           <Property Name="Activo" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Restaurante" Relationship="Self.FK_Plato_Restaurante" FromRole="Plato" ToRole="Restaurante" />

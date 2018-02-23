@@ -283,6 +283,7 @@
     <Compile Include="Models\LogicaReserva.cs" />
     <Compile Include="Models\LogicaRestaurante.cs" />
     <Compile Include="Models\LogicaUsuario.cs" />
+    <Compile Include="ViewModels\HorariosReservaViewModel.cs" />
     <Compile Include="ViewModels\PlatosElegidosViewModel.cs" />
     <Compile Include="ViewModels\PlatoViewModel.cs" />
     <Compile Include="ViewModels\ReservaViewModel.cs" />
