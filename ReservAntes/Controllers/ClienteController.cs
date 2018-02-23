@@ -141,7 +141,9 @@ namespace ReservAntes.Controllers
             foreach (var platoVM in listadoPlatos)
             {
                 platoVM.cantidadPlatos = cantidades;
+                platoVM.cantidad = 0;
             }
+
 
             //Creo listado para elegir cantidad comensales
             List<int> comensales = new List<int>();
@@ -157,8 +159,20 @@ namespace ReservAntes.Controllers
             return View("Reserva", reserva);
         }
 
-        //[HttpGet]
-        //public ActionResult ReservaHora ()
+        [HttpGet]
+        public ActionResult ReservaHora()
+        {
+            List<string> Horarios = new List<string>();
+            int horaInicial = 9;
+            for (horaInicial = 9; horaInicial <= 14 && horaInicial >= 20 && horaInicial <= 23; horaInicial ++)
+            {
+                Horarios.Add(horaInicial.ToString() + ":00");
+            
+            }
+            HorariosReservaViewModel horarioReserva = new HorariosReservaViewModel();
+            horarioReserva.Horarios = Horarios;
+            return View("ReservaHorarios", horarioReserva);
+        }
         [HttpPost]
         public ActionResult Reserva(ReservaViewModel reserva)
         {
