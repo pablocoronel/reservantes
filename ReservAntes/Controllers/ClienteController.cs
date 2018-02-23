@@ -1,4 +1,5 @@
-﻿using ReservAntes.Models;
+﻿using ReservAntes;
+using ReservAntes.Models;
 using ReservAntes.ViewModels;
 using ReservAntes.ViewModels.Extensions;
 using System;
@@ -29,12 +30,6 @@ namespace ReservAntes.Controllers
             return View(listadoRestaurante);
         }
 
-
-        // GET: Cliente/Edit/5
-        public ActionResult EditCliente(int id)
-        {
-            return View();
-        }
 
         // POST: Cliente/Edit/5
         [HttpPost]
@@ -69,32 +64,12 @@ namespace ReservAntes.Controllers
         }
 
         // GET: Cliente/Delete/5
-        public ActionResult Delete(int id)
+
+
+        public ActionResult EditCliente(int id)
         {
             return View();
         }
-
-        // POST: Cliente/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-
-        // GET: Cliente/Delete/5
- 
-
-
         public ActionResult CompletarCliente()
         {
 
@@ -113,7 +88,8 @@ namespace ReservAntes.Controllers
         [HttpPost]
         public ActionResult DetalleCliente(Cliente cl)
         {
-            Int32.TryParse(Session["usuarioId"].ToString(), out int idUsuario);
+            int idUsuario;
+            Int32.TryParse(Session["usuarioId"].ToString(), out idUsuario);
             Cliente cliente = ctx.Cliente.Where(x => x.IdUsuario == cl.IdUsuario).FirstOrDefault();
 
             //1 es admin
@@ -181,6 +157,8 @@ namespace ReservAntes.Controllers
             return View("Reserva", reserva);
         }
 
+        //[HttpGet]
+        //public ActionResult ReservaHora ()
         [HttpPost]
         public ActionResult Reserva(ReservaViewModel reserva)
         {
