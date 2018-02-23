@@ -1,5 +1,5 @@
-﻿@using ReservAntes.ViewModels
-@model  RestauranteViewModel
+﻿
+@model  Restaurante
 @{
     ViewBag.Title = "Platos";
     //ViewBag.Title = "Index";
@@ -25,7 +25,7 @@
 
         <thead />
         <tbody class="table-bordered table-bordered">
-            @foreach (var plato in Model.listadoPlatos)
+            @foreach (var plato in Model.Plato)
             {
                 <tr>
                     <td>@plato.NombrePlato</td>
