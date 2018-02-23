@@ -14,7 +14,6 @@
         <EntityTypeShape EntityType="dbReservantesModel.PlatosElegidos" Width="1.5" PointX="9.75" PointY="5.25" IsExpanded="true" />
         <EntityTypeShape EntityType="dbReservantesModel.Reserva" Width="1.5" PointX="7.5" PointY="6" IsExpanded="true" />
         <EntityTypeShape EntityType="dbReservantesModel.Restaurante" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbReservantesModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="10.875" IsExpanded="true" />
         <EntityTypeShape EntityType="dbReservantesModel.TipoUsuario" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
         <EntityTypeShape EntityType="dbReservantesModel.Usuario" Width="1.5" PointX="3" PointY="6.5" IsExpanded="true" />
         <AssociationConnector Association="dbReservantesModel.FK_Cliente_Usuario" ManuallyRouted="false" />

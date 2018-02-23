@@ -264,9 +264,6 @@
     <Compile Include="Servicios\HtmlHelper.cs" />
     <Compile Include="Servicios\LocalidadServicio.cs" />
     <Compile Include="Servicios\ProvinciaServicio.cs" />
-    <Compile Include="sysdiagrams.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="TipoUsuario.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

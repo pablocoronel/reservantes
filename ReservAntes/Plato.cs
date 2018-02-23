@@ -22,11 +22,11 @@ namespace ReservAntes
     
         public int Id { get; set; }
         public string NombrePlato { get; set; }
-        public Nullable<decimal> Precio { get; set; }
+        public decimal Precio { get; set; }
         public string Descripcion { get; set; }
         public string Foto { get; set; }
         public int RestauranteId { get; set; }
-        public Nullable<bool> Activo { get; set; }
+        public bool Activo { get; set; }
     
         public virtual Restaurante Restaurante { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
