@@ -1,16 +1,21 @@
 ﻿@using ReservAntes.ViewModels
-@model   HorariosReservaViewModel
+@model  HorariosReservaViewModel
 @{
     ViewBag.Title = "HorariosReserva";
     Layout = "~/Views/Shared/_LayoutCliente.cshtml";
 }
- 
+
 <h2>Verificar disponibilidad</h2>
 @using (Html.BeginForm("HorariosReserva", "Cliente", FormMethod.Post))
 {
     @Html.HiddenFor(u => u.RestoId)
 
-   @Html.DropDownListFor(u => u.hora, new SelectList(Model.Horarios), "Hora", new { @class = "form-control" })
+    @Html.DropDownListFor(u => u.hora, new SelectList(Model.Horarios), "Hora", new { @class = "form-control" })
+    <div>
+        Cantidad de Personas:
+        @Html.DropDownListFor(u => u.comensales, new SelectList(Model.cantidadMaxima), "Cantidad de Comensales", new { @class = "form-control" })
+
+    </div>
     <button type="submit" class="btn btn-primary">Reservar</button>
 
 }
