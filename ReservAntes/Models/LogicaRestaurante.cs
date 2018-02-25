@@ -320,7 +320,7 @@ namespace ReservAntes.Models
 
         // -------------------------------------
 
-        /* disponibilidad del restaurante */
+        /* Ocupación del restaurante */
         public int VerCantidadDeComensales(int idRestaurante, DateTime fechaHora)
         {
             Reserva reservaDeRestaurante = new Reserva();
@@ -339,7 +339,12 @@ namespace ReservAntes.Models
             return totalComensalesActuales;
         }
 
-       
+        public bool VerificaDisponibilidad(int idRestaurante, DateTime fechaHoraElegida, int comensales)
+        {
+            var cantidadReservada = VerCantidadDeComensales(idRestaurante, fechaHoraElegida);
+            var capacidadestaurante = GetById(idRestaurante).CantidadClientes;
+            return (capacidadestaurante - cantidadReservada) >= comensales;
+        }
 
         }
     }

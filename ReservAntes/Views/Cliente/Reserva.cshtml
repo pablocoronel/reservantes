@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_LayoutCliente.cshtml";
 }
 
-<h2 class="thumbnail">Reservar en @Model.Restaurante.NombreComercial</h2>
+<h2 class="thumbnail">Reservar en @Model.restauranteNombre</h2>
 
 
 
@@ -13,8 +13,10 @@
 @using (Html.BeginForm("Reserva", "Cliente", FormMethod.Post, new { reserva = Model }))
 {
     @Html.HiddenFor(u => u.RestauranteId)
+    @Html.HiddenFor(u => u.FechaHoraReserva)
+    @Html.HiddenFor(u => u.CantidadComensales)
     <div class="table-responsive thumbnail">
-        <table class="table table-bordered">
+        @*<table class="table table-bordered">
             <thead>
                 <tr>
                     <td>Nombre</td>
@@ -37,33 +39,33 @@
                 }
 
             </tbody>
-        </table>
+        </table>*@
     </div>
     <br />
     @*<label>Hora:</label>
-    @Html.TextBoxFor(u => u.hora, new { @class = "form-control" })
+        @Html.TextBoxFor(u => u.hora, new { @class = "form-control" })
 
-    @Html.ValidationMessageFor(p => p.hora, "", new { @class = "text-danger" } )
-    <div class="thumbnail">
-            Hora:
-            <select name="reserva.hora" form="reserva.hora">
-                <option value="9">9:00</option>
-                <option value="10">10:00</option>
-                <option value="11">11:00</option>
-                <option value="12">12:00</option>
-                <option value="13">13:00</option>
-                <option value="14">14:00</option>
-                <option value="20">20:00</option>
-                <option value="21">21:00</option>
-                <option value="22">22:00</option>
-                <option value="23">23:00</option>
-            </select>
-        </div>*@
+        @Html.ValidationMessageFor(p => p.hora, "", new { @class = "text-danger" } )
+        <div class="thumbnail">
+                Hora:
+                <select name="reserva.hora" form="reserva.hora">
+                    <option value="9">9:00</option>
+                    <option value="10">10:00</option>
+                    <option value="11">11:00</option>
+                    <option value="12">12:00</option>
+                    <option value="13">13:00</option>
+                    <option value="14">14:00</option>
+                    <option value="20">20:00</option>
+                    <option value="21">21:00</option>
+                    <option value="22">22:00</option>
+                    <option value="23">23:00</option>
+                </select>
+            </div>*@
     @*<div>
-        Cantidad de Personas:
-        @Html.DropDownListFor(u => u.CantidadComensales, new SelectList(Model.cantidadMaxima), "Cantidad de Comensales", new { @class = "form-control" })
+            Cantidad de Personas:
+            @Html.DropDownListFor(u => u.CantidadComensales, new SelectList(Model.cantidadMaxima), "Cantidad de Comensales", new { @class = "form-control" })
 
-    </div>*@
+        </div>*@
     @*@Html.ActionLink("Reservar", "PlatosElegidos", "Cliente", new { @reserva = @Model }, new { @class = "btn btn-default btn-success btn-lg btn-block" })*@
     <button type="submit" class="btn btn-primary">Reservar</button>
 }
@@ -107,7 +109,7 @@
     @*<button type="submit" class="btn btn-primary">Reservar</button>*@
     <p>Cantidad de Comensales: @Html.DisplayFor(model => model.CantidadComensales)</p>
 
-    <p>Horario: @Html.DisplayFor(model => model.hora) :00 horas </p>
+    <p>Horario: @Html.DisplayFor(model => model.FechaHoraReserva.Hour) :00 horas </p>
     <h3>Total: $ @Html.DisplayFor(model => model.total)  </h3>
 }
 
