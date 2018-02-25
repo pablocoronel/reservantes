@@ -15,7 +15,7 @@ namespace ReservAntes.ViewModels
         public string restauranteNombre { get; set; }
         public double? total { get; set; }
         public List<PlatoViewModel> platos { get; set; }
-        public RestauranteViewModel restauranteElegido { get; set; }
+        //public RestauranteViewModel restauranteElegido { get; set; }
         public List<PlatosElegidosViewModel> platosElegidosVm { get; set; }
 
     }

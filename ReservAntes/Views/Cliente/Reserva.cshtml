@@ -12,41 +12,51 @@
 
 @using (Html.BeginForm("Reserva", "Cliente", FormMethod.Post, new { reserva = Model }))
 {
-    @Html.HiddenFor(u => u.RestauranteId)
+    @*@Html.HiddenFor(u => u.RestauranteId)*@
     @Html.HiddenFor(u => u.FechaHoraReserva)
     @Html.HiddenFor(u => u.CantidadComensales)
-    <div class="table-responsive thumbnail">
-        @*<table class="table table-bordered">
+<div class="table-responsive thumbnail">
+    <table class="table table-bordered">
             <thead>
                 <tr>
                     <td>Nombre</td>
                     <td>Precio</td>
+                    <td>Elegir</td>
                     <td>Cantidad</td>
                 </tr>
 
             <thead />
             <tbody>
-                @foreach (var plato in Model.platos)
-                {
-                    @Html.HiddenFor(m => plato.Id)
-                    <tr>
-                        <td>@plato.NombrePlato</td>
-                        <td>$@plato.Precio</td>
-                        <td>
-                            @Html.DropDownListFor(u => plato.cantidad, new SelectList(plato.cantidadPlatos), "Cantidad", new { @class = "form-control" })
-                        </td>
-                    </tr>
-                }
+                @*@foreach (var plato in Model.platos)*@
+    
+            @for (int i = 0; i < Model.platos.Count; i++)
+{
+            @Html.HiddenFor(m => m.platos[i].Id)
+            <tr>
+                <td>
+                    @Html.HiddenFor(x => x.platos[i].NombrePlato)
+                    @Model.platos[i].NombrePlato
+                </td>
+                <td>
+                    @Html.HiddenFor(x => x.platos[i].Precio)
+                    $@Model.platos[i].Precio
+                </td>
+                <td>@Html.CheckBoxFor(x => x.platos[i].elegido)</td>
+                <td>
+                    @Html.DropDownListFor(u => u.platos[i].cantidad, new SelectList(Model.platos[i].cantidadPlatos), "Cantidad", new { @class = "form-control" })
+                </td>
+            </tr>
+}
 
             </tbody>
-        </table>*@
-    </div>
+        </table>
+</div>
     <br />
 
     @*@Html.ActionLink("Reservar", "PlatosElegidos", "Cliente", new { @reserva = @Model }, new { @class = "btn btn-default btn-success btn-lg btn-block" })*@
     <button type="submit" class="btn btn-primary">Reservar</button>
 }
-@if (Model != null && Model.platosElegidosVm != null && Model.platosElegidosVm.Count > 0)
+@*@if (Model != null && Model.platosElegidosVm != null && Model.platosElegidosVm.Count > 0)
 
 {
     <table class="table table-striped table-hover">
@@ -84,13 +94,13 @@
         @Html.ActionLink("Confirmar Reserva", "ConfirmaReserva", "Cliente", new { @reservaFinal = Model }, new { @class = "btn btn-default btn-success btn-lg btn-block" })
     </div>
     @*<button type="submit" class="btn btn-primary">Reservar</button>*@
-    <p>Cantidad de Comensales: @Html.DisplayFor(model => model.CantidadComensales)</p>
+    @*<p>Cantidad de Comensales: @Html.DisplayFor(model => model.CantidadComensales)</p>
 
     <p>Horario: @Html.DisplayFor(model => model.FechaHoraReserva.Hour) :00 horas </p>
     <h3>Total: $ @Html.DisplayFor(model => model.total)  </h3>
 }
 
-<button onclick="location.href='@Url.Action("Index", "Cliente")';return false;" class="btn btn-danger">Cancelar</button>
+@*<button onclick="location.href='@Url.Action("Index", "Cliente")';return false;" class="btn btn-danger">Cancelar</button>*@
 
 
 @*<a href="<% Response.Write(preference[" response"]["init_point"]); %>">Pagar</a>*@
