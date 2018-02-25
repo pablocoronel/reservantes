@@ -8,7 +8,6 @@ namespace ReservAntes.Extensions
 {
     public class ReservaExtension
     {
-
         [Required(ErrorMessage = "Este campo es obligatorio")]
         public int ClienteId { get; set; }
         [Required(ErrorMessage = "Este campo es obligatorio")]
@@ -22,5 +21,6 @@ namespace ReservAntes.Extensions
         public string CodigoReserva { get; set; }
         public DateTime FechaHoraOperacion { get; set; }
         public int? MedioPagoId { get; set; }
+        public double? Total { get; set; }
     }
 }

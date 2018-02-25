@@ -35,6 +35,7 @@ namespace ReservAntes.ViewModels.Extensions
             entity.MedioPagoId = model.MedioPagoId;
             entity.RestauranteId = model.RestauranteId;
             entity.Observaciones = model.Observaciones;
+            entity.Total = model.Total;
             
             return entity;
 

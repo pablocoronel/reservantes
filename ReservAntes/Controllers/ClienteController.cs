@@ -237,11 +237,11 @@ namespace ReservAntes.Controllers
                     platoElegido.nombrePlato = plato.NombrePlato;
                     platoElegido.subTotal = plato.cantidad * Convert.ToDouble(plato.Precio);
                     platosElegidos.Add(platoElegido);
-                    reserva.total = reserva.total + platoElegido.subTotal;
+                    reserva.Total = reserva.Total + Convert.ToDecimal(platoElegido.subTotal);
                 }
             }
             reserva.platosElegidosVm = platosElegidos;
-            return View("Reservar", reserva);
+            return View("Reserva", reserva);
         }
 
         /* Lista de platos del restaurante elegido*/
@@ -264,6 +264,7 @@ namespace ReservAntes.Controllers
             //String fecha = fechaHoy + " " + reservaFinal.hora + ":00" + ":00";
             //reservaFinal.FechaHoraReserva = DateTime.ParseExact(fecha, "MM/dd/yyyy HH:mm:ss", esAr, DateTimeStyles.None);
             reservaFinal.FechaHoraReserva = reservaFinal.FechaHoraReserva;
+            //Lo debe elegir el cliente, ahora guarda efectivo hasta que funcione MPago
             reservaFinal.MedioPagoId = 1;//Efectivo
             reservaFinal.EstadoReservaId = 1;
             reservaFinal.ClienteId = cliente.IdCliente;
