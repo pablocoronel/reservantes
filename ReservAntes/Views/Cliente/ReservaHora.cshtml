@@ -13,6 +13,7 @@
     @Html.HiddenFor(u => u.RestoId)
 
     <div class="form-group">
+        <label>Hora:</label>
         @Html.DropDownListFor(u => u.hora, new SelectList(Model.Horarios), "Hora", new { @class = "form-control" })
         @Html.ValidationMessageFor(u => u.hora, "", new { @class = "text-danger" })
 
