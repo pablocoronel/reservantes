@@ -11,7 +11,8 @@
 
 
 
-    <a mp-mode="dftl" href="http://mpago.la/VuME" name="MP-payButton" class='orange-ar-m-ov-undefined'>Pagar Servicio</a>
+
+    <a mp-mode="dftl" href="http://mpago.la/9w0a" name="MP-payButton" class='orange-ar-m-ov-undefined'>Pagar Servicio</a>
     <script type="text/javascript">
         (function () {
             function $MPC_load() {
@@ -31,6 +32,8 @@
 
 
 
+
+
     <hr />
 
 
@@ -39,6 +42,8 @@
     {
         @Html.AntiForgeryToken()
         @Html.HiddenFor(Model => Model.IdRestaurante);
+        @Html.HiddenFor(Model => Model.NombreComercial);
+
 
         <div><input type="submit" value="Dar de Baja el Servicio" class="btn btn-danger" /></div>
 

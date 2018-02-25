@@ -6,11 +6,11 @@
 
 <div class="container thumbnail">
     <h2>Mi Menu</h2>
-
+    <hr />
     <div class="container">
         <div class="row">
             <div class="col-md-9"></div>
-            <button class="col-md-2 btn btn-primary" onclick="location.href='@Url.Action("CreatePlato")'; return false;">Crear Nuevo Plato</button>
+            <button class="col-md-2 btn btn-primary" onclick="location.href='@Url.Action("CreatePlato")'; return false;"><span class="glyphicon glyphicon-plus-sign"></span>  Crear Nuevo Plato</button>
         </div><br />
 
         <div class="row">
@@ -47,7 +47,7 @@
                                     <!-- <th><img src="@plat.Foto" width="70" /></th> -->
                                     <th>@plat.NombrePlato</th>
                                     <th>@plat.Descripcion</th>
-                                    <th>@plat.Precio</th>
+                                    <th>$@plat.Precio</th>
                                     <th><a href="@Url.Action("EditarPlato", "Restaurante", new { idPlato = plat.Id})" class="btn btn-primary">Editar</a></th>
                                     <th><a href="@Url.Action("EliminarPlato", "Restaurante", new { idPlato = plat.Id})" class="btn btn-primary">Eliminar</a></th>
 

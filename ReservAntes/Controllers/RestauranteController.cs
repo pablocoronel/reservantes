@@ -62,78 +62,7 @@ namespace ReservAntes.Controllers
             return RedirectToAction("Index");
         }
 
-        // GET: Restaurante/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: Restaurante/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Restaurante/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Restaurante/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Restaurante/Edit/5
-        [HttpPost]
-        public ActionResult EditRestoran(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Restaurante/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Restaurante/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
+      
 
         // --------------------- PLATO -----------------------------
 
@@ -374,7 +303,11 @@ namespace ReservAntes.Controllers
         public ActionResult OpcionesResto(RestauranteViewModel restoDeBaja)
         {
 
+            var IdUsuario = Session["usuarioId"];
+            var restauranteNuevo = new RestauranteViewModel();
+            var restaurante = LogRes.GetByUserId(Convert.ToInt32(IdUsuario));
 
+            
 
             ViewBag.Guardado = "Se le envio un mail al administrador para dar de baja el servicio." +
                         "Le pedimos por favor que aguarde que nosotros nos contactaremos con usted.";
