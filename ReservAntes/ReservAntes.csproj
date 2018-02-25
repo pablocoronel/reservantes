@@ -203,6 +203,7 @@
     </Compile>
     <Compile Include="Extensions\Enums\MedioPagoEnum.cs" />
     <Compile Include="Extensions\Enums\NivelRestauranteEnum.cs" />
+    <Compile Include="Extensions\HorarioReservaExtension.cs" />
     <Compile Include="Extensions\MedioPagoExtension.cs" />
     <Compile Include="Extensions\NivelRestauranteExtension.cs" />
     <Compile Include="Extensions\PlatosElegidosExtension.cs" />
@@ -264,9 +265,6 @@
     <Compile Include="Servicios\HtmlHelper.cs" />
     <Compile Include="Servicios\LocalidadServicio.cs" />
     <Compile Include="Servicios\ProvinciaServicio.cs" />
-    <Compile Include="sysdiagrams.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="TipoUsuario.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -286,6 +284,7 @@
     <Compile Include="Models\LogicaReserva.cs" />
     <Compile Include="Models\LogicaRestaurante.cs" />
     <Compile Include="Models\LogicaUsuario.cs" />
+    <Compile Include="ViewModels\HorariosReservaViewModel.cs" />
     <Compile Include="ViewModels\PlatosElegidosViewModel.cs" />
     <Compile Include="ViewModels\PlatoViewModel.cs" />
     <Compile Include="ViewModels\ReservaViewModel.cs" />
@@ -394,7 +393,7 @@
     <Content Include="Views\Admin\VerUsuarios.cshtml" />
     <Content Include="Views\Cliente\ListaPlatos.cshtml" />
     <Content Include="Views\Restaurante\Domicilio.cshtml" />
-    <Content Include="Views\Reserva\ReservaHorarios.cshtml" />
+    <Content Include="Views\Cliente\ReservaHora.cshtml" />
     <Content Include="Views\Reserva\ReporteReservas.cshtml" />
     <Content Include="Views\Cliente\ConfirmarReserva.cshtml" />
     <Content Include="Scripts\jquery-3.2.1.slim.min.map" />

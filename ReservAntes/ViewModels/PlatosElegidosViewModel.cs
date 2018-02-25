@@ -10,8 +10,7 @@ namespace ReservAntes.ViewModels
     [MetadataType(typeof(PlatosElegidosExtension))]
     public class PlatosElegidosViewModel : PlatosElegidos
     {
-        //public List<PlatoViewModel> platos { get; set; }
         public string nombrePlato {get;set;}
-        public double? total { get; set; }
+        public double? subTotal { get; set; }
     }
 }

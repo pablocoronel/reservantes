@@ -1,4 +1,5 @@
-﻿using ReservAntes.Models;
+﻿using ReservAntes;
+using ReservAntes.Models;
 using ReservAntes.ViewModels;
 using ReservAntes.ViewModels.Extensions;
 using System;
@@ -25,76 +26,50 @@ namespace ReservAntes.Controllers
         public ActionResult Index()
         {
             List<RestauranteViewModel> listadoRestaurante = new List<RestauranteViewModel>();
-         
+
             return View(listadoRestaurante);
         }
 
-
-        // GET: Cliente/Edit/5
-        public ActionResult EditCliente(int id)
-        {
-            return View();
-        }
 
         // POST: Cliente/Edit/5
         [HttpPost]
         public ActionResult EditCliente(int id, Cliente editCl)
         {
-            
-                var IdUsuario = Session["usuarioId"];
-                var nomUsuario = Session["usuarioNombre"];
+
+            var IdUsuario = Session["usuarioId"];
+            var nomUsuario = Session["usuarioNombre"];
 
 
-                if (ModelState.IsValid)
-                {
+            if (ModelState.IsValid)
+            {
 
-                
-                    Cliente EditCliente = new Cliente();
 
-                    EditCliente.IdUsuario = Convert.ToInt32(IdUsuario);
-                    EditCliente.Nombre = editCl.Nombre;
-                    EditCliente.Apellido = editCl.Apellido;
+                Cliente EditCliente = new Cliente();
 
-                     ctx.Cliente.Add(EditCliente);
-                    ctx.SaveChanges();
+                EditCliente.IdUsuario = Convert.ToInt32(IdUsuario);
+                EditCliente.Nombre = editCl.Nombre;
+                EditCliente.Apellido = editCl.Apellido;
 
-                    return View("Index");
-                }
+                ctx.Cliente.Add(EditCliente);
+                ctx.SaveChanges();
 
-                //this.LogRes.crearMenu(id);
+                return View("Index");
+            }
 
-                return View("../Shared/Error");
-            
-           
+            //this.LogRes.crearMenu(id);
+
+            return View("../Shared/Error");
+
+
         }
 
         // GET: Cliente/Delete/5
-        public ActionResult Delete(int id)
+
+
+        public ActionResult EditCliente(int id)
         {
             return View();
         }
-
-        // POST: Cliente/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-
-        // GET: Cliente/Delete/5
- 
-
-
         public ActionResult CompletarCliente()
         {
 
@@ -106,14 +81,15 @@ namespace ReservAntes.Controllers
         {
             Cliente cliente = new Cliente();
             cliente = ctx.Cliente.Where(x => x.IdUsuario == id).FirstOrDefault();
-            
+
             return View(cliente);
         }
 
         [HttpPost]
         public ActionResult DetalleCliente(Cliente cl)
         {
-            Int32.TryParse(Session["usuarioId"].ToString(), out int idUsuario);
+            int idUsuario;
+            Int32.TryParse(Session["usuarioId"].ToString(), out idUsuario);
             Cliente cliente = ctx.Cliente.Where(x => x.IdUsuario == cl.IdUsuario).FirstOrDefault();
 
             //1 es admin
@@ -134,7 +110,7 @@ namespace ReservAntes.Controllers
             }
 
             return RedirectToRoute("Home/Index");
-            
+
         }
 
         public ActionResult Reserva(int idResto)
@@ -143,13 +119,19 @@ namespace ReservAntes.Controllers
             var reserva = new ReservaViewModel();
             reserva.RestauranteId = idResto;
             var resto = restauranteServicio.GetById(idResto);
-            reserva.restauranteNombre = resto.NombreComercial;
-            var cantidadMaxima = resto.CantidadClientes;
+            reserva.Restaurante = resto;
+            //RestauranteViewModel restauranteElegido = resto.Map();
+            //reserva.restauranteElegido = restauranteElegido;
+
+            //reserva.restauranteNombre = resto.NombreComercial;
             List<Plato> listaDePlatos = LogCliente.ListarPlatosDelRestaurante(idResto);
             List<PlatoViewModel> listadoPlatos = new List<PlatoViewModel>();
+            //cantidad de platos
+            var cantidadMaxima = restauranteServicio.GetById(idResto).CantidadClientes;
+
             List<int> cantidades = new List<int>();
             var cantidad = 0;
-            for (cantidad = 0; cantidad < 20; cantidad++)
+            for (cantidad = 0; cantidad <= cantidadMaxima; cantidad++)
             {
                 cantidades.Add(cantidad);
             }
@@ -160,41 +142,110 @@ namespace ReservAntes.Controllers
             foreach (var platoVM in listadoPlatos)
             {
                 platoVM.cantidadPlatos = cantidades;
+                platoVM.cantidad = 0;
             }
-            //Creo listado para elegir cantidad comensales
-            List<int> comensales = new List<int>();
-            var persona = 1;
-            for (persona = 1; persona < cantidadMaxima; persona++)
-            {
-                comensales.Add(persona);
-            }
-            reserva.cantidadMaxima = comensales;
+            //reserva.restauranteElegido.listadoPlatos = new List<PlatoViewModel>(listadoPlatos);
             reserva.platos = listadoPlatos;
             //platosElegidos.platos=listadoPlatos;
             return View("Reserva", reserva);
         }
+
+        [HttpGet]
+        public ActionResult ReservaHora(int idResto)
+        {
+
+            HorariosReservaViewModel horarioReserva = InicializaHorarioReserva(idResto);
+            return View("ReservaHora", horarioReserva);
+        }
+        [HttpPost]
+        public ActionResult ReservaHora(HorariosReservaViewModel horarioReserva)
+        {
+
+            CultureInfo enUS = new CultureInfo("en-US");
+            HorariosReservaViewModel nuevoHorarioReserva = InicializaHorarioReserva(horarioReserva.RestoId);
+            if (horarioReserva.comensales != 0)
+
+            {
+                string fechaHoy = DateTime.Today.ToShortDateString();
+
+                String fechaHora = fechaHoy + " " + horarioReserva.hora + ":00";
+                DateTime fechaHoraReserva = DateTime.ParseExact(fechaHora, "dd/MM/yyyy HH:mm:ss", enUS, DateTimeStyles.None);
+                //ESTO FUNCIONA. COMENTADO TEMPORALMENTE SOLO PARA PROBAR EL RESTO
+                //if (fechaHoraReserva.AddHours(1) > DateTime.Now)
+                //{
+                //    ModelState.AddModelError("Hora", "No puede reservar con menos de una hora de anticipación");
+                //    return View("ReservaHora", nuevoHorarioReserva);
+                //}
+                //if (fechaHoraReserva < DateTime.Now)
+                //{
+                //    ModelState.AddModelError("Hora", "No puede reservar en ese horario");
+                //    return View("ReservaHora", nuevoHorarioReserva);
+                //}
+                if (restauranteServicio.VerificaDisponibilidad(horarioReserva.RestoId, fechaHoraReserva, horarioReserva.comensales))
+                {
+                    var reserva = new ReservaViewModel();
+                    reserva.CantidadComensales = horarioReserva.comensales;
+                    reserva.FechaHoraReserva = fechaHoraReserva;
+                    reserva.RestauranteId = horarioReserva.RestoId;
+                    reserva.restauranteNombre = restauranteServicio.GetById(horarioReserva.RestoId).NombreComercial;
+                    //var resto = restauranteServicio.GetById(horarioReserva.RestoId);
+                    //reserva.Restaurante = resto;
+                    List<Plato> listaDePlatos = LogCliente.ListarPlatosDelRestaurante(horarioReserva.RestoId);
+                    List<PlatoViewModel> listadoPlatos = new List<PlatoViewModel>();
+                    //cantidad de platos
+                    var cantidadMaxima = restauranteServicio.GetById(horarioReserva.RestoId).CantidadClientes;
+
+                    List<int> cantidades = new List<int>();
+                    var cantidad = 0;
+                    for (cantidad = 0; cantidad <= cantidadMaxima; cantidad++)
+                    {
+                        cantidades.Add(cantidad);
+                    }
+                    foreach (Plato plato in listaDePlatos)
+                    {
+                        listadoPlatos.Add(plato.Map());
+                    }
+                    foreach (var platoVM in listadoPlatos)
+                    {
+                        platoVM.cantidadPlatos = cantidades;
+                        platoVM.cantidad = 0;
+                    }
+                    reserva.platos = listadoPlatos;
+
+                    return View("Reserva", reserva);
+                }
+                ModelState.AddModelError("Hora", "No hay disponibilidad en ese horario");
+                return View("ReservaHora", nuevoHorarioReserva);
+
+            }
+
+            ModelState.AddModelError("Comensales", "Debe elegir cantidad de comensales");
+            return View("ReservaHora", nuevoHorarioReserva);
+        }
+
 
         [HttpPost]
         public ActionResult Reserva(ReservaViewModel reserva)
         {
             var platosElegidos = new List<PlatosElegidosViewModel>();
             var reservaRealizada = new Reserva();
-            foreach(var plato in reserva.platos)
+            foreach (var plato in reserva.platos)
             {
-                if (plato.elegido && plato.cantidad!=0)
+                if (plato.cantidad != null && plato.cantidad != 0)
                 {
                     var platoElegido = new PlatosElegidosViewModel();
                     platoElegido.PlatoId = plato.Id;
                     platoElegido.Cantidad = plato.cantidad;
                     platoElegido.nombrePlato = plato.NombrePlato;
-                    platoElegido.total = plato.cantidad * Convert.ToDouble(plato.Precio);
+                    platoElegido.subTotal = plato.cantidad * Convert.ToDouble(plato.Precio);
                     platosElegidos.Add(platoElegido);
-                    reserva.total = reserva.total + platoElegido.total;
+                    reserva.total = reserva.total + platoElegido.subTotal;
                 }
             }
-            reserva.platosElegidos = platosElegidos;
-            return View ("Reservar",reserva);
+            reserva.platosElegidosVm = platosElegidos;
+            return View("Reservar", reserva);
         }
+
 
         /* Lista de platos del restaurante elegido restaurante */
         public ActionResult ListaPlatos(int idResto)
@@ -203,12 +254,12 @@ namespace ReservAntes.Controllers
             var resto = new RestauranteViewModel();
             resto = restauranteServicio.GetById(idResto).Map();
             List<Plato> listaDePlatos = LogCliente.ListarPlatosDelRestaurante(idResto);
-            List<PlatoViewModel> listadoPlatos = new List<PlatoViewModel>();
-            foreach (Plato plato in listaDePlatos)
-            {
-                listadoPlatos.Add(plato.Map());
-            }
-            resto.listadoPlatos = listadoPlatos;
+            //List<PlatoViewModel> listadoPlatos = new List<PlatoViewModel>();
+            //foreach (Plato plato in listaDePlatos)
+            //{
+            //    listadoPlatos.Add(plato.Map());
+            //}
+            resto.Plato = listaDePlatos;
             //platosElegidos.platos=listadoPlatos;
 
             return View("ListaPlatos", resto);
@@ -219,10 +270,11 @@ namespace ReservAntes.Controllers
         {
             var IdUsuario = Session["usuarioId"];
             var cliente = LogCliente.GetByUserId(Convert.ToInt32(IdUsuario));
-            var fechaHoy = DateTime.Now.Date;
-            CultureInfo esAr = new CultureInfo("es-AR");
-            String fecha = fechaHoy + " " + reservaFinal.hora + ":00" + ":00";
-            reservaFinal.FechaHoraReserva = DateTime.ParseExact(fecha, "MM/dd/yyyy HH:mm:ss", esAr, DateTimeStyles.None);
+            //var fechaHoy = DateTime.Now.Date;
+            //CultureInfo esAr = new CultureInfo("es-AR");
+            //String fecha = fechaHoy + " " + reservaFinal.hora + ":00" + ":00";
+            //reservaFinal.FechaHoraReserva = DateTime.ParseExact(fecha, "MM/dd/yyyy HH:mm:ss", esAr, DateTimeStyles.None);
+            reservaFinal.FechaHoraReserva = reservaFinal.FechaHoraReserva;
             reservaFinal.MedioPagoId = 1;//Efectivo
             reservaFinal.EstadoReservaId = 1;
             reservaFinal.ClienteId = cliente.IdCliente;
@@ -230,7 +282,7 @@ namespace ReservAntes.Controllers
             var reserva = reservaFinal.Map();
             logicaReserva.CreateOrUpdate(reserva);
             var platosReservados = new List<PlatosElegidos>();
-            foreach (var plato in reservaFinal.platosElegidos)
+            foreach (var plato in reservaFinal.platosElegidosVm)
             {
                 plato.ReservaId = reserva.Id;
                 platosReservados.Add(plato.Map());
@@ -255,9 +307,43 @@ namespace ReservAntes.Controllers
 
                 reservas = LogCliente.GetReservasDelCliente(usuarioId);
             }
-            
+
 
             return View(reservas);
+        }
+
+        private HorariosReservaViewModel InicializaHorarioReserva(int idResto)
+        {
+            List<string> Horarios = new List<string>();
+            //*Horario mañana
+            int horaInicial = 12;
+            for (horaInicial = 12; horaInicial <= 14; horaInicial++)
+            {
+                Horarios.Add(horaInicial.ToString() + ":00");
+
+            }
+            //*Horario nocturno
+            int horaNoche = 20;
+            for (horaNoche = 20; horaNoche <= 23; horaNoche++)
+            {
+                Horarios.Add(horaNoche.ToString() + ":00");
+
+            }
+            var cantidadMaxima = restauranteServicio.GetById(idResto).CantidadClientes;
+            //Creo listado para elegir cantidad comensales
+            List<int> comensales = new List<int>();
+            var persona = 1;
+            for (persona = 1; persona < cantidadMaxima; persona++)
+            {
+                comensales.Add(persona);
+            }
+
+            HorariosReservaViewModel horarioReserva = new HorariosReservaViewModel();
+            horarioReserva.Horarios = Horarios;
+            horarioReserva.RestoId = idResto;
+            horarioReserva.cantidadMaxima = comensales;
+            horarioReserva.comensales = 0;
+            return horarioReserva;
         }
     }
 }

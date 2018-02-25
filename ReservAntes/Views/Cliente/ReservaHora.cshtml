@@ -1,0 +1,29 @@
+﻿@using ReservAntes.ViewModels
+@model  HorariosReservaViewModel
+@{
+    /**/
+
+    ViewBag.Title = "ReservaHora";
+    Layout = "~/Views/Shared/_LayoutCliente.cshtml";
+}
+
+<h2>Verificar disponibilidad</h2>
+@using (Html.BeginForm("ReservaHora", "Cliente", FormMethod.Post))
+{
+    @Html.HiddenFor(u => u.RestoId)
+
+    <div class="form-group">
+        <label>Hora:</label>
+        @Html.DropDownListFor(u => u.hora, new SelectList(Model.Horarios), "Hora", new { @class = "form-control" })
+        @Html.ValidationMessageFor(u => u.hora, "", new { @class = "text-danger" })
+
+    </div>
+    <div class="form-group">
+        <label>Cantidad de Personas:</label>
+        @Html.DropDownListFor(u => u.comensales, new SelectList(Model.cantidadMaxima), "Cantidad de Comensales", new { @class = "form-control" })
+        @Html.ValidationMessageFor(u => u.comensales, "", new { @class = "text-danger" })
+    </div>
+    <button type="submit" class="btn btn-primary">Reservar</button>
+    @Html.ValidationSummary(true,"")
+
+}

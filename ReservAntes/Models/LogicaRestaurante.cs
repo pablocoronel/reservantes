@@ -43,14 +43,6 @@ namespace ReservAntes.Models
         }
 
         
-        //Listado de restaurantes
-        public List<Restaurante> GetRestaurantesByLocalidad(int localidadId)
-        {
-            List<Restaurante> todosLosRestaurantes = new List<Restaurante>();
-            todosLosRestaurantes = ctx.Restaurante.Include("Domicilio").ToList();
-
-            return todosLosRestaurantes;
-        }
         public void ActualizaEstado(bool estado, int restauranteId)
         {
             using (var db = new dbReservantesEntities())
@@ -344,7 +336,7 @@ namespace ReservAntes.Models
 
         // -------------------------------------
 
-        /* disponibilidad del restaurante */
+        /* Ocupación del restaurante */
         public int VerCantidadDeComensales(int idRestaurante, DateTime fechaHora)
         {
             Reserva reservaDeRestaurante = new Reserva();
@@ -363,7 +355,12 @@ namespace ReservAntes.Models
             return totalComensalesActuales;
         }
 
-       
+        public bool VerificaDisponibilidad(int idRestaurante, DateTime fechaHoraElegida, int comensales)
+        {
+            var cantidadReservada = VerCantidadDeComensales(idRestaurante, fechaHoraElegida);
+            var capacidadestaurante = GetById(idRestaurante).CantidadClientes;
+            return (capacidadestaurante - cantidadReservada) >= comensales;
+        }
 
         }
     }

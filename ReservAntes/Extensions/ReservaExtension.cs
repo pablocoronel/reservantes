@@ -16,7 +16,7 @@ namespace ReservAntes.Extensions
         [Required(ErrorMessage = "Este campo es obligatorio")]
         [StringLength(150)]
         public string Observaciones { get; set; }
-        [Required(ErrorMessage = "Este campo es obligatorio")]
+        //[Required(ErrorMessage = "Este campo es obligatorio")]
         public int EstadoReservaId { get; set; }
         public DateTime FechaHoraReserva { get; set; }
         public string CodigoReserva { get; set; }

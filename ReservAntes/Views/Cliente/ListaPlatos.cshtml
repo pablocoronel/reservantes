@@ -1,5 +1,5 @@
-﻿@using ReservAntes.ViewModels
-@model  RestauranteViewModel
+﻿
+@model  Restaurante
 @{
     ViewBag.Title = "Platos";
     //ViewBag.Title = "Index";
@@ -25,7 +25,7 @@
 
         <thead />
         <tbody class="table-bordered table-bordered">
-            @foreach (var plato in Model.listadoPlatos)
+            @foreach (var plato in Model.Plato)
             {
                 <tr>
                     <td>@plato.NombrePlato</td>
@@ -40,7 +40,7 @@
     @*@2 es cliente *@
     @if (Session["usuarioTipo"] != null && Session["usuarioTipo"].ToString() == "2")
     {
-        @Html.ActionLink("Reservar", "Reserva", "Cliente", new { idResto = Model.IdRestaurante }, new { @class = "btn btn-default btn-success btn-lg btn-block" })
+        @Html.ActionLink("Reservar", "ReservaHora", "Cliente", new { idResto = Model.IdRestaurante }, new { @class = "btn btn-default btn-success btn-lg btn-block" })
     }
 
     @*<button type="submit" class="btn btn-primary">Reservar</button>*@
