@@ -85,7 +85,6 @@ namespace ReservAntes.Models
                     restauranteDb.Latitud = restaurante.Latitud;
                     restauranteDb.Longitud = restaurante.Longitud;
 
-
                     HttpPostedFileBase foto = restaurante.Foto;
                     HttpPostedFileBase constAFIP = restaurante.ConstAFIP;
 
@@ -130,7 +129,7 @@ namespace ReservAntes.Models
 
 
 
-            }
+                 }
 
             else
                     {
@@ -146,33 +145,50 @@ namespace ReservAntes.Models
                             HttpPostedFileBase constAFIP = restaurante.ConstAFIP;
 
 
-                            if (foto != null && foto.ContentLength > 0 || constAFIP != null && constAFIP.ContentLength > 0)
-
-                            {
-                                var fileName = Path.GetFileName(foto.FileName);
-
-
-                                using (MemoryStream ms = new MemoryStream())
-                                {
-                                    foto.InputStream.CopyTo(ms);
-                                    byte[] arrayFoto = ms.GetBuffer();
-                                    byte[] arrayAFIP = ms.GetBuffer();
+                if (foto != null && foto.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(foto.FileName);
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        foto.InputStream.CopyTo(ms);
+                        byte[] arrayFoto = ms.GetBuffer();
 
 
-                                    restauranteDb.NombreComercial = restaurante.NombreComercial;
-                                    restauranteDb.Foto = arrayFoto;
-                                    restauranteDb.ConstAFIP = arrayAFIP;
+                        restauranteDb.NombreComercial = restaurante.NombreComercial;
+                        restauranteDb.ConstAFIP = arrayFoto;
 
 
-                                }
-                            }
+                    }
+                }
+                else
+                {
+
+                    if (constAFIP != null && constAFIP.ContentLength > 0)
+                    {
+                        var fileName = Path.GetFileName(constAFIP.FileName);
+
+
+                        using (MemoryStream ms = new MemoryStream())
+                        {
+                            constAFIP.InputStream.CopyTo(ms);
+                            byte[] arrayAFIP = ms.GetBuffer();
+
+
+                            restauranteDb.NombreComercial = restaurante.NombreComercial;
+                            restauranteDb.ConstAFIP = arrayAFIP;
+
+
+                        }
+                    }
+
+                }
                 ctx.Restaurante.Add(restauranteDb);
                   }
 
                    
               ctx.SaveChanges();
             
-        }
+            }
         //Habilitar el restaurante
         public void HabilitarRestaurante(int idresto)
         {
