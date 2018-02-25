@@ -59,11 +59,11 @@
                 <option value="23">23:00</option>
             </select>
         </div>*@
-    <div>
+    @*<div>
         Cantidad de Personas:
         @Html.DropDownListFor(u => u.CantidadComensales, new SelectList(Model.cantidadMaxima), "Cantidad de Comensales", new { @class = "form-control" })
 
-    </div>
+    </div>*@
     @*@Html.ActionLink("Reservar", "PlatosElegidos", "Cliente", new { @reserva = @Model }, new { @class = "btn btn-default btn-success btn-lg btn-block" })*@
     <button type="submit" class="btn btn-primary">Reservar</button>
 }

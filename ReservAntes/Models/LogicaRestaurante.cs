@@ -43,14 +43,6 @@ namespace ReservAntes.Models
         }
 
         
-        //Listado de restaurantes
-        public List<Restaurante> GetRestaurantesByLocalidad(int localidadId)
-        {
-            List<Restaurante> todosLosRestaurantes = new List<Restaurante>();
-            todosLosRestaurantes = ctx.Restaurante.Include("Domicilio").ToList();
-
-            return todosLosRestaurantes;
-        }
         public void ActualizaEstado(bool estado, int restauranteId)
         {
             using (var db = new dbReservantesEntities())

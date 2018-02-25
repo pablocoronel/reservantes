@@ -203,6 +203,7 @@
     </Compile>
     <Compile Include="Extensions\Enums\MedioPagoEnum.cs" />
     <Compile Include="Extensions\Enums\NivelRestauranteEnum.cs" />
+    <Compile Include="Extensions\HorarioReservaExtension.cs" />
     <Compile Include="Extensions\MedioPagoExtension.cs" />
     <Compile Include="Extensions\NivelRestauranteExtension.cs" />
     <Compile Include="Extensions\PlatosElegidosExtension.cs" />
@@ -392,7 +393,7 @@
     <Content Include="Views\Admin\VerUsuarios.cshtml" />
     <Content Include="Views\Cliente\ListaPlatos.cshtml" />
     <Content Include="Views\Restaurante\Domicilio.cshtml" />
-    <Content Include="Views\Cliente\ReservaHorarios.cshtml" />
+    <Content Include="Views\Cliente\ReservaHora.cshtml" />
     <Content Include="Views\Reserva\ReporteReservas.cshtml" />
     <Content Include="Views\Cliente\ConfirmarReserva.cshtml" />
     <Content Include="Scripts\jquery-3.2.1.slim.min.map" />

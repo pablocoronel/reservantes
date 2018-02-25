@@ -144,9 +144,6 @@ namespace ReservAntes.Controllers
                 platoVM.cantidadPlatos = cantidades;
                 platoVM.cantidad = 0;
             }
-
-
-
             //reserva.restauranteElegido.listadoPlatos = new List<PlatoViewModel>(listadoPlatos);
             reserva.platos = listadoPlatos;
             //platosElegidos.platos=listadoPlatos;
@@ -157,11 +154,19 @@ namespace ReservAntes.Controllers
         public ActionResult ReservaHora(int idResto)
         {
             List<string> Horarios = new List<string>();
-            int horaInicial = 9;
-            for (horaInicial = 9; horaInicial <= 14 && horaInicial >= 20 && horaInicial <= 23; horaInicial ++)
+            //*Horario mañana
+            int horaInicial = 12;
+            for (horaInicial = 12; horaInicial <= 14; horaInicial ++)
             {
                 Horarios.Add(horaInicial.ToString() + ":00");
             
+            }
+            //*Horario nocturno
+            int horaNoche = 20;
+            for (horaNoche= 20; horaNoche <= 23; horaNoche++)
+            {
+                Horarios.Add(horaNoche.ToString() + ":00");
+
             }
             var cantidadMaxima = restauranteServicio.GetById(idResto).CantidadClientes;
             //Creo listado para elegir cantidad comensales
@@ -178,17 +183,67 @@ namespace ReservAntes.Controllers
             horarioReserva.cantidadMaxima = comensales;
             horarioReserva.comensales = 0;
 
-            return View("ReservaHorarios", horarioReserva);
+            return View("ReservaHora", horarioReserva);
         }
-        //[HttpPost]
-        //public ActionResult ReservaHorarios (HorariosReservaViewModel horarioReserva)
-        //{
-        //    if (horarioReserva.comensales != 0)
-        //    {
+        [HttpPost]
+        public ActionResult ReservaHora(HorariosReservaViewModel horarioReserva)
+        {
+            CultureInfo enUS = new CultureInfo("en-US");
 
-        //    }
+            if (horarioReserva.comensales != 0)
 
-        //}
+            {
+                
+                String fechaHoy = Convert.ToString(DateTime.Today);
+
+                String fechaHora = fechaHoy + " " + horarioReserva + ":00";
+                DateTime fechaHoraReserva = DateTime.ParseExact(fechaHora, "MM/dd/yyyy HH:mm:ss", enUS, DateTimeStyles.None);
+                if (fechaHoraReserva.AddHours(1) > DateTime.Now)
+                {
+                    ModelState.AddModelError("Hora", "No puede reservar con menos de una hora de anticipación");
+                    return View("ReservaHora", horarioReserva);
+                }
+                var consultarDisponibilidad = restauranteServicio.VerCantidadDeComensales(horarioReserva.RestoId,fechaHoraReserva);
+                if (consultarDisponibilidad >= horarioReserva.comensales)
+                {
+                    var reserva = new ReservaViewModel();
+                    reserva.CantidadComensales = horarioReserva.comensales;
+                    reserva.RestauranteId = horarioReserva.RestoId;
+                    var resto = restauranteServicio.GetById(horarioReserva.RestoId);
+                    reserva.Restaurante = resto;
+                    List<Plato> listaDePlatos = LogCliente.ListarPlatosDelRestaurante(horarioReserva.RestoId);
+                    List<PlatoViewModel> listadoPlatos = new List<PlatoViewModel>();
+                    //cantidad de platos
+                    var cantidadMaxima = restauranteServicio.GetById(horarioReserva.RestoId).CantidadClientes;
+
+                    List<int> cantidades = new List<int>();
+                    var cantidad = 0;
+                    for (cantidad = 0; cantidad <= cantidadMaxima; cantidad++)
+                    {
+                        cantidades.Add(cantidad);
+                    }
+                    foreach (Plato plato in listaDePlatos)
+                    {
+                        listadoPlatos.Add(plato.Map());
+                    }
+                    foreach (var platoVM in listadoPlatos)
+                    {
+                        platoVM.cantidadPlatos = cantidades;
+                        platoVM.cantidad = 0;
+                    }
+                    reserva.platos = listadoPlatos;
+
+                    return View("Reserva", reserva);
+                }
+                ModelState.AddModelError("Hora", "No hay disponibilidad en ese horario");
+                return View("ReservaHora", horarioReserva);
+
+            }
+
+            ModelState.AddModelError("Comensales", "Debe elegir cantidad de comensales");
+            return View("ReservaHora", horarioReserva);
+
+        }
         [HttpPost]
         public ActionResult Reserva(ReservaViewModel reserva)
         {
