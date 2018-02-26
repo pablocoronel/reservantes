@@ -63,10 +63,15 @@ namespace ReservAntes.Models
             Usuario usuario = new Usuario();
             usuario.Username = us.Username;
             usuario.Email = us.Email;
-            usuario.Password = us.Password;
             usuario.TipoUsuarioId = us.TipoUsuarioId;
             usuario.Activo = true;
             usuario.FechaDeRegistro = DateTime.Now;
+
+            string result = string.Empty;
+            byte[] encryted = System.Text.Encoding.Unicode.GetBytes(us.Password);
+            result = Convert.ToBase64String(encryted);
+
+            usuario.Password = result;
 
             ctx.Usuario.Add(usuario);
             ctx.SaveChanges();
@@ -91,7 +96,13 @@ namespace ReservAntes.Models
         //Login de usuarios
         public Usuario UsuarioIngresar(Usuario usuario)
         {
-            return ctx.Usuario.FirstOrDefault(usu => usu.Username == usuario.Username && usu.Password == usuario.Password);
+
+            string result = string.Empty;
+            byte[] encryted = System.Text.Encoding.Unicode.GetBytes(usuario.Password);
+            result = Convert.ToBase64String(encryted);
+
+
+            return ctx.Usuario.FirstOrDefault(usu => usu.Username == usuario.Username && usu.Password == result); 
         }
     }
 }
