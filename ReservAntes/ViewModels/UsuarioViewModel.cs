@@ -11,5 +11,7 @@ namespace ReservAntes.ViewModels
     [MetadataType(typeof(UsuarioExtension))]
     public class UsuarioViewModel : Usuario
     {
+
+
     }
 }
