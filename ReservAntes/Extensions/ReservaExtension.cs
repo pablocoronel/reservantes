@@ -8,11 +8,10 @@ namespace ReservAntes.Extensions
 {
     public class ReservaExtension
     {
-        [Required(ErrorMessage = "Este campo es obligatorio")]
+        //[Required(ErrorMessage = "Este campo es obligatorio")]
         public int ClienteId { get; set; }
         [Required(ErrorMessage = "Este campo es obligatorio")]
         public int RestauranteId { get; set; }
-        [Required(ErrorMessage = "Este campo es obligatorio")]
         [StringLength(150)]
         public string Observaciones { get; set; }
         //[Required(ErrorMessage = "Este campo es obligatorio")]

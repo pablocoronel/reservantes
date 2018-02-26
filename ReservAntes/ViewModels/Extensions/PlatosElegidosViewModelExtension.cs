@@ -14,7 +14,7 @@ namespace ReservAntes.ViewModels.Extensions
             entity.Cantidad = model.Cantidad;
             entity.ReservaId = model.ReservaId;
             entity.PlatoId = model.PlatoId;
-
+            
             return entity;
 
         }

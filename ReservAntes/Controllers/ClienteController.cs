@@ -116,39 +116,41 @@ namespace ReservAntes.Controllers
 
         public ActionResult Reserva(int idResto)
         {
-            //var platosElegidos = new PlatosElegidosViewModel();
-            var reserva = new ReservaViewModel();
-            reserva.RestauranteId = idResto;
-            var resto = restauranteServicio.GetById(idResto);
-            reserva.Restaurante = resto;
-            //RestauranteViewModel restauranteElegido = resto.Map();
-            //reserva.restauranteElegido = restauranteElegido;
+            HorariosReservaViewModel horarioReserva = InicializaHorarioReserva(idResto);
+            return View("ReservaHora", horarioReserva);
+            ////var platosElegidos = new PlatosElegidosViewModel();
+            //var reserva = new ReservaViewModel();
+            //reserva.RestauranteId = idResto;
+            //var resto = restauranteServicio.GetById(idResto);
+            //reserva.Restaurante = resto;
+            ////RestauranteViewModel restauranteElegido = resto.Map();
+            ////reserva.restauranteElegido = restauranteElegido;
 
-            //reserva.restauranteNombre = resto.NombreComercial;
-            List<Plato> listaDePlatos = LogCliente.ListarPlatosDelRestaurante(idResto);
-            List<PlatoViewModel> listadoPlatos = new List<PlatoViewModel>();
-            //cantidad de platos
-            var cantidadMaxima = restauranteServicio.GetById(idResto).CantidadClientes;
+            ////reserva.restauranteNombre = resto.NombreComercial;
+            //List<Plato> listaDePlatos = LogCliente.ListarPlatosDelRestaurante(idResto);
+            //List<PlatoViewModel> listadoPlatos = new List<PlatoViewModel>();
+            ////cantidad de platos
+            //var cantidadMaxima = restauranteServicio.GetById(idResto).CantidadClientes;
 
-            List<int> cantidades = new List<int>();
-            var cantidad = 0;
-            for (cantidad = 0; cantidad <= cantidadMaxima; cantidad++)
-            {
-                cantidades.Add(cantidad);
-            }
-            foreach (Plato plato in listaDePlatos)
-            {
-                listadoPlatos.Add(plato.Map());
-            }
-            foreach (var platoVM in listadoPlatos)
-            {
-                platoVM.cantidadPlatos = cantidades;
-                platoVM.cantidad = 0;
-            }
-            //reserva.restauranteElegido.listadoPlatos = new List<PlatoViewModel>(listadoPlatos);
-            reserva.platos = listadoPlatos;
-            //platosElegidos.platos=listadoPlatos;
-            return View("Reserva", reserva);
+            //List<int> cantidades = new List<int>();
+            //var cantidad = 0;
+            //for (cantidad = 0; cantidad <= cantidadMaxima; cantidad++)
+            //{
+            //    cantidades.Add(cantidad);
+            //}
+            //foreach (Plato plato in listaDePlatos)
+            //{
+            //    listadoPlatos.Add(plato.Map());
+            //}
+            //foreach (var platoVM in listadoPlatos)
+            //{
+            //    platoVM.cantidadPlatos = cantidades;
+            //    platoVM.cantidad = 0;
+            //}
+            ////reserva.restauranteElegido.listadoPlatos = new List<PlatoViewModel>(listadoPlatos);
+            //reserva.platos = listadoPlatos;
+            ////platosElegidos.platos=listadoPlatos;
+            //return View("Reserva", reserva);
         }
 
         [HttpGet]
@@ -247,6 +249,7 @@ namespace ReservAntes.Controllers
                     platoElegido.subTotal = platoElegido.Cantidad * Convert.ToDouble(plato.Precio);
                     platosElegidos.Add(platoElegido);
                     reserva.Total = reserva.Total + Convert.ToDecimal(platoElegido.subTotal);
+                    reserva.PlatosElegidos.Add(platoElegido.Map());
                 }
             }
             reserva.platosElegidosVm = platosElegidos;
@@ -271,7 +274,6 @@ namespace ReservAntes.Controllers
             }
 
             reserva.platos = listadoPlatos;
-
             return View("Reserva", reserva);
         }
 
