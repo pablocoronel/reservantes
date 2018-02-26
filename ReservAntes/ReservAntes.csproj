@@ -243,6 +243,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\LogicaEmail.cs" />
+    <Compile Include="Models\LogicaPlato.cs" />
     <Compile Include="NivelRestaurante.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

@@ -12,6 +12,8 @@ namespace ReservAntes.ViewModels
         public string restauranteNombre { get; set; }
         public List<PlatoViewModel> platos { get; set; }
         //public RestauranteViewModel restauranteElegido { get; set; }
+        public List<int> PlatoCantidad { get; set; }
+        public List<int> PlatoId { get; set; }
         public List<PlatosElegidosViewModel> platosElegidosVm { get; set; }
 
     }
