@@ -5,11 +5,11 @@
 
     ViewBag.Title = "ReservaCliente";
 }
+<div class="thumbnail">
+    <h2 class="text-center">Mis reservas</h2><br />
 
-<h2>Mis reservas</h2>
 
-
-    <div class="thumbnail table-responsive">
+    <div class="table-responsive">
         <table class="table-bordered table-striped table-condensed" style="width: 100%;">
             <thead>
                 <tr>
@@ -24,24 +24,25 @@
             <tbody>
                 @foreach (Reserva reserva in Model)
                 {
-                <tr>
-                    <td>
-                        @reserva.Restaurante.NombreComercial
-                    </td>
-                    <td>
-                        @reserva.FechaHoraReserva.ToLongDateString() a las @reserva.FechaHoraReserva.ToShortTimeString()
-                    </td>
-                    <td>
-                        @reserva.CodigoReserva
-                    </td>
-                    <td>
-                        @reserva.CantidadComensales
-                    </td>
-                    <td>
-                        @reserva.Observaciones
-                    </td>
-                </tr>
+                    <tr>
+                        <td>
+                            @reserva.Restaurante.NombreComercial
+                        </td>
+                        <td>
+                            @reserva.FechaHoraReserva.ToLongDateString() a las @reserva.FechaHoraReserva.ToShortTimeString()
+                        </td>
+                        <td>
+                            @reserva.CodigoReserva
+                        </td>
+                        <td>
+                            @reserva.CantidadComensales
+                        </td>
+                        <td>
+                            @reserva.Observaciones
+                        </td>
+                    </tr>
                 }
             </tbody>
         </table>
     </div>
+</div>

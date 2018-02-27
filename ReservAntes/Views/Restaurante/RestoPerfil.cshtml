@@ -50,9 +50,12 @@
             <p></p>
         </div>
         <div class="form-group">
-            <label><b>Constancia de inscripcion a la AFIP:</b></label>
+            <label><b>Constancia de inscripcion a la AFIP: <em>(*)</em></b></label>
             @Html.TextBoxFor(Model => Model.ConstAFIP, new { type = "file" })
-            @Html.ValidationMessageFor(p => p.ConstAFIP, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(p => p.ConstAFIP, "", new { @class = "text-danger" })<p></p>
+            <em class="small">(*)Les pedimos por favor que cargue un archivo de tipo .pdf, </em><br />
+            <em class="small">el mismo podra descargarlo desde el siguiente enlace <a href="https://seti.afip.gob.ar/padron-puc-constancia-internet/ConsultaConstanciaAction.do">Constancia AFIP.</a> </em>
+
 
         </div>
 
@@ -65,7 +68,7 @@
             }
         </style>
 
-        <div style="width:320px; margin:-350px 0 0 500px;">
+        <div style="width:320px; margin:-410px 0 0 500px;">
             <label><b>Direccion:</b></label>
             @Html.TextBoxFor(Model => Model.Domicilio, new { @class = "form-control", id = "direccion" })
             <p></p>

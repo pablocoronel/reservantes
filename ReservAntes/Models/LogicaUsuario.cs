@@ -81,7 +81,7 @@ namespace ReservAntes.Models
             {
                 Restaurante restaurante = new Restaurante();
                 restaurante.IdUsuario = usuario.Id;
-                restaurante.NombreComercial = "por defecto";
+                restaurante.NombreComercial = "Mi Restoran";
                 restaurante.CUIT = "00-00000000-0";
                 restaurante.CantidadClientes = 0;
                 restaurante.Habilitado = false;
@@ -97,8 +97,8 @@ namespace ReservAntes.Models
                 {
                 Cliente client = new Cliente();
                 client.IdUsuario = usuario.Id;
-                client.Nombre = "por defecto";
-                client.Apellido = "por defecto";
+                client.Nombre = "Mi Nombre";
+                client.Apellido = "Mi Apellido";
 
                 ctx.Cliente.Add(client);
                 ctx.SaveChanges();
