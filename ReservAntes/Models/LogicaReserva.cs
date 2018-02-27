@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ReservAntes.Extensions.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -76,22 +77,23 @@ namespace ReservAntes.Models
         {
             using (var db = new dbReservantesEntities())
             {
-
+                reserva.FechaHoraOperacion = DateTime.Now;
                 db.Reserva.Add(reserva);
                 db.SaveChanges();
             }
         }
-        public void CreatePlatos(List<PlatosElegidos> platosElegidos)
+        public void CreatePlatos(ICollection<PlatosElegidos> platosElegidos)
         {
             using (var db = new dbReservantesEntities())
             {
                 foreach (var item in platosElegidos)
                 {
                     db.PlatosElegidos.Add(item);
-
+                    db.SaveChanges();
                 }
-                db.SaveChanges();
+                
             }
         }
+
     }
 }

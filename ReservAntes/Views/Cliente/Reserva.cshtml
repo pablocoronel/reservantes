@@ -10,7 +10,6 @@
 <h2 class="thumbnail">Reservar en @Model.restauranteNombre</h2>
 
 
-
 @if (Model.platosElegidosVm==null)
 {
     using (Html.BeginForm("Reserva", "Cliente", FormMethod.Post, new { reserva = @Model }))
@@ -55,60 +54,11 @@
         <button type="submit" class="btn btn-primary">Reservar</button>
     }
 }
-@if (Model != null && Model.platosElegidosVm != null && Model.platosElegidosVm.Count > 0)
+@*@if (Model != null && Model.platosElegidosVm != null && Model.platosElegidosVm.Count > 0)
 
 {
-    using (Html.BeginForm("ConfirmarReserva", "Cliente", FormMethod.Post, new { reservaFinal = @Model }))
-    {
-        @Html.HiddenFor(u => u.RestauranteId)
-        @Html.HiddenFor(u => u.FechaHoraReserva)
-        @Html.HiddenFor(u => u.CantidadComensales)
-        @Html.HiddenFor(u=>u.PlatosElegidos)
-
-        <table class="table table-striped table-hover">
-            <thead>
-                <tr>
-                    <th>Plato</th>
-                    <th>Cantidad</th>
-                    <th>Total</th>
-                </tr>
-            </thead>
-            <tbody>
-
-                @foreach (var item in Model.platosElegidosVm)
-                {
-
-                    <tr class="active">
-                        <td>
-                            @Html.DisplayFor(modelItem => item.nombrePlato)
-                        </td>
-
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Cantidad)
-                        </td>
-
-                        <td>
-                            $ @Html.DisplayFor(modelItem => item.subTotal)
-                        </td>
-                    </tr>
-                }
-
-            </tbody>
-
-        </table>
-
-        @*<button type="submit" class="btn btn-primary">Reservar</button>*@
-        <p>Cantidad de Comensales: @Html.DisplayFor(model => model.CantidadComensales)</p>
-
-        <p>Horario: @Html.DisplayFor(model => model.FechaHoraReserva.Hour) :00 horas </p>
-        <h3>Total: $ @Html.DisplayFor(model => model.Total)  </h3>
-        <button type="submit" class="btn btn-default btn-success btn-lg btn-block">Confirmar Reserva</button>
-
-        @*<div>
-                @Html.ActionLink("Confirmar Reserva", "ConfirmarReserva", "Cliente", new { @reservaFinal = Model }, new { @class = "btn btn-default btn-success btn-lg btn-block" })
-            </div>*@
-    }
-}
+   
+}*@
 
 <button onclick="location.href='@Url.Action("Index", "Cliente")';return false;" class="btn btn-danger">Cancelar</button>
 

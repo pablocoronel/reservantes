@@ -394,7 +394,7 @@
     <Content Include="Views\Restaurante\Domicilio.cshtml" />
     <Content Include="Views\Cliente\ReservaHora.cshtml" />
     <Content Include="Views\Reserva\ReporteReservas.cshtml" />
-    <Content Include="Views\Cliente\ConfirmarReserva.cshtml" />
+    <Content Include="Views\Cliente\ConfirmaReserva.cshtml" />
     <Content Include="Scripts\jquery-3.2.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.2.1.min.map" />
     <Content Include="Views\Cliente\ReservaCliente.cshtml" />
@@ -406,6 +406,7 @@
     <Content Include="Views\Home\Sent.cshtml" />
     <Content Include="Views\Restaurante\OpcionesResto.cshtml" />
     <Content Include="Views\Cliente\Reserva.cshtml" />
+    <Content Include="Views\Cliente\PagarReserva.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

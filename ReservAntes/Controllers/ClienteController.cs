@@ -1,4 +1,5 @@
 ﻿using ReservAntes;
+using ReservAntes.Extensions.Enums;
 using ReservAntes.Models;
 using ReservAntes.ViewModels;
 using ReservAntes.ViewModels.Extensions;
@@ -175,16 +176,16 @@ namespace ReservAntes.Controllers
                 String fechaHora = fechaHoy + " " + horarioReserva.hora + ":00";
                 DateTime fechaHoraReserva = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, int.Parse(horarioReserva.hora.Split(':')[0]), 0, 0);
                 //Comentado temporalmente por la hora
-                //if (fechaHoraReserva < DateTime.Now.AddHours(1))
-                //{
-                //    ModelState.AddModelError("Hora", "No puede reservar con menos de una hora de anticipación");
-                //    return View("ReservaHora", nuevoHorarioReserva);
-                //}
-                //if (fechaHoraReserva < DateTime.Now)
-                //{
-                //    ModelState.AddModelError("Hora", "No puede reservar en ese horario");
-                //    return View("ReservaHora", nuevoHorarioReserva);
-                //}
+                if (fechaHoraReserva < DateTime.Now.AddHours(1))
+                {
+                    ModelState.AddModelError("Hora", "No puede reservar con menos de una hora de anticipación");
+                    return View("ReservaHora", nuevoHorarioReserva);
+                }
+                if (fechaHoraReserva < DateTime.Now)
+                {
+                    ModelState.AddModelError("Hora", "No puede reservar en ese horario");
+                    return View("ReservaHora", nuevoHorarioReserva);
+                }
                 if (restauranteServicio.VerificaDisponibilidad(horarioReserva.RestoId, fechaHoraReserva, horarioReserva.comensales))
                 {
                     var reserva = new ReservaViewModel();
@@ -249,10 +250,16 @@ namespace ReservAntes.Controllers
                     platoElegido.subTotal = platoElegido.Cantidad * Convert.ToDouble(plato.Precio);
                     platosElegidos.Add(platoElegido);
                     reserva.Total = reserva.Total + Convert.ToDecimal(platoElegido.subTotal);
-                    reserva.PlatosElegidos.Add(platoElegido.Map());
+                    //reserva.PlatosElegidos.Add(platoElegido.Map());
                 }
             }
-            reserva.platosElegidosVm = platosElegidos;
+            if (platosElegidos.Count() > 0)
+            {
+                reserva.platosElegidosVm = platosElegidos;
+                ModelState.AddModelError("Platos", "No eligió ningún plato");
+
+            }
+            reserva.restauranteNombre = restauranteServicio.GetById(reserva.RestauranteId).NombreComercial;
             List<Plato> listaDePlatos = LogCliente.ListarPlatosDelRestaurante(reserva.RestauranteId);
             var cantidadMaxima = restauranteServicio.GetById(reserva.RestauranteId).CantidadClientes;
             List<PlatoViewModel> listadoPlatos = new List<PlatoViewModel>();
@@ -274,7 +281,7 @@ namespace ReservAntes.Controllers
             }
 
             reserva.platos = listadoPlatos;
-            return View("Reserva", reserva);
+            return View("ConfirmaReserva", reserva);
         }
 
         /* Lista de platos del restaurante elegido*/
@@ -291,30 +298,44 @@ namespace ReservAntes.Controllers
         public ActionResult ConfirmarReserva(ReservaViewModel reservaFinal)
         {
             var IdUsuario = Session["usuarioId"];
+            
             var cliente = LogCliente.GetByUserId(Convert.ToInt32(IdUsuario));
-            //var fechaHoy = DateTime.Now.Date;
-            //CultureInfo esAr = new CultureInfo("es-AR");
-            //String fecha = fechaHoy + " " + reservaFinal.hora + ":00" + ":00";
-            //reservaFinal.FechaHoraReserva = DateTime.ParseExact(fecha, "MM/dd/yyyy HH:mm:ss", esAr, DateTimeStyles.None);
+            if (cliente == null)
+            {
+                return View("Index");
+            }
+            var i = 0;
+            for (i = 0; i < reservaFinal.PlatoElegidoId.Count(); i++)
+            {
+                //if (plato.cantidad != null && plato.cantidad != 0)
+                if (reservaFinal.PlatoElegidoCantidad[i] > 0)
+                {
+                    var platoElegido = new PlatosElegidos();
+                    platoElegido.PlatoId = reservaFinal.PlatoElegidoId[i];
+                    platoElegido.Cantidad = reservaFinal.PlatoElegidoCantidad[i];
+                    reservaFinal.PlatosElegidos.Add(platoElegido);
+               }
+            }
             reservaFinal.FechaHoraReserva = reservaFinal.FechaHoraReserva;
             //Lo debe elegir el cliente, ahora guarda efectivo hasta que funcione MPago
-            reservaFinal.MedioPagoId = 1;//Efectivo
-            reservaFinal.EstadoReservaId = 1;
+            reservaFinal.MedioPagoId = 2;//Efectivo
+            reservaFinal.EstadoReservaId = 1; // Reservado
             reservaFinal.ClienteId = cliente.IdCliente;
             reservaFinal.CodigoReserva = Convert.ToString(reservaFinal.FechaHoraReserva.Hour)+ Convert.ToString(reservaFinal.ClienteId) + Convert.ToString(reservaFinal.RestauranteId);
             var reserva = reservaFinal.Map();
+
             logicaReserva.CreateOrUpdate(reserva);
-            var platosReservados = new List<PlatosElegidos>();
-            foreach (var plato in reservaFinal.platosElegidosVm)
+
+            //var platosReservados = new List<PlatosElegidos>();
+            foreach (var platoElegido in reservaFinal.PlatosElegidos)
             {
-                plato.ReservaId = reserva.Id;
-                platosReservados.Add(plato.Map());
+                platoElegido.ReservaId = reserva.Id;
             }
 
-            logicaReserva.CreatePlatos(platosReservados);
+            logicaReserva.CreatePlatos(reservaFinal.PlatosElegidos);
             //Estado RESERVADO
             //var codigo = reserva.Id;
-            return View("ConfirmarReserva", reservaFinal);
+            return View("PagarReserva");
         }
 
         public ActionResult ReservaCliente()
