@@ -125,6 +125,7 @@ namespace ReservAntes.Controllers
         [HttpGet]
         public ActionResult ReservaHora(int idResto)
         {
+               
             HorariosReservaViewModel horarioReserva = InicializaHorarioReserva(idResto);
             return View("ReservaHora", horarioReserva);
         }
@@ -288,6 +289,7 @@ namespace ReservAntes.Controllers
             //Lo debe elegir el cliente, ahora guarda efectivo hasta que funcione MPago
             reservaFinal.MedioPagoId = 2;//Efectivo
             reservaFinal.EstadoReservaId = 1; // Reservado
+
             reservaFinal.ClienteId = cliente.IdCliente;
             reservaFinal.CodigoReserva = Convert.ToString(reservaFinal.FechaHoraReserva.Hour)+ Convert.ToString(reservaFinal.ClienteId) + Convert.ToString(reservaFinal.RestauranteId);
             var reserva = reservaFinal.Map();
