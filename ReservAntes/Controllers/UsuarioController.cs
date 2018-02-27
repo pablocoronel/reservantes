@@ -76,7 +76,7 @@ namespace ReservAntes.Controllers
                     string sCorreoReservAntes = "reservantesapp@gmail.com";
                     string sPsswordReservantes = "ReservAntes007";
                     smtp.Credentials = new System.Net.NetworkCredential(sCorreoReservAntes, sPsswordReservantes);
-                    smtp.Send(message);
+                    //smtp.Send(message);
 
                     
                 }

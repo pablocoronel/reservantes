@@ -119,39 +119,7 @@ namespace ReservAntes.Controllers
         {
             HorariosReservaViewModel horarioReserva = InicializaHorarioReserva(idResto);
             return View("ReservaHora", horarioReserva);
-            ////var platosElegidos = new PlatosElegidosViewModel();
-            //var reserva = new ReservaViewModel();
-            //reserva.RestauranteId = idResto;
-            //var resto = restauranteServicio.GetById(idResto);
-            //reserva.Restaurante = resto;
-            ////RestauranteViewModel restauranteElegido = resto.Map();
-            ////reserva.restauranteElegido = restauranteElegido;
 
-            ////reserva.restauranteNombre = resto.NombreComercial;
-            //List<Plato> listaDePlatos = LogCliente.ListarPlatosDelRestaurante(idResto);
-            //List<PlatoViewModel> listadoPlatos = new List<PlatoViewModel>();
-            ////cantidad de platos
-            //var cantidadMaxima = restauranteServicio.GetById(idResto).CantidadClientes;
-
-            //List<int> cantidades = new List<int>();
-            //var cantidad = 0;
-            //for (cantidad = 0; cantidad <= cantidadMaxima; cantidad++)
-            //{
-            //    cantidades.Add(cantidad);
-            //}
-            //foreach (Plato plato in listaDePlatos)
-            //{
-            //    listadoPlatos.Add(plato.Map());
-            //}
-            //foreach (var platoVM in listadoPlatos)
-            //{
-            //    platoVM.cantidadPlatos = cantidades;
-            //    platoVM.cantidad = 0;
-            //}
-            ////reserva.restauranteElegido.listadoPlatos = new List<PlatoViewModel>(listadoPlatos);
-            //reserva.platos = listadoPlatos;
-            ////platosElegidos.platos=listadoPlatos;
-            //return View("Reserva", reserva);
         }
 
         [HttpGet]
@@ -176,16 +144,16 @@ namespace ReservAntes.Controllers
                 String fechaHora = fechaHoy + " " + horarioReserva.hora + ":00";
                 DateTime fechaHoraReserva = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, int.Parse(horarioReserva.hora.Split(':')[0]), 0, 0);
                 //Comentado temporalmente por la hora
-                if (fechaHoraReserva < DateTime.Now.AddHours(1))
-                {
-                    ModelState.AddModelError("Hora", "No puede reservar con menos de una hora de anticipación");
-                    return View("ReservaHora", nuevoHorarioReserva);
-                }
-                if (fechaHoraReserva < DateTime.Now)
-                {
-                    ModelState.AddModelError("Hora", "No puede reservar en ese horario");
-                    return View("ReservaHora", nuevoHorarioReserva);
-                }
+                //if (fechaHoraReserva < DateTime.Now.AddHours(1))
+                //{
+                //    ModelState.AddModelError("Hora", "No puede reservar con menos de una hora de anticipación");
+                //    return View("ReservaHora", nuevoHorarioReserva);
+                //}
+                //if (fechaHoraReserva < DateTime.Now)
+                //{
+                //    ModelState.AddModelError("Hora", "No puede reservar en ese horario");
+                //    return View("ReservaHora", nuevoHorarioReserva);
+                //}
                 if (restauranteServicio.VerificaDisponibilidad(horarioReserva.RestoId, fechaHoraReserva, horarioReserva.comensales))
                 {
                     var reserva = new ReservaViewModel();

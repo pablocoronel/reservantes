@@ -4,21 +4,21 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d9eb1cbe734249bb8970624e523385ce" Name="Diagram1">
+      <Diagram DiagramId="51402c35dc0244bfaf57f7473ddc5269" Name="Diagram1">
         <EntityTypeShape EntityType="dbReservantesModel.Cliente" Width="1.5" PointX="5.25" PointY="6.875" IsExpanded="true" />
         <EntityTypeShape EntityType="dbReservantesModel.DatosBancarios" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
         <EntityTypeShape EntityType="dbReservantesModel.EstadoReserva" Width="1.5" PointX="5.25" PointY="9.875" IsExpanded="true" />
         <EntityTypeShape EntityType="dbReservantesModel.MedioPago" Width="1.5" PointX="5.25" PointY="12.375" IsExpanded="true" />
         <EntityTypeShape EntityType="dbReservantesModel.NivelRestaurante" Width="1.5" PointX="3" PointY="11.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbReservantesModel.Plato" Width="1.5" PointX="7.5" PointY="2.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbReservantesModel.PlatosElegidos" Width="1.5" PointX="9.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbReservantesModel.Plato" Width="1.5" PointX="7.5" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbReservantesModel.PlatosElegidos" Width="1.5" PointX="9.75" PointY="9.125" IsExpanded="true" />
         <EntityTypeShape EntityType="dbReservantesModel.Reserva" Width="1.5" PointX="7.5" PointY="6" IsExpanded="true" />
         <EntityTypeShape EntityType="dbReservantesModel.Restaurante" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="dbReservantesModel.TipoUsuario" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
         <EntityTypeShape EntityType="dbReservantesModel.Usuario" Width="1.5" PointX="3" PointY="6.5" IsExpanded="true" />
         <AssociationConnector Association="dbReservantesModel.FK_Cliente_Usuario" ManuallyRouted="false" />
         <AssociationConnector Association="dbReservantesModel.FK_Reserva_Cliente" ManuallyRouted="false" />
-        <AssociationConnector Association="dbReservantesModel.FK_Restaurante_DatosBancarios1" ManuallyRouted="false" />
+        <AssociationConnector Association="dbReservantesModel.FK_Restaurante_DatosBancarios" ManuallyRouted="false" />
         <AssociationConnector Association="dbReservantesModel.FK_Reserva_EstadoReserva" ManuallyRouted="false" />
         <AssociationConnector Association="dbReservantesModel.FK_Reserva_MedioPago" ManuallyRouted="false" />
         <AssociationConnector Association="dbReservantesModel.FK_Restaurante_Nivel" ManuallyRouted="false" />
@@ -27,7 +27,7 @@
         <AssociationConnector Association="dbReservantesModel.FK_PlatosElegidos_Reserva" ManuallyRouted="false" />
         <AssociationConnector Association="dbReservantesModel.FK_Reserva_Restaurante" ManuallyRouted="false" />
         <AssociationConnector Association="dbReservantesModel.FK_Restaurante_Usuario" ManuallyRouted="false" />
-        <AssociationConnector Association="dbReservantesModel.FK_Usuario_TipoUsuario" ManuallyRouted="false" />
+        <AssociationConnector Association="dbReservantesModel.FK_TipoUsuario" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
