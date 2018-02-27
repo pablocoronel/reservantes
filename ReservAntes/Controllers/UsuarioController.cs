@@ -43,30 +43,41 @@ namespace ReservAntes.Controllers
             return View();
         }
 
+    
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CreateUser(UsuarioExtension user)
         {
-
-            {
+        
+            
                 if (ModelState.IsValid)
                 {
-                    ViewBag.ListUsuario = LogUs.GetTiposDeUs();
-                    this.LogUs.CrearUsuario(user);
-                    ViewBag.Guardado = "Felicidades. Usted se ha registrado con exito." +
-                        "Verifique por favor que ha recibido el mail de confirmacion.";
+                    var emailEx = ctx.Usuario.Any(a => a.Email == user.Email);
+                    
+                    if (emailEx == true)
+                    {
+                       ViewBag.Error = "Ya hay un email registrado";
+                       ViewBag.ListUsuario = LogUs.GetTiposDeUs();
+                       return View();
 
-                    var message = new MailMessage();
-                    message.From = new MailAddress("reservantesapp@gmail.com");
-                    message.To.Add(user.Email);
-                    message.Subject = "Registro ReservAntes";
-                    message.Body = "<div class='container'>" +
-                        " <h4>Felicidades " + user.Username  + " usted se ha registrado con Exito en ReservAntes </h4> " +
-                        "En caso de cualquier detalle tecnico le pedimos por favor que se comunique con reservantesapp@gmail.com " +
-                        "La contraseña que usted ha ingresado es: " + user.Password +
-                        "</div>";
-                    message.IsBodyHtml = true;
-                    message.Priority = MailPriority.Normal;
+                    }
+
+                ViewBag.ListUsuario = LogUs.GetTiposDeUs();
+                        this.LogUs.CrearUsuario(user);
+                        ViewBag.Guardado = "Felicidades. Usted se ha registrado con exito." +
+                            "Verifique por favor que ha recibido el mail de confirmacion.";
+
+                        var message = new MailMessage();
+                        message.From = new MailAddress("reservantesapp@gmail.com");
+                        message.To.Add(user.Email);
+                        message.Subject = "Registro ReservAntes";
+                        message.Body = "<div class='container'>" +
+                            " <h4>Felicidades " + user.Username  + " usted se ha registrado con Exito en ReservAntes </h4> " +
+                            "En caso de cualquier detalle tecnico le pedimos por favor que se comunique con reservantesapp@gmail.com " +
+                            "La contraseña que usted ha ingresado es: " + user.Password +
+                            "</div>";
+                        message.IsBodyHtml = true;
+                        message.Priority = MailPriority.Normal;
 
 
                     SmtpClient smtp = new SmtpClient();
@@ -79,12 +90,13 @@ namespace ReservAntes.Controllers
                     //smtp.Send(message);
 
                     
-                }
+                } 
+                
 
                 ViewBag.ListUsuario = LogUs.GetTiposDeUs();
                 return View();
                 
-            }
+            
 
         }
 
@@ -98,6 +110,9 @@ namespace ReservAntes.Controllers
             return RedirectToAction("../Admin/VerUsuarios");
         }
 
+
+
+    
     }
 }
 

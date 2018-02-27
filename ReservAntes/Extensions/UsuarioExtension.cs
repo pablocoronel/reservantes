@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Text;
 using System.ComponentModel;
+using System.Web.Mvc;
 
 namespace ReservAntes.Extensions
 {
@@ -23,7 +24,7 @@ namespace ReservAntes.Extensions
         [StringLength(50)]
         public string Password { get; set; }
 
-        [Compare("Password", ErrorMessage = "Las contraseñas no coinciden")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "Las contraseñas no coinciden")]
         public string RePass { get; set; }
 
         [Required(ErrorMessage = "Este campo es obligatorio")]

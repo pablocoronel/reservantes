@@ -89,7 +89,24 @@ namespace ReservAntes.Models
                 
                 ctx.Restaurante.Add(restaurante);
                 ctx.SaveChanges();
-            }           
+            }
+            else
+                //Crear cliente si el usuario corresponde a un cliente
+
+                if (us.TipoUsuarioId == 2)
+                {
+                Cliente client = new Cliente();
+                client.IdUsuario = usuario.Id;
+                client.Nombre = "por defecto";
+                client.Apellido = "por defecto";
+
+                ctx.Cliente.Add(client);
+                ctx.SaveChanges();
+            }
+
+
+
+
 
         }
 
@@ -104,5 +121,6 @@ namespace ReservAntes.Models
 
             return ctx.Usuario.FirstOrDefault(usu => usu.Username == usuario.Username && usu.Password == result); 
         }
+
     }
 }
