@@ -7,16 +7,19 @@
     Layout = "~/Views/Shared/_LayoutCliente.cshtml";
 }
 
+<p></p>
+<p></p>
+<br />
 <div class="thumbnail">
     <div class="row">
-    <div class="col-lg-6"></div>
+        <div class="col-lg-5"></div>
 
-        <h2>Verifica si hay disponibilidad disponibilidad</h2>
+        <h2 class="text-center">Verifica si hay disponibilidad</h2>
         @using (Html.BeginForm("ReservaHora", "Cliente", FormMethod.Post))
         {
             @Html.HiddenFor(u => u.RestoId)
             <div class="col-lg-2"></div>
-            <div class="col-lg-5">
+            <div class="col-lg-4">
 
                 <div class="form-group">
                     <label>Hora:</label>
@@ -28,8 +31,10 @@
                 <label>Cantidad de Personas:</label>
                 @Html.DropDownListFor(u => u.comensales, new SelectList(Model.cantidadMaxima), "Cantidad de Comensales", new { @class = "form-control" })
                 @Html.ValidationMessageFor(u => u.comensales, "", new { @class = "text-danger" })
-            </div>
-            <button type="submit" class="btn btn-primary">Reservar</button>
+            </div><br />
+            <div class="col-lg-5"></div>
+
+            <button type="submit" class="btn btn-primary btn-lg">Reservar</button>
             @Html.ValidationSummary(true, "")
 
         }

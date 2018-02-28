@@ -7,7 +7,7 @@
 
 }
 
-<h2 class="thumbnail">Reservar en @Model.restauranteNombre</h2>
+<h2 class="thumbnail text-center">Reservar en <b>@Model.restauranteNombre</b></h2>
 
 
 @if (Model.platosElegidosVm==null)
@@ -51,8 +51,9 @@
         <br />
 
         @*@Html.ActionLink("Reservar", "PlatosElegidos", "Cliente", new { @reserva = @Model }, new { @class = "btn btn-default btn-success btn-lg btn-block" })*@
-        <button type="submit" class="btn btn-primary">Reservar</button>
-    }
+        <div class="jumbotron"><button type="submit" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-ok-sign"></span>  Seleccionar platos</button></div>
+
+            }
 }
 @*@if (Model != null && Model.platosElegidosVm != null && Model.platosElegidosVm.Count > 0)
 
@@ -60,7 +61,6 @@
    
 }*@
 
-<button onclick="location.href='@Url.Action("Index", "Cliente")';return false;" class="btn btn-danger">Cancelar</button>
 
 
 @*<a href="<% Response.Write(preference[" response"]["init_point"]); %>">Pagar</a>*@

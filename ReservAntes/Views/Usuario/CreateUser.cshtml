@@ -28,45 +28,46 @@
         <div class="jumbotron col-md-5">
             <div>
                 @using (Html.BeginForm())
-                    {
-                        @Html.AntiForgeryToken()
-                            @Html.ValidationSummary(true)
+    {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
 
-                    <div class="form-group">
-                        <label>Nombre de Usuario:</label>
-                        @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Username)
-                    </div>
+            <div class="form-group">
+                <label>Nombre de Usuario:</label>
+                @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Username)
+            </div>
 
-                    <div class="form-group">
-                        <label>Contraseña:</label>
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Password)
-                    </div>
+            <div class="form-group">
+                <label>Contraseña:</label>
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Password)
+            </div>
 
-                    <div class="form-group">
-                        <label>Repita Contraseña:</label>
-                        @Html.PasswordFor(m => m.RePass, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.RePass)
-                    </div>
+            <div class="form-group">
+                <label>Repita Contraseña:</label>
+                @Html.PasswordFor(m => m.RePass, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.RePass)
+            </div>
 
-                    <div class="form-group">
-                        <label>Email:</label>
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Email)
-                    </div>
+            <div class="form-group">
+                <label>Email:</label>
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Email)
+            </div>
 
-                    <div class="form-group">
-                        <label>Tipo de Usuario:</label>
-                        @Html.DropDownList("TipoUsuarioId", new SelectList(ViewBag.ListUsuario, "Id", "Descripcion"), new { @class = "form-control" })
+            <div class="form-group">
+                <label>Tipo de Usuario:</label>
+                @Html.DropDownList("TipoUsuarioId", new SelectList(ViewBag.ListUsuario, "Id", "Descripcion"), new { @class = "form-control" })
 
-                    </div>
+            </div>
 
 
-                    <p></p>
-                    <div id=""><input type="submit" value="Registrarse" class="btn btn-rojo" /></div>
+            <p></p>
+            <button type="submit" id="" class="btn btn-block btn btn-primary" style="width:283px;">Registrarse</button>
 
-                }
+
+}
             </div>
         </div>
     </div>

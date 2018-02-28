@@ -12,38 +12,43 @@
         <div class="col-md-5">
             <div class="jumbotron">
                 @if (ViewBag.LoginIncorrecto != null && ViewBag.LoginIncorrecto == true)
-                {
-                    <div class="alert alert-warning">
-                        Usuario y/o contraseña incorrecto
-                    </div>
-                }else if (ViewBag.UsuarioDeshabilitado != null && ViewBag.UsuarioDeshabilitado == true)
-                {
-                    <div class="alert alert-warning">
-                        La cuenta está suspendida o pendiente de habilitación
-                    </div>
-                }
+    {
+            <div class="alert alert-warning">
+                Usuario y/o contraseña incorrecto
+            </div>
+}
+else if (ViewBag.UsuarioDeshabilitado != null && ViewBag.UsuarioDeshabilitado == true)
+{
+            <div class="alert alert-warning">
+                La cuenta está suspendida o pendiente de habilitación
+            </div>
+}
 
                 @using (Html.BeginForm("Login", "Login"))
-            {
-                    <div class="form-group">
-                        @Html.LabelFor(Model => Model.Username)
+    {
+            <div class="form-group">
+                <label>Usuario</label>
+                @*@Html.LabelFor(Model => Model.Username)*@
 
-                        @Html.TextBoxFor(Model => Model.Username, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(Model => Model.Username, "", new { @class = "text-danger" })
-                    </div>
+                @Html.TextBoxFor(Model => Model.Username, new { @class = "form-control" })
+                @Html.ValidationMessageFor(Model => Model.Username, "", new { @class = "text-danger" })
+            </div>
 
-                    <div class="form-group">
-                        @Html.LabelFor(Model => Model.Password)
+            <div class="form-group">
+                <label>Contraseña</label>
+                @*@Html.LabelFor(Model => Model.Password)*@
 
-                        @Html.PasswordFor(Model => Model.Password, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(Model => Model.Password, "", new { @class = "text-danger" })
-                    </div>
+                @Html.PasswordFor(Model => Model.Password, new { @class = "form-control" })
+                @Html.ValidationMessageFor(Model => Model.Password, "", new { @class = "text-danger" })
+            </div>
 
-                    <button type="submit" class="btn btn-rojo">Ingresar</button>
-                    <button onclick="location.href='@Url.Action("Index", "Home")';return false;" class="btn btn-rojo">Cancelar</button>
-                }
-            </div>        
-        </div>
+                <button type="submit" class="btn btn-block btn btn-primary" style="width:283px;">Ingresar</button>
+
+            @*<button onclick="location.href='@Url.Action("Index", "Home")';return false;" class="btn btn-rojo">Cancelar</button>*@
+}
+
+            </div>
+            </div>
 
     </div>
 </div>
