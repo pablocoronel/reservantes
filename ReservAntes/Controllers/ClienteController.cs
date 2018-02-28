@@ -339,10 +339,12 @@ namespace ReservAntes.Controllers
             else
             {
                 message.Body = "<div class='container'>" +
-                " <h4>Felicidades " + cli.Nombre + " usted ha generado una reserva en " + res.NombreComercial + " </h4> " +
-                "<p> Su código de reserva es:" + reservaFinal.CodigoReserva + " </p>" +
+                " <h4>Felicidades " + cli.Nombre + " usted ha confirmado la reserva en " + res.NombreComercial + " </h4> " +
+                "<p> Su código de reserva es: <h2><b>" + reservaFinal.CodigoReserva + " </h2></b></p>" +
                 "<p>Recuerde que ha elegido: Pago en efectivo en el local</p>" +
                  "<p>Su comida lo espera a las " + reservaFinal.FechaHoraReserva.ToLongTimeString() +" <p>"+
+                 "<p><p>" +
+
                 "<p> ReservAntes APP.</p>" +
 
                 "</div>";
@@ -368,54 +370,27 @@ namespace ReservAntes.Controllers
             Restaurante restoParaObtenerNombre = ctx.Restaurante.Where(x => x.IdRestaurante == reserva.RestauranteId).FirstOrDefault();
             string nombreDelRestaurante = restoParaObtenerNombre.NombreComercial;
 
-<<<<<<< HEAD
 
 
-            MP mp = new MP("3569046944289967", "VKUe2kZa2BemjDp7vgNHu3ZTLStjlIhh");
 
             var producto = res.NombreComercial;
             var precio = reservaFinal.Total;
-=======
-            ItemBuy itemsAPagar = new ItemBuy();
-            itemsAPagar.Currency = "ARS";
-            itemsAPagar.Price = Convert.ToDouble(reserva.Total);
-            itemsAPagar.Quantity = 1;
-            itemsAPagar.Title = string.Concat("Reserva en ", nombreDelRestaurante);
+            //ItemBuy itemsAPagar = new ItemBuy();
+            //itemsAPagar.Currency = "ARS";
+            //itemsAPagar.Price = Convert.ToDouble(reserva.Total);
+            //itemsAPagar.Quantity = 1;
+            //itemsAPagar.Title = string.Concat("Reserva en ", nombreDelRestaurante);
 
-            //return View("PagarReserva");
-            TempData["itemsAPagar"] = itemsAPagar;
-            return RedirectToAction("PagarReserva");
-        }
 
-        [HttpGet]
-        public ActionResult PagarReserva()
-        {
+
             ItemBuy item = (ItemBuy)TempData["itemsAPagar"];
 
             MP mp = new MP("3569046944289967", "VKUe2kZa2BemjDp7vgNHu3ZTLStjlIhh");
 
-            //var producto = "Nombre Comercial";
-            //var precio = 500;
 
->>>>>>> 545e308effcc3dc84fa03354112a95dead0e65e3
 
-            //var preference = mp.createPreference("{\"items\":[{\"title\":\"" + producto + "\",\"quantity\":1,\"currency_id\":\"ARS\",\"unit_price\":" + precio + "}]}");
-            var preference = mp.createPreference("{\"auto_return\":\"approved\"," +
-                "\"back_urls\":" +
+            var preference = mp.createPreference("{\"items\":[{\"title\":\"" + producto + "\",\"quantity\":1,\"currency_id\":\"ARS\",\"unit_price\":" + precio +"}]}");
 
-                        "{\"success\":\"http://localhost:36305/index \"," +
-                        "\"pending\":\"http://localhost:36305/error \"}" +
-                        "\"failure\":\"http://localhost:36305/error \"}" +
-                    "," +
-            "\"items\":" +
-                    "[" +
-                        "{\"title\":\"" + item.Title + "\"," +
-                        "\"quantity\":" + item.Quantity + "," +
-                        "\"currency_id\":\"" + item.Currency + "\"," +
-                        "\"unit_price\":" + item.Price + "" +
-                        "}" +
-                    "]" +
-            "}");
 
             mp.sandboxMode(true);
 
@@ -423,21 +398,27 @@ namespace ReservAntes.Controllers
             ViewBag.LinkMP = (((Hashtable)preference["response"])["sandbox_init_point"]);
 
 
-            return View("PagarReserva");
 
+
+
+            return View("PagarReserva");
+            //TempData["itemsAPagar"] = itemsAPagar;
             //return RedirectToAction("PagarReserva");
         }
 
         [HttpGet]
         public ActionResult PagarReserva()
         {
-            
-       
+            //ItemBuy item = (ItemBuy)TempData["itemsAPagar"];
+
+        
 
 
-            return View();
+            return View("PagarReserva");
 
+            //return RedirectToAction("PagarReserva");
         }
+
 
         public ActionResult ReservaCliente()
         {
