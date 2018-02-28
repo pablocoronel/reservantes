@@ -43,7 +43,13 @@
                         @reserva.EstadoReserva.Descripcion
                     </td>
                     <td>
-                        ACA VA ALE BOTON DE MERCADO PAGO
+                        @{
+                            if (reserva.EstadoReserva.Descripcion == "Reservado" || reserva.EstadoReserva.Descripcion == "Aceptado")
+                            {
+                                <a href="@ViewBag.LinkMP" class="btn btn-default">Pagar</a>
+                            }
+                        }
+                        
                     </td>
                 </tr>
                 }

@@ -416,25 +416,23 @@ namespace ReservAntes.Controllers
             ViewBag.LinkMP = (((Hashtable)preference["response"])["sandbox_init_point"]);
 
 
+            List<Reserva> reservas = new List<Reserva>();
 
+            if (Session["usuarioId"] != null)
+            {
+                Int32.TryParse(Session["usuarioId"].ToString(), out int usuarioId);
 
+                reservas = LogCliente.GetReservasDelCliente(usuarioId);
+            }
 
-            return View("PagarReserva");
-            //TempData["itemsAPagar"] = itemsAPagar;
-            //return RedirectToAction("PagarReserva");
+            return View("ReservaCliente", model: reservas);
+            //return RedirectToAction("ReservaCliente");
         }
 
         [HttpGet]
         public ActionResult PagarReserva()
         {
-            //ItemBuy item = (ItemBuy)TempData["itemsAPagar"];
-
-        
-
-
             return View("PagarReserva");
-
-            //return RedirectToAction("PagarReserva");
         }
 
 
