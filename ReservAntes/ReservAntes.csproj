@@ -244,6 +244,7 @@
     </Compile>
     <Compile Include="Models\LogicaEmail.cs" />
     <Compile Include="Models\LogicaPlato.cs" />
+    <Compile Include="Models\Random.cs" />
     <Compile Include="NivelRestaurante.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
