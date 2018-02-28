@@ -11,6 +11,7 @@ using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 using System.Web.UI;
 
 namespace ReservAntes.Controllers
@@ -309,20 +310,51 @@ namespace ReservAntes.Controllers
             //var codigo = reserva.Id;
 
 
+            //Pasar objeto de pago
+            Restaurante restoParaObtenerNombre = ctx.Restaurante.Where(x => x.IdRestaurante == reserva.RestauranteId).FirstOrDefault();
+            string nombreDelRestaurante = restoParaObtenerNombre.NombreComercial;
+
+            ItemBuy itemsAPagar = new ItemBuy();
+            itemsAPagar.Currency = "ARS";
+            itemsAPagar.Price = Convert.ToDouble(reserva.Total);
+            itemsAPagar.Quantity = 1;
+            itemsAPagar.Title = string.Concat("Reserva en ", nombreDelRestaurante);
+
             //return View("PagarReserva");
+            TempData["itemsAPagar"] = itemsAPagar;
             return RedirectToAction("PagarReserva");
+            //return RedirectToAction("PagarReserva", new RouteValueDictionary(itemsAPagar));
         }
 
         [HttpGet]
         public ActionResult PagarReserva()
         {
+            ItemBuy item = (ItemBuy)TempData["searchJob"];
+
             MP mp = new MP("3569046944289967", "VKUe2kZa2BemjDp7vgNHu3ZTLStjlIhh");
 
-            var producto = "Nombre Comercial";
-            var precio = 500;
+            //var producto = "Nombre Comercial";
+            //var precio = 500;
 
 
-            var preference = mp.createPreference("{\"items\":[{\"title\":\"" + producto + "\",\"quantity\":1,\"currency_id\":\"ARS\",\"unit_price\":" + precio + "}]}");
+            //var preference = mp.createPreference("{\"items\":[{\"title\":\"" + producto + "\",\"quantity\":1,\"currency_id\":\"ARS\",\"unit_price\":" + precio + "}]}");
+            var preference = mp.createPreference("{\"auto_return\":\"approved\"," +
+                "\"back_urls\":" +
+
+                        "{\"success\":\"http://localhost:36305/index \"," +
+                        "\"pending\":\"http://localhost:36305/error \"}" +
+                        "\"failure\":\"http://localhost:36305/error \"}" +
+                    "," +
+            "\"items\":" +
+                    "[" +
+                        "{\"title\":\"" + item.Title + "\"," +
+                        "\"quantity\":" + item.Quantity + "," +
+                        "\"currency_id\":\"" + item.Currency + "\"," +
+                        "\"unit_price\":" + item.Price + "" +
+                        "}" +
+                    "]" +
+            "}");
+
             mp.sandboxMode(true);
 
 
@@ -379,5 +411,15 @@ namespace ReservAntes.Controllers
             horarioReserva.comensales = 0;
             return horarioReserva;
         }
+    }
+
+
+    //Clase para items de mercado pago
+    public class ItemBuy
+    {
+        public string Title { get; set; }
+        public int Quantity { get; set; }
+        public string Currency { get; set; } /*Currencies Posibles https://api.mercadopago.com/currencies*/
+        public double Price { get; set; }
     }
 }
