@@ -1,0 +1,10 @@
+﻿@using mercadopago;
+@using System.Collections;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+
+<h2>Probar mercado pago</h2>
+<a href="@Url.Action("EnviarPagoMP","Reserva")">Pay</a>
