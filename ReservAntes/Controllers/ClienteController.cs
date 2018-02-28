@@ -417,7 +417,7 @@ namespace ReservAntes.Controllers
 
             //Guardar link en la BD
             var linkMP = ViewBag.LinkMP;
-            Reserva reservaLinkMP = ctx.Reserva.Where(x => x.Id == reservaFinal.Id).FirstOrDefault();
+            Reserva reservaLinkMP = ctx.Reserva.Where(x => x.Id == reserva.Id).FirstOrDefault();
             reservaLinkMP.LinkMP = linkMP;
             ctx.SaveChanges();
 
