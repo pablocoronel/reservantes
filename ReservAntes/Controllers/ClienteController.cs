@@ -383,7 +383,7 @@ namespace ReservAntes.Controllers
 
 
 
-            ItemBuy item = (ItemBuy)TempData["itemsAPagar"];
+            //ItemBuy item = (ItemBuy)TempData["itemsAPagar"];
 
             MP mp = new MP("3569046944289967", "VKUe2kZa2BemjDp7vgNHu3ZTLStjlIhh");
 
@@ -398,10 +398,8 @@ namespace ReservAntes.Controllers
                     "\"pending\":\"http://localhost/ReservAntes/Cliente/ReservaCliente/\"," +
                     "\"failure\":\"http://localhost/ReservAntes/Cliente/ReservaCliente/\"}" +
                 "," +
+                "\"external_reference\":\"" + reservaFinal.CodigoReserva + "\"," +
                 "\"items\":" +
-                
-
-            //"{\"items\":" +
                     "[" +
                         "{\"title\":\"" + producto + "\"," +
                         "\"quantity\":" + 1 + "," +
@@ -440,8 +438,20 @@ namespace ReservAntes.Controllers
         }
 
 
-        public ActionResult ReservaCliente()
+        public ActionResult ReservaCliente(string collection_status = null, string external_reference = null)
         {
+            //Cambiar estado de pago
+            if (collection_status != null && external_reference != null)
+            {
+                if (collection_status == "approved")
+                {
+                    Reserva reserva = ctx.Reserva.Where(x => x.CodigoReserva == external_reference).FirstOrDefault();
+                    reserva.EstadoReservaId = 3;
+                    ctx.SaveChanges();
+                }
+            }
+
+
             List<Reserva> reservas = new List<Reserva>();
 
             if (Session["usuarioId"] != null)
