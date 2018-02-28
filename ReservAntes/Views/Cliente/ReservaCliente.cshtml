@@ -46,6 +46,7 @@
                         @{
                             if (reserva.EstadoReserva.Descripcion == "Reservado" || reserva.EstadoReserva.Descripcion == "Aceptado")
                             {
+                                @Html.ActionLink("Efectivo", "PagarEnEfectivo", "Cliente", new { idReserva = reserva.Id }, new { @class = "btn btn-default" })
                                 <a href="@reserva.LinkMP" class="btn btn-default">Mercado Pago</a>
                             }
                         }

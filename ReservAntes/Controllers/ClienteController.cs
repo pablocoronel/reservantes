@@ -434,6 +434,24 @@ namespace ReservAntes.Controllers
             //return RedirectToAction("ReservaCliente");
         }
 
+        public ActionResult PagarEnEfectivo(int idReserva)
+        {
+            Reserva reserva = ctx.Reserva.Where(x => x.Id == idReserva).FirstOrDefault();
+            reserva.EstadoReservaId = 3; //Pagado
+            ctx.SaveChanges();
+
+            List<Reserva> reservas = new List<Reserva>();
+
+            if (Session["usuarioId"] != null)
+            {
+                Int32.TryParse(Session["usuarioId"].ToString(), out int usuarioId);
+
+                reservas = LogCliente.GetReservasDelCliente(usuarioId);
+            }
+
+            return View("ReservaCliente", model: reservas);
+        }
+
         [HttpGet]
         public ActionResult PagarReserva()
         {
