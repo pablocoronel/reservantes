@@ -11,6 +11,7 @@ using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 using System.Web.UI;
 using System.Net.Mail;
 
@@ -129,7 +130,7 @@ namespace ReservAntes.Controllers
         [HttpGet]
         public ActionResult ReservaHora(int idResto)
         {
-               
+
             HorariosReservaViewModel horarioReserva = InicializaHorarioReserva(idResto);
             return View("ReservaHora", horarioReserva);
         }
@@ -209,14 +210,14 @@ namespace ReservAntes.Controllers
             var reservaRealizada = new Reserva();
             reserva.Total = 0;
             var i = 0;
-            for (i = 0; i < reserva.PlatoId.Count(); i++) 
+            for (i = 0; i < reserva.PlatoId.Count(); i++)
             //foreach (var plato in reserva.platos)
             {
                 //if (plato.cantidad != null && plato.cantidad != 0)
                 if (reserva.PlatoCantidad[i] > 0)
                 {
                     var platoElegido = new PlatosElegidosViewModel();
-                    Plato plato=logicaPlato.GetById(reserva.PlatoId[i]);
+                    Plato plato = logicaPlato.GetById(reserva.PlatoId[i]);
                     platoElegido.PlatoId = reserva.PlatoId[i];
                     platoElegido.Cantidad = reserva.PlatoCantidad[i];
                     platoElegido.nombrePlato = plato.NombrePlato;
@@ -271,7 +272,7 @@ namespace ReservAntes.Controllers
         public ActionResult ConfirmarReserva(ReservaViewModel reservaFinal)
         {
             var IdUsuario = Session["usuarioId"];
-            
+
             var cliente = LogCliente.GetByUserId(Convert.ToInt32(IdUsuario));
             if (cliente == null)
             {
@@ -287,7 +288,7 @@ namespace ReservAntes.Controllers
                     platoElegido.PlatoId = reservaFinal.PlatoElegidoId[i];
                     platoElegido.Cantidad = reservaFinal.PlatoElegidoCantidad[i];
                     reservaFinal.PlatosElegidos.Add(platoElegido);
-               }
+                }
             }
             reservaFinal.FechaHoraReserva = reservaFinal.FechaHoraReserva;
             //Lo debe elegir el cliente, ahora guarda efectivo hasta que funcione MPago
@@ -295,7 +296,9 @@ namespace ReservAntes.Controllers
             reservaFinal.EstadoReservaId = 1; // Reservado
 
             reservaFinal.ClienteId = cliente.IdCliente;
-            reservaFinal.CodigoReserva = Convert.ToString(reservaFinal.FechaHoraReserva.Hour)+ Convert.ToString(reservaFinal.ClienteId) + Convert.ToString(reservaFinal.RestauranteId);
+            RandomGenerator generator = new RandomGenerator();
+
+            reservaFinal.CodigoReserva = generator.RandomCodigo();
             var reserva = reservaFinal.Map();
 
             logicaReserva.CreateOrUpdate(reserva);
@@ -313,7 +316,7 @@ namespace ReservAntes.Controllers
 
                 Cliente cli = ctx.Cliente.Where(x => x.IdCliente == reservaFinal.ClienteId).FirstOrDefault();
 
-                Usuario us = ctx.Usuario.Where(x => x.Id == cli.IdUsuario).FirstOrDefault();
+            Usuario us = ctx.Usuario.Where(x => x.Id == cli.IdUsuario).FirstOrDefault();
 
                Restaurante res = ctx.Restaurante.Where(x => x.IdRestaurante == reservaFinal.RestauranteId).FirstOrDefault();
 
@@ -321,15 +324,30 @@ namespace ReservAntes.Controllers
             var message = new MailMessage();
             message.From = new MailAddress("reservantesapp@gmail.com");
             message.To.Add(us.Email);
-            message.Subject = "ReservAntes -- RESERVA "+ res.NombreComercial +"";
-            message.Body = "<div class='container'>" +
-                " <h4>Felicidades " + cli.Nombre + " usted ha generado una reserva en " + res.NombreComercial + " </h4> " +
-                "<p> Le comentamos que hasta que no confirme su reserva en su perfil no se hara efectiva la misma.</p>" +
-                "<p></p>" +
+            message.Subject = "ReservAntes -- RESERVA " + res.NombreComercial + "";
+            if (reservaFinal.MedioPagoId != 1)
+            {
+                message.Body = "<div class='container'>" +
+                    " <h4>Felicidades " + cli.Nombre + " usted ha generado una reserva en " + res.NombreComercial + " </h4> " +
+                    "<p> Le recordamos que, hasta que no confirme su reserva en su perfil, no se hará efectiva la misma.</p>" +
+                    "<p></p>" +
 
+                    "<p> ReservAntes APP.</p>" +
+
+                    "</div>";
+            }
+            else
+            {
+                message.Body = "<div class='container'>" +
+                " <h4>Felicidades " + cli.Nombre + " usted ha generado una reserva en " + res.NombreComercial + " </h4> " +
+                "<p> Su código de reserva es:" + reservaFinal.CodigoReserva + " </p>" +
+                "<p>Recuerde que ha elegido: Pago en efectivo en el local</p>" +
+                 "<p>Su comida lo espera a las " + reservaFinal.FechaHoraReserva.ToLongTimeString() +" <p>"+
                 "<p> ReservAntes APP.</p>" +
 
                 "</div>";
+
+            }
             message.IsBodyHtml = true;
             message.Priority = MailPriority.Normal;
 
@@ -344,16 +362,61 @@ namespace ReservAntes.Controllers
             smtp.Send(message);
 
 
+            //return View("PagarReserva");
 
+            //Pasar objeto de pago
+            Restaurante restoParaObtenerNombre = ctx.Restaurante.Where(x => x.IdRestaurante == reserva.RestauranteId).FirstOrDefault();
+            string nombreDelRestaurante = restoParaObtenerNombre.NombreComercial;
+
+<<<<<<< HEAD
 
 
             MP mp = new MP("3569046944289967", "VKUe2kZa2BemjDp7vgNHu3ZTLStjlIhh");
 
             var producto = res.NombreComercial;
             var precio = reservaFinal.Total;
+=======
+            ItemBuy itemsAPagar = new ItemBuy();
+            itemsAPagar.Currency = "ARS";
+            itemsAPagar.Price = Convert.ToDouble(reserva.Total);
+            itemsAPagar.Quantity = 1;
+            itemsAPagar.Title = string.Concat("Reserva en ", nombreDelRestaurante);
 
+            //return View("PagarReserva");
+            TempData["itemsAPagar"] = itemsAPagar;
+            return RedirectToAction("PagarReserva");
+        }
 
-            var preference = mp.createPreference("{\"items\":[{\"title\":\"" + producto + "\",\"quantity\":1,\"currency_id\":\"ARS\",\"unit_price\":" + precio + "}]}");
+        [HttpGet]
+        public ActionResult PagarReserva()
+        {
+            ItemBuy item = (ItemBuy)TempData["itemsAPagar"];
+
+            MP mp = new MP("3569046944289967", "VKUe2kZa2BemjDp7vgNHu3ZTLStjlIhh");
+
+            //var producto = "Nombre Comercial";
+            //var precio = 500;
+
+>>>>>>> 545e308effcc3dc84fa03354112a95dead0e65e3
+
+            //var preference = mp.createPreference("{\"items\":[{\"title\":\"" + producto + "\",\"quantity\":1,\"currency_id\":\"ARS\",\"unit_price\":" + precio + "}]}");
+            var preference = mp.createPreference("{\"auto_return\":\"approved\"," +
+                "\"back_urls\":" +
+
+                        "{\"success\":\"http://localhost:36305/index \"," +
+                        "\"pending\":\"http://localhost:36305/error \"}" +
+                        "\"failure\":\"http://localhost:36305/error \"}" +
+                    "," +
+            "\"items\":" +
+                    "[" +
+                        "{\"title\":\"" + item.Title + "\"," +
+                        "\"quantity\":" + item.Quantity + "," +
+                        "\"currency_id\":\"" + item.Currency + "\"," +
+                        "\"unit_price\":" + item.Price + "" +
+                        "}" +
+                    "]" +
+            "}");
+
             mp.sandboxMode(true);
 
 
@@ -424,5 +487,15 @@ namespace ReservAntes.Controllers
             horarioReserva.comensales = 0;
             return horarioReserva;
         }
+    }
+
+
+    //Clase para items de mercado pago
+    public class ItemBuy
+    {
+        public string Title { get; set; }
+        public int Quantity { get; set; }
+        public string Currency { get; set; } /*Currencies Posibles https://api.mercadopago.com/currencies*/
+        public double Price { get; set; }
     }
 }
