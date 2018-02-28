@@ -38,9 +38,11 @@ namespace ReservAntes.Models
             return ctx.Cliente.FirstOrDefault(x => x.IdUsuario == userId);
         }
 
-        public List<Reserva> GetReservasDelCliente(int idCliente)
+        public List<Reserva> GetReservasDelCliente(int usuarioID)
         {
-            return ctx.Reserva.Where(x => x.ClienteId == idCliente).ToList();
+            Cliente cli = ctx.Cliente.Where(x => x.IdUsuario == usuarioID).FirstOrDefault();
+
+            return ctx.Reserva.Where(x => x.ClienteId == cli.IdCliente).ToList();
         }
     }
 

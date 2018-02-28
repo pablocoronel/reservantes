@@ -150,16 +150,16 @@ namespace ReservAntes.Controllers
                 String fechaHora = fechaHoy + " " + horarioReserva.hora + ":00";
                 DateTime fechaHoraReserva = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, int.Parse(horarioReserva.hora.Split(':')[0]), 0, 0);
                 //Comentado temporalmente por la hora
-                //if (fechaHoraReserva < DateTime.Now.AddHours(1))
-                //{
-                //    ModelState.AddModelError("Hora", "No puede reservar con menos de una hora de anticipación");
-                //    return View("ReservaHora", nuevoHorarioReserva);
-                //}
-                //if (fechaHoraReserva < DateTime.Now)
-                //{
-                //    ModelState.AddModelError("Hora", "No puede reservar en ese horario");
-                //    return View("ReservaHora", nuevoHorarioReserva);
-                //}
+                if (fechaHoraReserva < DateTime.Now.AddHours(1))
+                {
+                    ModelState.AddModelError("Hora", "No puede reservar con menos de una hora de anticipación");
+                    return View("ReservaHora", nuevoHorarioReserva);
+                }
+                if (fechaHoraReserva < DateTime.Now)
+                {
+                    ModelState.AddModelError("Hora", "No puede reservar en ese horario");
+                    return View("ReservaHora", nuevoHorarioReserva);
+                }
                 if (restauranteServicio.VerificaDisponibilidad(horarioReserva.RestoId, fechaHoraReserva, horarioReserva.comensales))
                 {
                     var reserva = new ReservaViewModel();
@@ -325,8 +325,7 @@ namespace ReservAntes.Controllers
             message.From = new MailAddress("reservantesapp@gmail.com");
             message.To.Add(us.Email);
             message.Subject = "ReservAntes -- RESERVA " + res.NombreComercial + "";
-            if (reservaFinal.MedioPagoId != 1)
-            {
+       
                 message.Body = "<div class='container'>" +
                     " <h4>Felicidades " + cli.Nombre + " usted ha generado una reserva en " + res.NombreComercial + " </h4> " +
                     "<p> Le recordamos que, hasta que no confirme su reserva en su perfil, no se hará efectiva la misma.</p>" +
@@ -335,21 +334,8 @@ namespace ReservAntes.Controllers
                     "<p> ReservAntes APP.</p>" +
 
                     "</div>";
-            }
-            else
-            {
-                message.Body = "<div class='container'>" +
-                " <h4>Felicidades " + cli.Nombre + " usted ha confirmado la reserva en " + res.NombreComercial + " </h4> " +
-                "<p> Su código de reserva es: <h2><b>" + reservaFinal.CodigoReserva + " </h2></b></p>" +
-                "<p>Recuerde que ha elegido: Pago en efectivo en el local</p>" +
-                 "<p>Su comida lo espera a las " + reservaFinal.FechaHoraReserva.ToLongTimeString() +" <p>"+
-                 "<p><p>" +
-
-                "<p> ReservAntes APP.</p>" +
-
-                "</div>";
-
-            }
+       
+      
             message.IsBodyHtml = true;
             message.Priority = MailPriority.Normal;
 
@@ -419,6 +405,9 @@ namespace ReservAntes.Controllers
             var linkMP = ViewBag.LinkMP;
             Reserva reservaLinkMP = ctx.Reserva.Where(x => x.Id == reserva.Id).FirstOrDefault();
             reservaLinkMP.LinkMP = linkMP;
+
+
+
             ctx.SaveChanges();
 
             List<Reserva> reservas = new List<Reserva>();
@@ -438,6 +427,45 @@ namespace ReservAntes.Controllers
         {
             Reserva reserva = ctx.Reserva.Where(x => x.Id == idReserva).FirstOrDefault();
             reserva.EstadoReservaId = 3; //Pagado
+
+            Restaurante res = ctx.Restaurante.Where(x => x.IdRestaurante == reserva.RestauranteId).FirstOrDefault();
+
+            Cliente cli = ctx.Cliente.Where(x => x.IdCliente == reserva.ClienteId).FirstOrDefault();
+
+            Usuario us = ctx.Usuario.Where(x => x.Id == cli.IdUsuario).FirstOrDefault();
+
+
+            var message = new MailMessage();
+            message.From = new MailAddress("reservantesapp@gmail.com");
+            message.To.Add(us.Email);
+            message.Subject = "ReservAntes -- RESERVA " + res.NombreComercial + "";
+          
+                message.Body = "<div class='container'>" +
+                " <h4>Felicidades " + cli.Nombre + " usted ha confirmado la reserva en " + res.NombreComercial + " </h4> " +
+                "<p> Su código de reserva es: <h2><b>" + reserva.CodigoReserva + " </h2></b></p>" +
+                "<p>Recuerde que ha elegido: Pago en efectivo en el local</p>" +
+                 "<p>Su comida lo espera a las " + reserva.FechaHoraReserva.ToLongTimeString() + " <p>" +
+                 "<p><p>" +
+
+                "<p> ReservAntes APP.</p>" +
+
+                "</div>";
+
+            
+            message.IsBodyHtml = true;
+            message.Priority = MailPriority.Normal;
+
+
+            SmtpClient smtp = new SmtpClient();
+            smtp.Host = "smtp.gmail.com";
+            smtp.Port = 25;
+            smtp.EnableSsl = true;
+            string sCorreoReservAntes = "reservantesapp@gmail.com";
+            string sPsswordReservantes = "ReservAntes007";
+            smtp.Credentials = new System.Net.NetworkCredential(sCorreoReservAntes, sPsswordReservantes);
+            smtp.Send(message);
+
+
             ctx.SaveChanges();
 
             List<Reserva> reservas = new List<Reserva>();
@@ -468,6 +496,46 @@ namespace ReservAntes.Controllers
                 {
                     Reserva reserva = ctx.Reserva.Where(x => x.CodigoReserva == external_reference).FirstOrDefault();
                     reserva.EstadoReservaId = 3;
+
+
+                    Restaurante res = ctx.Restaurante.Where(x => x.IdRestaurante == reserva.RestauranteId).FirstOrDefault();
+
+                    Cliente cli = ctx.Cliente.Where(x => x.IdCliente == reserva.ClienteId).FirstOrDefault();
+
+                    Usuario us = ctx.Usuario.Where(x => x.Id == cli.IdUsuario).FirstOrDefault();
+
+
+                    var message = new MailMessage();
+                    message.From = new MailAddress("reservantesapp@gmail.com");
+                    message.To.Add(us.Email);
+                    message.Subject = "ReservAntes -- RESERVA " + res.NombreComercial + "";
+
+                    message.Body = "<div class='container'>" +
+                    " <h4>Felicidades " + cli.Nombre + " usted ha confirmado la reserva en " + res.NombreComercial + " </h4> " +
+                    "<p> Su código de reserva es: <h2><b>" + reserva.CodigoReserva + " </h2></b></p>" +
+                     "<p>Su comida lo espera a las " + reserva.FechaHoraReserva.ToLongTimeString() + " <p>" +
+                     "<p><p>" +
+
+                    "<p> ReservAntes APP.</p>" +
+
+                    "</div>";
+
+
+                    message.IsBodyHtml = true;
+                    message.Priority = MailPriority.Normal;
+
+
+                    SmtpClient smtp = new SmtpClient();
+                    smtp.Host = "smtp.gmail.com";
+                    smtp.Port = 25;
+                    smtp.EnableSsl = true;
+                    string sCorreoReservAntes = "reservantesapp@gmail.com";
+                    string sPsswordReservantes = "ReservAntes007";
+                    smtp.Credentials = new System.Net.NetworkCredential(sCorreoReservAntes, sPsswordReservantes);
+                    smtp.Send(message);
+
+
+
                     ctx.SaveChanges();
                 }
             }
