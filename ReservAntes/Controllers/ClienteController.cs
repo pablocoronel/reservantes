@@ -13,6 +13,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.UI;
+using System.Net.Mail;
+
 
 namespace ReservAntes.Controllers
 {
@@ -309,6 +311,43 @@ namespace ReservAntes.Controllers
             //Estado RESERVADO
             //var codigo = reserva.Id;
 
+<<<<<<< HEAD
+                Cliente cli = ctx.Cliente.Where(x => x.IdCliente == reservaFinal.ClienteId).FirstOrDefault();
+
+                Usuario us = ctx.Usuario.Where(x => x.Id == cli.IdUsuario).FirstOrDefault();
+
+            Restaurante res = ctx.Restaurante.Where(x => x.IdRestaurante == reservaFinal.RestauranteId).FirstOrDefault();
+
+
+            var message = new MailMessage();
+            message.From = new MailAddress("reservantesapp@gmail.com");
+            message.To.Add(us.Email);
+            message.Subject = "ReservAntes -- RESERVA "+ res.NombreComercial +"";
+            message.Body = "<div class='container'>" +
+                " <h4>Felicidades " + cli.Nombre + " usted ha generado una reserva en " + res.NombreComercial + " </h4> " +
+                "<p> Le comentamos que hasta que no confirme su reserva en su perfil no se hara efectiva la misma.</p>" +
+                "<p></p>" +
+
+                "<p> ReservAntes APP.</p>" +
+
+                "</div>";
+            message.IsBodyHtml = true;
+            message.Priority = MailPriority.Normal;
+
+
+            SmtpClient smtp = new SmtpClient();
+            smtp.Host = "smtp.gmail.com";
+            smtp.Port = 25;
+            smtp.EnableSsl = true;
+            string sCorreoReservAntes = "reservantesapp@gmail.com";
+            string sPsswordReservantes = "ReservAntes007";
+            smtp.Credentials = new System.Net.NetworkCredential(sCorreoReservAntes, sPsswordReservantes);
+            smtp.Send(message);
+
+
+
+            return View("PagarReserva");
+=======
 
             //Pasar objeto de pago
             Restaurante restoParaObtenerNombre = ctx.Restaurante.Where(x => x.IdRestaurante == reserva.RestauranteId).FirstOrDefault();
@@ -361,6 +400,7 @@ namespace ReservAntes.Controllers
             ViewBag.LinkMP = (((Hashtable)preference["response"])["sandbox_init_point"]);
            
             return View(preference);
+>>>>>>> 46b82754829696bae0b2daa99eb80d4b5451c7c9
         }
 
         public ActionResult ReservaCliente()

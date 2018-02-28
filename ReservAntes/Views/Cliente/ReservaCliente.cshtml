@@ -17,30 +17,35 @@
                     <th>Fecha y hora</th>
                     <th>Código</th>
                     <th>Comensales</th>
-                    <th>Observaciones</th>
+                    <th>Estado de la Reserva</th>
+                    <th>Opciones</th>
+
                 </tr>
             </thead>
 
             <tbody>
                 @foreach (Reserva reserva in Model)
                 {
-                    <tr>
-                        <td>
-                            @reserva.Restaurante.NombreComercial
-                        </td>
-                        <td>
-                            @reserva.FechaHoraReserva.ToLongDateString() a las @reserva.FechaHoraReserva.ToShortTimeString()
-                        </td>
-                        <td>
-                            @reserva.CodigoReserva
-                        </td>
-                        <td>
-                            @reserva.CantidadComensales
-                        </td>
-                        <td>
-                            @reserva.Observaciones
-                        </td>
-                    </tr>
+                <tr>
+                    <td>
+                        @reserva.Restaurante.NombreComercial
+                    </td>
+                    <td>
+                        @reserva.FechaHoraReserva.ToLongDateString() a las @reserva.FechaHoraReserva.ToShortTimeString()
+                    </td>
+                    <td>
+                        <h3><b>  @reserva.CodigoReserva</b></h3>
+                    </td>
+                    <td>
+                        @reserva.CantidadComensales
+                    </td>
+                    <td>
+                        @reserva.Observaciones
+                    </td>
+                    <td>
+                        ACA VA ALE BOTON DE MERCADO PAGO
+                    </td>
+                </tr>
                 }
             </tbody>
         </table>
