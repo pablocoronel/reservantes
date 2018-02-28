@@ -40,10 +40,10 @@
         <div class="collapse navbar-collapse" id="barraAdministracion">
             <ul class="nav navbar-nav">
                 <li>
-                    <button onclick="location.href='@Url.Action("DetalleCliente","Cliente", new { id = Convert.ToInt32(Session["usuarioId"].ToString())})'; return false;" class="btn btn-gris">Mi Perfil</button>
+                    <button onclick="location.href='@Url.Action("DetalleCliente","Cliente", new { id = Convert.ToInt32(Session["usuarioId"].ToString())})'; return false;" class="btn btn-gris"><span class="glyphicon glyphicon-user"></span>  Mi Perfil</button>
                 </li>
                 <li>
-                    <button onclick="location.href='@Url.Action("ReservaCliente","Cliente")'; return false;" class="btn btn-gris">Mis Reservas</button>
+                    <button onclick="location.href='@Url.Action("ReservaCliente","Cliente")'; return false;" class="btn btn-gris"><span class="glyphicon glyphicon-th-list"></span>  Mis Reservas</button>
                 </li>
             </ul>
         </div>

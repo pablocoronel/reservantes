@@ -48,8 +48,8 @@
                                     <th>@plat.NombrePlato</th>
                                     <th>@plat.Descripcion</th>
                                     <th>$@plat.Precio</th>
-                                    <th><a href="@Url.Action("EditarPlato", "Restaurante", new { idPlato = plat.Id})" class="btn btn-primary">Editar</a></th>
-                                    <th><a href="@Url.Action("EliminarPlato", "Restaurante", new { idPlato = plat.Id})" class="btn btn-primary">Eliminar</a></th>
+                                    <th class="text-center"><a href="@Url.Action("EditarPlato", "Restaurante", new { idPlato = plat.Id})" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span></a></th>
+                                    <th class="text-center"><a href="@Url.Action("EliminarPlato", "Restaurante", new { idPlato = plat.Id})" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a></th>
 
                                 </tr>
                             }
