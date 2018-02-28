@@ -365,7 +365,7 @@ namespace ReservAntes.Controllers
         [HttpGet]
         public ActionResult PagarReserva()
         {
-            ItemBuy item = (ItemBuy)TempData["searchJob"];
+            ItemBuy item = (ItemBuy)TempData["itemsAPagar"];
 
             MP mp = new MP("3569046944289967", "VKUe2kZa2BemjDp7vgNHu3ZTLStjlIhh");
 
