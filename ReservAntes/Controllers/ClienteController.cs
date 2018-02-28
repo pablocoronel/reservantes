@@ -1,9 +1,11 @@
-﻿using ReservAntes;
+﻿using mercadopago;
+using ReservAntes;
 using ReservAntes.Extensions.Enums;
 using ReservAntes.Models;
 using ReservAntes.ViewModels;
 using ReservAntes.ViewModels.Extensions;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -308,6 +310,7 @@ namespace ReservAntes.Controllers
             //Estado RESERVADO
             //var codigo = reserva.Id;
 
+<<<<<<< HEAD
                 Cliente cli = ctx.Cliente.Where(x => x.IdCliente == reservaFinal.ClienteId).FirstOrDefault();
 
                 Usuario us = ctx.Usuario.Where(x => x.Id == cli.IdUsuario).FirstOrDefault();
@@ -343,6 +346,29 @@ namespace ReservAntes.Controllers
 
 
             return View("PagarReserva");
+=======
+
+            //return View("PagarReserva");
+            return RedirectToAction("PagarReserva");
+        }
+
+        [HttpGet]
+        public ActionResult PagarReserva()
+        {
+            MP mp = new MP("3569046944289967", "VKUe2kZa2BemjDp7vgNHu3ZTLStjlIhh");
+
+            var producto = "Nombre Comercial";
+            var precio = 500;
+
+
+            var preference = mp.createPreference("{\"items\":[{\"title\":\"" + producto + "\",\"quantity\":1,\"currency_id\":\"ARS\",\"unit_price\":" + precio + "}]}");
+            mp.sandboxMode(true);
+
+
+            ViewBag.LinkMP = (((Hashtable)preference["response"])["sandbox_init_point"]);
+           
+            return View(preference);
+>>>>>>> 46b82754829696bae0b2daa99eb80d4b5451c7c9
         }
 
         public ActionResult ReservaCliente()
