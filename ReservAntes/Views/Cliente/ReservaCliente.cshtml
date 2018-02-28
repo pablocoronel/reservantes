@@ -18,7 +18,7 @@
                     <th>Código</th>
                     <th>Comensales</th>
                     <th>Estado de la Reserva</th>
-                    <th>Opciones</th>
+                    <th>Pago</th>
 
                 </tr>
             </thead>
@@ -46,7 +46,7 @@
                         @{
                             if (reserva.EstadoReserva.Descripcion == "Reservado" || reserva.EstadoReserva.Descripcion == "Aceptado")
                             {
-                                <a href="@reserva.LinkMP" class="btn btn-default">Pagar</a>
+                                <a href="@reserva.LinkMP" class="btn btn-default">Mercado Pago</a>
                             }
                         }
                         
