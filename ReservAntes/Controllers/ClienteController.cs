@@ -311,7 +311,7 @@ namespace ReservAntes.Controllers
             //Estado RESERVADO
             //var codigo = reserva.Id;
 
-<<<<<<< HEAD
+
                 Cliente cli = ctx.Cliente.Where(x => x.IdCliente == reservaFinal.ClienteId).FirstOrDefault();
 
                 Usuario us = ctx.Usuario.Where(x => x.Id == cli.IdUsuario).FirstOrDefault();
@@ -345,9 +345,6 @@ namespace ReservAntes.Controllers
             smtp.Send(message);
 
 
-
-            return View("PagarReserva");
-=======
 
             //Pasar objeto de pago
             Restaurante restoParaObtenerNombre = ctx.Restaurante.Where(x => x.IdRestaurante == reserva.RestauranteId).FirstOrDefault();
@@ -400,7 +397,6 @@ namespace ReservAntes.Controllers
             ViewBag.LinkMP = (((Hashtable)preference["response"])["sandbox_init_point"]);
            
             return View(preference);
->>>>>>> 46b82754829696bae0b2daa99eb80d4b5451c7c9
         }
 
         public ActionResult ReservaCliente()
