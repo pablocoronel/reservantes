@@ -389,7 +389,27 @@ namespace ReservAntes.Controllers
 
 
 
-            var preference = mp.createPreference("{\"items\":[{\"title\":\"" + producto + "\",\"quantity\":1,\"currency_id\":\"ARS\",\"unit_price\":" + precio +"}]}");
+            var preference = mp.createPreference(
+            
+            "{\"auto_return\":\"approved\"," +
+            "\"back_urls\":" +
+
+                    "{\"success\":\"http://localhost/ReservAntes/Cliente/ReservaCliente/\"," +
+                    "\"pending\":\"http://localhost/ReservAntes/Cliente/ReservaCliente/\"," +
+                    "\"failure\":\"http://localhost/ReservAntes/Cliente/ReservaCliente/\"}" +
+                "," +
+                "\"items\":" +
+                
+
+            //"{\"items\":" +
+                    "[" +
+                        "{\"title\":\"" + producto + "\"," +
+                        "\"quantity\":" + 1 + "," +
+                        "\"currency_id\":\"" + "ARS" + "\"," +
+                        "\"unit_price\":" + precio + "" +
+                        "}" +
+                    "]" +
+            "}");
 
 
             mp.sandboxMode(true);
