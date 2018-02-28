@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="dbReservantesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="dbReservantesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Cliente">
           <Key>
             <PropertyRef Name="IdCliente" />
@@ -83,6 +83,7 @@
           <Property Name="MedioPagoId" Type="int" />
           <Property Name="CantidadComensales" Type="int" />
           <Property Name="Total" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="LinkMP" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Restaurante">
           <Key>
@@ -327,8 +328,7 @@
             <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="dbReservantesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -425,6 +425,7 @@
           <NavigationProperty Name="MedioPago" Relationship="Self.FK_Reserva_MedioPago" FromRole="Reserva" ToRole="MedioPago" />
           <NavigationProperty Name="PlatosElegidos" Relationship="Self.FK_PlatosElegidos_Reserva" FromRole="Reserva" ToRole="PlatosElegidos" />
           <NavigationProperty Name="Restaurante" Relationship="Self.FK_Reserva_Restaurante" FromRole="Reserva" ToRole="Restaurante" />
+          <Property Name="LinkMP" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Restaurante">
           <Key>
@@ -756,6 +757,7 @@
           <EntitySetMapping Name="Reserva">
             <EntityTypeMapping TypeName="dbReservantesModel.Reserva">
               <MappingFragment StoreEntitySet="Reserva">
+                <ScalarProperty Name="LinkMP" ColumnName="LinkMP" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
                 <ScalarProperty Name="RestauranteId" ColumnName="RestauranteId" />

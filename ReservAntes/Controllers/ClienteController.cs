@@ -415,6 +415,11 @@ namespace ReservAntes.Controllers
 
             ViewBag.LinkMP = (((Hashtable)preference["response"])["sandbox_init_point"]);
 
+            //Guardar link en la BD
+            var linkMP = ViewBag.LinkMP;
+            Reserva reservaLinkMP = ctx.Reserva.Where(x => x.Id == reservaFinal.Id).FirstOrDefault();
+            reservaLinkMP.LinkMP = linkMP;
+            ctx.SaveChanges();
 
             List<Reserva> reservas = new List<Reserva>();
 

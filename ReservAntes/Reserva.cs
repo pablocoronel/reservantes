@@ -31,6 +31,7 @@ namespace ReservAntes
         public Nullable<int> MedioPagoId { get; set; }
         public Nullable<int> CantidadComensales { get; set; }
         public Nullable<decimal> Total { get; set; }
+        public string LinkMP { get; set; }
     
         public virtual Cliente Cliente { get; set; }
         public virtual EstadoReserva EstadoReserva { get; set; }
